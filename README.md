@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Kavaan Builder and Construction Company Website</title>
+    <h1>Kavaan Builder and Construction Company Website</h1>
   </head>
   <body>
     <h1>Welcome to our website!</h1>
