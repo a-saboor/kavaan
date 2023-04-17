@@ -1,0 +1,309 @@
+﻿@model MyProject.Web.Areas.Admin.ViewModels.Banners.BannersViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<style>
+    .btn-lang {
+        position: absolute;
+        top: 2px;
+    }
+</style>
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Subheader-->
+    <div class="subheader py-2 py-lg-12 subheader-transparent" id="kt_subheader">
+        <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+            <!--begin::Info-->
+            <div class="d-flex align-items-center flex-wrap mr-1">
+                <!--begin::Heading-->
+                <div class="d-flex flex-column">
+
+                    <div class="d-flex align-items-center font-weight-bold my-2">
+                        <!--begin::Item-->
+                        <a href="/Admin/Dashboard/Index" class="opacity-75 hover-opacity-100">
+                            <i class="flaticon2-shelter text-white icon-1x"></i>
+                        </a>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <a href="/Admin/Dashboard/Index" class="text-white text-hover-white opacity-75 hover-opacity-100">&nbsp;&nbsp;Dashboard</a>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
+                        <a href="javascript:;" class="text-white text-hover-white opacity-75 hover-opacity-100">Banners & Videos</a>
+                        <!--end::Item-->
+                    </div>
+                    <!--end::Breadcrumb-->
+                </div>
+                <!--end::Heading-->
+            </div>
+            <!--end::Info-->
+        </div>
+    </div>
+    <!--end::Subheader-->
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Dashboard-->
+
+            <div class="row">
+                <div class="col-md-6" id="Video_Banners">
+                    <!--begin::Card-->
+                    <div class="card card-custom gutter-b">
+                        <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                            <div class="card-title">
+                                <h3 class="card-label">
+                                    Banner Videos
+                                    <span class="d-block text-muted pt-2 font-size-sm">Manage Banner Videos Here...</span>
+                                </h3>
+                            </div>
+                            <div class="card-toolbar">
+                                <!--begin::Button-->
+                                <button type="submit" form="FormVideoBanners" id="FormVideoBannersUpload" class="btn btn-custom font-weight-bolder">
+                                    <span class="svg-icon svg-icon-md">
+                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24" />
+                                                <circle fill="#ffffff" cx="9" cy="15" r="6" class="fill-white" />
+                                                <path class="fill-white" d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z" fill="#ffffff" opacity="0.3" />
+                                            </g>
+                                        </svg>
+                                        <!--end::Svg Icon-->
+                                    </span> Upload
+                                </button>
+                                <!--end::Button-->
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                @using (Html.BeginForm("Manage", "Banner", FormMethod.Post, new { enctype = "multipart/form-data", id = "FormVideoBanners" }))
+                                {
+                                    <input type="hidden" name="ContentType" value="Video" />
+                                    <input type="hidden" name="Device" value="Website" />
+
+                                    <div class="row" id="FileUploadWebsiteForm">
+                                        @*<div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Url (Where to navigate on click)</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="Url" id="Url" placeholder="Redirect to" required />
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="flaticon2-open-text-book"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>*@
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Type</label>
+                                                <div class="input-group mb-3">
+                                                    <select id="Type" name="Type" required class="form-control required-custom" data_actions_box="true">
+                                                        <option value="Header">Header (Max 1)</option>
+                                                        <option value="Centered">Centered (Max 1)</option>
+                                                        <option value="Footer">Footer (Max 1)</option>
+                                                        <option value="About">About Us (Max 1)</option>
+                                                    </select>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fa fa-file"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Content Type</label>
+                                                    <div class="input-group mb-3">
+                                                        <select id="ContentType" name="ContentType" required class="form-control required-custom" data_actions_box="true">
+                                                            <option value="Image">Image</option>
+                                                            <option value="Video">Video</option>
+                                                        </select>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text"><i class="fa fa-file"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>*@
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="input-group">
+
+                                                    <!--Image-->
+                                                    @*<input type="file" class="form-control accept-change" accept=".png, .jpg, .jpeg" name="file" id="file" placeholder="Browse" data-width="1800" data-height="1200" required />
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text"><i class="flaticon-upload"></i></span>
+                                                        </div>
+                                                        <span class="form-text text-muted">Image dimensions should be 1800 x 1200 pixels and Image size must be less than 500 kb</span>*@
+
+                                                    <!--Video-->
+                                                    <input type="file" class="form-control accept-change" accept="video/mp4,video/x-m4v,video/*" name="file" id="file" placeholder="Browse" data-width="1920" data-height="1080" required="">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="flaticon-upload"></i></span>
+                                                    </div>
+                                                </div>
+                                                <span class="form-text text-muted">Video dimensions should be 1920 x 1080 pixels (16:9 ratio) and size must be less than 20 mb</span>
+
+                                            </div>
+                                        </div>
+                                        @*<video id="video" width="320" height="240" controls style="display: none;"></video>*@
+                                    </div>
+
+                                }
+                                <hr />
+                                <div class="row">
+                                    @foreach (var videoBanner in Model.VideoBanners)
+                                    {
+                                        <div class="col-md-12 col-sm-12 mb-5 website-banner banner" data="@videoBanner.ID">
+                                            <a class="btn btn-icon btn-light-danger btn-pill" onclick="Delete(this,@videoBanner.ID)" style="position: absolute; right: 15px; top: 8px; z-index:1;">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                            <span class="btn-custom m-2 position-absolute px-2 py-1 mt-1 rounded text-light">@videoBanner.Type Video</span>
+                                            <video class="rounded-lg" style="width: 100%; height: 100%;" controls="controls" preload="metadata">
+                                                <source src="@videoBanner.Path" type="video/mp4">
+                                            </video>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6" id="Image_Banners">
+                    <!--begin::Card-->
+                    <div class="card card-custom gutter-b">
+                        <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                            <div class="card-title">
+                                <h3 class="card-label">
+                                    Image Banners
+                                    <span class="d-block text-muted pt-2 font-size-sm">Manage Image Banners Here...</span>
+                                </h3>
+                            </div>
+                            <div class="card-toolbar">
+                                <!--begin::Button-->
+                                <button type="submit" form="FormImageBanners" id="FormImageBannersUpload" class="btn btn-custom font-weight-bolder">
+                                    <span class="svg-icon svg-icon-md">
+                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24" />
+                                                <circle fill="#ffffff" cx="9" cy="15" r="6" class="fill-white" />
+                                                <path class="fill-white" d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z" fill="#ffffff" opacity="0.3" />
+                                            </g>
+                                        </svg>
+                                        <!--end::Svg Icon-->
+                                    </span> Upload
+                                </button>
+                                <!--end::Button-->
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                @using (Html.BeginForm("Manage", "Banner", FormMethod.Post, new { enctype = "multipart/form-data", id = "FormImageBanners" }))
+                                {
+
+                                    <input type="hidden" name="ContentType" value="Image" />
+                                    <input type="hidden" name="Device" value="Website" />
+
+                                    <div class="row" id="FileUploadImageForm">
+                                        @*<div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Url (Where to navigate on click)</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="Url" id="Url" placeholder="Redirect to" required />
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="flaticon2-open-text-book"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>*@
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Type</label>
+                                                <div class="input-group mb-3">
+                                                    <select id="Type" name="Type" required class="form-control required-custom" data_actions_box="true">
+                                                        <option value="Header">Header</option>
+                                                        <option value="Centered">Centered (Max 1)</option>
+                                                        <option value="Footer">Footer (Max 1)</option>
+                                                        <option value="About">About Us (Max 1)</option>
+                                                    </select>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fa fa-file"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="input-group">
+
+                                                    <!--Image-->
+                                                    <input type="file" class="form-control accept-change" accept=".png, .jpg, .jpeg" name="file" id="file" placeholder="Browse" data-width="1800" data-height="1200" required />
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="flaticon-upload"></i></span>
+                                                    </div>
+                                                    <span class="form-text text-muted">Image dimensions should be 1800 x 1200 pixels and Image size must be less than 500 kb</span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                <hr />
+                                <div class="row">
+                                    @foreach (var imgBanner in Model.ImageBanners)
+                                    {
+                                        <div class="col-md-12 col-sm-12 mb-5 website-banner banner" data="@imgBanner.ID">
+                                            <a class="btn btn-icon btn-light-danger btn-pill" onclick="Delete(this,@imgBanner.ID)" style="position:absolute; right:15px;top:2px">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                            <div class="bgi-no-repeat bgi-size-cover rounded min-h-200px shadow-sm" style="background-position: 50% 50%;background-image: url(@imgBanner.Path)"><span class="btn-custom m-1 position-absolute px-2 py-1 rounded text-light">@imgBanner.Type Image</span></div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Dashboard-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+</div>
+
+<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content" style="min-height:100px">
+            <div id='myModalContent'>
+                <div class="row justify-content-center">
+                    <div class="col-16">
+                        <div class="kt-spinner kt-spinner--lg kt-spinner--dark kt-spinner-modal"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Row-->
+
+@section IndexScript {
+    @if (ViewBag.Message != null && !String.IsNullOrEmpty(ViewBag.Message))
+    {
+        <script type="text/javascript">
+        toastr.success('@ViewBag.Message');
+        </script>
+    }
+    <!--begin::Page Scripts(used by this page)-->
+    <script src="@Url.ContentVersioned("~/Assets/Admin/js/admin/Banner/manage.js")"></script>
+    <!--end::Page Scripts-->
+    <script src="~/Assets/Admin/js/general/ModalPopup.js"></script>
+    <!--end::Page Scripts-->
+}

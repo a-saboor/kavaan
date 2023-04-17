@@ -1,0 +1,172 @@
+@model IEnumerable<MyProject.Data.Product>
+
+@{
+    ViewBag.Title = "List";
+    Layout = null;
+}
+<style>
+    #kt_datatable1 tbody tr td:last-child {
+        white-space: nowrap;
+    }
+</style>
+<!--begin::Row-->
+<div class="row">
+    <div class="col-xl-12">
+        <!--begin::Card-->
+        <div class="card card-custom gutter-b">
+            <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                <div class="card-title">
+                    <h3 class="card-label">
+                        Inventory Approvals
+                        <span class="d-block text-muted pt-2 font-size-sm">Manage Inventory Approvals Here...</span>
+                    </h3>
+                </div>
+                <div>
+                    <div class="dropdown dropdown-inline mr-2" hidden>
+                        @using (Html.BeginForm("ApprovalReport", "Product", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <button type="submit" class="btn btn-dark btn-sm @(Model.Count() > 0 ? "" : "disabled")">
+                                <i class="far fa-file-excel"></i>
+                                Export Excel
+                            </button>
+                        }
+                    </div>
+                    <div class="dropdown dropdown-inline mr-2">
+                        <button id="approveall" class="btn btn-outline-success btn-sm mr-1 btn_approveall">
+                            <i class="fa fa-check-circle"></i>Approve All
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                @Html.AntiForgeryToken()
+                <!--begin: Datatable-->
+                <table class="table table-separate table-head-custom table-checkable" id="kt_datatable1">
+                    <thead>
+                        <tr>
+                            <th>
+                                <label class="custom_check">
+                                    <input type="checkbox" name="checkAll" id="checkAll">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </th>
+                            <th>Date</th>
+                            <th>Vendor</th>
+                            <th>Product</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody style="display:none">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td nowrap="nowrap">
+                                    <label class="custom_check">
+                                        <input type="checkbox" class="Checkbox" value="@item.ID" name="select_specialist"> <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                                @*<td nowrap="nowrap"> <input type="checkbox" class="checkbox"id="@item.ID" </td>*@
+                                <td>@(item.CreatedOn.HasValue ? item.CreatedOn.Value.ToString(MyProject.Web.Helpers.CustomHelper.GetDateFormat) : "-")	</td>
+                                <td>@(item.Vendor != null ? item.Vendor.Name + "|" + item.Vendor.VendorCode : "-")</td>
+                                <td>@item.Name|@item.SKU</td>
+                                <td>@item.ApprovalStatus</td>
+                                <td nowrap="nowrap">@item.ApprovalStatus,@item.ID</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <!--end: Datatable-->
+            </div>
+        </div>
+        <!--end::Card-->
+    </div>
+</div>
+<!--end::Row-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script>
+
+    $(document).ready(function () {
+
+        $(".btn_approveall").prop("disabled", true);
+
+        $("#checkAll").click(function () {
+
+            $('.Checkbox').not(this).prop('checked', this.checked);
+            $(".btn_approveall").prop("disabled", false);
+            $(".btnapprove").toggle("disabled");
+            var chk = $('.Checkbox:checked').length;
+            if (chk > 0) {
+                $(".btnapprove").hide();
+                $(".btn_approveall").prop("disabled", false);
+            }
+            else {
+                $(".btn_approveall").prop("disabled", true);
+                $(".btnapprove").show();
+            }
+
+        });
+        $(".Checkbox").change(function () {
+
+            var chk = $('.Checkbox:checked').length;
+            if (chk > 0) {
+                $(".btnapprove").hide();
+                $(".btn_approveall").prop("disabled", false);
+            }
+            else {
+                $(".btn_approveall").prop("disabled", true);
+                $(".btnapprove").show();
+            }
+        });
+        $('[name="cbox[]"]:checked').length
+    });
+
+    $("#approveall").click(function () {
+        $('#approveall').addClass('spinner spinner-sm spinner-left').attr('disabled', true);
+        var yourArray = [];
+        $("input:checkbox[name=select_specialist]:checked").each(function () {
+            yourArray.push($(this).val());
+        });
+        // console.log(yourArray);
+        $.ajax({
+            url: '/Admin/Product/ApproveAll',
+            type: 'POST',
+            data: { 'ids': yourArray },
+            success: function (response) {
+                if (response.success) {
+                    toastr.options = {
+                        "positionClass": "toast-bottom-right",
+                    };
+                  
+                        toastr.success('Products approved successfully ...');
+                 
+                    setTimeout(function () {
+                        window.location.href = "/Admin/Product/Index";
+                    }, 5000);
+                  
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                
+                if (xhr.status === 403) {
+                    try {
+                        var response = $.parseJSON(xhr.responseText);
+                        swal.fire(response.Error, response.Message, "warning").then(function () {
+                            $('#myModal').modal('hide');
+                        });
+                    } catch (ex) {
+                        swal.fire("Access Denied", "Your are not authorize to perform this action, For further details please contact administrator !", "warning").then(function () {
+                            $('#myModal').modal('hide');
+                        });
+                    }
+
+                    $("#approveall").removeClass('spinner spinner-left spinner-sm').attr('disabled', false);
+                    $("#approveall").find('i').show();
+                }
+            }
+        });
+    });
+
+</script>

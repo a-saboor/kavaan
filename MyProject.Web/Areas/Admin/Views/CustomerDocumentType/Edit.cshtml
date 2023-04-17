@@ -1,0 +1,110 @@
+﻿
+@model MyProject.Data.CustomerDocumentType
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+<div class="modal-header">
+    <h5 class="modal-title">Update</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <i aria-hidden="true" class="ki ki-close"></i>
+    </button>
+</div>
+<div class="modal-body">
+    <form id="editform" action="/Admin/CustomerDocumentType/Edit/" name="form" enctype="multipart/form-data" class="form-file-custom" onsubmit="return form_file_custom(this)">
+        
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.ID)
+
+            <div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Title</label>
+                        <div class="input-group mb-2">
+                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @id = "Title", @class = "form-control required-custom", placeholder = "Enter document type here ..."} })
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-tag"></i></span></div>
+                        </div>
+							@Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Title Ar</label>
+                        <div class="input-group mb-2">
+                            @Html.EditorFor(model => model.TitleAr, new { htmlAttributes = new { @id = "TitleAr", @class = "form-control required-custom", placeholder = "Enter document type (ar) here ...", dir = "rtl"} })
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-tag"></i></span></div>
+                        </div>
+							@Html.ValidationMessageFor(model => model.TitleAr, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+            </div>
+        </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-custom" id="btnSubmit" form="editform">Save Changes</button>
+</div>
+
+<script>
+
+	$(document).ready(function () {
+		$("#myDocument").hide();
+	});
+	//$("#fileUpload").change(function (e) {
+	//	var file = this.files[0];
+	//	if (file) {
+	//		if (file.size >= (20 * 1000000)) {
+	//			Swal.fire({
+	//				icon: 'error',
+	//				title: 'Oops...',
+	//				text: 'Document size should be less than to or equal to 20 MB!',
+	//				//footer: '<a href>Image size should be less than or equal to  100KB and dimension should be 1713x540</a>'
+	//			})
+	//			$("#fileUpload").val("");
+	//		}
+	//		img = new Image();
+	//	}
+
+	//});
+
+	//$("#Userform").submit(function () {
+	//	
+	//	$(this).closest('.modal').find('button[type=submit]').addClass('spinner spinner-sm spinner-left').attr('disabled', true);
+	//	var data = new FormData();
+	//	//var files = $("#fileUpload").get(0).files;
+	//	//if (files.length > 0) {
+	//	//	data.append("fileUpload", files[0]);
+	//	//}
+	//	data.append("id", $('#ID').val());
+ //       data.append("Title", $('#Title').val());
+ //       data.append("TitleAr", $('#TitleAr').val());
+
+	//	$.ajax({
+ //           url: "/Admin/CustomerDocumentType/Edit",
+	//		type: "POST",
+	//		processData: false,
+	//		contentType: false,
+	//		data: data,
+	//		success: function (response) {
+	//			if (callback) {
+	//				callback($('#myModalContent'), element, true, response);
+	//			}
+	//		},
+	//		error: function (er) {
+	//			toastr.error(er);
+	//		}
+	//	});
+	//	return false;
+	//});
+
+	$("#cancelDocs").click(function () {
+		$("#viewDocs").hide();
+		$("#myDocument").show();
+
+		/*$("input[name=Video][type=hidden]").remove();*/
+	})
+
+</script>

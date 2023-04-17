@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = ""+ "";
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+   bool RTL = false;
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!--Body Content-->
+<div class="render-body" style="">
+	<!-- Hero Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<div class="">
+            <div class="h-[150px] mx-auto bg-cm-details bg-cover flex flex-col justify-center items-center md:h-[200px] lg:h-[300px]">
+                <h1 class="uppercase font-Rubik text-xl font-medium text-center text-white lg:text-4xl lg:mb-2">CONTRACTORS</h1>
+                <div class="flex items-center">
+                    <a href="/@culture/home/index" class="font-Rubik text-xs uppercase text-white">HOME</a>
+                    <svg viewBox="0 0 192 512" class="w-1.5 mx-2 fill-current text-white flip-horizontal-rtl"><path fill="" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class="fill-white"></path></svg>
+                    <p class="font-Rubik text-xs uppercase text-white">CONTRACTORS</p>
+                </div>
+            </div>
+		</div>
+	</section>
+	<!-- Hero Section End -->
+
+	<!-- consultants Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto" id="contractors_section">
+		@*<div>
+			<h1 class="uppercase font-Rubik text-xl font-medium text-center pb-4 pt-4 lg:pt-14 xl:pb-10">contractors</h1>
+		</div>*@
+
+        <div class="w-[80%] mx-auto sm:flex sm:flex-wrap sm:justify-between xl:w-[70%] pb-10 pt-10 main-div" style="">
+            <section class="text-center py-2 w-full" style=""><i class="fa fa-2x fa-circle-o-notch fa-spin"></i></section>
+            @*<a href="javascript:void(0);" class="cursor-pointer flex flex-row pb-4 w-full sm:w-[49%]">
+                <div class="bg-black/5 w-[25%] flex justify-center items-center rounded-l-lg drop-shadow-lg">
+                    <img src="/assets/images/web-icons/blog.png" alt="" class="w-10 h-10 xl:w-12 xl:h-12">
+                </div>
+                <div class="w-[75%] flex flex-col justify-center py-4 pl-4 bg-white rounded-r-lg drop-shadow-lg">
+                    <h1 class="font-Rubik text-xs font-medium xl:text-base">CAVALLI CLUB</h1>
+                    <p class="cut-text font-Rubik text-xs pr-3 text-justify xl:pr-6">In at iaculis lorem. Praesent tempor dictum tellus ut molestie. Sed sed ullamcorper lorem, id faucibus odio. Duis eu nisl ut ligula cursus molestie at at dolor. </p>
+                </div>
+            </a>
+            <a href="javascript:void(0);" class="cursor-pointer flex flex-row pb-4 w-full sm:w-[49%]">
+                <div class="bg-black/5 w-[25%] flex justify-center items-center rounded-l-lg drop-shadow-lg">
+                    <img src="/assets/images/web-icons/blog.png" alt="" class="w-10 h-10 xl:w-12 xl:h-12">
+                </div>
+                <div class="w-[75%] flex flex-col justify-center py-4 pl-4 bg-white rounded-r-lg drop-shadow-lg">
+                    <h1 class="font-Rubik text-xs font-medium xl:text-base">CAVALLI CLUB</h1>
+                    <p class="cut-text font-Rubik text-xs pr-3 text-justify xl:pr-6">In at iaculis lorem. Praesent tempor dictum tellus ut molestie. Sed sed ullamcorper lorem, id faucibus odio. Duis eu nisl ut ligula cursus molestie at at dolor. </p>
+                </div>
+            </a>
+            <a href="javascript:void(0);" class="cursor-pointer flex flex-row pb-4 w-full sm:w-[49%]">
+                <div class="bg-black/5 w-[25%] flex justify-center items-center rounded-l-lg drop-shadow-lg">
+                    <img src="/assets/images/web-icons/blog.png" alt="" class="w-10 h-10 xl:w-12 xl:h-12">
+                </div>
+                <div class="w-[75%] flex flex-col justify-center py-4 pl-4 bg-white rounded-r-lg drop-shadow-lg">
+                    <h1 class="font-Rubik text-xs font-medium xl:text-base">CAVALLI CLUB</h1>
+                    <p class="cut-text font-Rubik text-xs pr-3 text-justify xl:pr-6">In at iaculis lorem. Praesent tempor dictum tellus ut molestie. Sed sed ullamcorper lorem, id faucibus odio. Duis eu nisl ut ligula cursus molestie at at dolor. </p>
+                </div>
+            </a>
+            <a href="javascript:void(0);" class="cursor-pointer flex flex-row pb-4 w-full sm:w-[49%]">
+                <div class="bg-black/5 w-[25%] flex justify-center items-center rounded-l-lg drop-shadow-lg">
+                    <img src="/assets/images/web-icons/blog.png" alt="" class="w-10 h-10 xl:w-12 xl:h-12">
+                </div>
+                <div class="w-[75%] flex flex-col justify-center py-4 pl-4 bg-white rounded-r-lg drop-shadow-lg">
+                    <h1 class="font-Rubik text-xs font-medium xl:text-base">CAVALLI CLUB</h1>
+                    <p class="cut-text font-Rubik text-xs pr-3 text-justify xl:pr-6">In at iaculis lorem. Praesent tempor dictum tellus ut molestie. Sed sed ullamcorper lorem, id faucibus odio. Duis eu nisl ut ligula cursus molestie at at dolor. </p>
+                </div>
+            </a>
+            <a href="javascript:void(0);" class="cursor-pointer flex flex-row pb-4 w-full sm:w-[49%]">
+                <div class="bg-black/5 w-[25%] flex justify-center items-center rounded-l-lg drop-shadow-lg">
+                    <img src="/assets/images/web-icons/blog.png" alt="" class="w-10 h-10 xl:w-12 xl:h-12">
+                </div>
+                <div class="w-[75%] flex flex-col justify-center py-4 pl-4 bg-white rounded-r-lg drop-shadow-lg">
+                    <h1 class="font-Rubik text-xs font-medium xl:text-base">CAVALLI CLUB</h1>
+                    <p class="cut-text font-Rubik text-xs pr-3 text-justify xl:pr-6">In at iaculis lorem. Praesent tempor dictum tellus ut molestie. Sed sed ullamcorper lorem, id faucibus odio. Duis eu nisl ut ligula cursus molestie at at dolor. </p>
+                </div>
+            </a>
+            <a href="javascript:void(0);" class="cursor-pointer flex flex-row pb-4 w-full sm:w-[49%]">
+                <div class="bg-black/5 w-[25%] flex justify-center items-center rounded-l-lg drop-shadow-lg">
+                    <img src="/assets/images/web-icons/blog.png" alt="" class="w-10 h-10 xl:w-12 xl:h-12">
+                </div>
+                <div class="w-[75%] flex flex-col justify-center py-4 pl-4 bg-white rounded-r-lg drop-shadow-lg">
+                    <h1 class="font-Rubik text-xs font-medium xl:text-base">CAVALLI CLUB</h1>
+                    <p class="cut-text font-Rubik text-xs pr-3 text-justify xl:pr-6">In at iaculis lorem. Praesent tempor dictum tellus ut molestie. Sed sed ullamcorper lorem, id faucibus odio. Duis eu nisl ut ligula cursus molestie at at dolor. </p>
+                </div>
+            </a>
+            <a href="javascript:void(0);" class="cursor-pointer flex flex-row pb-4 w-full sm:w-[49%]">
+                <div class="bg-black/5 w-[25%] flex justify-center items-center rounded-l-lg drop-shadow-lg">
+                    <img src="/assets/images/web-icons/blog.png" alt="" class="w-10 h-10 xl:w-12 xl:h-12">
+                </div>
+                <div class="w-[75%] flex flex-col justify-center py-4 pl-4 bg-white rounded-r-lg drop-shadow-lg">
+                    <h1 class="font-Rubik text-xs font-medium xl:text-base">CAVALLI CLUB</h1>
+                    <p class="cut-text font-Rubik text-xs pr-3 text-justify xl:pr-6">In at iaculis lorem. Praesent tempor dictum tellus ut molestie. Sed sed ullamcorper lorem, id faucibus odio. Duis eu nisl ut ligula cursus molestie at at dolor. </p>
+                </div>
+            </a>
+            <a href="javascript:void(0);" class="cursor-pointer flex flex-row pb-4 w-full sm:w-[49%]">
+                <div class="bg-black/5 w-[25%] flex justify-center items-center rounded-l-lg drop-shadow-lg">
+                    <img src="/assets/images/web-icons/blog.png" alt="" class="w-10 h-10 xl:w-12 xl:h-12">
+                </div>
+                <div class="w-[75%] flex flex-col justify-center py-4 pl-4 bg-white rounded-r-lg drop-shadow-lg">
+                    <h1 class="font-Rubik text-xs font-medium xl:text-base">CAVALLI CLUB</h1>
+                    <p class="cut-text font-Rubik text-xs pr-3 text-justify xl:pr-6">In at iaculis lorem. Praesent tempor dictum tellus ut molestie. Sed sed ullamcorper lorem, id faucibus odio. Duis eu nisl ut ligula cursus molestie at at dolor. </p>
+                </div>
+            </a>*@
+        </div>
+
+		<div class="flex justify-center items-center animate-pulse">
+			<a href="javascript:void(0);" class="mb-16 bg-gk-gold uppercase font-Rubik text-xs text-center font-medium py-2 mb-12 px-4 hover:bg-gk-gold hover:text-white cursor-pointer transition delay-150 duration-300 ease-in-out hover:delay-0 rounded see-more" style="display:none;">SEE_MORE</a>
+			<a href="javascript:void(0);" class="mb-16 bg-gk-gold ease-in-out font-Rubik font-medium px-4 py-2 mb-12 text-center text-xs uppercase rounded no-more" style="display:none;"><i class="fa fa-exclamation-circle mr-1"></i> COMING_SOON</a>
+		</div>
+
+	</section>
+	<!-- consultants Section End -->
+</div>
+<!--Body Content End-->
+<!--Write js Here-->
+@section IndexScript {
+	<script src="@Url.ContentVersioned("~/Assets/js/web/contractors/index.js")"></script>
+}

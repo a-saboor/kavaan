@@ -1,0 +1,370 @@
+﻿@{
+    ViewBag.Title = "Login Modal";
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+    bool RTL = CultureHelper.IsRighToLeft();
+    Layout = null;
+}
+<!-- #region Modal-->
+<div class="popup-section" id="register_section" style="display:none;">
+    <div id="lightcase-overlay" style="opacity: 0.9; display: block; cursor: pointer;"></div>
+    <div id="lightcase-case" aria-hidden="false" role="dialog" style="opacity: 1; display: block; max-width: 100%; width: 639.996px; margin-top: -180px; margin-left: -319px;" class="">
+        <div id="lightcase-content">
+            <div class="lightcase-contentInner" style="opacity: 1; width: 639.996px; height: 361.596px; max-width: 100%;">
+                <!-- Register AREA START -->
+                <div class="ltn__login-area pb-110">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="section-title-area text-center">
+                                    <h1 class="section-title">Register <br>Your Account</h1>
+                                    <p hidden>
+                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. <br>
+                                        Sit aliquid,  Non distinctio vel iste.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 offset-lg-3">
+                                <div class="account-login-inner">
+                                    <form class="ltn__form-box contact-form-box" action="/@culture/customer/signup" method="post">
+                                        <input type="text" name="firstname" placeholder="First Name">
+                                        <input type="text" name="lastname" placeholder="Last Name">
+                                        <input type="text" name="email" placeholder="Email*">
+                                        <input type="password" name="password" placeholder="Password*">
+                                        <input type="password" name="confirmpassword" placeholder="Confirm Password*">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" value="">
+                                            I consent to Herboil processing my personal data in order to send personalized marketing material in accordance with the consent form and the privacy policy.
+                                        </label>
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" value="">
+                                            By clicking "create account", I consent to the privacy policy.
+                                        </label>
+                                        <div class="btn-wrapper">
+                                            <button class="theme-btn-1 btn reverse-color btn-block" type="submit">CREATE ACCOUNT</button>
+                                        </div>
+                                    </form>
+                                    <div class="by-agree text-center">
+                                        <p>By creating an account, you agree to our:</p>
+                                        <p><a href="#">TERMS OF CONDITIONS  &nbsp; &nbsp; | &nbsp; &nbsp;  PRIVACY POLICY</a></p>
+                                        <div class="go-to-btn mt-50">
+                                            <a href="javascript:void(0);">ALREADY HAVE AN ACCOUNT ?</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Register AREA END -->
+            </div>
+        </div>
+    </div>
+    <a href="javascript:void(0);" class="lightcase-icon-close" style="opacity: 1;" onclick="closeRegisterSection();"><span>Close</span></a>
+</div>
+
+    <div class="bg-white rounded-lg w-[80%] sm:w-[60%] md:w-[60%] lg:w-[60%] xl:w-[45%] m-10" hidden>
+        <!-- popup image section -->
+        <div class="relative w-full">
+            <div class="">
+                <img src="/assets/images/bg/popup-bg-3.png" alt="" class="w-full h-[6rem] sm:h-[8rem] md:h-[12rem] lg:h-[14rem] xl:h-[16rem] object-cover rounded-t-lg filter brightness-90">
+            </div>
+            <a href="javascript:void(0)" onclick="closeRegisterSection();">
+                <svg class="h-4 w-4 absolute top-4 right-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                          clip-rule="evenodd" />
+                </svg>
+            </a>
+            <div class="absolute translate-x-[-50%] translate-y-[-50%] left-[50%] bottom-[0%] sm:bottom-[4%] md:bottom-[6%] w-full">
+                <h2 class="text-white font-medium text-xl md:text-3xl leading-2 md:leading-[2.2rem] 2xl:leading-[2.8rem] uppercase mx-2 md:mx-10">
+                    Welcome to KAVAAN
+                </h2>
+            </div>
+        </div>
+        <!-- signup section -->
+        <div class="w-[90%] mx-auto main-div signup-div" style="display:none;">
+            <h1 class="font-Rubik font-medium text-xl mt-4">SIGNUP</h1>
+            <form action="/@culture/customer/signup" method="post">
+                @Html.AntiForgeryToken()
+                <!--Alert Message-->
+                <div class="alert-div px-2">
+                </div>
+                <!--Alert Message End-->
+
+                <div class="md:flex md:flex-wrap justify-between">
+                    <input type="hidden" class="input-field" name="ReturnUrl" value="" />
+                    <input type="hidden" class="input-field" name="Contact" value="" />
+
+                    <div class="form-group md:w-[100%] flex flex-col my-3 md:my-2 px-2 intr-form-group">
+                        <label for="PhoneCode" class="hidden">Phone Number</label>
+                        <input class="code" inputmode="numeric" name="PhoneCode" type="hidden" value="">
+                        <input data-strict="1" type="text"
+                               class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md w-full intr-phone numpad input-field form-field Contact" onkeypress="return isNumber(event)" maxlength="15" autocomplete="off" pattern="[0-9\-]*" data-required placeholder="Phone Number">
+                        <small class="form-text-validation text-xss text-danger py-1">
+                        </small>
+                    </div>
+
+                    <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2">
+                        <label for="Name" class="hidden">Name</label>
+                        <input data-strict="1" type="text"
+                               class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md input-field form-field Name" name="Name" onkeypress="return isString(event)" maxlength="100" autocomplete="off" data-required placeholder="Name">
+                        <small class="form-text-validation text-xss text-danger py-1">
+                        </small>
+                    </div>
+
+                    <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2">
+                        <label for="Email" class="hidden">Email</label>
+                        <input data-strict="1" type="text"
+                               class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md input-field form-field Email" name="Email" maxlength="100" autocomplete="off" data-required placeholder="Email Address">
+                        <small class="form-text-validation text-xss text-danger py-1">
+                        </small>
+                    </div>
+
+                    <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2">
+                        <label for="Password" class="hidden">Password</label>
+                        <div class="relative flex flex-row bg-white box-shadow-md rounded-lg outline-none-input">
+                            <input data-strict="1" type="password"
+                                   class="rounded-lg text-sm outline-none-input py-3 px-3 w-full input-field form-field Password s-p" name="Password" maxlength="20" autocomplete="off" pattern=@("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z@$*&#%!~()\\d]{8,}$") onkeyup="validatePassword(this);" data-required placeholder="Password">
+                            <div class="absolute border-ak-gold/40 border-l flex items-center ml-2 pl-2 right-0 top-[50%] translate-x-[-50%] translate-y-[-50%] w-[10%] w-fit see-password">
+                                <i class="fa fa-eye-slash text-ak-gold text-xl text-stroke-white-1 cursor-pointer"></i>
+                            </div>
+                        </div>
+                        <small class="form-text-validation text-xss text-danger py-1">
+                        </small>
+                    </div>
+
+                    <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2">
+                        <label for="ConfirmPassword" class="hidden">Confirm Password</label>
+                        <div class="relative flex flex-row bg-white box-shadow-md rounded-lg outline-none-input">
+                            <input data-strict="1" type="password"
+                                   class="rounded-lg text-sm outline-none-input py-3 px-3 w-full input-field form-field ConfirmPassword s-p" name="ConfirmPassword" maxlength="20" autocomplete="off" onkeyup="validateConfirmPassword(this)" ; data-required placeholder="Confirm Password">
+                            <div class="absolute border-ak-gold/40 border-l flex items-center ml-2 pl-2 right-0 top-[50%] translate-x-[-50%] translate-y-[-50%] w-[10%] w-fit see-password">
+                                <i class="fa fa-eye-slash text-ak-gold text-xl text-stroke-white-1 cursor-pointer"></i>
+                            </div>
+                        </div>
+                        <small class="form-text-validation text-xss text-danger py-1">
+                        </small>
+                    </div>
+
+                </div>
+                <button class="rounded-lg bg-ak-gold/90 hover:bg-ak-gold text-white focus:outline-none py-2 mt-4 mx-2 w-[97%]" type="submit">
+                    <p class="p-btn-primary text-white">PROCEED</p>
+                </button>
+            </form>
+            <p class="font-Rubik text-center text-xs mt-4">ALREADY_HAVE_AN_ACCOUNT</p>
+            <p class="text-ak-purple font-medium font-Rubik text-center text-sm flex justify-center mb-3 mt-3 uppercase">
+                <a href="javascript:void(0);"
+                   onclick="changeRegisterSection('.signup-div','.login-div')">LOGIN</a>
+            </p>
+        </div>
+        <!-- login section -->
+        <div class="w-[90%] mx-auto main-div login-div" style="">
+            <h1 class="font-Rubik font-medium text-xl mt-4">LOGIN</h1>
+            <form action="/@culture/customer/login" method="post" class="mb-4">
+                @Html.AntiForgeryToken()
+                <!--Alert Message-->
+                <div class="alert-div px-2">
+                </div>
+                <!--Alert Message End-->
+                <div class="md:flex md:flex-wrap justify-between">
+                    <input type="hidden" class="input-field" name="ReturnUrl" value="" />
+                    <input type="hidden" class="input-field" name="Contact" value="" />
+                    <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2 intr-form-group">
+                        <input class="code" inputmode="numeric" name="PhoneCode" type="hidden" value="">
+                        <label for="PhoneCode" class="hidden">Phone Number</label>
+                        <input data-strict="1" type="text"
+                               class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md w-full intr-phone numpad Contact input-field form-field " onkeypress="return isNumber(event)" maxlength="15" autocomplete="off" pattern="[0-9\-]*" data-required placeholder="Phone Number">
+                        <small class="form-text-validation text-xss text-danger py-1">
+                        </small>
+                    </div>
+
+                    <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2">
+                        <label for="Password" class="hidden">Password</label>
+                        <div class="relative flex flex-row bg-white box-shadow-md rounded-lg outline-none-input">
+                            <input data-strict="1" type="password"
+                                   class="rounded-lg text-sm outline-none-input py-3 px-3 w-full input-field form-field Password s-p" name="Password" maxlength="20" autocomplete="off" pattern=@("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z@$*&#%!~()\\d]{8,}$") onkeyup="validatePassword(this);" data-required placeholder="Password">
+                            <div class="absolute border-ak-gold/40 border-l flex items-center ml-2 pl-2 right-0 top-[50%] translate-x-[-50%] translate-y-[-50%] w-[10%] w-fit see-password">
+                                <i class="fa fa-eye-slash text-ak-gold text-xl text-stroke-white-1 cursor-pointer"></i>
+                            </div>
+                        </div>
+                        <small class="form-text-validation text-xss text-danger py-1"></small>
+                    </div>
+
+                    <div class="mt-2 xl:w-[100%]">
+                        <p class="text-ak-blue font-medium font-Rubik text-right text-xs flex justify-end uppercase">
+                            <a href="javascript:void(0);"
+                               onclick="changeRegisterSection('.login-div','.reset-password-div')">FORGOT_PASSWORD_</a>
+                        </p>
+                    </div>
+
+                </div>
+                <button class="rounded-lg bg-ak-gold/90 hover:bg-ak-gold text-white focus:outline-none py-2 mt-4 mx-2 w-[97%]" type="submit">
+                    <p class="p-btn-primary text-white">PROCEED</p>
+                </button>
+            </form>
+            <p class="font-Rubik text-center text-xs">DONT_HAVE_AN_ACCOUNT</p>
+            <p class="text-ak-purple font-medium font-Rubik text-center text-sm flex justify-center mb-3 mt-3 uppercase">
+                <a href="javascript:void(0);"
+                   onclick="changeRegisterSection('.login-div','.signup-div')">SIGNUP</a>
+            </p>
+        </div>
+        <!-- otp/number verify section -->
+        <div class="w-[90%] mx-auto main-div otp-div" style="display:none;">
+            <h1 class="font-Rubik font-medium text-xl mt-4">OTP_VERIFICATION</h1>
+            <form action="/@culture/Customer/Account/verifyOTP" method="post" class="" data-submission="autosubmit">
+                <input type="hidden" id="is_otp_access" value="0" />
+                <input type="hidden" id="reset_password" value="0" />
+                @Html.AntiForgeryToken()
+                <!--Alert Message-->
+                <div class="alert-div px-2">
+                </div>
+                <!--Alert Message End-->
+                <div>
+                    <p class="font-Rubik text-center text-xs mt-2">A_VERIFICATION_CODE_WAS_SENT_TO</p>
+                    <a href="javascript:void(0);"
+                       class="text-ak-blue font-medium font-Rubik text-center text-sm flex justify-center mb-2 otp-contact"
+                       data-value=""></a>
+                </div>
+                <div>
+                    <p class="font-Rubik text-xs text-black/40 capitalize font-medium text-center pb-3">
+                        ENTER_VERIFICATION_CODE
+                    </p>
+                    <div class="mb-2 flex justify-center digit-group">
+                        <input data-strict="1" type="text" name=""
+                               class="input-field form-field digits w-12 h-10 lg:w-16 lg:h-14 md:w-12 md:h-10 rounded-lg bg-white box-shadow-md font-medium text-sm outline-none-input text-center mx-2"
+                               maxlength="1">
+                        <input data-strict="1" type="text" name=""
+                               class="input-field form-field digits w-12 h-10 lg:w-16 lg:h-14 md:w-12 md:h-10 rounded-lg bg-white box-shadow-md font-medium text-sm outline-none-input text-center mx-2"
+                               maxlength="1">
+                        <input data-strict="1" type="text" name=""
+                               class="input-field form-field digits w-12 h-10 lg:w-16 lg:h-14 md:w-12 md:h-10 rounded-lg bg-white box-shadow-md font-medium text-sm outline-none-input text-center mx-2"
+                               maxlength="1">
+                        <input data-strict="1" type="text" name=""
+                               class="input-field form-field digits w-12 h-10 lg:w-16 lg:h-14 md:w-12 md:h-10 rounded-lg bg-white box-shadow-md font-medium text-sm outline-none-input text-center mx-2"
+                               maxlength="1">
+                    </div>
+                    <button class="rounded-lg bg-ak-gold/90 hover:bg-ak-gold text-white focus:outline-none py-2 mt-4 mx-2 w-[97%]" type="submit">
+                        <p class="p-btn-primary text-white">VERIFY</p>
+                    </button>
+                    <p class="font-Rubik text-center mt-4 timer">01:59</p>
+                    <p class="text-ak-purple font-medium font-Rubik text-center text-sm flex justify-center mb-3 mt-3 uppercase">
+                        <a href="javascript:void(0);" class="resend-code"
+                           onclick="resendVerificationCode(this)">RESEND_CODE</a>
+                    </p>
+                    <p class="font-Rubik text-center text-xs mt-4 incorrect-details">INCORRECT_PHONE_NUMBER</p>
+                    <p class="text-ak-purple font-medium font-Rubik text-center text-sm flex justify-center mb-3 mt-3 uppercase">
+                        <a href="javascript:void(0);"
+                           onclick="changeRegisterSection('.otp-div','.login-div')">CANCEL_VERIFICATION</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+        <!-- email verify section -->
+        <div class="w-[90%] mx-auto main-div email-verify-div" style="display:none;">
+            <h1 class="font-Rubik font-medium text-xl mt-4">OTP Verification</h1>
+            <form action="/@culture/customer/email-verification" method="post" class="" data-submission="autosubmit">
+                @Html.AntiForgeryToken()
+                <!--Alert Message-->
+                <div class="alert-div px-2">
+                </div>
+                <!--Alert Message End-->
+                <div class="form-group md:w-[100%] flex flex-col my-3 md:my-2 px-2">
+                    <label for="Email" class="hidden">Email</label>
+                    <input data-strict="1" type="text"
+                           class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md input-field form-field Email" name="Email" maxlength="100" autocomplete="off" data-required placeholder="Email Address">
+                    <small class="form-text-validation text-xss text-danger py-1">
+                    </small>
+                </div>
+                <button class="rounded-lg bg-ak-gold/90 hover:bg-ak-gold text-white focus:outline-none py-2 mt-4 mx-2 w-[97%]" type="submit">
+                    <p class="p-btn-primary text-white">PROCEED</p>
+                </button>
+            </form>
+            <p class="text-ak-purple font-medium font-Rubik text-center text-sm flex justify-center mb-3 mt-3 uppercase">
+                <a href="javascript:void(0);"
+                   onclick="changeRegisterSection('.email-verify-div','.login-div')">CANCEL_VERIFICATION</a>
+            </p>
+        </div>
+        <!-- reset password section -->
+        <div class="w-[90%] mx-auto main-div reset-password-div" style="display:none;">
+            <h1 class="font-Rubik font-medium text-xl mt-4">FORGOT_PASSWORD</h1>
+            <form action="/@culture/customer/resetpassword" method="post">
+                @Html.AntiForgeryToken()
+                <!--Alert Message-->
+                <div class="alert-div px-2">
+                </div>
+                <!--Alert Message End-->
+
+                <div class="form-group md:w-[100%] flex flex-col my-3 md:my-2 px-2 intr-form-group">
+                    <input type="hidden" class="input-field" name="Contact" value="" />
+                    <input class="code" inputmode="numeric" name="PhoneCode" type="hidden" value="">
+                    <label for="PhoneCode" class="hidden">Phone Number</label>
+                    <input data-strict="1" type="text"
+                           class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md w-full intr-phone numpad Contact input-field form-field " onkeypress="return isNumber(event)" maxlength="15" autocomplete="off" pattern="[0-9\-]*" data-required placeholder="Phone Number">
+                    <small class="form-text-validation text-xss text-danger py-1">
+                    </small>
+                </div>
+
+                <button class="rounded-lg bg-ak-gold/90 hover:bg-ak-gold text-white focus:outline-none py-2 mt-4 mx-2 w-[97%]" type="submit">
+                    <p class="p-btn-primary text-white">PROCEED</p>
+                </button>
+            </form>
+            <p class="font-Rubik text-center text-xs mt-4">ALREADY_HAVE_AN_ACCOUNT</p>
+            <p class="text-ak-purple font-medium font-Rubik text-center text-sm flex justify-center mb-3 mt-3 uppercase">
+                <a href="javascript:void(0);"
+                   onclick="changeRegisterSection('.reset-password-div','.login-div')">LOGIN</a>
+            </p>
+        </div>
+        <!-- new password section -->
+        <div class="w-[90%] mx-auto main-div new-password-div" style="display:none;">
+            <h1 class="font-Rubik font-medium text-xl mt-4">CREATE_NEW_PASSWORD</h1>
+            <form action="/@culture/customer/newpassword" method="post">
+                @Html.AntiForgeryToken()
+                <!--Alert Message-->
+                <div class="alert-div px-2">
+                </div>
+                <!--Alert Message End-->
+                <div class="xl:flex xl:flex-wrap justify-between">
+                    <input type="hidden" class="" name="Contact" value="" />
+                    <input type="hidden" class="" name="OTP" value="" />
+                    <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2">
+                        <label for="Password" class="hidden">Password</label>
+                        <input data-strict="1" type="password"
+                               class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md input-field form-field Password" name="Password" maxlength="20" autocomplete="off" pattern=@("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z@$*&#%!~()\\d]{8,}$") onkeyup="validatePassword(this);" data-required placeholder="Password">
+                        <small class="form-text-validation text-xss text-danger py-1">
+                        </small>
+                    </div>
+
+                    <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2">
+                        <label for="ConfirmPassword" class="hidden">Confirm Password</label>
+                        <input data-strict="1" type="password"
+                               class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md input-field form-field ConfirmPassword" name="ConfirmPassword" maxlength="20" autocomplete="off" onkeyup="validateConfirmPassword(this);" data-required placeholder="Confirm Password">
+                        <small class="form-text-validation text-xss text-danger py-1">
+                        </small>
+                    </div>
+                </div>
+                <button class="rounded-lg bg-ak-gold/90 hover:bg-ak-gold text-white focus:outline-none py-2 mt-4 mx-2 w-[97%]" type="submit">
+                    <p class="p-btn-primary text-white">PROCEED</p>
+                </button>
+            </form>
+            <p class="font-Rubik text-center text-xs mt-4">ALREADY_HAVE_AN_ACCOUNT</p>
+            <p class="text-ak-purple font-medium font-Rubik text-center text-sm flex justify-center mb-3 mt-3 uppercase">
+                <a href="javascript:void(0);"
+                   onclick="changeRegisterSection('.signup-div','.login-div')">LOGIN</a>
+            </p>
+        </div>
+        <!-- message section -->
+        <div class="w-[90%] mx-auto main-div result-div" style="display:none;">
+            <h1 class="font-Rubik font-medium text-xl mt-4 text-center">LoginSuccessful</h1>
+            <div class="flex items-center w-full my-3 justify-center">
+                <img src="/assets/images/web-icons/result-icon-check.svg" alt="" class="h-32 mx-2 result-icon" />
+            </div>
+            <p class="font-Rubik text-center text-xs mt-4 ">YOU_ARE_REDIRECTING_TO_YOUR_PORTAL</p>
+            <p class="text-ak-purple font-medium font-Rubik text-center text-sm flex justify-center mb-3 mt-3 uppercase">
+                <a href="javascript:void(0);">PLEASE_WAIT_</a>
+            </p>
+        </div>
+    </div>
+
+<!-- #endregion Modal -->

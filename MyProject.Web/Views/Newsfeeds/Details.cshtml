@@ -1,0 +1,175 @@
+﻿@model MyProject.Data.NewsFeed
+@{
+    ViewBag.Title = "Newsfeeds";
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+    bool RTL = CultureHelper.IsRighToLeft();
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!-- #region Content-->
+<!-- BREADCRUMB AREA START -->
+<div class="ltn__breadcrumb-area text-left bg-overlay-white-30 bg-image mt-5 mb-5" data-bs-bg="/Assets/img/bg/14.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ltn__breadcrumb-inner">
+                    <h1 class="page-title">Newsfeed Details</h1>
+                    <div class="ltn__breadcrumb-list">
+                        <ul>
+                            <li><a href="~/home"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Home</a></li>
+                            <li><a href="~/blogs"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Newsfeeds</a></li>
+                            <li>Newsfeed Details</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BREADCRUMB AREA END -->
+<!-- BLOG AREA START -->
+<div class="ltn__blog-area mb-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ltn__blog-list-wrap">
+                    <!-- Newsfeed Item -->
+                    <div class="ltn__blog-item ltn__blog-item-5">
+                        <div class="ltn__blog-img">
+                            <a><img src="@(!string.IsNullOrEmpty(Model.BannerImage) ? Model.BannerImage : "/Assets/img/gallery/1.jpg")" alt="Image"></a>
+                        </div>
+                        <div class="ltn__blog-brief">
+                            <div class="ltn__blog-meta">
+                                <ul>
+                                    <li class="ltn__blog-category">
+                                        <a href="javascript:void(0);">Newsfeed</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h3 class="ltn__blog-title">
+                                <a href="javascript:void(0);">
+                                    @Model.Title
+                                </a>
+                            </h3>
+                            <div class="ltn__blog-meta">
+                                <ul>
+                                    @*<li>
+                            <a href="javascript:void(0);"><i class="far fa-eye"></i>232 Views</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);"><i class="far fa-comments"></i>35 Comments</a>
+                        </li>*@
+                                    <li class="ltn__blog-date">
+                                        <i class="far fa-calendar-alt"></i>@(Model.PostedDate.HasValue ? Model.PostedDate.Value.ToString("dd MMM, yyyy") : "")
+                                    </li>
+                                </ul>
+                            </div>
+                            <input type="hidden" id="description" value="@Model.TitleDescription" />
+                            <div class="d-flex flex-column w-100 text-justify" id="TitleDescription" style="display:none;">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint</p>
+                            </div>
+                            <div class="ltn__blog-meta-btn">
+                                <div class="ltn__blog-meta mt-3">
+                                    <ul>
+                                        <li class="ltn__blog-author">
+                                            <a href="javascript:void(0);"><img src="~/Assets/img/blog/author.jpg" alt="#">By: @Model.Host</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="ltn__social-media-2 ml-30 social-links">
+                                    <ul>
+                                        @if (!string.IsNullOrEmpty(Model.FacebookURL) && Model.FacebookURL != "-")
+                                        {
+                                            <li><a href="@(!string.IsNullOrEmpty(Model.FacebookURL) && Model.FacebookURL != "-" ? Model.FacebookURL : "javascript:void(0);")" target="@(!string.IsNullOrEmpty(Model.FacebookURL) && Model.FacebookURL != "-" ? "_blank" : "")" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                        }
+                                        @if (!string.IsNullOrEmpty(Model.TwitterUrl) && Model.TwitterUrl != "-")
+                                        {
+                                            <li><a href="@(!string.IsNullOrEmpty(Model.TwitterUrl) && Model.TwitterUrl != "-" ? Model.TwitterUrl : "javascript:void(0);")" target="@(!string.IsNullOrEmpty(Model.TwitterUrl) && Model.TwitterUrl != "-" ? "_blank" : "")" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                        }
+                                        @if (!string.IsNullOrEmpty(Model.LinkedinURL) && Model.LinkedinURL != "-")
+                                        {
+                                            <li><a href="@(!string.IsNullOrEmpty(Model.LinkedinURL) && Model.LinkedinURL != "-" ? Model.LinkedinURL : "javascript:void(0);")" target="@(!string.IsNullOrEmpty(Model.LinkedinURL) && Model.LinkedinURL != "-" ? "_blank" : "")" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
+                                        }
+                                        @if (!string.IsNullOrEmpty(Model.InstagramURL) && Model.InstagramURL != "-")
+                                        {
+                                            <li><a href="@(!string.IsNullOrEmpty(Model.InstagramURL) && Model.InstagramURL != "-" ? Model.InstagramURL : "javascript:void(0);")" target="@(!string.IsNullOrEmpty(Model.InstagramURL) && Model.InstagramURL != "-" ? "_blank" : "")" title="Instagram"><i class="fab fa-instagram"></i></a></li>
+                                        }
+                                        @if (!string.IsNullOrEmpty(Model.Email) && Model.Email != "-")
+                                        {
+                                            <li><a href="@(!string.IsNullOrEmpty(Model.Email) && Model.Email != "-" ? "mailto:"+Model.Email : "javascript:void(0);")" title="Email"><i class="fa fa-envelope"></i></a></li>
+                                        }
+                                        <li>
+                                            <a title="Copy Link" class="cursor-pointer" onclick="CopyLink(this);">
+                                                <i class="fa fa-link"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                @*<div class="ltn__blog-btn">
+                        <a href="javascript:void(0);"><i class="fas fa-arrow-right"></i>Read more</a>
+                    </div>*@
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Newsfeed Item (Video) -->
+                    @if (!string.IsNullOrEmpty(Model.Video))
+                    {
+                        <div class="ltn__blog-item ltn__blog-item-video text-center">
+                            <div class="ltn__video-img">
+                                <img src="~/Assets/img/blog/4.jpg" alt="video popup bg image">
+                                <a class="ltn__video-icon-2 ltn__secondary-bg ltn__video-icon-2-border---" href="@Model.Video" data-rel="lightcase:myCollection">
+                                    <i class="fa fa-play"></i>
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BLOG AREA END -->
+<!-- #endregion Content -->
+<!--Write js Here-->
+@section IndexScript {
+    <script>
+        var temp = $("<input>");
+        var url = $(location).attr('href');
+
+        $(document).ready(function () {
+            //OnErrorImage(0.5, 'newsfeed');
+
+            let description = $('#description').val();
+            if (description.includes("\n")) {
+                description = description.split('\n');
+                $.each(description, function (k, v) {
+                    $('#TitleDescription').append(`<p class="">${v}</p>`)
+                });
+            }
+            else {
+                description = description;
+                $('#TitleDescription').html(description);
+            }
+
+            $('#TitleDescription').show();
+
+            $.each($(".social-links a[href]"), function (idx, elem) {
+                if (!$(elem).attr('title').includes('Email') && !$(elem).attr('href').includes('http')) {
+                    $(elem).attr('href', "https://" + $(elem).attr('href'))
+                }
+            });
+
+        });
+
+        function CopyLink(elem) {
+            $(elem).append(temp);
+            temp.val(url).select();
+            document.execCommand("copy");
+            temp.remove();
+            //show message popup
+            ToastrMessage(icon_success, 'Link copied to clipboard.', "", 6);
+        }
+    </script>
+}

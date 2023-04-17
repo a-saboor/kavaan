@@ -1,0 +1,1323 @@
+﻿@model MyProject.Web.ViewModels.HomeViewModel
+@{
+    ViewBag.Title = "Home";
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+    //bool RTL = false;
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!-- #region Content-->
+<!-- Body main wrapper start -->
+<div class="body-wrapper">
+
+    <!-- SLIDER AREA START (slider-4) -->
+    <div class="ltn__slider-area ltn__slider-4 position-relative ltn__primary-bg fix">
+        <div class="ltn__slide-one-active----- slick-slide-arrow-1----- slick-slide-dots-1----- arrow-white----- ltn__slide-animation-active">
+
+            <!-- HTML5 VIDEO -->
+            <video autoplay muted loop id="myVideo">
+                <source src="@Url.Content(Model.HeaderVideo.Path)" type="video/mp4">
+            </video>
+
+            <!-- YouTube VIDEO -->
+            <!-- <div class="ltn__youtube-video-background">
+                <iframe frameborder="0" height="100%" width="100%"
+                  src="https://www.youtube.com/embed/PuTqWxuAazI&loop=1&controls=0&showinfo=0&autoplay=1&mute=1">
+                </iframe>
+            </div> -->
+            <!-- ltn__slide-item -->
+            <div class="ltn__slide-item ltn__slide-item-2 ltn__slide-item-7 bg-image--- bg-overlay-theme-black-10---" data-bs-bg="/Assets/img/slider/41.jpg">
+                <div class="ltn__slide-item-inner text-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 align-self-center">
+                                <div class="slide-item-info">
+                                    <div class="slide-item-info-inner ltn__slide-animation">
+                                        <h6 class="slide-sub-title white-color animated"><span><i class="fas fa-home"></i></span> Kavaan Real Estate Agency</h6>
+                                        <h1 class="slide-title text-uppercase white-color animated ">Find Your Dream <br> House By Us</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- SLIDER AREA END -->
+    @if (Model.ProjectTypes.Count() > 0)
+    {
+        <!-- BANNER AREA START ( Banner - 4 ) -->
+        <div class="ltn__banner-area pt-120">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title-area ltn__section-title-2--- text-center">
+                            <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">Property</h6>
+                            <h1 class="section-title">Property By Categories</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+
+                    @{ int PTIdx = 0;}
+                    @foreach (var item in Model.ProjectTypes)
+                    {
+                        PTIdx++;
+                        if (PTIdx == 1)
+                        {
+                            <div class="col-lg-8 col-md-6">
+                                <div class="ltn__banner-item ltn__banner-style-4 text-color-white bg-image" data-bs-bg="@Url.Content(item.Projects.FirstOrDefault().Thumbnail)">
+                                    <div class="ltn__banner-info">
+                                        <h3><a href="~/projects?type=@item.ID"> @item.Name </a></h3>
+                                        <p> Great Deals Available</p>
+                                        <mark> @item.Projects.Count() Listings</mark>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-lg-4 col-md-6">
+                                <div class="ltn__banner-item ltn__banner-style-4 text-color-white bg-image" data-bs-bg="@Url.Content(item.Projects.FirstOrDefault().Thumbnail)">
+                                    <div class="ltn__banner-info">
+                                        <h3><a href="~/projects?type=@item.ID"> @item.Name </a></h3>
+                                        <p> Great Deals Available</p>
+                                        <mark> @item.Projects.Count() Listings</mark>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+        <!-- BANNER AREA END -->
+    }
+
+    @if (Model.HeaderBanners.Count() > 0)
+    {
+        <!-- SLIDER AREA START (slider-3) -->
+        <div class="ltn__slider-area ltn__slider-3  section-bg-2">
+            <div class="ltn__slide-one-active slick-slide-arrow-1 slick-slide-dots-1">
+                @foreach (var item in Model.HeaderBanners)
+                {
+                    <!-- ltn__slide-item -->
+                    <div class="ltn__slide-item ltn__slide-item-2 ltn__slide-item-3-normal--- ltn__slide-item-3 bg-image bg-overlay-theme-black-60" data-bs-bg="@Url.Content(item.Path)">
+                        <div class="ltn__slide-item-inner text-center">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-12 align-self-center">
+                                        <div class="slide-item-info">
+                                            <div class="slide-item-info-inner ltn__slide-animation">
+                                                @*<div class="slide-video mb-50 d-none">
+                                                        <a class="ltn__video-icon-2 ltn__video-icon-2-border" href="https://www.youtube.com/embed/tlThdr3O5Qo" data-rel="lightcase:myCollection">
+                                                            <i class="fa fa-play"></i>
+                                                        </a>
+                                                    </div>*@
+                                                <h6 class="slide-sub-title white-color--- animated"><span><i class="fas fa-home"></i></span> Kavaan Real Estate Agency</h6>
+                                                <h1 class="slide-title animated ">Find Your Dream <br> House By Us</h1>
+                                                <div class="slide-brief animated">
+                                                    <p>Slide to see images, or Click on button to see all projects</p>
+                                                </div>
+                                                <div class="btn-wrapper animated">
+                                                    <a href="~/projects" class="theme-btn-1 btn btn-effect-1">See all Projects</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <!-- SLIDER AREA END -->
+    }
+    <!-- FEATURE AREA START ( Feature - 6) -->
+    <div class="ltn__feature-area section-bg-1 pt-120 pb-90 mb-120---">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title-area ltn__section-title-2--- text-center">
+                        <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">Our Services</h6>
+                        <h1 class="section-title">Our Main Focus</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row ltn__custom-gutter--- justify-content-center">
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="ltn__feature-item ltn__feature-item-6 text-center bg-white  box-shadow-1">
+                        <div class="ltn__feature-icon">
+                            <!-- <span><i class="flaticon-house"></i></span> -->
+                            <img src="~/Assets/img/icons/icon-img/21.png" alt="#">
+                        </div>
+                        <div class="ltn__feature-info">
+                            <h3><a href="~/projects">Buy a home</a></h3>
+                            <p>over 20+ homes for sale available on the website, we can match you with a house you will want to call home.</p>
+                            <a class="ltn__service-btn" href="~/projects">Find A Home <i class="flaticon-right-arrow"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="ltn__feature-item ltn__feature-item-6 text-center bg-white  box-shadow-1 active">
+                        <div class="ltn__feature-icon">
+                            <!-- <span><i class="flaticon-house-3"></i></span> -->
+                            <img src="~/Assets/img/icons/icon-img/22.png" alt="#">
+                        </div>
+                        <div class="ltn__feature-info">
+                            <h3><a href="~/projects">Rent a home</a></h3>
+                            <p>over 20+ homes for sale available on the website, we can match you with a house you will want to call home.</p>
+                            <a class="ltn__service-btn" href="~/projects">Find A Home <i class="flaticon-right-arrow"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="ltn__feature-item ltn__feature-item-6 text-center bg-white  box-shadow-1">
+                        <div class="ltn__feature-icon">
+                            <!-- <span><i class="flaticon-deal-1"></i></span> -->
+                            <img src="~/Assets/img/icons/icon-img/23.png" alt="#">
+                        </div>
+                        <div class="ltn__feature-info">
+                            <h3><a href="~/projects">Sell a home</a></h3>
+                            <p>over 20+ homes for sale available on the website, we can match you with a house you will want to call home.</p>
+                            <a class="ltn__service-btn" href="~/projects">Find A Home <i class="flaticon-right-arrow"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FEATURE AREA END -->
+    <!-- PRODUCT SLIDER AREA START -->
+    <div class="ltn__product-slider-area ltn__product-gutter pt-115 pb-90 plr--7" hidden>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title-area ltn__section-title-2--- text-center">
+                        <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">Properties</h6>
+                        <h1 class="section-title">Featured Listings</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row ltn__product-slider-item-four-active-full-width slick-arrow-1">
+                <!-- ltn__product-item -->
+                <div class="col-lg-12">
+                    <div class="ltn__product-item ltn__product-item-4 text-center---">
+                        <div class="product-img">
+                            <a href="~/projects"><img src="~/Assets/img/product-3/1.jpg" alt="#"></a>
+                            <div class="product-badge">
+                                <ul>
+                                    <li class="sale-badge bg-green">For Rent</li>
+                                </ul>
+                            </div>
+                            <div class="product-img-location-gallery">
+                                <div class="product-img-location">
+                                    <ul>
+                                        <li>
+                                            <a href="~/contact-us"><i class="flaticon-pin"></i> Belmont Gardens, Chicago</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product-img-gallery">
+                                    <ul>
+                                        <li>
+                                            <a href="~/projects"><i class="fas fa-camera"></i> 4</a>
+                                        </li>
+                                        <li>
+                                            <a href="~/projects"><i class="fas fa-film"></i> 2</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-price">
+                                <span>$34,900<label>/Month</label></span>
+                            </div>
+                            <h2 class="product-title"><a href="~/projects">New Apartment Nice View</a></h2>
+                            <div class="product-description">
+                                <p>
+                                    Beautiful Huge 1 Family House In Heart Of <br>
+                                    Westbury. Newly Renovated With New Wood
+                                </p>
+                            </div>
+                            <ul class="ltn__list-item-2 ltn__list-item-2-before">
+                                <li>
+                                    <span>3 <i class="flaticon-bed"></i></span>
+                                    Bedrooms
+                                </li>
+                                <li>
+                                    <span>2 <i class="flaticon-clean"></i></span>
+                                    Bathrooms
+                                </li>
+                                <li>
+                                    <span>3450 <i class="flaticon-square-shape-design-interface-tool-symbol"></i></span>
+                                    square Ft
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product-info-bottom">
+                            <div class="real-estate-agent">
+                                <div class="agent-img">
+                                    <a href="~/about-us"><img src="~/Assets/img/blog/author.jpg" alt="#"></a>
+                                </div>
+                                <div class="agent-brief">
+                                    <h6><a href="~/about-us">William Seklo</a></h6>
+                                    <small>Estate Agents</small>
+                                </div>
+                            </div>
+                            <div class="product-hover-action">
+                                <ul>
+                                    <li>
+                                        <a href="javascript:void(0);" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                            <i class="flaticon-expand"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                            <i class="flaticon-heart-1"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="~/projects" title="Product Details">
+                                            <i class="flaticon-add"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ltn__product-item -->
+                <div class="col-lg-12">
+                    <div class="ltn__product-item ltn__product-item-4 text-center---">
+                        <div class="product-img">
+                            <a href="~/projects"><img src="~/Assets/img/product-3/2.jpg" alt="#"></a>
+                            <div class="product-badge">
+                                <ul>
+                                    <li class="sale-badge bg-green---">For Sale</li>
+                                </ul>
+                            </div>
+                            <div class="product-img-location-gallery">
+                                <div class="product-img-location">
+                                    <ul>
+                                        <li>
+                                            <a href="~/contact-us"><i class="flaticon-pin"></i> Belmont Gardens, Chicago</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product-img-gallery">
+                                    <ul>
+                                        <li>
+                                            <a href="~/projects"><i class="fas fa-camera"></i> 4</a>
+                                        </li>
+                                        <li>
+                                            <a href="~/projects"><i class="fas fa-film"></i> 2</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-price">
+                                <span>$34,900<label>/Month</label></span>
+                            </div>
+                            <h2 class="product-title"><a href="~/projects">Modern Apartments</a></h2>
+                            <div class="product-description">
+                                <p>
+                                    Beautiful Huge 1 Family House In Heart Of <br>
+                                    Westbury. Newly Renovated With New Wood
+                                </p>
+                            </div>
+                            <ul class="ltn__list-item-2 ltn__list-item-2-before">
+                                <li>
+                                    <span>3 <i class="flaticon-bed"></i></span>
+                                    Bedrooms
+                                </li>
+                                <li>
+                                    <span>2 <i class="flaticon-clean"></i></span>
+                                    Bathrooms
+                                </li>
+                                <li>
+                                    <span>3450 <i class="flaticon-square-shape-design-interface-tool-symbol"></i></span>
+                                    square Ft
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product-info-bottom">
+                            <div class="real-estate-agent">
+                                <div class="agent-img">
+                                    <a href="~/about-us"><img src="~/Assets/img/blog/author.jpg" alt="#"></a>
+                                </div>
+                                <div class="agent-brief">
+                                    <h6><a href="~/about-us">William Seklo</a></h6>
+                                    <small>Estate Agents</small>
+                                </div>
+                            </div>
+                            <div class="product-hover-action">
+                                <ul>
+                                    <li>
+                                        <a href="javascript:void(0);" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                            <i class="flaticon-expand"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                            <i class="flaticon-heart-1"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="~/projects" title="Product Details">
+                                            <i class="flaticon-add"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ltn__product-item -->
+                <div class="col-lg-12">
+                    <div class="ltn__product-item ltn__product-item-4 text-center---">
+                        <div class="product-img">
+                            <a href="~/projects"><img src="~/Assets/img/product-3/3.jpg" alt="#"></a>
+                            <div class="product-badge">
+                                <ul>
+                                    <li class="sale-badge bg-green">For Rent</li>
+                                </ul>
+                            </div>
+                            <div class="product-img-location-gallery">
+                                <div class="product-img-location">
+                                    <ul>
+                                        <li>
+                                            <a href="~/contact-us"><i class="flaticon-pin"></i> Belmont Gardens, Chicago</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product-img-gallery">
+                                    <ul>
+                                        <li>
+                                            <a href="~/projects"><i class="fas fa-camera"></i> 4</a>
+                                        </li>
+                                        <li>
+                                            <a href="~/projects"><i class="fas fa-film"></i> 2</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-price">
+                                <span>$34,900<label>/Month</label></span>
+                            </div>
+                            <h2 class="product-title"><a href="~/projects">Comfortable Apartment</a></h2>
+                            <div class="product-description">
+                                <p>
+                                    Beautiful Huge 1 Family House In Heart Of <br>
+                                    Westbury. Newly Renovated With New Wood
+                                </p>
+                            </div>
+                            <ul class="ltn__list-item-2 ltn__list-item-2-before">
+                                <li>
+                                    <span>3 <i class="flaticon-bed"></i></span>
+                                    Bedrooms
+                                </li>
+                                <li>
+                                    <span>2 <i class="flaticon-clean"></i></span>
+                                    Bathrooms
+                                </li>
+                                <li>
+                                    <span>3450 <i class="flaticon-square-shape-design-interface-tool-symbol"></i></span>
+                                    square Ft
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product-info-bottom">
+                            <div class="real-estate-agent">
+                                <div class="agent-img">
+                                    <a href="~/about-us"><img src="~/Assets/img/blog/author.jpg" alt="#"></a>
+                                </div>
+                                <div class="agent-brief">
+                                    <h6><a href="~/about-us">William Seklo</a></h6>
+                                    <small>Estate Agents</small>
+                                </div>
+                            </div>
+                            <div class="product-hover-action">
+                                <ul>
+                                    <li>
+                                        <a href="javascript:void(0);" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                            <i class="flaticon-expand"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                            <i class="flaticon-heart-1"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="~/projects" title="Product Details">
+                                            <i class="flaticon-add"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ltn__product-item -->
+                <div class="col-lg-12">
+                    <div class="ltn__product-item ltn__product-item-4 text-center---">
+                        <div class="product-img">
+                            <a href="~/projects"><img src="~/Assets/img/product-3/4.jpg" alt="#"></a>
+                            <div class="product-badge">
+                                <ul>
+                                    <li class="sale-badge bg-green">For Rent</li>
+                                </ul>
+                            </div>
+                            <div class="product-img-location-gallery">
+                                <div class="product-img-location">
+                                    <ul>
+                                        <li>
+                                            <a href="~/contact-us"><i class="flaticon-pin"></i> Belmont Gardens, Chicago</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product-img-gallery">
+                                    <ul>
+                                        <li>
+                                            <a href="~/projects"><i class="fas fa-camera"></i> 4</a>
+                                        </li>
+                                        <li>
+                                            <a href="~/projects"><i class="fas fa-film"></i> 2</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-price">
+                                <span>$34,900<label>/Month</label></span>
+                            </div>
+                            <h2 class="product-title"><a href="~/projects">Luxury villa in Rego Park </a></h2>
+                            <div class="product-description">
+                                <p>
+                                    Beautiful Huge 1 Family House In Heart Of <br>
+                                    Westbury. Newly Renovated With New Wood
+                                </p>
+                            </div>
+                            <ul class="ltn__list-item-2 ltn__list-item-2-before">
+                                <li>
+                                    <span>3 <i class="flaticon-bed"></i></span>
+                                    Bedrooms
+                                </li>
+                                <li>
+                                    <span>2 <i class="flaticon-clean"></i></span>
+                                    Bathrooms
+                                </li>
+                                <li>
+                                    <span>3450 <i class="flaticon-square-shape-design-interface-tool-symbol"></i></span>
+                                    square Ft
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product-info-bottom">
+                            <div class="real-estate-agent">
+                                <div class="agent-img">
+                                    <a href="~/about-us"><img src="~/Assets/img/blog/author.jpg" alt="#"></a>
+                                </div>
+                                <div class="agent-brief">
+                                    <h6><a href="~/about-us">William Seklo</a></h6>
+                                    <small>Estate Agents</small>
+                                </div>
+                            </div>
+                            <div class="product-hover-action">
+                                <ul>
+                                    <li>
+                                        <a href="javascript:void(0);" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                            <i class="flaticon-expand"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                            <i class="flaticon-heart-1"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="~/projects" title="Product Details">
+                                            <i class="flaticon-add"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ltn__product-item -->
+                <div class="col-lg-12">
+                    <div class="ltn__product-item ltn__product-item-4 text-center---">
+                        <div class="product-img">
+                            <a href="~/projects"><img src="~/Assets/img/product-3/5.jpg" alt="#"></a>
+                            <div class="product-badge">
+                                <ul>
+                                    <li class="sale-badge bg-green">For Rent</li>
+                                </ul>
+                            </div>
+                            <div class="product-img-location-gallery">
+                                <div class="product-img-location">
+                                    <ul>
+                                        <li>
+                                            <a href="~/contact-us"><i class="flaticon-pin"></i> Belmont Gardens, Chicago</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product-img-gallery">
+                                    <ul>
+                                        <li>
+                                            <a href="~/projects"><i class="fas fa-camera"></i> 4</a>
+                                        </li>
+                                        <li>
+                                            <a href="~/projects"><i class="fas fa-film"></i> 2</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-price">
+                                <span>$34,900<label>/Month</label></span>
+                            </div>
+                            <h2 class="product-title"><a href="~/projects">Beautiful Flat in Manhattan </a></h2>
+                            <div class="product-description">
+                                <p>
+                                    Beautiful Huge 1 Family House In Heart Of <br>
+                                    Westbury. Newly Renovated With New Wood
+                                </p>
+                            </div>
+                            <ul class="ltn__list-item-2 ltn__list-item-2-before">
+                                <li>
+                                    <span>3 <i class="flaticon-bed"></i></span>
+                                    Bedrooms
+                                </li>
+                                <li>
+                                    <span>2 <i class="flaticon-clean"></i></span>
+                                    Bathrooms
+                                </li>
+                                <li>
+                                    <span>3450 <i class="flaticon-square-shape-design-interface-tool-symbol"></i></span>
+                                    square Ft
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product-info-bottom">
+                            <div class="real-estate-agent">
+                                <div class="agent-img">
+                                    <a href="~/about-us"><img src="~/Assets/img/blog/author.jpg" alt="#"></a>
+                                </div>
+                                <div class="agent-brief">
+                                    <h6><a href="~/about-us">William Seklo</a></h6>
+                                    <small>Estate Agents</small>
+                                </div>
+                            </div>
+                            <div class="product-hover-action">
+                                <ul>
+                                    <li>
+                                        <a href="javascript:void(0);" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                            <i class="flaticon-expand"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                            <i class="flaticon-heart-1"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="~/projects" title="Product Details">
+                                            <i class="flaticon-add"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+            </div>
+        </div>
+    </div>
+    <!-- PRODUCT SLIDER AREA END -->
+    <!-- COUNTER UP AREA START -->
+    <div class="ltn__counterup-area section-bg-1 pt-120 pb-70" hidden>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 align-self-center">
+                    <div class="ltn__counterup-item text-color-white---">
+                        <div class="counter-icon">
+                            <i class="flaticon-select"></i>
+                        </div>
+                        <h1><span class="counter">560</span><span class="counterUp-icon">+</span> </h1>
+                        <h6>Total Area Sq</h6>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 align-self-center">
+                    <div class="ltn__counterup-item text-color-white---">
+                        <div class="counter-icon">
+                            <i class="flaticon-office"></i>
+                        </div>
+                        <h1><span class="counter">197</span><span class="counterUp-letter">K</span><span class="counterUp-icon">+</span> </h1>
+                        <h6>Apartments Sold</h6>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 align-self-center">
+                    <div class="ltn__counterup-item text-color-white---">
+                        <div class="counter-icon">
+                            <i class="flaticon-excavator"></i>
+                        </div>
+                        <h1><span class="counter">268</span><span class="counterUp-icon">+</span> </h1>
+                        <h6>Total Constructions</h6>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 align-self-center">
+                    <div class="ltn__counterup-item text-color-white---">
+                        <div class="counter-icon">
+                            <i class="flaticon-armchair"></i>
+                        </div>
+                        <h1><span class="counter">340</span><span class="counterUp-icon">+</span> </h1>
+                        <h6>Apartio Rooms</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- COUNTER UP AREA END -->
+    <!-- CALL TO ACTION START (call-to-action-4) -->
+    <div class="ltn__call-to-action-area ltn__call-to-action-4 bg-image pt-115 pb-120 mb-120" data-bs-bg="/Assets/img/bg/6.jpg" hidden>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 ">
+                    <div class="call-to-action-inner call-to-action-inner-4 text-center web-contact-promo">
+                        <div class="section-title-area ltn__section-title-2">
+                            <h6 class="section-subtitle ltn__secondary-color">//  any question you have  //</h6>
+                            <h1 class="section-title white-color phone-number">897-876-987-90</h1>
+                        </div>
+                        <div class="btn-wrapper">
+                            <a href="tel:+123456789" class="theme-btn-1 btn btn-effect-1 phone-link">MAKE A CALL</a>
+                            <a href="~/contact-us" class="btn btn-transparent btn-effect-4 white-color">CONTACT US</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ltn__call-to-4-img-1">
+            <img src="/Assets/img/slider/21.png" alt="#">
+        </div>
+        <div class="ltn__call-to-4-img-2">
+            <img src="/Assets/img/bg/11.png" alt="#">
+        </div>
+    </div>
+    <!-- CALL TO ACTION END -->
+    @if (Model.CenteredVideo != null)
+    {
+        <!-- VIDEO AREA START -->
+        <div class="ltn__video-popup-area ltn__video-popup-margin">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ltn__video-bg-img ltn__video-popup-height-600 bg-overlay-black-10-- bg-image" data-bs-bg="@Url.Content(Model.CenteredBanners.Path)">
+                            <a class="ltn__video-icon-2 ltn__video-icon-2-border border-radius-no ltn__secondary-bg" href="@Url.Content(Model.CenteredVideo.Path)" data-rel="lightcase:myCollection">
+                                <i class="fa fa-play"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- VIDEO AREA END-->
+    }
+    @if (Model.Contractors.Count() > 0)
+    {
+        <!-- BRAND LOGO AREA START -->
+        <div class="ltn__brand-logo-area ltn__brand-logo-1 bg-image bg-overlay-theme-black-90 pt-290 pb-110 plr--9" data-bs-bg="/Assets/img/bg/7.jpg">
+            <div class="container-fluid">
+                <div class="row ltn__brand-logo-active">
+                    @foreach (var item in Model.Contractors)
+                    {
+                        <div class="col-lg-12">
+                            <div class="ltn__brand-logo-item">
+                                <img src="@Url.Content(item.Image)" alt="@item.Name" title="@item.Name">
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- BRAND LOGO AREA END -->
+    }
+    <!-- APARTMENTS PLAN AREA START -->
+    <div class="ltn__apartments-plan-area pt-115--- pb-70 mt-120" hidden>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title-area ltn__section-title-2--- text-center">
+                        <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">Apartment Sketch</h6>
+                        <h1 class="section-title">Apartments Plan</h1>
+                    </div>
+                    <div class="ltn__tab-menu ltn__tab-menu-3 ltn__tab-menu-top-right-- text-uppercase--- text-center">
+                        <div class="nav">
+                            <a data-bs-toggle="tab" href="#liton_tab_3_1">The Studio</a>
+                            <a class="active show" data-bs-toggle="tab" href="#liton_tab_3_2">Deluxe Portion</a>
+                            <a data-bs-toggle="tab" href="#liton_tab_3_3" class="">Penthouse</a>
+                            <a data-bs-toggle="tab" href="#liton_tab_3_4" class="">Top Garden</a>
+                            <a data-bs-toggle="tab" href="#liton_tab_3_5" class="">Double Height</a>
+                        </div>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane fade" id="liton_tab_3_1">
+                            <div class="ltn__apartments-tab-content-inner">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="apartments-plan-info ltn__secondary-bg text-color-white">
+                                            <h2>The Studio</h2>
+                                            <p>
+                                                Enimad minim veniam quis nostrud exercitation ullamco laboris.
+                                                Lorem ipsum dolor sit amet cons aetetur adipisicing elit sedo
+                                                eiusmod tempor.Incididunt labore et dolore magna aliqua.
+                                                sed ayd minim veniam.
+                                            </p>
+                                            <div class="apartments-info-list apartments-info-list-color mt-40">
+                                                <ul>
+                                                    <li><label>Total Area</label> <span>2800 Sq. Ft</span></li>
+                                                    <li><label>Bedroom</label> <span>150 Sq. Ft</span></li>
+                                                    <li><label>Bathroom</label> <span>45 Sq. Ft</span></li>
+                                                    <li><label>Belcony/Pets</label> <span>Allowed</span></li>
+                                                    <li><label>Lounge</label> <span>650 Sq. Ft</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="apartments-plan-img">
+                                            <img src="~/Assets/img/others/10.png" alt="#">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade active show" id="liton_tab_3_2">
+                            <div class="ltn__product-tab-content-inner">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="apartments-plan-info ltn__secondary-bg text-color-white">
+                                            <h2>Deluxe Portion</h2>
+                                            <p>
+                                                Enimad minim veniam quis nostrud exercitation ullamco laboris.
+                                                Lorem ipsum dolor sit amet cons aetetur adipisicing elit sedo
+                                                eiusmod tempor.Incididunt labore et dolore magna aliqua.
+                                                sed ayd minim veniam.
+                                            </p>
+                                            <div class="apartments-info-list apartments-info-list-color mt-40">
+                                                <ul>
+                                                    <li><label>Total Area</label> <span>2800 Sq. Ft</span></li>
+                                                    <li><label>Bedroom</label> <span>150 Sq. Ft</span></li>
+                                                    <li><label>Bathroom</label> <span>45 Sq. Ft</span></li>
+                                                    <li><label>Belcony/Pets</label> <span>Allowed</span></li>
+                                                    <li><label>Lounge</label> <span>650 Sq. Ft</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="apartments-plan-img">
+                                            <img src="~/Assets/img/others/10.png" alt="#">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="liton_tab_3_3">
+                            <div class="ltn__product-tab-content-inner">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="apartments-plan-info ltn__secondary-bg text-color-white">
+                                            <h2>Penthouse</h2>
+                                            <p>
+                                                Enimad minim veniam quis nostrud exercitation ullamco laboris.
+                                                Lorem ipsum dolor sit amet cons aetetur adipisicing elit sedo
+                                                eiusmod tempor.Incididunt labore et dolore magna aliqua.
+                                                sed ayd minim veniam.
+                                            </p>
+                                            <div class="apartments-info-list apartments-info-list-color mt-40">
+                                                <ul>
+                                                    <li><label>Total Area</label> <span>2800 Sq. Ft</span></li>
+                                                    <li><label>Bedroom</label> <span>150 Sq. Ft</span></li>
+                                                    <li><label>Bathroom</label> <span>45 Sq. Ft</span></li>
+                                                    <li><label>Belcony/Pets</label> <span>Allowed</span></li>
+                                                    <li><label>Lounge</label> <span>650 Sq. Ft</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="apartments-plan-img">
+                                            <img src="~/Assets/img/others/10.png" alt="#">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="liton_tab_3_4">
+                            <div class="ltn__product-tab-content-inner">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="apartments-plan-info ltn__secondary-bg text-color-white">
+                                            <h2>Top Garden</h2>
+                                            <p>
+                                                Enimad minim veniam quis nostrud exercitation ullamco laboris.
+                                                Lorem ipsum dolor sit amet cons aetetur adipisicing elit sedo
+                                                eiusmod tempor.Incididunt labore et dolore magna aliqua.
+                                                sed ayd minim veniam.
+                                            </p>
+                                            <div class="apartments-info-list apartments-info-list-color mt-40">
+                                                <ul>
+                                                    <li><label>Total Area</label> <span>2800 Sq. Ft</span></li>
+                                                    <li><label>Bedroom</label> <span>150 Sq. Ft</span></li>
+                                                    <li><label>Bathroom</label> <span>45 Sq. Ft</span></li>
+                                                    <li><label>Belcony/Pets</label> <span>Allowed</span></li>
+                                                    <li><label>Lounge</label> <span>650 Sq. Ft</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="apartments-plan-img">
+                                            <img src="~/Assets/img/others/10.png" alt="#">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="liton_tab_3_5">
+                            <div class="ltn__product-tab-content-inner">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="apartments-plan-info ltn__secondary-bg text-color-white">
+                                            <h2>Double Height</h2>
+                                            <p>
+                                                Enimad minim veniam quis nostrud exercitation ullamco laboris.
+                                                Lorem ipsum dolor sit amet cons aetetur adipisicing elit sedo
+                                                eiusmod tempor.Incididunt labore et dolore magna aliqua.
+                                                sed ayd minim veniam.
+                                            </p>
+                                            <div class="apartments-info-list apartments-info-list-color mt-40">
+                                                <ul>
+                                                    <li><label>Total Area</label> <span>2800 Sq. Ft</span></li>
+                                                    <li><label>Bedroom</label> <span>150 Sq. Ft</span></li>
+                                                    <li><label>Bathroom</label> <span>45 Sq. Ft</span></li>
+                                                    <li><label>Belcony/Pets</label> <span>Allowed</span></li>
+                                                    <li><label>Lounge</label> <span>650 Sq. Ft</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="apartments-plan-img">
+                                            <img src="~/Assets/img/others/10.png" alt="#">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- APARTMENTS PLAN AREA END -->
+    @if (Model.FooterVideo != null)
+    {
+        <!-- VIDEO AREA START -->
+        <div class="ltn__video-popup-area ltn__video-popup-margin---">
+            <div class="ltn__video-bg-img ltn__video-popup-height-600--- bg-overlay-black-30 bg-image bg-fixed ltn__animation-pulse1" data-bs-bg="@Url.Content(Model.FooterBanners.Path)">
+                <a class="ltn__video-icon-2 ltn__video-icon-2-border---" href="@Url.Content(Model.FooterVideo.Path)" data-rel="lightcase:myCollection">
+                    <i class="fa fa-play"></i>
+                </a>
+            </div>
+        </div>
+        <!-- VIDEO AREA END -->
+    }
+    <!-- CATEGORY AREA START -->
+    <div class="ltn__category-area section-bg-1-- ltn__primary-bg before-bg-1 bg-image bg-overlay-theme-black-5--0 pt-115 pb-90 d-none" data-bs-bg="/Assets/img/bg/5.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title-area ltn__section-title-2 text-center">
+                        <h1 class="section-title white-color">Top Categories</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row ltn__category-slider-active slick-arrow-1">
+                <div class="col-12">
+                    <div class="ltn__category-item ltn__category-item-4 text-center">
+                        <div class="ltn__category-item-img">
+                            <a href="javascript:void(0);">
+                                <i class="flaticon-car"></i>
+                            </a>
+                        </div>
+                        <div class="ltn__category-item-name">
+                            <h4><a href="javascript:void(0);">Parking Space</a></h4>
+                        </div>
+                        <div class="ltn__category-item-btn">
+                            <a href="javascript:void(0);"><i class="flaticon-right-arrow"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="ltn__category-item ltn__category-item-4 text-center">
+                        <div class="ltn__category-item-img">
+                            <a href="javascript:void(0);">
+                                <i class="flaticon-car"></i>
+                            </a>
+                        </div>
+                        <div class="ltn__category-item-name">
+                            <h4><a href="javascript:void(0);">Parking Space</a></h4>
+                        </div>
+                        <div class="ltn__category-item-btn">
+                            <a href="javascript:void(0);"><i class="flaticon-right-arrow"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="ltn__category-item ltn__category-item-4 text-center">
+                        <div class="ltn__category-item-img">
+                            <a href="javascript:void(0);">
+                                <i class="flaticon-car"></i>
+                            </a>
+                        </div>
+                        <div class="ltn__category-item-name">
+                            <h4><a href="javascript:void(0);">Parking Space</a></h4>
+                        </div>
+                        <div class="ltn__category-item-btn">
+                            <a href="javascript:void(0);"><i class="flaticon-right-arrow"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="ltn__category-item ltn__category-item-4 text-center">
+                        <div class="ltn__category-item-img">
+                            <a href="javascript:void(0);">
+                                <i class="flaticon-car"></i>
+                            </a>
+                        </div>
+                        <div class="ltn__category-item-name">
+                            <h4><a href="javascript:void(0);">Parking Space</a></h4>
+                        </div>
+                        <div class="ltn__category-item-btn">
+                            <a href="javascript:void(0);"><i class="flaticon-right-arrow"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="ltn__category-item ltn__category-item-4 text-center">
+                        <div class="ltn__category-item-img">
+                            <a href="javascript:void(0);">
+                                <i class="flaticon-car"></i>
+                            </a>
+                        </div>
+                        <div class="ltn__category-item-name">
+                            <h4><a href="javascript:void(0);">Parking Space</a></h4>
+                        </div>
+                        <div class="ltn__category-item-btn">
+                            <a href="javascript:void(0);"><i class="flaticon-right-arrow"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="ltn__category-item ltn__category-item-4 text-center">
+                        <div class="ltn__category-item-img">
+                            <a href="javascript:void(0);">
+                                <i class="flaticon-car"></i>
+                            </a>
+                        </div>
+                        <div class="ltn__category-item-name">
+                            <h4><a href="javascript:void(0);">Parking Space</a></h4>
+                        </div>
+                        <div class="ltn__category-item-btn">
+                            <a href="javascript:void(0);"><i class="flaticon-right-arrow"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CATEGORY AREA END -->
+    @if (Model.Amenities.Count() > 0)
+    {
+        <!-- AMENITY AREA START -->
+        <div class="ltn__category-area ltn__product-gutter section-bg-1--- pt-115 pb-90 ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title-area ltn__section-title-2--- text-center">
+                            <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">Our Amenities</h6>
+                            <h1 class="section-title">Building Amenities</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ltn__category-slider-active--- slick-arrow-1 justify-content-center">
+                    @foreach (var item in Model.Amenities)
+                    {
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                            <div class="ltn__category-item ltn__category-item-5 text-center">
+                                <a>
+                                    <span class="category-icon">
+                                        <div class="ltn__feature-icon">
+                                            <img src="@Url.Content(item.Image)" alt="#">
+                                        </div>
+                                        @*<i class="flaticon-car"></i>*@
+                                    </span>
+                                    <span class="category-title">@item.Name</span>
+                                    <span class="category-btn"><i class="fa fa-check"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- AMENITY AREA END -->
+    }
+
+    <!-- TESTIMONIAL AREA START (testimonial-7) -->
+    <div class="ltn__testimonial-area section-bg-1--- bg-image-top pt-115 pb-70" data-bs-bg="/Assets/img/bg/20.jpg" hidden>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title-area ltn__section-title-2--- text-center">
+                        <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">Our Testimonial</h6>
+                        <h1 class="section-title">Clients Feedback</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row ltn__testimonial-slider-5-active slick-arrow-1">
+                <div class="col-lg-4">
+                    <div class="ltn__testimonial-item ltn__testimonial-item-7">
+                        <div class="ltn__testimoni-info">
+                            <p>
+                                <i class="flaticon-left-quote-1"></i>
+                                Precious ipsum dolor sit amet
+                                consectetur adipisicing elit, sed dos
+                                mod tempor incididunt ut labore et
+                                dolore magna aliqua. Ut enim ad min
+                                veniam, quis nostrud Precious ips
+                                um dolor sit amet, consecte
+                            </p>
+                            <div class="ltn__testimoni-info-inner">
+                                <div class="ltn__testimoni-img">
+                                    <img src="~/Assets/img/testimonial/1.jpg" alt="#">
+                                </div>
+                                <div class="ltn__testimoni-name-designation">
+                                    <h5>Jacob William</h5>
+                                    <label>Selling Agents</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="ltn__testimonial-item ltn__testimonial-item-7">
+                        <div class="ltn__testimoni-info">
+                            <p>
+                                <i class="flaticon-left-quote-1"></i>
+                                Precious ipsum dolor sit amet
+                                consectetur adipisicing elit, sed dos
+                                mod tempor incididunt ut labore et
+                                dolore magna aliqua. Ut enim ad min
+                                veniam, quis nostrud Precious ips
+                                um dolor sit amet, consecte
+                            </p>
+                            <div class="ltn__testimoni-info-inner">
+                                <div class="ltn__testimoni-img">
+                                    <img src="~/Assets/img/testimonial/2.jpg" alt="#">
+                                </div>
+                                <div class="ltn__testimoni-name-designation">
+                                    <h5>Kelian Anderson</h5>
+                                    <label>Selling Agents</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="ltn__testimonial-item ltn__testimonial-item-7">
+                        <div class="ltn__testimoni-info">
+                            <p>
+                                <i class="flaticon-left-quote-1"></i>
+                                Precious ipsum dolor sit amet
+                                consectetur adipisicing elit, sed dos
+                                mod tempor incididunt ut labore et
+                                dolore magna aliqua. Ut enim ad min
+                                veniam, quis nostrud Precious ips
+                                um dolor sit amet, consecte
+                            </p>
+                            <div class="ltn__testimoni-info-inner">
+                                <div class="ltn__testimoni-img">
+                                    <img src="~/Assets/img/testimonial/3.jpg" alt="#">
+                                </div>
+                                <div class="ltn__testimoni-name-designation">
+                                    <h5>Adam Joseph</h5>
+                                    <label>Selling Agents</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="ltn__testimonial-item ltn__testimonial-item-7">
+                        <div class="ltn__testimoni-info">
+                            <p>
+                                <i class="flaticon-left-quote-1"></i>
+                                Precious ipsum dolor sit amet
+                                consectetur adipisicing elit, sed dos
+                                mod tempor incididunt ut labore et
+                                dolore magna aliqua. Ut enim ad min
+                                veniam, quis nostrud Precious ips
+                                um dolor sit amet, consecte
+                            </p>
+                            <div class="ltn__testimoni-info-inner">
+                                <div class="ltn__testimoni-img">
+                                    <img src="~/Assets/img/testimonial/4.jpg" alt="#">
+                                </div>
+                                <div class="ltn__testimoni-name-designation">
+                                    <h5>James Carter</h5>
+                                    <label>Selling Agents</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+            </div>
+        </div>
+    </div>
+    <!-- TESTIMONIAL AREA END -->
+
+    @if (Model.Blogs.Count() > 0)
+    {
+        <!-- BLOG AREA START (blog-3) -->
+        <div class="ltn__blog-area pt-115--- pb-70">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title-area ltn__section-title-2--- text-center">
+                            <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">Blogs</h6>
+                            <h1 class="section-title">Leatest Blogs</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row  ltn__blog-slider-one-active slick-arrow-1 ltn__blog-item-3-normal">
+                    @foreach (var item in Model.Blogs)
+                    {
+                        <!-- Blog Item -->
+                        <div class="col-lg-12">
+                            <div class="ltn__blog-item ltn__blog-item-3">
+                                <div class="ltn__blog-img">
+                                    <a href="~/blogs/@item.Slug"><img src="@Url.Content(item.BannerImage)" alt="@item.Title"></a>
+                                </div>
+                                <div class="ltn__blog-brief">
+                                    <div class="ltn__blog-meta">
+                                        <ul>
+                                            <li class="ltn__blog-author">
+                                                <a href="javascript:void(0);"><i class="far fa-user"></i>by: @item.Author</a>
+                                            </li>
+                                            <li class="ltn__blog-tags">
+                                                <a href="javascript:void(0);"><i class="fas fa-tags"></i>@item.Title</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h3 class="ltn__blog-title"><a href="~/blogs/@item.Slug">@item.TitleDescription</a></h3>
+                                    <div class="ltn__blog-meta-btn">
+                                        <div class="ltn__blog-meta">
+                                            <ul>
+                                                <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i>@item.PostedDate.Value.ToString(CustomHelper.GetDateFormat2)</li>
+                                            </ul>
+                                        </div>
+                                        <div class="ltn__blog-btn">
+                                            <a href="~/blogs/@item.Slug">Read more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- BLOG AREA END -->
+    }
+
+    @if (Model.NewsFeeds.Count() > 0)
+    {
+        <!-- BLOG AREA START (blog-3) -->
+        <div class="ltn__blog-area pt-115--- pb-70">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title-area ltn__section-title-2--- text-center">
+                            <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">Newsfeed</h6>
+                            <h1 class="section-title">Leatest Newsfeed</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row  ltn__blog-slider-one-active slick-arrow-1 ltn__blog-item-3-normal">
+                    @foreach (var item in Model.NewsFeeds)
+                    {
+                        <!-- Blog Item -->
+                        <div class="col-lg-12">
+                            <div class="ltn__blog-item ltn__blog-item-3">
+                                <div class="ltn__blog-img">
+                                    <a href="~/newsfeeds/@item.Slug"><img src="@Url.Content(item.BannerImage)" alt="@item.Title"></a>
+                                </div>
+                                <div class="ltn__blog-brief">
+                                    <div class="ltn__blog-meta">
+                                        <ul>
+                                            <li class="ltn__blog-author">
+                                                <a href="javascript:void(0);"><i class="far fa-user"></i>by: @item.Host</a>
+                                            </li>
+                                            <li class="ltn__blog-tags">
+                                                <a href="javascript:void(0);"><i class="fas fa-tags"></i>@item.Title</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h3 class="ltn__blog-title"><a href="~/newsfeeds/@item.Slug">@item.TitleDescription</a></h3>
+                                    <div class="ltn__blog-meta-btn">
+                                        <div class="ltn__blog-meta">
+                                            <ul>
+                                                <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i>@item.PostedDate.Value.ToString(CustomHelper.GetDateFormat2)</li>
+                                            </ul>
+                                        </div>
+                                        <div class="ltn__blog-btn">
+                                            <a href="~/newsfeeds/@item.Slug">Read more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- BLOG AREA END -->
+    }
+
+</div>
+<!-- Body main wrapper end -->
+<!-- #endregion Content-->
+<!--Write js Here-->
+@section IndexScript {
+    <script src="@Url.ContentVersioned("~/Assets/js/web/home/index.js")"></script>
+}

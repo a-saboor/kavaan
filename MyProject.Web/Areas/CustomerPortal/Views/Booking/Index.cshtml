@@ -1,0 +1,235 @@
+﻿@model MyProject.Data.Notification
+
+@{
+    Layout = null;
+    ViewBag.Title = "My Bookings";
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+    bool RTL = CultureHelper.IsRighToLeft();
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!-- Bookings Section -->
+<section style="display:none;" class="container w-full dashboard-sections" id="my-bookings">
+
+    <!-- bookings -->
+    <div class="row flex flex-row mx-auto items-center mb-8 booking-tabs-a">
+
+        <a class="text-ak-gray active:text-ak-gold cursor-pointer text-center p-2 border-b-[1.5px] border-b-ak-light active:border-b-ak-gold/80 font-medium text-xs md:text-sm w-1/2 -mt-2 active change-status" data-tab="tab-1" data-status="Pending" >Upcoming</a>
+        <a class="text-ak-gray active:text-ak-gold cursor-pointer text-center p-2 border-b-[1.5px] border-b-ak-light active:border-b-ak-gold/80 font-medium text-xs md:text-sm w-1/2 -mt-2 change-status" data-tab="tab-2" data-status="Completed" >History</a>
+
+    </div>
+
+    <div class="row flex flex-col mx-auto overflow-scroll-custom overflow-y-auto max-h-36_5rem px-4">
+
+        <div class="booking-tabs w-full items-center tab-1 upcoming">
+            <div class="row flex flex-col mx-auto main-div">
+                <!--
+                <div class="flex flex-col flex-wrap my-4 items-center justify-between w-full upcoming-item">
+
+                    <div class="flex flex-row flex-wrap justify-between items-center w-full">
+                        <p class="px-2">
+                            <span class="text-black font-medium text-xs md:text-sm">Booking ID : </span>
+                            <span class="text-ak-gold font-normal text-xs md:text-sm">21931</span>
+                        </p>
+                        <p class="px-2">
+                            <span class="text-black font-medium text-xs md:text-sm">Date : </span>
+                            <span class="text-ak-gold font-normal text-xs md:text-sm">06-12-21 3:00 PM</span>
+                        </p>
+                    </div>
+
+                    <div class="bg-white border border-ak-gold/80 flex flex-row flex-wrap py-0 w-full md:w-full rounded-lg items-center justify-between mt-3">
+                        <div class="flex flex-col items-center md:items-start mx-auto w-fit md:w-[70%] px-5 mt-4 md:mt-0 text-1 text-center">
+                            <h6 class="text-xs md:text-lg text-ak-gray font-medium">Cleaning Service</h6>
+                            <hr class="w-full md:w-[30%] my-3">
+                            <p class="py-1 rounded-[5px] flex flex-row justify-between items-center w-full md:w-fit">
+                                <span class="text-ak-gray font-medium text-xs md:text-sm">Address</span>&nbsp;&nbsp;&nbsp;
+                                <span class="text-ak-gold font-normal text-xs md:text-sm ">
+                                    2341, Street Maldives ,lane K6
+                                    UAE
+                                </span>
+                            </p>
+                            <hr class="w-full md:w-[30%] my-3">
+                            <p class="py-1 rounded-[5px] flex flex-row justify-between items-center w-full md:w-fit">
+                                <span class="text-ak-gray font-medium text-xs md:text-sm">Status</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="text-ak-gold font-normal text-xs md:text-sm ">Pending</span>
+                            </p>
+                        </div>
+
+                        <div class="w-[80%] mx-auto mt-4 mb-2 md:hidden bg-ak-light h-[1px]"></div>
+
+                        <div class="text-1 w-full md:w-[30%] flex flex-col items-center md:items-end justify-center md:justify-end md:mt-0 px-5 py-3">
+                            <p class="text-ak-gray/60 font-medium text-xs md:text-sm my-2">Deep Cleaning Service</p>
+                            <div class="flex flex-row flex-wrap md:flex-col space-x-2">
+                                <a class="cursor-pointer rounded-lg bg-ak-gold py-2 px-5 my-2 text-center text-white/90 font-light text-xs md:text-sm">
+                                    All
+                                    Details
+                                </a>
+                                <a class="cursor-pointer rounded-lg bg-ak-white border border-black/60 py-2 px-7 my-2 text-center text-ak-gray font-light text-xs md:text-sm">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                -->
+            </div>
+
+            <!-- Loading -->
+            @*<section class="py-2 text-center loading" style="display:none;"><i class="fa fa-2x fa-circle-notch text-ak-gold fa-spin"></i></section>*@
+            <section class="flex flex-col my-auto py-3 text-center w-[100%] loading" style=""><i class="mt-1 mx-auto dot-flashing text-center w-[100%]"></i></section>
+
+            <!-- load more button upcoming -->
+            <div class="w-full flex mx-auto text-center items-center align-middle">
+                <button class="btn-primary bg-ak-gold/90 hover:bg-ak-gold focus:outline-none mt-8 md:mt-12 mb-8 mx-auto load-more"
+                        style="display:none;">
+                    <p class="p-btn-primary text-white">Load More</p>
+                </button>
+                <button class="btn-primary bg-ak-gold/90 hover:bg-ak-gold focus:outline-none mt-8 md:mt-12 mb-8 mx-auto no-more"
+                        style="display:none;">
+                    <p class="p-btn-primary text-white">No Data Found</p>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="booking-tabs w-full items-center tab-2 past hidden">
+            <div class="row flex flex-col mx-auto items-center main-div">
+
+                <div class="flex flex-col flex-wrap my-4 items-center justify-between w-full past-item completed-item">
+
+                    <div class="flex flex-row flex-wrap justify-between items-center w-full">
+                        <p class="px-2">
+                            <span class="text-black font-medium text-xs md:text-sm">Booking ID : </span>
+                            <span class="text-ak-gold font-normal text-xs md:text-sm">21931</span>
+                        </p>
+                        <p class="px-2">
+                            <span class="text-black font-medium text-xs md:text-sm">Date : </span>
+                            <span class="text-ak-gold font-normal text-xs md:text-sm">06-12-21 3:00 PM</span>
+                        </p>
+                    </div>
+
+                    <div class="bg-white border border-ak-gold/80 flex flex-row flex-wrap py-0 w-full md:w-full rounded-lg items-center justify-between mt-3 md:py-2.5">
+                        <div class="flex flex-col items-center md:items-start mx-auto w-fit md:w-[70%] px-5 mt-4 md:mt-0 text-1 text-center">
+                            <h6 class="text-xs md:text-lg text-ak-gray font-medium">Cleaning Service</h6>
+                            <hr class="w-full md:w-[30%] my-3">
+                            <p class="py-1 rounded-[5px] flex flex-row justify-between items-center w-full md:w-fit">
+                                <span class="text-ak-gray font-medium text-xs md:text-sm">Address</span>&nbsp;&nbsp;&nbsp;
+                                <span class="text-ak-gold font-normal text-xs md:text-sm ">
+                                    2341, Street Maldives ,lane K6
+                                    UAE
+                                </span>
+                            </p>
+                            <hr class="w-full md:w-[30%] my-3">
+                            <p class="py-1 rounded-[5px] flex flex-row justify-between items-center w-full md:w-fit">
+                                <span class="text-ak-gray font-medium text-xs md:text-sm">Status</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="text-ak-gold font-normal text-xs md:text-sm ">Completed</span>
+                            </p>
+                        </div>
+
+                        <div class="w-[80%] mx-auto mt-2 mb-0 md:hidden bg-ak-light h-[1px]"></div>
+
+                        <div class="text-1 w-full md:w-[30%] flex flex-col items-start md:items-end justify-center md:justify-end md:mt-0 px-5 py-3">
+                            <p class="text-ak-gray/60 font-medium text-xs md:text-sm my-2 md:mb-auto">Deep Cleaning Service</p>
+                            <p class="py-1 pt-0 rounded-[5px] flex flex-row justify-between items-center w-full md:w-fit md:mb-auto">
+                                <span class="text-ak-gray font-medium text-xs md:text-sm">Total</span>&nbsp;&nbsp;&nbsp;
+                                <span class="text-ak-gold font-normal text-xs md:text-sm ">AED 60.00</span>
+                            </p>
+                            <div class="flex flex-row flex-wrap md:flex-col space-x-2 ml-auto mr-auto md:ml-auto md:mr-0 md:mt-auto">
+                                <a class="cursor-pointer rounded-lg bg-ak-gold py-2 px-5 my-2 text-center text-white/90 font-light text-xs md:text-sm">
+                                    Write
+                                    a Review
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="flex flex-col flex-wrap my-4 items-center justify-between w-full past-item canceled-item">
+
+                    <div class="flex flex-row flex-wrap justify-between items-center w-full">
+                        <p class="px-2">
+                            <span class="text-black font-medium text-xs md:text-sm">Booking ID : </span>
+                            <span class="text-ak-gold font-normal text-xs md:text-sm">21931</span>
+                        </p>
+                        <p class="px-2">
+                            <span class="text-black font-medium text-xs md:text-sm">Date : </span>
+                            <span class="text-ak-gold font-normal text-xs md:text-sm">06-12-21 3:00 PM</span>
+                        </p>
+                    </div>
+
+                    <div class="bg-white border border-ak-gold/80 flex flex-row flex-wrap py-0 w-full md:w-full rounded-lg items-center justify-between mt-3 md:py-3">
+                        <div class="flex flex-col items-center md:items-start mx-auto w-fit md:w-[70%] px-5 mt-4 md:mt-0 text-1 text-center">
+                            <h6 class="text-xs md:text-lg text-ak-gray font-medium">Cleaning Service</h6>
+                            <hr class="w-full md:w-[30%] my-3">
+                            <p class="py-1 rounded-[5px] flex flex-row justify-between items-center w-full md:w-fit">
+                                <span class="text-ak-gray font-medium text-xs md:text-sm">Address</span>&nbsp;&nbsp;&nbsp;
+                                <span class="text-ak-gold font-normal text-xs md:text-sm ">
+                                    2341, Street Maldives ,lane K6
+                                    UAE
+                                </span>
+                            </p>
+                            <hr class="w-full md:w-[30%] my-3">
+                            <p class="py-1 rounded-[5px] flex flex-row justify-between items-center w-full md:w-fit">
+                                <span class="text-ak-gray font-medium text-xs md:text-sm">Status</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="text-ak-gray/60 font-normal text-xs md:text-sm ">Canceled</span>
+                            </p>
+                        </div>
+
+                        <div class="w-[80%] mx-auto mt-2 mb-0 md:hidden bg-ak-light h-[1px]"></div>
+
+                        <!-- <div
+                   class="text-1 w-full md:w-[30%] flex flex-col items-start md:items-end justify-center md:justify-end md:mt-0 px-5 py-3 md:mb-auto">
+                   <p class="text-ak-gray/60 font-medium text-xs md:text-sm my-2 mb-0">Deep Cleaning Service</p>
+                   <p class="py-1 pt-0 rounded-[5px] flex flex-row justify-between items-center w-full md:w-fit">
+                     <span class="text-ak-gray font-medium text-xs md:text-sm">Total</span>&nbsp;&nbsp;&nbsp;
+                     <span class="text-ak-gold font-normal text-xs md:text-sm ">AED 60.00</span>
+                  </p>
+                </div> -->
+
+                        <div class="text-1 w-full md:w-[30%] flex flex-col items-start md:items-end justify-center md:justify-end md:mt-0 px-5 py-3">
+                            <p class="text-ak-gray/60 font-medium text-xs md:text-sm my-2 md:mb-auto">Deep Cleaning Service</p>
+                            <p class="py-1 pt-0 rounded-[5px] flex flex-row justify-between items-center w-full md:w-fit md:mb-auto">
+                                <span class="text-ak-gray font-medium text-xs md:text-sm">Total</span>&nbsp;&nbsp;&nbsp;
+                                <span class="text-ak-gold font-normal text-xs md:text-sm ">AED 60.00</span>
+                            </p>
+                            <div class="flex flex-row flex-wrap md:flex-col space-x-2 ml-auto mr-auto md:ml-auto md:mr-0 md:mt-auto">
+                                <a class="cursor-pointer rounded-lg bg-ak-gold py-2 px-5 my-2 text-center text-white/90 font-light text-xs md:text-sm">
+                                    Write
+                                    a Review
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Loading -->
+            @*<section class="py-2 text-center loading" style="display:none;"><i class="fa fa-2x fa-circle-notch text-ak-gold fa-spin"></i></section>*@
+            <section class="flex flex-col my-auto py-3 text-center w-[100%] loading" style=""><i class="mt-1 mx-auto dot-flashing text-center w-[100%]"></i></section>
+
+            <!-- load more button past -->
+            <div class="w-full flex mx-auto text-center items-center align-middle">
+                <button class="btn-primary bg-ak-gold/90 hover:bg-ak-gold focus:outline-none mx-auto mt-8 md:mt-12 mb-8 load-more"
+                        style="display:none;">
+                    <p class="p-btn-primary text-white">Load More</p>
+                </button>
+                <button class="btn-primary bg-ak-gold/90 hover:bg-ak-gold focus:outline-none mx-auto mt-8 md:mt-12 mb-8 no-more"
+                        style="display:none;">
+                    <p class="p-btn-primary text-white">No Data Found</p>
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Bookings Section End -->
+<!--Write js Here-->
+<script src="@Url.ContentVersioned("~/Assets/Admin/js/customer/booking/index.js")"></script>

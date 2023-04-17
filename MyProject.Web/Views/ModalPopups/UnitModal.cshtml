@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "Enquire and Payment Plan";
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+   bool RTL = false;
+    Layout = null;
+}
+
+<!-- Enquire Popup -->
+<div class="bg-black/50 fixed inset-0 flex justify-center items-center overflow-y-scroll h-auto z-50 popup-section" id="enquire_section" style="display:none;">
+    <div class="bg-white md:w-[40%] pb-2 rounded-lg sm:w-[50%] w-[80%] xl:w-[30%]">
+        <!-- popup image section -->
+        <div class="relative">
+            <a href="javascript:void(0)" class="close-popup-section">
+                <svg class="h-4 w-4 absolute top-4 right-4" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </a>
+        </div>
+        <!-- enquire section -->
+        <div class="w-[90%] mx-auto main-div">
+            <h1 class="font-Rubik font-medium text-xl mt-4">ENQUIRE</h1>
+            <form action="/@culture/ModalPopups/UnitEnquiry" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="UnitID" value="" />
+                @*<input type="hidden" name="CustomerID" value="@CustomerSessionHelper.ID" />*@
+                <!--Alert Message-->
+                <div class="alert-div"></div>
+                <!--Alert Message End-->
+                <div class="flex-col justify-between">
+                    <input type="hidden" class="input-field" name="Contact" value="" />
+                    <div class="mt-2 ">
+                        <p class="font-Rubik text-black/50 text-xs font-medium pb-1">FULL_NAME_</p>
+                        <input type="text" name="FullName" placeholder="ENTER_NAME_HERE" class="bg-black/10 w-full py-4 rounded-lg text-xs text-black font-medium px-4 Name input-field" onkeypress="return isString(event)" maxlength="100" autocomplete="off" autofocus="" value="@CustomerSessionHelper.UserName">
+                        <span class="font-Rubik text-danger text-xs font-medium py-1"></span>
+                    </div>
+                    <div class="mt-2">
+                        <p class="font-Rubik text-black/50 text-xs font-medium pb-1">PHONE_NUMBER</p>
+                        @*<input type="number" name="Contact" placeholder="Enter number here" class="bg-black/10 w-full py-4 rounded-lg text-xs text-black font-medium px-4 numpad Contact input-field" onkeypress="return isNumber(event)" maxlength="15" autocomplete="off" value="@CustomerSessionHelper.Contact">*@
+                        <input type="text" inputmode="numeric" onkeypress="return isNumber(event)" maxlength="15" autocomplete="off" pattern="[0-9\-]*" class="intr-phone numpad Contact input-field bg-black/10 text-black font-Rubik text-xs py-4 px-3 font-medium rounded-lg w-full" value="@CustomerSessionHelper.Contact" placeholder="ENTER_NUMBER_HERE">
+                        <span class="font-Rubik text-danger text-xs font-medium py-1"></span>
+                    </div>
+                    <div class="mt-2">
+                        <p class="font-Rubik text-black/50 text-xs font-medium pb-1">EMAIL</p>
+                        <input type="email" name="Email" placeholder="ENTER_EMAIL_HERE" class="bg-black/10 w-full py-4 rounded-lg text-xs text-black font-medium px-4 Email input-field" maxlength="100" autocomplete="off" value="@CustomerSessionHelper.Email">
+                        <span class="font-Rubik text-danger text-xs font-medium py-1"></span>
+                    </div>
+                </div>
+                <p class="font-Rubik text-center text-xs mt-4">
+                    BY_SUBMITTING_YOUR_ENQUIRE_YOU_ARE_ACCEPTING_OUR
+                    <a href="/@culture/terms-and-conditions" target="_blank" class="font-Rubik font-bold text-gk-blue uppercase">TERMS___CONDITIONS</a> AND
+                    <a href="/@culture/disclaimer" target="_blank" class="font-Rubik font-bold text-gk-blue uppercase">DISCLAIMER</a>
+                </p>
+                <button type="submit" class="font-Rubik bg-gk-gold text-white font-medium w-full py-3 mt-4 font-Rubik text-xs rounded-lg mb-2 uppercase">SUBMIT</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Enquire Popup END -->
+<!-- PaymentPlan Popup -->
+<div class="bg-black/50 fixed inset-0 flex justify-center items-center overflow-y-scroll h-auto z-50 popup-section" id="payment_plan_section" style="display:none;">
+    <div class="bg-white rounded-lg w-[80%] sm:w-[60%] md:w-[50%] lg:w-[50%] xl:w-[40%] pb-2">
+        <!-- popup image section -->
+        <div class="relative">
+            <a href="javascript:void(0)" class="close-popup-section">
+                <svg class="h-4 w-4 absolute top-4 right-4" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </a>
+        </div>
+        <!-- paymentPlan section -->
+        <div class="w-[90%] mx-auto main-div">
+            <h1 class="font-Rubik font-medium text-xl mt-4">PAYMENT_PLAN</h1>
+            <div class="payment-plan">
+                <div class="flex flex-col mt-2">
+                    <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+                        <div class="inline-block min-w-full overflow-hidden align-middle pb-4">
+                            <table class="min-w-full">
+                                <thead>
+                                    <tr>
+                                        <th class="py-3 w-full font-Rubik text-xs font-medium leading-4 tracking-wider text-left uppercase">
+                                            MILESTONE
+                                        </th>
+                                        <th class="py-3 pr-10 font-Rubik text-xs font-medium leading-4 tracking-wider text-right uppercase">
+                                            _PERCENTILE
+                                        </th>
+                                        <th class="py-3 font-Rubik text-xs font-medium leading-4 tracking-wider text-right uppercase">
+                                            _AED
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white">
+                                    <tr>
+                                        <td colspan="3">
+                                            <section class="text-center py-2 w-[100%]" style=""><i class="fa fa-2x fa-circle-o-notch fa-spin"></i></section>
+                                        </td>
+                                    </tr>
+                                    @*<tr style="">
+                                            <td class="py-2 whitespace-no-wrap border-b border-gray-200">
+                                                <span class="text-sm leading-5 text-gray-500">SignatureSpecimen.docx</span>
+                                            </td>
+                                            <td class="py-2 whitespace-no-wrap text-right border-b border-gray-200">
+                                                <div class="text-sm leading-5 text-gray-500">15</div>
+                                            </td>
+                                            <td class="py-2 whitespace-no-wrap text-right border-b border-gray-200">
+                                                <span class="text-sm leading-5 text-gray-500">100,000</span>
+                                            </td>
+                                        </tr>*@
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- PaymentPlan Popup END -->

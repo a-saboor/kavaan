@@ -1,0 +1,97 @@
+﻿@model MyProject.Data.JobCandidate
+@{
+    ViewBag.Title = "Schedule Status";
+    Layout = null;
+}
+
+<div class="modal-header">
+    <h5 class="modal-title">Update Status/ Schedule</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <i aria-hidden="true" class="ki ki-close"></i>
+    </button>
+</div>
+<div class="modal-body">
+
+    @using (Html.BeginForm("ScheduleStatus", "JobCandidates", new { area = "Admin" }, FormMethod.Post, new { id = "frm-edit", @class = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        
+        <div class="row">
+            <div class="col-md-8 offset-md-2 col-sm-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Status, "Status", htmlAttributes: new { @class = "control-label" })
+                    <div class="input-group mb-3">
+                        <select class="form-control" id="Status" name="Status" required="required">
+                            @*<select class="form-control" id="Status" name="Status" required="required" @(string.IsNullOrEmpty(Model.Status) || Model.Status == "Pending" ? "" : "disabled")>*@
+                            <option value="" @(string.IsNullOrEmpty(Model.Status) || Model.Status == "Pending" ? "selected" : "")>Select Status</option>
+                            <option value="Approved" @(Model.Status == "Approved" ? "selected" : "")>Approved</option>
+                            <option value="Rejected" @(Model.Status == "Rejected" ? "selected" : "")>Rejected</option>
+                            <option value="Shortlisted" @(Model.Status == "Shortlisted" ? "selected" : "")>Shortlisted</option>
+                        </select>
+                        @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-list"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 offset-md-2 col-sm-12 schedule" style="display:none;">
+                <div class="form-group mb-1">
+                    <label class="control-label">Schedule Date</label>
+                    <div class="input-group date" id="_datetime" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" placeholder="Select Schedule date & time" data-target="#_datetime" id="Schedule" name="Schedule" value="@Model.Schedule" />
+                        <div class="input-group-append" data-target="#_datetime" data-toggle="datetimepicker">
+                            <span class="input-group-text">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-custom" id="save-changes" form="frm-edit">Save Changes</button>
+</div>
+
+<script>
+    'use strict';
+
+    $(document).ready(function () {
+
+        $('#Status').change(function (e) {
+            if ($(this).val() == "Approved") {
+                $('.schedule').show();
+            }
+            else {
+                $('.schedule').hide();
+            }
+            e.preventDefault();
+        });
+
+        $('#Status').trigger('change');
+    });
+
+    var arrows;
+    if (KTUtil.isRTL()) {
+        arrows = {
+            leftArrow: '<i class="la la-angle-right"></i>',
+            rightArrow: '<i class="la la-angle-left"></i>'
+        }
+    } else {
+        arrows = {
+            leftArrow: '<i class="la la-angle-left"></i>',
+            rightArrow: '<i class="la la-angle-right"></i>'
+        }
+    }
+
+    // Date Range
+    $("#_datetime").datetimepicker({
+        format: 'MM/DD/yyyy hh:mm A',
+    });
+</script>

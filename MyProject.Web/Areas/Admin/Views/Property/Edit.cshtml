@@ -1,0 +1,1096 @@
+﻿@model MyProject.Data.Property
+
+
+@{
+	ViewBag.Title = "Edit";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<style>
+	.video-frame {
+		width: 100%;
+		height: auto;
+		border-radius: 5px;
+		padding: 10px;
+		/*  //     box-shadow: 0 0.5rem 1.5rem 0.5rem rgb(0 0 0 / 8%);*/
+		background-color: rgb(0 0 0 / 8%);
+	}
+
+	.video-frame1 {
+		width: 100%;
+		height: auto;
+		border-radius: 5px;
+		padding: 10px;
+		background-color: rgb(0 0 0 / 8%);
+	}
+</style>
+
+
+<link href="~/Assets/Admin/plugins/custom/richtextarea/rte_theme_default.css" rel="stylesheet" />
+<script src="~/Assets/Admin/plugins/custom/richtextarea/rte.js"></script>
+<script src="~/Assets/Admin/plugins/custom/richtextarea/all_plugins.js"></script>
+<script src="~/Assets/Admin/plugins/custom/richtextarea/rte-upload.js"></script>
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Subheader-->
+	<div class="subheader py-2 py-lg-12 subheader-transparent" id="kt_subheader">
+		<div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+			<!--begin::Info-->
+			<div class="d-flex align-items-center flex-wrap mr-1">
+				<!--begin::Heading-->
+				<div class="d-flex flex-column">
+
+					<!--begin::Breadcrumb-->
+					<div class="d-flex align-items-center font-weight-bold my-2">
+						<!--begin::Item-->
+						<a href="/Admin/Dashboard/Index" class="opacity-75 hover-opacity-100">
+							<i class="flaticon2-shelter text-white icon-1x"></i>
+						</a>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<a href="/Admin/Dashboard/Index" class="text-white text-hover-white opacity-75 hover-opacity-100">&nbsp;&nbsp;Dashboard</a>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
+						<a href="javascript:;" class="text-white text-hover-white opacity-75 hover-opacity-100">MyProject.</a>
+						<!--end::Item-->
+					</div>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Heading-->
+			</div>
+			<!--end::Info-->
+		</div>
+	</div>
+	<!--end::Subheader-->
+	<!--begin::Entry-->
+	<div class="d-flex flex-column-fluid">
+		<!--begin::Container-->
+		<div class="container">
+			<!--begin::Dashboard-->
+			<div class="row">
+				<div class="col-xl-12">
+					<!--begin::Card-->
+					<div class="card card-custom gutter-b">
+						<div class="card-header flex-wrap border-0 pt-6 pb-0">
+							<div class="card-title">
+								<h3 class="card-label">
+									MyProject.
+									<span class="d-block text-muted pt-2 font-size-sm">Update MyProject. Here...</span>
+								</h3>
+							</div>
+							<div class="card-toolbar">
+								<!--begin::Button-->
+								<div class="dropdown dropdown-inline mr-2">
+
+								</div>
+								<a href="/Admin/property/index" class="btn btn-custom font-weight-bolder">
+									<span class="svg-icon svg-icon-md svg-icon-white">
+										<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+												<rect x="0" y="0" width="24" height="24" />
+												<circle fill="#ffffff" cx="9" cy="15" r="6" />
+												<path d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z" fill="#ffffff" opacity="0.3" />
+											</g>
+										</svg>
+										<!--end::Svg Icon-->
+									</span>Back
+								</a>
+								<!--end::Button-->
+							</div>
+						</div>
+						<div class="card-body">
+
+							<!--begin: form-->
+							@*@using (Html.BeginForm("Update", "Property", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data", id = "editform" }))
+								{*@
+							<form enctype="multipart/form-data" id="editform">
+								<div class="card-body">
+
+									@Html.AntiForgeryToken()
+									<div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+									@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+									@Html.HiddenFor(m => m.ID)
+									<div class="form-group row">
+										<div class="col-lg-12 text-center">
+											<div class="image-input image-input-outline" id="kt_image_1">
+												@if (string.IsNullOrEmpty(Model.Thumbnail))
+												{
+													<div class="image-input-wrapper" style="background-image:url('../../../../Assets/AppFiles/Images/default.png')"></div>
+												}
+												else
+												{
+													<div class="image-input-wrapper" style="background-image:url('@Model.Thumbnail')"></div>
+												}
+												<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change logo">
+													<i class="fa fa-pen icon-sm text-muted"></i>
+													<input type="file" name="Thumbnail" id="cover" accept=".png, .jpg, .jpeg" />
+													<input type="hidden" name="profile_avatar_remove" />
+												</label>
+												<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow cancelimage" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+													<i class="ki ki-bold-close icon-xs text-muted"></i>
+												</span>
+											</div>
+											<span class="form-text text-muted">Thumbnail</span>
+											<span class="form-text text-muted">Image dimensions should be 1092 x 615 pixels and Image size must be less than 200 kb</span>
+										</div>
+									</div>
+									<h3 class="font-size-lg text-dark font-weight-bold mb-6 card-label">Basic Info:</h3>
+
+									<div class="row">
+										<div class="col-md-10 col-sm-10">
+											<div class="form-group">
+												<label class="control-label">Development Type</label>
+												<div class="input-group mb-2">
+
+													@Html.DropDownListFor(m => m.DevelopmentID, null, "Select Development ", htmlAttributes: new { @class = "form-control", required = "required" })
+
+													<div class="input-group-append">
+														<span class="input-group-text"><i class="fa fa-server"></i></span>
+													</div>
+
+													@Html.ValidationMessageFor(model => model.DevelopmentID, "", new { @class = "text-danger" })
+
+												</div>
+											</div>
+										</div>
+										<div class="col-md-2 col-sm-2">
+											<div class="form-group">
+												<label class="control-label">Enable Featured</label>
+												<div class="input-group mb-2">
+													<span class="switch">
+														<label>
+
+															@Html.CheckBox("IsFeatured", new { id = "IsFeatured" })
+															<span></span>
+														</label>
+													</span>
+												</div>
+
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+												<label class="control-label">Title</label>
+												<div class="input-group mb-2">
+													@Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter title here ...", required = "required" } })
+													<div class="input-group-append">
+														<span class="input-group-text"><i class="fa fa-server"></i></span>
+													</div>
+												</div>
+												@Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+												<label class="control-label">Title (Ar)</label>
+												<div class="input-group mb-2">
+													@Html.EditorFor(model => model.TitleAr, new { htmlAttributes = new { @class = "form-control", placeholder = " ...Enter title (Ar) here", required = "required", dir = "rtl" } })
+													<div class="input-group-append">
+														<span class="input-group-text"><i class="fa fa-server"></i></span>
+													</div>
+												</div>
+												@Html.ValidationMessageFor(model => model.TitleAr, "", new { @class = "text-danger" })
+											</div>
+										</div>
+
+										@*<div class="col-md-6 col-sm-12">
+												<div class="form-group">
+													<label class="control-label">Short Description</label>
+													<div class="input-group mb-3">
+														@Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter short description here ...", required = "required" } })
+														<div class="input-group-append">
+															<span class="input-group-text"><i class="fa fa-server"></i></span>
+														</div>
+													</div>
+													@Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-12">
+												<div class="form-group">
+													<label class="control-label">Short Description(Ar)</label>
+													<div class="input-group mb-3">
+														@Html.EditorFor(model => model.ShortDescriptionAr, new { htmlAttributes = new { @class = "form-control", placeholder = " ...Enter short description (Ar) here", dir = "rtl" } })
+														<div class="input-group-append">
+															<span class="input-group-text"><i class="fa fa-server"></i></span>
+														</div>
+													</div>
+													@Html.ValidationMessageFor(model => model.ShortDescriptionAr, "", new { @class = "text-danger" })
+												</div>
+											</div>*@
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+												<label class="control-label">Description</label>
+												<div class="input-group mb-3">
+													@Html.TextAreaFor(model => model.Description, 3, 20, new { @class = "form-control", placeholder = "Enter description here ..." })
+													@*@Html.TextAreaFor(model => model.TitleDescriptionAr, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter description (ar) here ...", required = "required", dir = "rtl" } })*@
+
+												</div>
+												@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+												<label class="control-label">Description(Ar)</label>
+												<div class="input-group mb-3">
+													@Html.TextAreaFor(model => model.DescriptionAr, 3, 20, new { @class = "form-control", placeholder = " ...Enter title (Ar) here", required = "required", dir = "rtl" })
+													@*@Html.TextAreaFor(model => model.TitleDescriptionAr, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter description (ar) here ...", required = "required", dir = "rtl" } })*@
+
+												</div>
+												@Html.ValidationMessageFor(model => model.DescriptionAr, "", new { @class = "text-danger" })
+											</div>
+										</div>
+									</div>
+									<h3 class="font-size-lg text-dark font-weight-bold mb-6 card-label">Address:</h3>
+
+									<div class="row">
+										@*<div class="col-md-4 col-sm-4">
+												<div class="form-group">
+													<label class="control-label">Countries</label>
+													<div class="input-group mb-2">
+														@Html.DropDownList("CountryID", null, "Select Countries ", htmlAttributes: new { @class = "form-control", required = "required" })
+
+														<div class="input-group-append">
+															<span class="input-group-text"><i class="fas fa-globe-asia"></i></span>
+														</div>
+													</div>
+													@Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
+												</div>
+											</div>
+											<div class="col-md-4 col-sm-4">
+												<div class="form-group">
+													<label class="control-label">Cities</label>
+													<div class="input-group mb-2">
+														@Html.DropDownList("CityID", null, "Select Country First ", htmlAttributes: new { @class = "form-control", required = "required" })
+
+														<div class="input-group-append">
+															<span class="input-group-text"><i class="fas fa-city"></i></span>
+														</div>
+													</div>
+													@Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+												</div>
+											</div>
+											<div class="col-md-4 col-sm-4">
+												<div class="form-group">
+													<label class="control-label">Areas</label>
+													<div class="input-group mb-2">
+														@Html.DropDownList("AreaID", null, "Select City First ", htmlAttributes: new { @class = "form-control", required = "required" })
+
+
+														<div class="input-group-append">
+															<span class="input-group-text"><i class="fas fa-map"></i></span>
+														</div>
+													</div>
+													@Html.ValidationMessageFor(model => model.AreaID, "", new { @class = "text-danger" })
+												</div>
+											</div>*@
+										<div class="col-md-6 col-sm-6">
+											<div class="form-group">
+												<label class="control-label">Latitude (Optional)</label>
+												<div class="input-group mb-2">
+
+													<input type="text" maxlength="9" placeholder="Enter latitude here ##.######" name="Latitude" id="Latitude" class="form-control" pattern="^[1-9]\d*(\.\d+)?$" value="@Model.Latitude" />
+													<div class="input-group-append">
+														<span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+													</div>
+												</div>
+												@Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-6">
+											<div class="form-group">
+												<label class="control-label">Longitude (Optional)</label>
+												<div class="input-group mb-2">
+													<input type="text" maxlength="10" placeholder="Enter longitude here ##.#######" class="form-control" name="Longitude" id="Longitude" pattern="^[1-9]\d*(\.\d+)?$" value="@Model.Longitude" />
+													<div class="input-group-append">
+														<span class="input-group-text"><i class="fas fa-map-marker"></i></span>
+													</div>
+												</div>
+												@Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+											</div>
+										</div>
+										@*<div class="col-md-12 col-sm-12">
+												<div class="form-group">
+													<label class="control-label">Address</label>
+													<div class="input-group mb-3">
+														@Html.TextAreaFor(model => model.Address, 3, 20, new { @class = "form-control", placeholder = "Enter address here ..." })
+														<div class="input-group-append">
+															<span class="input-group-text"><i class="fas fa-address-card"></i></span>
+														</div>
+													</div>
+													@Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+												</div>
+											</div>*@
+									</div>
+									<h3 class="font-size-lg text-dark font-weight-bold mb-6 card-label">Media:</h3>
+									<div class="row">
+										<div class="col-md-9"></div>
+
+										<div id="" class="col-md-12 col-sm-12">
+											<label class="control-label">VRTour Link (Optional)</label>
+											<div class="form-group">
+												<div class="input-group mb-2">
+													@Html.EditorFor(model => model.VRTour, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter vr tour link here ..." } })
+													<div class="input-group-append">
+														<span class="input-group-text"><i class="fa fa-link"></i></span>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div id="video" class="col-md-4 col-sm-12">
+											<div class="form-group">
+												<label class="control-label">Video</label>
+												<div class="input-group mb-2">
+													@Html.TextBox("VideoFile", "", new { type = "file", name = "VideoFile", @class = "form-control", @accept = "video/*" })
+													<div class="input-group-append">
+														<span class="input-group-text"><i class="fa fa-video"></i></span>
+													</div>
+												</div>
+												<span class="form-text text-muted">Video Size should be less than 20 mb</span>
+											</div>
+										</div>
+
+										<div class="col-md-4 col-sm-12 video-framediv">
+											<div class="form-group video-frame">
+												<div class="input-group mb-2">
+													@if (!string.IsNullOrEmpty(Model.Video))
+													{
+														<div>
+															<label class="control-label">Video</label>
+															<span class="btn btn-circle btn-hover-text-primary btn-icon btn-white btn-pill btn-shadow btn-xs float-right mb-2" data-action="cancel" id="deletevideo" data-toggle="tooltip" title="Delete Video">
+																<i class="ki ki-bold-close icon-xs text-muted"></i>
+															</span>
+															<center>
+																<video style="width: 100%; height: 100%;" controls>
+																	<source src="@Url.Content(Model.Video)" type="video/mp4" name="Video" />
+																</video>
+															</center>
+														</div>
+														<input type="hidden" name="Video" id="Video" value="@Model.Video">
+													}
+												</div>
+											</div>
+										</div>
+
+										<div class="col-md-4 col-sm-12 my-auto text-center" id="inputfiled1">
+											<div class="form-group">
+												<label>Floor Plan</label>
+												<div></div>
+												<a href="@(!string.IsNullOrEmpty(Model.FloorPlan) ? Model.FloorPlan : "#")" target="_blank" id="floorplan" class="btn btn-secondary"><i class="fa fa-eye" aria-hidden="true"></i>View Floor Plan</a>
+												<input type="file" id="selectedFloorPlan" name="FloorPlan" style="display: none;" accept=".jpg, .jpeg, .png, .pdf, .doc, .docx, .xlsx" />
+												<input type="button" class="btn btn-secondary" value="Browse..." onclick="document.getElementById('selectedFloorPlan').click();" />
+											</div>
+											File Size should be less than 20 mb
+										</div>
+
+										<div class="col-md-4 col-sm-12 my-auto text-center" id="inputfiled2">
+											<div class="form-group">
+												<label>Property PDF</label>
+												<div></div>
+												<a href="@(!string.IsNullOrEmpty(Model.Broucher) ? Model.Broucher : "#")" target="_blank" id="filename" class="btn btn-secondary"><i class="fa fa-eye" aria-hidden="true"></i>View Broucher</a>
+												<input type="file" id="selectedFile" name="Broucher" style="display: none;" accept="application/pdf" />
+												<input type="button" class="btn btn-secondary" value="Browse..." onclick="document.getElementById('selectedFile').click();" />
+											</div>
+											File Size should be less than 20 mb
+										</div>
+
+									</div>
+									<!--Faqs Start-->
+									<h3 class="font-size-lg text-dark font-weight-bold mt-10 card-label">Frequently Asked Questions:</h3>
+									<div class="row">
+										<div class="col-md-12 col-sm-12">
+											<label class="control-label">FAQs</label>
+											<div class="form-group">
+												<div class="input-group mb-2">
+													<input type="hidden" name="Faqs" id="Faqs" />
+													<div id="div_editor1" class="richtexteditor">
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-12 col-sm-12">
+											<label class="control-label">FAQs (Ar)</label>
+											<div class="form-group">
+												<div class="input-group mb-2">
+													<input type="hidden" name="FaqsAr" id="FaqsAr" />
+													<div id="div_editor2" class="richtexteditor">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--Faqs End-->
+								</div>
+
+								<div class="card-footer text-right">
+
+									@*<a href="/Admin/property/index" class="btn btn-secondary">Back</a>*@
+									<button type="submit" id="editbutton" form="editform" class="btn btn-custom">Save Changes</button>
+
+								</div>
+							</form>
+							<div class="example-preview" id="kt_blockui_content">
+
+							</div>
+							<!--end: form-->
+						</div>
+					</div>
+					<!--end::Card-->
+				</div>
+			</div>
+
+			<!--end::Dashboard-->
+		</div>
+		<!--end::Container-->
+	</div>
+	<!--end::Entry-->
+</div>
+
+<!--end::Page Scripts-->
+
+@section IndexScript {
+
+	@if (ViewBag.ErrorMessage != null && !String.IsNullOrEmpty(ViewBag.ErrorMessage))
+	{
+		<script type="text/javascript">
+        toastr.error('@ViewBag.ErrorMessage');
+		</script>
+	}
+	<script type="text/javascript">
+		KTUtil.ready(function () {
+			unblockui();
+			var str = '@Model.Video';
+			str = str.toString();
+			if (str == "") {
+				$("#video").show();
+				$(".video-frame").hide();
+				$(".video-framediv").hide();
+
+			}
+			else if (str != null) {
+				$("#video").hide();
+				$(".video-frame").show();
+				$(".video-framediv").show();
+
+			}
+			else {
+				$("#video").show();
+				$(".video-frame").hide();
+				$(".video-framediv").hide();
+					}
+
+			let filebrowser1 = "@Model.FloorPlan";
+			if (filebrowser1 != '')
+			{
+				$("#inputfiled1").show();
+			}
+			else {
+				$("#floorplan").html('<i class="fa fa-upload" aria-hidden="true"></i>Upload Floor Plan');
+			}
+
+			let filebrowser2 = "@Model.Broucher";
+			if (filebrowser2 != '')
+			{
+				$("#inputfiled2").show();
+			}
+			else {
+				$("#filename").html('<i class="fa fa-upload" aria-hidden="true"></i>Upload Broucher');
+			}
+			KTImageInputDemo.init();
+			KTImageInputDemo2.init();
+
+		});
+        function blockui() {
+
+            $("#editbutton").addClass("spinner spinner-dark spinner-right");
+            $("#editbutton").prop('disabled', true);
+            $("#editbutton").html("Updating MyProject.");
+            KTApp.blockPage({
+                overlayColor: '#000000',
+                state: 'primary',
+                message: 'Updating MyProject. Please Wait...'
+            });
+
+        }
+        function unblockui() {
+            KTApp.unblockPage();
+            $("#editbutton").removeClass("spinner spinner-dark spinner-right");
+            $("#editbutton").prop('disabled', false);
+            $("#editbutton").html("Save Changes");
+        }
+        // Class definition
+        var KTImageInputDemo = function () {
+            // Private functions
+            var initDemos = function () {
+                var avatar1 = new KTImageInput('kt_image_1');
+            }
+
+            return {
+                // public functions
+                init: function () {
+                    initDemos();
+                }
+            };
+        }();
+        // Class definition
+        var KTImageInputDemo2 = function () {
+            // Private functions
+            var initDemos = function () {
+                var avatar1 = new KTImageInput('kt_image_2');
+            }
+
+            return {
+                // public functions
+                init: function () {
+                    initDemos();
+                }
+            };
+        }();
+
+		$("#selectedFloorPlan").change(function () {
+            var file, doc;
+
+            if ((file = this.files[0]))
+            {
+                doc = this.files[0];
+
+				if (doc.size > 20 * (1000000)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'File Size Should be Lower than 20MB!',
+
+                    }).then(function (result) {
+						$("#selectedFloorPlan").val('');
+                    });
+
+                }
+                else {
+                    doc.onerror = function () {
+                        alert("not a valid file: " + file.type);
+                    };
+                }
+				$("#floorplan").html('<i class="fa fa-eye" aria-hidden="true"></i>View New File Uploaded');
+				$("#floorplan").attr('href', URL.createObjectURL(file));
+                doc.src = _URL.createObjectURL(file);
+            }
+
+		});
+		$("#selectedFile").change(function () {
+            var file, doc;
+
+            if ((file = this.files[0]))
+            {
+                doc = this.files[0];
+
+				if (doc.size > 20 * (1000000)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Pdf File Size Should be Lower than 20MB!',
+
+                    }).then(function (result) {
+                        $("#selectedFile").val('');
+                    });
+
+                }
+                else if (doc.type != "application/pdf") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Please Upload Pdf files only !',
+
+                    }).then(function (result) {
+                        $("#selectedFile").val('');
+                    });
+                }
+                else {
+                    doc.onerror = function () {
+                        alert("not a valid file: " + file.type);
+                    };
+                }
+                $("#filename").html('<i class="fa fa-eye" aria-hidden="true"></i>View New File Uploaded');
+                $("#filename").attr('href', URL.createObjectURL(file));
+                doc.src = _URL.createObjectURL(file);
+            }
+
+        });
+		var _URL = window.URL || window.webkitURL;
+		//$('#CountryID').change(function () {
+		//	var count = 0
+		//	var $dropdown = $("#CityID");
+		//	var $dropdown1 = $("#AreaID").empty();
+		//	$dropdown1.append($("<option />").val('').text("Please Select City First!"));
+		//	$dropdown1.selectpicker('refresh');
+
+		//	if ($(this).val() == 0) {
+		//		$dropdown.empty();
+		//		$dropdown.append($("<option />").val('').text("Please Select Country First!"));
+		//		$dropdown.selectpicker('refresh');
+		//	}
+		//	else {
+		//		$.ajax({
+		//			type: 'Get',
+		//			url: '/Admin/City/GetCitiesByCountry/' + $(this).val(),
+		//			success: function (response) {
+		//				$dropdown.empty();
+		//				$dropdown.append($("<option />").val('').text("Select City"));
+
+		//				$.each(response.data, function (k, v) {
+		//					$dropdown.append($("<option />").val(v.value).text(v.text));
+		//					count++;
+		//				});
+		//				$dropdown.selectpicker('refresh');
+		//			},
+
+		//			error: function (respones) {
+
+		//			}
+		//		});
+		//	}
+		//});
+		//$('#CityID').change(function () {
+		//	var count = 0;
+		//	var $dropdown = $("#AreaID");
+		//	if ($(this).val() == 0) {
+		//		$dropdown.empty();
+		//		$dropdown.append($("<option />").val('').text("Please Select City First!"));
+		//		$dropdown.selectpicker('refresh');
+		//	}
+		//	else {
+		//		$.ajax({
+		//			type: 'Get',
+		//			url: '/Admin/Area/GetAreasByCity/' + $(this).val(),
+		//			success: function (response) {
+		//				$dropdown.empty();
+		//				$dropdown.append($("<option />").val('').text("Select Area"));
+
+		//				$.each(response.data, function (k, v) {
+		//					$dropdown.append($("<option />").val(v.value).text(v.text));
+		//					count++;
+		//				});
+		//				$dropdown.selectpicker('refresh');
+		//			},
+		//			error: function (respones) {
+
+		//			}
+		//		});
+		//	}
+		//});
+		//Thumbnail Image Validation Begin
+		$("#cover").change(function (e) {
+
+			var file, img;
+
+			if ((file = this.files[0])) {
+
+				img = new Image();
+				img.onload = function () {
+					if (this.width < 1092 || this.width > 1092) {
+						Swal.fire({
+							icon: 'error',
+							title: 'Oops...',
+							text: 'Image dimension should be 1092 x 615 !',
+
+						}).then(function (result) {
+
+							$("#cover").attr("src", "/Assets/AppFiles/Images/default.png");
+							 $(".cancelimage").trigger('click');
+						});
+					}
+					else if (this.height < 615 || this.height > 615) {
+						Swal.fire({
+							icon: 'error',
+							title: 'Oops...',
+							text: 'Image dimension should be 1092 x 615 !',
+
+						}).then(function (result) {
+							$("#cover").attr("src", "/Assets/AppFiles/Images/default.png");
+							$(".cancelimage").trigger('click');
+						});
+					}
+					else if (this.size > 200000) {
+						Swal.fire({
+							icon: 'error',
+							title: 'Oops...',
+							text: 'Image size must be less than 200 kb!',
+
+						}).then(function (result) {
+
+							$("#cover").attr("src", "/Assets/AppFiles/Images/default.png");
+							$(".cancelimage").trigger('click');
+						});
+					}
+					else {
+						img.onerror = function () {
+							alert("not a valid file: " + file.type);
+						};
+					}
+
+				};
+				img.src = _URL.createObjectURL(file);
+			}
+		});
+		//Image Validation End
+		////Floor Image Validation Begin
+		//$("#FloorPlan").change(function (e) {
+
+
+		//	var file, img;
+
+		//	if ((file = this.files[0])) {
+
+		//		img = new Image();
+		//		img.onload = function () {
+
+		//			if (this.width < 690 || this.width > 690) {
+		//				Swal.fire({
+		//					icon: 'error',
+		//					title: 'Oops...',
+		//					text: 'Image dimension should be 690 x 460 !',
+
+		//				}).then(function (result) {
+		//					$("#FloorPlan").attr("src", "/Assets/AppFiles/Images/default.png");
+		//					$(".cancelimage").trigger('click');
+		//				});
+		//			}
+		//			else if (this.height < 460 || this.height > 460) {
+		//				Swal.fire({
+		//					icon: 'error',
+		//					title: 'Oops...',
+		//					text: 'Image dimension should be 690 x 460 !',
+
+		//				}).then(function (result) {
+		//					$("#FloorPlan").attr("src", "/Assets/AppFiles/Images/default.png");
+		//					$(".cancelimage").trigger('click');
+
+		//				});
+		//			}
+		//			else if (this.size > 200000) {
+		//				Swal.fire({
+		//					icon: 'error',
+		//					title: 'Oops...',
+		//					text: 'Image size must be less than 200 kb!',
+
+		//				}).then(function (result) {
+
+		//					$("#FloorPlan").attr("src", "/Assets/AppFiles/Images/default.png");
+		//					$(".cancelimage").trigger('click');
+		//				});
+		//			}
+		//			else {
+		//				img.onerror = function () {
+		//					alert("not a valid file: " + file.type);
+		//				};
+		//			}
+		//		};
+		//		img.src = _URL.createObjectURL(file);
+		//	}
+		//});
+		////Image Validation End
+
+		//Floor Plan Validation Begin
+		$("#FloorPlan").change(function (e) {
+
+			var file, doc;
+
+			if ((file = this.files[0])) {
+
+				doc = this.files[0];
+				doc.onload = function () {
+
+					if (this.size > 20 * (1000000)) {
+						Swal.fire({
+							icon: 'error',
+							title: 'Oops...',
+							text: 'File Size Should be Lower than 20MB!',
+
+						}).then(function (result) {
+							$("FloorPlan").val('');
+						});
+
+					}
+					else {
+						doc.onerror = function () {
+							alert("not a valid file: " + file.type);
+						};
+					}
+				};
+				doc.src = _URL.createObjectURL(file);
+			}
+		});
+		//Floor Plan Validation End
+
+		//Property Pdf Validation Begin
+		$("#Broucher").change(function (e) {
+
+			var file, doc;
+
+			if ((file = this.files[0])) {
+
+				doc = this.files[0];
+				doc.onload = function () {
+
+					if (this.size > 20 * (1000000)) {
+						Swal.fire({
+							icon: 'error',
+							title: 'Oops...',
+							text: 'Pdf File Size Should be Lower than 20MB!',
+
+						}).then(function (result) {
+							$("Broucher").val('');
+						});
+
+					}
+					else if (this.type != ".pdf") {
+						Swal.fire({
+							icon: 'error',
+							title: 'Oops...',
+							text: 'Please Upload Pdf files only !',
+
+						}).then(function (result) {
+							$("Broucher").val('');
+						});
+					}
+					else {
+						doc.onerror = function () {
+							alert("not a valid file: " + file.type);
+						};
+					}
+				};
+				doc.src = _URL.createObjectURL(file);
+			}
+		});
+		//Property Pdf Validation End
+
+		//video validation
+		$("#Video").change(function (e) {
+
+			var file;
+
+			if ((file = this.files[0])) {
+
+				if (!file.type.match('video.*')) {
+					Swal.fire({
+						icon: 'error',
+						title: 'Oops...',
+						text: 'Please upload valid video file !',
+
+					}).then(function (result) {
+						$("#Video").val("");
+					});
+				}
+				else if (file.size >= 20 * (1000000)) {
+					Swal.fire({
+						icon: 'error',
+						title: 'Oops...',
+						text: 'Video size must be less than 10 MB!',
+
+					}).then(function (result) {
+						$("#Video").val("");
+					});
+				}
+			}
+
+		});
+		$("#deletevideo").click(function () {
+			$(".video-frame").hide();
+			$(".video-framediv").hide();
+			$("#video").show();
+			$("input[name=Video][type=hidden]").remove();
+		})
+		// vrvideo validation
+		//$("#VRTour").change(function (e) {
+
+		//	var file;
+
+		//	if ((file = this.files[0])) {
+
+		//		if (!file.type.match('video.*')) {
+		//			Swal.fire({
+		//				icon: 'error',
+		//				title: 'Oops...',
+		//				text: 'Please upload valid VRTour video file !',
+
+		//			}).then(function (result) {
+		//				$("#VRTour").val("");
+		//			});
+		//		}
+		//		else if (file.size >= 10000000) {
+		//			Swal.fire({
+		//				icon: 'error',
+		//				title: 'Oops...',
+		//				text: 'VRTour video size must be less than 10 MB!',
+
+		//			}).then(function (result) {
+		//				$("#VRTour").val("");
+		//			});
+		//		}
+		//	}
+
+		//});
+		//$("#deletevrtour").click(function () {
+		//	$(".video-frame1").hide();
+		//	$(".video-framediv1").hide();
+		//	$("#vrtourf").show();
+		//	$("input[name=VRTour][type=hidden]").remove();
+		//})
+		function ValidateLatLng() {
+			var lat = document.getElementById("Latitude").value;
+			var lng = document.getElementById("Longitude").value;
+			if (lat) {
+				if (lat < -90 || lat > 90) {
+					toastr.error("Latitude must be between -90 and 90 degrees inclusive.");
+					return false;
+				}
+			}
+			if (lng) {
+				if (lng < -180 || lng > 180) {
+					toastr.error("Longitude must be between -180 and 180 degrees inclusive.");
+					return false;
+				}
+			}
+			return true;
+		}
+		$("#editform").submit(function (e) {
+
+			e.preventDefault();
+			if (!ValidateLatLng()) {
+				return false
+			}
+			var data = new FormData();
+			data.append("ID", $('#ID').val());
+
+			data.append("DevelopmentID", $("#DevelopmentID").val());
+			data.append("IsFeatured", $("#IsFeatured").prop("checked"));
+			data.append("Title", $('#Title').val());
+			data.append("TitleAr", $('#TitleAr').val());
+			//data.append("ShortDescription", $('#ShortDescription').val());
+			//data.append("ShortDescriptionAr", $('#ShortDescriptionAr').val());
+			data.append("Description", $('#Description').val());
+			data.append("DescriptionAr", $('#DescriptionAr').val());
+			data.append("VRTour", $('#VRTour').val());
+			//data.append("Address", $("#Address").val());
+
+			var thumbnail = $("#cover").val();
+			if (thumbnail != '')
+			{
+				data.append("Thumbnail", $("#cover")[0].files[0]);
+			}
+
+			var video = $("#VideoFile").val();
+			if (video != '') {
+				data.append("VideoFile", $("#VideoFile")[0].files[0]);
+
+			}
+			if ($("#Video").val()) {
+				data.append("Video", $("#Video").val());
+			}
+
+			//var VRTourFile = $("#VRTourFile").val();
+			//if (VRTourFile != '') {
+			//	data.append("VRTourFile", $("#VRTourFile")[0].files[0]);
+
+			//}
+			//if ($("#VRTour").val()) {
+			//	data.append("VRTour", $("#VRTour").val());
+			//}
+
+			//var vrtour = $("#VRTour").val();
+			//if (vrtour != '') {
+			//    data.append("VRTour", $("#VRTour")[0].files[0]);
+			//}
+			let floorplan = $("#FloorPlan").val();
+			if (floorplan != '' && $("#selectedFloorPlan")[0]) {
+				data.append("FloorPlan", $("#selectedFloorPlan")[0].files[0]);
+			}
+
+			let broucher = $("#selectedFile").val();
+			if (broucher != '' && $("#selectedFile")[0]) {
+				data.append("Broucher", $("#selectedFile")[0].files[0]);
+			}
+			data.append("Latitude", $("#Latitude").val());
+			data.append("Longitude", $("#Longitude").val());
+			//data.append("CountryID", $("#CountryID").val());
+			//data.append("CityID", $("#CityID").val());
+			//data.append("AreaID", $("#AreaID").val());
+			data.append("Faqs", $("#Faqs").val());
+			data.append("FaqsAr", $("#FaqsAr").val());
+			data.append("__RequestVerificationToken", $('input[name=__RequestVerificationToken]').val());
+			blockui();
+			$.ajax({
+				url: "/Admin/Property/Update/",
+				type: "POST",
+				processData: false,
+				contentType: false,
+				data: data,
+				success: function (response) {
+					if (response.success) {
+						window.location.href = response.url.toString();
+					}
+					else {
+						toastr.error(response.message);
+					}
+					unblockui();
+				},
+				error: function (er) {
+					toastr.error(er);
+					unblockui();
+				}
+			});
+			return false;
+		});
+
+		var faq = `@Html.Raw(Model.Faqs)`;
+		var faqAr = `@Html.Raw(Model.FaqsAr)`;
+        var editor1cfg = {}
+        editor1cfg.toolbar = "basic";
+        var editor1 = new RichTextEditor(document.getElementById("div_editor1"));
+        var editor2 = new RichTextEditor(document.getElementById("div_editor2"));
+        editor1.attachEvent("change", function () {
+			document.getElementById("Faqs").value = editor1.getHTMLCode();
+		});
+		editor2.attachEvent("change", function () {
+			document.getElementById("FaqsAr").value = editor2.getHTMLCode();
+        });
+		$('.rte_command_insertimage').hide();
+		$('.rte_command_insertvideo').hide();
+		$('.rte_command_insertdocument').hide();
+		$(document).ready(function () {
+
+			@*$.ajax({
+            url: "/Admin/Property/GetDescriptionHTML/" + @Model.ID,
+            type: "GET",
+            data: 'json',
+            dataType: "text json",
+            success: function (response) {
+                //var html = $.parseHTML(response)[0]
+                editor1.setHTMLCode(response)
+            },
+            error: function (er) {
+                toastr.error(er);
+            }
+			});*@
+
+			setTimeout(function () {
+				insertFaqs();
+			}, 1000);
+
+		});
+
+		function insertFaqs() {
+			if ($(".rte-toggleborder")) {
+				editor1.setHTMLCode(faq);
+				editor2.setHTMLCode(faqAr);
+			}
+			else {
+				setTimeout(function () {
+					insertFaqs();
+				}, 1000);
+			}
+		}
+
+	</script>
+}
+<!--end::Page Scripts-->

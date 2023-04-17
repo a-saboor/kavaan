@@ -1,0 +1,83 @@
+﻿@model MyProject.Data.Category
+@{
+    ViewBag.Title = ""+ "";
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+   bool RTL = false;
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!--Body Content-->
+<div class="render-body" style="">
+	<!-- Hero Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<div class="">
+			<div class="h-[150px] mx-auto bg-career-bg bg-cover flex flex-col justify-center items-center md:h-[200px] lg:h-[300px]">
+				<h1 class="uppercase font-Rubik text-xl font-medium text-center text-white lg:text-4xl lg:mb-2">CAREERS</h1>
+				<div class="flex items-center">
+					<p class="font-Rubik text-xs uppercase text-white"><a href="/@culture/home/index">HOME</a></p>
+                    <svg viewBox="0 0 192 512" class="w-1.5 mx-2 fill-current text-white flip-horizontal-rtl"><path fill="" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path></svg>
+					<p class="font-Rubik text-xs uppercase text-white"><a href="/@culture/careers/departments">DEPARTMENTS</a></p>
+					<svg viewBox="0 0 192 512" class="w-1.5 mx-2 fill-current text-white flip-horizontal-rtl"><path fill="" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path></svg>
+                    <p class="font-Rubik text-xs uppercase text-white">JOBS</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero Section End -->
+	<!-- careers Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto" id="jobs_section">
+		<div>
+            <h1 class="font-Rubik text-xl font-bold text-center pt-4 py-10 lg:pt-10">AVAILABLE_POSITIONS</h1>
+		</div>
+        <div class="w-[80%] mx-auto sm:flex sm:flex-wrap sm:justify-center main-div" style="display:none;">
+            <div class="w-[80%] mx-auto bg-white shadow-2xl p-5 my-4 sm:w-[45%] lg:w-[30%] lg:m-3 xl:flex xl:justify-center xl:items-baseline xl:flex-col">
+                <h1 class="font-medium text-sm ">POSITION_TITLE_1</h1>
+                <p class="text-xs my-4 font-light cut-text">OUR_PROPERTIES_EACH_HAVE_THEIR_OWN_</p>
+                <button class="border-2 border-gk-blue flex items-center rounded-lg py-2 pl-2">
+                    <p class="font-medium text-xs mr-3">APPLY_NOW</p>
+                    <svg viewBox="0 0 192 512" class="w-1 mx-2"><path fill="#F9B35E" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class=""></path></svg>
+                </button>
+            </div>
+            <div class="w-[80%] mx-auto bg-white shadow-2xl p-5 my-4 sm:w-[45%] lg:w-[30%] lg:m-3 xl:flex xl:justify-center xl:items-baseline xl:flex-col">
+                <h1 class="font-medium text-sm ">POSITION_TITLE_1</h1>
+                <p class="text-xs my-4 font-light cut-text">OUR_PROPERTIES_EACH_HAVE_THEIR_OWN_</p>
+                <button class="border-2 border-gk-blue flex items-center rounded-lg py-2 pl-2">
+                    <p class="font-medium text-xs mr-3">APPLY_NOW</p>
+                    <svg viewBox="0 0 192 512" class="w-1 mx-2"><path fill="#F9B35E" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class=""></path></svg>
+                </button>
+            </div>
+            <div class="w-[80%] mx-auto bg-white shadow-2xl p-5 my-4 sm:w-[45%] lg:w-[30%] lg:m-3 xl:flex xl:justify-center xl:items-baseline xl:flex-col">
+                <h1 class="font-medium text-sm ">POSITION_TITLE_1</h1>
+                <p class="text-xs my-4 font-light cut-text">OUR_PROPERTIES_EACH_HAVE_THEIR_OWN_</p>
+                <button class="border-2 border-gk-blue flex items-center rounded-lg py-2 pl-2">
+                    <p class="font-medium text-xs mr-3">APPLY_NOW</p>
+                    <svg viewBox="0 0 192 512" class="w-1 mx-2"><path fill="#F9B35E" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class=""></path></svg>
+                </button>
+            </div>
+            <div class="w-[80%] mx-auto bg-white shadow-2xl p-5 my-4 sm:w-[45%] lg:w-[30%] lg:m-3 xl:flex xl:justify-center xl:items-baseline xl:flex-col">
+                <h1 class="font-medium text-sm ">POSITION_TITLE_1</h1>
+                <p class="text-xs my-4 font-light cut-text">OUR_PROPERTIES_EACH_HAVE_THEIR_OWN_</p>
+                <button class="border-2 border-gk-blue flex items-center rounded-lg py-2 pl-2">
+                    <p class="font-medium text-xs mr-3">APPLY_NOW</p>
+                    <svg viewBox="0 0 192 512" class="w-1 mx-2"><path fill="#F9B35E" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class=""></path></svg>
+                </button>
+            </div>
+        </div>
+		<div class="flex justify-center items-center animate-pulse ">
+			<a href="javascript:void(0);" class="bg-gk-gold ease-in-out font-Rubik font-medium px-4 py-2 mb-12 text-center text-xs uppercase rounded no-more" style="display:none;"><i class="fa fa-exclamation-circle mr-1"></i> COMING_SOON</a>
+		</div>
+	</section>
+	<!-- careers Section End -->
+
+</div>
+<!--Body Content End-->
+
+<!--Write js Here-->
+@section IndexScript {
+	<script src="~/Assets/js/web/Jobs/index.js"></script>
+	<script>
+        var departmentId = '@Model.ID';
+	</script>
+}

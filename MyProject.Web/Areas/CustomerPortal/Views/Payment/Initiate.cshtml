@@ -1,0 +1,391 @@
+﻿@model MyProject.Payment.ViewModel.OrderPaymentProcessingViewModel
+@{
+    ViewBag.Title = Resources.PAYMENT_PROCESSING;
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+    bool RTL = CultureHelper.IsRighToLeft();
+    Layout = "~/Views/Shared/_Layout_Web_View_Payment_Gateway.cshtml";
+    //Layout = null;
+}
+
+<script src="@Model.PaymentGatewaySetting.GatewayUrl"
+        data-error="errorCallback"
+        data-cancel="cancelCallback">
+</script>
+
+<script type="text/javascript">
+
+	window.onload = function () {
+		//document.myform.action = Checkout.showPaymentPage();
+		setTimeout(function () {
+			Checkout.showPaymentPage();
+		}, 1000);
+    }
+
+	function errorCallback(error) {
+		window.location = "/" +@culture+ "/Customer/Payment/Complete/" +@Model.Invoice.RecordID;
+	}
+
+	function cancelCallback() {
+		window.location = "/" +@culture+ "/Customer/Payment/Complete/"+@Model.Invoice.RecordID;
+	}
+
+	//adding merchant details, order information from session and master card session.
+	Checkout.configure({
+		merchant: '@Model.PaymentGatewaySetting.MerchantID',
+		session: {
+			id: '@Model.mastercard_session_id',
+			@*version: '@Model.mastercard_session_version'*@
+		},
+		order: {
+			amount: function () {
+				//returning amount from amount session
+				return @String.Format("{0:0.00}", Model.Invoice.Amount);
+			},
+			currency: '@Model.PaymentGatewaySetting.Currency',
+			description: 'Property Booking',
+			id: function () {
+				//returning order from order id session
+				return '@Model.Invoice.InvoiceNo';
+			}
+		},
+		//entering billing detials from session...
+		billing: {
+			address: {
+				street: '@Model.Customer.Address',
+				street2: '@Model.Customer.Address2',
+				city: '@Model.Customer.CustomerCity',
+				postcodeZip: '@Model.Customer.ZipCode',
+				stateProvince: '@Model.Customer.CustomerCity',
+				country: '@Model.Customer.Country'
+			}
+		},
+
+		//entering customer information from session
+		customer: {
+			email: '@Model.Customer.Email',
+			phone: '@Model.Customer.Contact',
+		},
+		//please enter your merchant name and address details
+		interaction: {
+			merchant: {
+                name: 'KAVAAN Real Estate Development',
+				address: {
+                    line1: 'Near Bentley Showroom, Umm Al Sheif, Sheikh Zayed Road, PO Box: 112466',
+                    line2: 'Dubai, United Arab Emirates'
+				},
+				logo: '@MyProject.Web.Helpers.Routing.CustomURL.GetFormatedURL(Resources.APP_LOGO_PATH)'
+			},
+			//displayControl: {
+			//	billingAddress: 'HIDE',
+			//	customerEmail: 'HIDE',
+			//	orderSummary: 'SHOW',
+			//	shipping: 'HIDE'
+			//}
+		}
+	});
+</script>
+
+
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!--Body Content-->
+<div class="render-body bg-gk-body" style="min-height: 300px;">
+    <!-- Hero Section Start -->
+    @*<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+        <div class="">
+            <div class="h-[150px] mx-auto bg-intro-details bg-cover flex flex-col justify-center items-center md:h-[200px] lg:h-[300px]">
+                <h1 class="uppercase font-Rubik text-xl font-medium text-center text-white lg:text-4xl lg:mb-2">@Resources.PAYMENT_PROCESSING</h1>
+                <div class="flex items-center">
+                    <a href="/@culture/home/index" class="font-Rubik text-xs uppercase text-white">@Resources.HOME</a>
+                    <svg viewBox="0 0 192 512" class="w-1.5 mx-2 fill-current text-white flip-horizontal-rtl"><path fill="" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class="fill-white"></path></svg>
+                    <a href="/@culture/our-story" class="font-Rubik text-xs uppercase text-white">@Resources.PAYMENT_PROCESSING</a>
+                </div>
+            </div>
+        </div>
+    </section>*@
+    <!-- Hero Section End -->
+    <!-- Processing Section -->
+    <section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto ">
+        <div class="w-[80%] mx-auto xl:w-[60%] pt-10">
+            @*<div class="wrapper"><h1 class="page-width">Booking # @Model.Booking.BookingNo</h1></div>*@
+            <section class="text-center w-full" style=""><i class="fa fa-2x fa-circle-o-notch fa-spin"></i></section>
+            <h1 class="font-Rubik font-medium lg:text-xl pt-4 text-base text-center">@Resources.BookingNo # @Model.Booking.BookingNo</h1>
+            <h1 class="font-Rubik font-medium lg:text-xl pt-4 text-base text-center pb-5">@Resources.PROCESSING_FOR_PAYMENT_</h1>
+        </div>
+    </section>
+    <!-- Processing Section End -->
+</div>
+<!--Body Content End-->
+<!--Write js Here-->
+@section IndexScript {
+
+}
+
+<!--<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>KAVAAN Facilities</title>
+    <meta name="description" content="description">
+    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!-- Favicon -->
+<!--<link rel="shortcut icon" href="~/favicon.ico" />-->
+<!-- Plugins CSS -->
+<!--<link rel="stylesheet" href="~/assets/css/plugins.css">-->
+<!-- Bootstap CSS -->
+<!--<link rel="stylesheet" href="~/assets/css/bootstrap.min.css">-->
+<!-- Main Style CSS -->
+<!--<link rel="stylesheet" href="~/assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+    <link href="~/Assets/css/Layout.css" rel="stylesheet" />
+    <style>
+        .wishlist-style {
+            margin-left: -10px;
+            top: 5px !important;
+            left: -2px;
+        }
+
+        .wishlist-style-mobile {
+            right: 42px;
+        }
+
+        .compare-style {
+            margin-left: -10px;
+            top: 5px !important;
+            left: -2px;
+        }
+
+        .compare-style-mobile {
+            right: 70px;
+        }
+
+        #header-cart .qtyField .qtyBtn, #header-cart .qtyField .qty {
+            width: 50px;
+        }
+
+        .dot {
+            height: 14px;
+            width: 14px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            padding-top: 1px;
+            position: relative;
+            top: 2px;
+        }
+
+        .footer-links li {
+            font-weight: 600;
+        }
+
+        .footer-2 .footer-top h4, .footer-2 .footer-top .h4 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .footer-2 .footer-top, .footer-2 .footer-links a, .footer-2 .footer-top p, .footer-2 .footer-bottom, .footer-2 .footer-bottom a {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .footer-2 .site-footer {
+            background-color: #110044;
+        }
+
+        #footer {
+            margin-top: 0px !important;
+        }
+
+        .home2-default .top-header {
+            background: #110044;
+            color: #ffffff;
+        }
+
+        .top-header {
+            background: #110044;
+        }
+
+            .top-header p, .top-header a, .top-header select, .top-header .fa, .top-header span.selected-currency, .top-header .language-dd {
+                color: #ffffff;
+                font-size: 14px;
+            }
+
+        .footer-2 .site-footer .addressFooter .icon {
+            color: #ffffff !important;
+            margin-top: 2px;
+        }
+
+        .fadeInDown .main-header-logo {
+            width: 50px;
+        }
+
+        .fadeInDown .search__input form-control {
+            margin-bottom: 0px !important;
+        }
+
+        .fadeInDown .form-group {
+            margin-bottom: 0px !important;
+        }
+
+        .fadeInDown .desktop-header-right {
+            padding-top: 10px;
+        }
+
+        .fadeInDown .main-header-search {
+            margin-top: 0px;
+        }
+
+        .fadeInDown .main-header {
+            padding: 5px 30px;
+        }
+
+        #message {
+            background: #000 !important;
+        }
+
+        #message {
+            color: #fff;
+            /*line-height: 38px;*/
+            cursor: pointer;
+            /*font-size: 20px;*/
+            height: 40px;
+            right: 10px;
+            position: fixed;
+            border-radius: 3px;
+            text-align: center;
+            transition: all 0.3s ease 0s;
+            -moz-transition: all 0.3s ease 0s;
+            -webkit-transition: all 0.3s ease 0s;
+            /*width: 40px;*/
+            bottom: 60px;
+            z-index: 444;
+            display: none;
+            background: #000;
+            padding: 10px;
+        }
+
+        #couponpromotion > i {
+            color: #ffffff;
+        }
+
+        #siteNav {
+            max-width: 1300px;
+        }
+
+        @@media (min-width: 990px) {
+            #siteNav > li > a:hover:hover, #siteNav > li > a:hover {
+                color: #7a62c1;
+            }
+        }
+
+        @@media (min-width: 990px) {
+            #siteNav a {
+                font-size: 12px;
+            }
+        }
+
+
+        #site-scroll {
+            background: #110044 !important;
+        }
+
+        body::-webkit-scrollbar {
+            width: .7em;
+        }
+
+        body::-webkit-scrollbar-track {
+            /*box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.9);*/
+            background-color: #000;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: #f57400;
+            outline: 1px solid #f57400;
+        }
+
+        .whatsapp-link {
+            position: fixed;
+            right: 5px;
+            bottom: 10px;
+            background: #110044;
+            border-radius: 10px 10px 0px 10px;
+            color: #ffffff;
+            font-size: 16px;
+            padding: 10px 10px 10px 45px;
+            font-weight: 700;
+        }
+
+            .whatsapp-link:hover {
+                color: #ffffff;
+                text-decoration: unset;
+            }
+
+            .whatsapp-link i {
+                color: #ffffff;
+                font-size: 30px;
+                position: absolute;
+                left: 10px;
+                top: 6px;
+            }
+
+        h4 {
+            font-family: "Poppins",Helvetica,Tahoma,Arial,serif;
+        }
+    </style>
+</head>
+
+<body class="template-index home2-default">
+    <div class="pageWrapper">-->
+<!--Mobile Menu-->
+<!--<div class="mobile-nav-wrapper" role="navigation">
+    <div class="closemobileMenu">
+
+    </div>
+    <ul id="MobileNav" class="mobile-nav"></ul>
+</div>-->
+<!--End Mobile Menu-->
+<!--Body Content-->
+<!--<div id="page-content">-->
+<!--Page Title-->
+<!--<div class="page section-header text-center">
+    <div class="page-title">
+        <div class="wrapper"><h1 class="page-width">Booking # @@Model.Booking.BookingNo</h1></div>
+    </div>
+</div>-->
+<!--End Page Title-->
+<!--<div class="container" id="checkout-container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <i class="fa fa-circle-o-notch fa-spin fa-3x mt-5"></i>
+                <h5 class="text-center mt-5"><small>Processing for Payment</small></h5>
+            </div>
+        </div>
+    </div>
+</div>-->
+<!--Scoll Top-->
+<!--<span id="site-scroll">
+    <i class="icon anm anm-angle-up-r"></i>
+</span>-->
+<!--End Scoll Top-->
+<!--Scoll Top-->
+<!--<span id="message">
+    <i class="icon anm anm-message"></i>
+</span>-->
+<!--End Scoll Top-->
+<!-- Including Jquery -->
+<!--<script src="~/assets/js/vendor/jquery-3.3.1.min.js"></script>
+<script src="~/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+<script src="~/assets/js/vendor/jquery.cookie.js"></script>
+<script src="~/assets/js/vendor/wow.min.js"></script>-->
+<!-- Including Javascript -->
+<!--<script src="~/assets/js/bootstrap.min.js"></script>
+        <script src="~/assets/js/plugins.js"></script>
+        <script src="~/assets/js/popper.min.js"></script>
+        <script src="~/assets/js/lazysizes.js"></script>
+        <script src="~/assets/js/main.js"></script>
+    </div>
+</body>
+</html>-->

@@ -1,0 +1,502 @@
+﻿
+@model MyProject.Data.Customer
+@{
+	ViewBag.Title = "Create";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="@Url.ContentVersioned("~/Assets/css/intlTelInput/intlTelInput.css")">
+<link href="~/Assets/Admin/css/admin/profileEdit/edit.css" rel="stylesheet" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<link href="~/assets/Admin/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<!--begin::Page Custom Styles(used by this page)-->
+<!--end::Page Custom Styles-->
+<style>
+	.color-circle {
+		width: 10px;
+		height: 10px;
+		border-radius: 50px;
+		display: inline-block;
+		position: relative;
+		margin-top: 0px;
+		padding-top: 5px;
+		top: 1px;
+	}
+
+	.variat {
+		border-top: 1px solid #0000001c;
+		padding-top: 1.25rem !important;
+		border-bottom: 1px solid #0000004a;
+		padding-bottom: 1.25rem !important;
+	}
+</style>
+@Html.AntiForgeryToken()
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Subheader-->
+	<div class="subheader py-2 py-lg-12 subheader-transparent" id="kt_subheader">
+		<div class="container-fluid align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+			<!--begin::Info-->
+			<div class="d-flex align-items-center flex-wrap mr-1">
+				<!--begin::Heading-->
+				<div class="d-flex flex-column">
+
+					<!--begin::Breadcrumb-->
+					<div class="d-flex align-items-center font-weight-bold my-2">
+						<!--begin::Item-->
+						<a href="/Admin/Dashboard/Index" class="opacity-75 hover-opacity-100">
+							<i class="flaticon2-shelter text-white icon-1x"></i>
+						</a>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<a href="/Admin/Dashboard/Index" class="text-white text-hover-white opacity-75 hover-opacity-100">&nbsp;&nbsp;Dashboard</a>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
+						<a href="javascript:;" class="text-white text-hover-white opacity-75 hover-opacity-100">Customers Profile</a>
+						<!--end::Item-->
+					</div>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Heading-->
+			</div>
+			<!--end::Info-->
+		</div>
+	</div>
+	<!--end::Subheader-->
+	<!--begin::Entry-->
+	<div class="d-flex flex-column-fluid">
+		<!--begin::Container-->
+		<div class="container">
+			<!--begin::Dashboard-->
+			<div class="row">
+				<div class="col-md-12">
+					<!--begin::Card-->
+					@*<div class="card card-custom  gutter-b" id="kt_page_sticky_card">
+							<div class="card-body">
+
+							</div>
+						</div>*@
+					<div class="card card-custom  gutter-b">
+						<div class="card-body">
+							<div class="accordion accordion-light accordion-toggle-plus accordion-light-borderless accordion-svg-toggle" id="accordionBasicInfo">
+								<div class="card">
+									<div class="card-header" id="headingImage">
+										<div class="card-title" data-toggle="collapse" data-target="#collapseBasicInfo">
+											<div class="card-label pl-4">Basic Info</div>
+										</div>
+									</div>
+									<div id="collapseBasicInfo" class="collapse show" data-parent="#accordionBasicInfo">
+										<div class="card-body pl-12">
+											<div class="form-group row">
+												<div class="col-lg-12 text-center">
+													<div class="image-input image-input-outline" id="kt_image_1">
+														@if (string.IsNullOrEmpty(Model.Logo))
+														{
+															<div class="image-input-wrapper" style="background-image:url('../../../../Assets/AppFiles/Images/default.png')"></div>
+														}
+														else
+														{
+															<div class="image-input-wrapper" style="background-image:url('@Model.Logo')"></div>
+														}
+														@*<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change logo">
+																<i class="fa fa-pen icon-sm text-muted"></i>
+																<input type="file" name="BannerImage" id="cover" accept=".png, .jpg, .jpeg" />
+																<input type="hidden" name="profile_avatar_remove" />
+															</label>
+															<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow cancelimage" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+																<i class="ki ki-bold-close icon-xs text-muted"></i>
+															</span>*@
+													</div>
+
+												</div>
+											</div>
+											<div class="form-group row">
+
+												<div class="col-lg-12">
+													<form id="btnFormSubmit" class="custom-form-view" action="/Admin/Customer/Update">
+														@Html.AntiForgeryToken()
+														<div class="row">
+															@Html.HiddenFor(model => model.ID)
+															<div class="col-md-6">
+																<label class="control-label">First Name</label>
+																<div class="form-group">
+																	<div class="input-group mb-2">
+																		@Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter first name here ..." } })
+																		<div class="input-group-append">
+																			<span class="input-group-text"><i class="fa fa-tag"></i></span>
+																		</div>
+																	</div>
+																	@Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+																</div>
+															</div>
+															<div class="col-md-6">
+																<label class="control-label">Last Name </label>
+																<div class="form-group">
+																	<div class="input-group mb-2">
+																		@Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter last name here ..." } })
+																		<div class="input-group-prepend">
+																			<span class="input-group-text"><i class="fa fa-tag"></i></span>
+																		</div>
+																	</div>
+																	@Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+																</div>
+															</div>
+															@*<input type="text" class="" value="-" name="NameAr" id="NameAr"/>*@
+														</div>
+
+
+														<div class="row">
+															<div class="col-md-6">
+																<label>
+																	Username
+																</label>
+																<div class="form-group">
+																	<div class="input-group mb-2">
+																		@Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control required-custom ", placeholder = "Enter username here ..." } })
+
+																		<div class="input-group-prepend">
+																			<span class="input-group-text"><i class="fa fa-user"></i></span>
+																		</div>
+																	</div>
+																	@Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+																</div>
+															</div>
+															<div class="col-md-6">
+																<label>
+																	Email
+																</label>
+																<div class="form-group">
+																	<div class="input-group mb-2">
+																		@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control required-custom email", placeholder = "Enter email here ...", onkeyup = "isEmailValid(this)" } })
+
+																		<div class="input-group-prepend">
+																			<span class="input-group-text"><i class="fa fa-envelope"></i></span>
+																		</div>
+																	</div>
+																	@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-6 col-sm-12">
+																<div class="form-group">
+																	<label class="control-label">Password</label>
+																	<div class="input-group">
+																		@Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control required-custom password s-p", placeholder = "Enter password here ...", type = "password", onkeyup = "isPasswordValid(this)" } })
+                                                                        <div class="input-group-append">
+                                                                            <span class="input-group-text cursor-pointer" onclick="seePassword(this)">
+                                                                                <i class="fa fa-eye"></i>
+                                                                            </span>
+                                                                        </div></div>
+																	@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+																</div>
+															</div>
+
+															<div class="col-md-6 col-sm-12">
+																<div class="form-group">
+																	<label class="contrl-label">Confirm Password</label>
+																	<div class="input-group">
+																		<input type="password" class="form-control required-custom confirm-password" id="confirmPassword" placeholder="Enter confirm password here..." onkeyup="isPasswordMatch(this)" value="@Model.Password" />
+																		<div class="input-group-append">
+																			<span class="input-group-text"><i class="fa fa-lock"></i></span>
+																		</div>
+																	</div>
+																	<span class="field-validation-valid text-danger" data-valmsg-for="confirmPassword" data-valmsg-replace="true"></span>
+																	@*<span class="form-text text-danger" style="font-size: 9px;" id="confPassError"></span>*@
+																</div>
+															</div>
+														</div>
+
+														<div class="row">
+
+															<div class="col-md-6 col-sm-12">
+																<div class="form-group">
+																	<label class="control-label">Nationality</label>
+																	<div class="input-group mb-3">
+																		<select id="CustomerCountry" name="CustomerCountry" required class="form-control countries required-custom" data-value="@Model.CustomerCountry" data_actions_box="true">
+																		</select>
+																		<div class="input-group-append">
+																			<span class="input-group-text"><i class="fa fa-flag"></i></span>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<label>
+																	City
+																</label>
+																<div class="form-group">
+																	<div class="input-group mb-2">
+																		@Html.EditorFor(model => model.CustomerCity, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter customer city here ..." } })
+																		@Html.ValidationMessageFor(model => model.CustomerCity, "", new { @class = "text-danger" })
+																		<div class="input-group-prepend">
+																			<span class="input-group-text"><i class="fa fa-city"></i></span>
+																		</div>
+																	</div>
+																</div>
+															</div>
+
+															@*<div class="col-md-6 col-sm-12">
+																	<div class="form-group">
+																		<label class="control-label">Facility</label>
+																		<div class="input-group mb-3">
+																			@Html.DropDownList("FacilityID", null, "Select facility", htmlAttributes: new { @class = "form-control", @data_actions_box = "true", id = "FacilityID" })
+																			@Html.ValidationMessageFor(model => model.FacilityID, "", new { @class = "text-danger" })
+																			<div class="input-group-append">
+																				<span class="input-group-text"><i class="fa fa-server"></i></span>
+																			</div>
+																		</div>
+																	</div>
+																</div>*@
+														</div>
+														<div class="row">
+															<div class="col-md-6 col-sm-12">
+																<div class="form-group">
+																	<label class="control-label">Contact</label>
+                                                                    <div class="input-group mb-2 flex-nowrap">
+                                                                        @Html.HiddenFor(model => model.PhoneCode, new { @class = "code" })
+                                                                        @Html.EditorFor(model => model.Contact, new { htmlAttributes = new { @class = "form-control required-custom intr-phone remove-space", placeholder = "Enter contact here ...", onkeypress = "return isNumber(event)", id = "Contact", maxlength = "20", autocomplete = "off", pattern = "[0-9\\-]*" } })
+                                                                        @*onChange = "contactVerification(this," + Model.ID + ",'/Admin/User/ContactVerification/')",*@
+                                                                        @Html.ValidationMessageFor(model => model.Contact, "", new { @class = "text-danger" })
+                                                                        <div class="input-group-append">
+                                                                            <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                                                                        </div>
+                                                                    </div>
+																</div>
+															</div>
+
+															<div class="col-md-6">
+																<label>
+																	Zip Code
+																</label>
+																<div class="form-group">
+																	<div class="input-group mb-2">
+																		@Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter zip code here ..." } })
+																		@Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+																		<div class="input-group-prepend">
+																			<span class="input-group-text"><i class="fa fa-envelope"></i></span>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-6 col-sm-12">
+																<div class="form-group">
+																	<label class="control-label">CNIC </label>
+																	<div class="input-group mb-2">
+																		<input type="text" name="EmiratesID" id="EmiratesID" placeholder="Enter cnic here ..." class="form-control" data-inputmask="'mask': '99999-99999-99-9'" value="@Model.EmiratesID" autocomplete="off" />
+
+																		@*@Html.EditorFor(model => model.IDNo, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter emirates id no here ...", required = "required" } })*@
+																		<div class="input-group-append"><span class="input-group-text"><i class="fa fa-hashtag"></i></span></div>
+																	</div>
+																	@Html.ValidationMessageFor(model => model.EmiratesID, "", new { @class = "text-danger" })
+																</div>
+															</div>
+
+															<div class="col-md-6">
+																<label class="control-label">
+																	CNIC Expiry Date
+																</label>
+																<div class="form-group">
+																	<div class="input-group mb-2">
+																		<div class="input-daterange input-group kt_datepicker_range">
+																			@*@Html.EditorFor(model => model.Expiry, new { htmlAttributes = new { @class = "form-control", type = "text", placeholder = " MM/DD/YYYY", required = "required" } })*@
+																			@Html.EditorFor(model => model.EmiratesIDExpiry, "{MM/dd/yyyy}", new { htmlAttributes = new { @class = "form-control kt_datepicker_range date-format-1", type = "text", placeholder = " MM/DD/YYYY" } })
+																			<div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
+
+																		</div>
+
+																	</div>
+																	@Html.ValidationMessageFor(model => model.EmiratesIDExpiry, "", new { @class = "text-danger" })
+																</div>
+															</div>
+
+														</div>
+
+														<div class="row">
+
+															<div class="col-md-6">
+																<label class="control-label">Passport Number </label>
+																<div class="form-group">
+																	<div class="input-group mb-2">
+																		@Html.EditorFor(model => model.PassportNo, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter passport number here ..." } })
+																		<div class="input-group-prepend">
+																			<span class="input-group-text"><i class="fa fa-tag"></i></span>
+																		</div>
+																	</div>
+																	@Html.ValidationMessageFor(model => model.PassportNo, "", new { @class = "text-danger" })
+																</div>
+															</div>
+
+															<div class="col-md-6">
+																<label>
+																	Passport Expiry
+																</label>
+																<div class="form-group">
+																	<div class="input-group mb-2">
+																		<div class="input-daterange input-group kt_datepicker_range">
+																			@*@Html.EditorFor(model => model.Expiry, new { htmlAttributes = new { @class = "form-control", type = "text", placeholder = " MM/DD/YYYY", required = "required" } })*@
+																			@Html.EditorFor(model => model.PassportExpiry, "{MM/dd/yyyy}", new { htmlAttributes = new { @class = "form-control kt_datepicker_range date-format-1", type = "text", placeholder = " MM/DD/YYYY" } })
+																			<div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
+
+																		</div>
+
+																		@Html.ValidationMessageFor(model => model.PassportExpiry, "", new { @class = "text-danger" })
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="row">
+															<div class="col-md-6">
+																<label class="control-label">PO Box </label>
+																<div class="form-group">
+																	<div class="input-group mb-2">
+																		@Html.EditorFor(model => model.PoBox, new { htmlAttributes = new { @class = "form-control", placeholder = "Ener PO box number here ..." } })
+																		<div class="input-group-prepend">
+																			<span class="input-group-text"><i class="fa fa-tag"></i></span>
+																		</div>
+																		@Html.ValidationMessageFor(model => model.PoBox, "", new { @class = "text-danger" })
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="row">
+															<div class="col-sm-12 col-md-6">
+																<div class="form-group">
+																	<label class="control-label">Address</label>
+																	<div class="input-group mb-2">
+																		@Html.TextAreaFor(m => m.Address, new { @class = "form-control", placeholder = "Enter address here ...", rows = "3" })
+																	</div>
+																	@Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+																</div>
+															</div>
+
+															<div class="col-sm-12 col-md-6">
+																<div class="form-group">
+																	<label class="control-label"> Address 2</label>
+																	<div class="input-group mb-2">
+																		@Html.TextAreaFor(m => m.Address2, new { @class = "form-control", placeholder = "Enter other address here ...", rows = "3" })
+																	</div>
+																	@Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-danger" })
+																</div>
+															</div>
+
+														</div>
+
+
+
+													</form>
+
+													<div class="col-md-12 col-sm-12">
+														<button type="submit" id="btnSaveFacility" class="btn btn-custom font-weight-bolder mt-3" style="float:right" form="btnFormSubmit">
+															<i class="ki ki-check icon-sm" style="color:white"></i> Save
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--end::Dashboard-->
+			</div>
+
+			<div class="card card-custom  gutter-b">
+				<div class="card-body">
+					<div class="accordion accordion-light accordion-toggle-plus accordion-light-borderless accordion-svg-toggle" id="accordionDocument">
+						<div class="card">
+							<div class="card-header" id="headingGallery">
+								<div class="card-title" data-toggle="collapse" data-target="#collapseDocument">
+									<div class="card-label pl-4">Customer Documents</div>
+								</div>
+							</div>
+							<div id="collapseDocument" class="collapse show" data-parent="#accordionDocument">
+								<div class="card-body pl-12">
+
+									@{ Html.RenderAction("list", "CustomerDocument", new { area = "Admin", ID = Model.ID }); }
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!--end::Container-->
+		</div>
+		<!--end::Entry-->
+	</div>
+
+	<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+		<div class="modal-dialog modal-dialog-centered modal-xl">
+			<div class="modal-content" style="min-height:100px">
+				<div id='myModalContent'>
+					<div class="row justify-content-center">
+						<div class="col-16">
+							<div class="kt-spinner kt-spinner--lg kt-spinner--dark kt-spinner-modal"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!--end::Row-->
+	<script>
+	@*var SuccessMessage = '@ViewBag.SuccessMessage';
+	var ErrorMessage = '@ViewBag.ErrorMessage';*@
+	</script>
+
+	@section IndexScript {
+
+
+		@*@if (ViewBag.SuccessMessage != null)
+			{
+				<script>
+				toastr.success('@ViewBag.SuccessMessage');
+				</script>
+			}
+			else if (ViewBag.ErrorMessage != null)
+			{
+				<script>
+				toastr.error('@ViewBag.ErrorMessage');
+				</script>
+			}*@
+		<!--begin::Page Admin(used by this page)-->
+		<script src="~/assets/admin/js/pages/crud/forms/widgets/bootstrap-datepicker.js"></script>
+		<script src="~/Assets/js/inputmask/jquery.inputmask.bundle.js"></script>
+		<script src="~/assets/admin/js/pages/crud/forms/widgets/bootstrap-datepicker.js"></script>
+		<!--end::Page Admin-->
+		<!--begin::Page Scripts(used by this page)-->
+		<script src="@Url.ContentVersioned("~/Assets/js/intlTelInput/intlTelInput.js")"></script>
+		<script src="~/Assets/Admin/js/general/ModalPopup.js"></script>
+		<script src="@Url.ContentVersioned("~/Assets/Admin/js/admin/customerdocument/list.js")"></script>
+		<script src="~/assets/Admin/plugins/custom/datatables/datatables.bundle.js"></script>
+		<!--end::Page Scripts-->
+
+		<script>
+			'use strict';
+
+			// Initialization
+			jQuery(document).ready(function () {
+				$('#EmiratesID').inputmask();
+				$('.kt_datepicker_range').datepicker({
+					todayHighlight: true,
+				});
+			});
+			removeSpace();
+		</script>
+
+		<!--end::Page Scripts-->
+	}
+
+

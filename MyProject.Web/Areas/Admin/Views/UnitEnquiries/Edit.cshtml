@@ -1,0 +1,143 @@
+﻿@model MyProject.Data.UnitPaymentPlan
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = null;
+}
+
+<div class="modal-header">
+    <h5 class="modal-title">Edit</h5>
+
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <i aria-hidden="true" class="ki ki-close"></i>
+    </button>
+</div>
+
+@using (Html.BeginForm("Edit", "UnitPaymentPlan", new { area = "Admin" }, FormMethod.Post, new { id = "frm-edit", @class = "form" }))
+{
+    <div class="modal-body">
+        @Html.AntiForgeryToken()
+        <div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Units</label>
+                    <div class="input-group mb-3">
+                        @Html.DropDownList("UnitID", null, "Select Unit", htmlAttributes: new { @class = "form-control" })
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-building"></i></span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.UnitID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Milestones </label>
+                    <div class="input-group mb-2">
+                        @Html.EditorFor(model => model.Milestones, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter milestones here ...", required = "required" } })
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-server"></i></span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Milestones, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Percentage </label>
+                    <div class="input-group mb-2">
+                        @Html.EditorFor(model => model.Percentage, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter percentage here ...", required = "required" } })
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-server"></i></span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Percentage, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Amount </label>
+                    <div class="input-group mb-2">
+                        @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter amount here ...", required = "required" } })
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-server"></i></span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+}
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-custom" form="frm-edit">Edit</button>
+</div>
+
+<script>
+	var SuccessMessage = '@ViewBag.SuccessMessage';
+	var ErrorMessage = '@ViewBag.ErrorMessage';
+</script>
+
+<!--end::Row-->
+<script>
+	var SuccessMessage = '@ViewBag.SuccessMessage';
+	var ErrorMessage = '@ViewBag.ErrorMessage';
+</script>
+
+
+
+
+
+<!--end::Page Scripts-->
+
+<script>
+    // Class definition
+    var KTImageInputDemo = function () {
+        // Private functions
+        var initDemos = function () {
+            
+            var avatar1 = new KTImageInput('kt_image_1');
+        }
+
+        return {
+            // public functions
+            init: function () {
+                initDemos();
+            }
+        };
+    }();
+
+    'use strict';
+    KTUtil.ready(function () {
+        KTImageInputDemo.init();
+
+
+    });
+
+
+
+
+
+
+    var _URL = window.URL || window.webkitURL;
+
+
+    if (SuccessMessage) {
+        toastr.success(SuccessMessage);
+    }
+    else if (ErrorMessage) {
+        toastr.error(ErrorMessage);
+    }
+</script>
+
+<!--end::Page Scripts-->

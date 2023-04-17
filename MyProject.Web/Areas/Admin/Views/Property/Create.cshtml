@@ -1,0 +1,747 @@
+﻿@model MyProject.Data.Property
+
+
+@{
+	ViewBag.Title = "Create";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+}
+<link href="~/Assets/Admin/plugins/custom/richtextarea/rte_theme_default.css" rel="stylesheet" />
+<script src="~/Assets/Admin/plugins/custom/richtextarea/rte.js"></script>
+<script src="~/Assets/Admin/plugins/custom/richtextarea/all_plugins.js"></script>
+<script src="~/Assets/Admin/plugins/custom/richtextarea/rte-upload.js"></script>
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Subheader-->
+	<div class="subheader py-2 py-lg-12 subheader-transparent" id="kt_subheader">
+		<div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+			<!--begin::Info-->
+			<div class="d-flex align-items-center flex-wrap mr-1">
+				<!--begin::Heading-->
+				<div class="d-flex flex-column">
+
+					<!--begin::Breadcrumb-->
+					<div class="d-flex align-items-center font-weight-bold my-2">
+						<!--begin::Item-->
+						<a href="/Admin/Dashboard/Index" class="opacity-75 hover-opacity-100">
+							<i class="flaticon2-shelter text-white icon-1x"></i>
+						</a>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<a href="/Admin/Dashboard/Index" class="text-white text-hover-white opacity-75 hover-opacity-100">&nbsp;&nbsp;Dashboard</a>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
+						<a href="javascript:;" class="text-white text-hover-white opacity-75 hover-opacity-100">Projects</a>
+						<!--end::Item-->
+					</div>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Heading-->
+			</div>
+			<!--end::Info-->
+		</div>
+	</div>
+
+	<div class="d-flex flex-column-fluid">
+		<!--begin::Container-->
+		<div class="container">
+			<!--begin::Dashboard-->
+			<div class="row">
+				<div class="col-xl-12">
+					<!--begin::Card-->
+					<div class="card card-custom gutter-b">
+						<div class="card-header flex-wrap border-0 pt-6 pb-0">
+							<div class="card-title">
+								<h3 class="card-label">
+									Project
+									<span class="d-block text-muted pt-2 font-size-sm">Create Project Here...</span>
+								</h3>
+							</div>
+							<div class="card-toolbar">
+								<!--begin::Button-->
+								<div class="dropdown dropdown-inline mr-2">
+
+								</div>
+								<a href="/Admin/property/index" class="btn btn-custom font-weight-bolder">
+									<span class="svg-icon svg-icon-md svg-icon-white">
+										<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+												<rect x="0" y="0" width="24" height="24" />
+												<circle fill="#ffffff" cx="9" cy="15" r="6" />
+												<path d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z" fill="#ffffff" opacity="0.3" />
+											</g>
+										</svg>
+										<!--end::Svg Icon-->
+									</span>Back
+								</a>
+								<!--end::Button-->
+							</div>
+						</div>
+						<div class="card-body">
+							<form enctype="multipart/form-data" id="createform">
+								@Html.AntiForgeryToken()
+								<div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+								@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+								<h3 class="font-size-lg text-dark font-weight-bold mb-6 card-label">Basic Info:</h3>
+								<div class="row">
+									<div class="col-md-10 col-sm-10">
+
+										<div class="form-group">
+											<label class="control-label">Development Type</label>
+											<div class="input-group mb-2">
+												@if (ViewBag.DevelopmentID == null)
+												{
+													<label class="control-label">Please Make Development Type First</label>
+
+												}
+												else
+												{
+													@Html.DropDownList("DevelopmentID", null, "Select Development ", htmlAttributes: new { @class = "form-control  kt-selectpicker", required = "required", @data_actions_box = "true" })
+
+													<div class="input-group-append">
+														<span class="input-group-text"><i class="fa fa-server"></i></span>
+													</div>
+
+													@Html.ValidationMessageFor(model => model.DevelopmentID, "", new { @class = "text-danger" })
+												}
+											</div>
+										</div>
+									</div>
+									<div class="col-md-2 col-sm-2">
+										<div class="form-group">
+											<label class="control-label">Enable Featured</label>
+											<div class="input-group mb-2">
+												<span class="switch">
+													<label>
+
+														@Html.CheckBox("IsFeatured", false, new { id = "IsFeatured" })
+														<span></span>
+													</label>
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-12 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">Thumbnail</label>
+											<div class="input-group mb-2">
+												@Html.TextBoxFor(model => model.Thumbnail, "", new { type = "file", @class = "form-control", @accept = "image/*", required = "required" })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fa fa-image"></i></span>
+												</div>
+											</div>
+											<span class="form-text text-muted">Image dimensions should be 1092 x 615 pixels and Image size must be less than 200 kb</span>
+
+										</div>
+									</div>
+
+									<div class="col-md-6 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">Title</label>
+											<div class="input-group mb-2">
+												@Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter title here ...", required = "required" } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fa fa-server"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">Title (Ar)</label>
+											<div class="input-group mb-2">
+												@Html.EditorFor(model => model.TitleAr, new { htmlAttributes = new { @class = "form-control", placeholder = " ...Enter title (Ar) here", required = "required", dir = "rtl" } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fa fa-server"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.TitleAr, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									@*<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+												<label class="control-label">Short Description</label>
+												<div class="input-group mb-3">
+													@Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter short description here ...", @required = "required" } })
+													<div class="input-group-append">
+														<span class="input-group-text"><i class="fa fa-server"></i></span>
+													</div>
+												</div>
+												@Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+												<label class="control-label">Short Description (Ar)</label>
+												<div class="input-group mb-3">
+													@Html.EditorFor(model => model.ShortDescriptionAr, new { htmlAttributes = new { @class = "form-control", placeholder = " ...Enter short description (Ar) here", dir = "rtl", @required = "required" } })
+													<div class="input-group-append">
+														<span class="input-group-text"><i class="fa fa-server"></i></span>
+													</div>
+												</div>
+												@Html.ValidationMessageFor(model => model.ShortDescriptionAr, "", new { @class = "text-danger" })
+											</div>
+										</div>*@
+									<div class="col-md-6 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">Description</label>
+											<div class="input-group mb-3">
+												@Html.TextAreaFor(model => model.Description, 3, 20, new { @class = "form-control", placeholder = "Enter description here ...", @required = "required" })
+												@*@Html.TextAreaFor(model => model.TitleDescriptionAr, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter description (ar) here ...", required = "required", dir = "rtl" } })*@
+
+											</div>
+											@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">Description (Ar)</label>
+											<div class="input-group mb-3">
+												@Html.TextAreaFor(model => model.DescriptionAr, 3, 20, new { @class = "form-control", placeholder = " ...Enter title (Ar) here", @required = "required", dir = "rtl" })
+												@*@Html.TextAreaFor(model => model.TitleDescriptionAr, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter description (ar) here ...", required = "required", dir = "rtl" } })*@
+
+											</div>
+											@Html.ValidationMessageFor(model => model.DescriptionAr, "", new { @class = "text-danger" })
+										</div>
+									</div>
+
+								</div>
+								<h3 class="font-size-lg text-dark font-weight-bold mb-6 card-label">Address:</h3>
+								<div class="row">
+									@*<div class="col-md-4 col-sm-4">
+											<div class="form-group">
+												<label class="control-label">Country</label>
+												<div class="input-group mb-2">
+													@Html.DropDownList("CountryID", null, "Select Country ", htmlAttributes: new { @class = "form-control kt-selectpicker", @required = "required" })
+
+													<div class="input-group-append">
+														<span class="input-group-text"><i class="fas fa-globe-asia"></i></span>
+													</div>
+												</div>
+												@Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
+											</div>
+										</div>
+										<div class="col-md-4 col-sm-4">
+											<div class="form-group">
+												<label class="control-label">City</label>
+												<div class="input-group mb-2">
+													<select class="form-control  kt-selectpicker" id="CityID" name="CityID" required="required">
+														<option value="">Select Country First!</option>
+													</select>
+													<div class="input-group-append">
+														<span class="input-group-text"><i class="fas fa-city"></i></span>
+													</div>
+												</div>
+												@Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+											</div>
+										</div>
+										<div class="col-md-4 col-sm-4">
+											<div class="form-group">
+												<label class="control-label">Area</label>
+												<div class="input-group mb-2">
+													<select class="form-control  kt-selectpicker" id="AreaID" name="AreaID" required="required">
+														<option value="">Select City First!</option>
+													</select>
+
+													<div class="input-group-append">
+														<span class="input-group-text"><i class="fas fa-map"></i></span>
+													</div>
+												</div>
+												@Html.ValidationMessageFor(model => model.AreaID, "", new { @class = "text-danger" })
+											</div>
+										</div>*@
+									<div class="col-md-6 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">Latitude (Optional)</label>
+											<div class="input-group mb-2">
+
+												<input type="text" maxlength="9" placeholder="Enter latitude here ##.######" name="Latitude" id="Latitude" class="form-control" pattern="^[1-9]\d*(\.\d+)?$" />
+												@*@Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter latitude url here ...", required = "required" } })*@
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+												</div>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">Longitude (Optional)</label>
+											<div class="input-group mb-2">
+												<input type="text" maxlength="10" placeholder="Enter longitude here ##.#######" class="form-control" name="Longitude" id="Longitude" pattern="^[1-9]\d*(\.\d+)?$" />
+
+												@*@Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter longitude url here ...", required = "required" } })*@
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+												</div>
+											</div>
+
+										</div>
+									</div>
+									@*<div class="col-md-12 col-sm-12">
+											<div class="form-group">
+												<label class="control-label">Address</label>
+												<div class="input-group mb-3">
+													@Html.TextAreaFor(model => model.Address, 3, 20, new { @class = "form-control", placeholder = "Enter address here ...", required = "required" })
+													<div class="input-group-append">
+														<span class="input-group-text"><i class="fas fa-address-card"></i></span>
+													</div>
+												</div>
+												@Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+											</div>
+										</div>*@
+								</div>
+								<h3 class="font-size-lg text-dark font-weight-bold mb-6 card-label">Media:</h3>
+								<div class="row">
+									<div class="col-md-12 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">VrTour Link (Optional)</label>
+											<div class="input-group mb-2">
+												@Html.EditorFor(model => model.VRTour, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter vr tour link here ..." } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fa fa-link"></i></span>
+												</div>
+											</div>
+											<span class="form-text text-muted"></span>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">Video (Optional)</label>
+											<div class="input-group mb-2">
+												@Html.TextBoxFor(m => m.Video, "", new { type = "file", name = "Video", @class = "form-control", @accept = "video/*" })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fa fa-video"></i></span>
+												</div>
+											</div>
+											<span class="form-text text-muted">Video Size should be less than 20 mb</span>
+										</div>
+									</div>
+
+
+									<div class="col-md-4 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">Floor Plan (Optional)</label>
+											<div class="input-group mb-2">
+												@Html.TextBoxFor(m => m.FloorPlan, "", new { type = "file", name = "FloorPlan", @class = "form-control", @accept = ".jpg, .jpeg, .png, .pdf, .doc, .docx, .xlsx" })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fa fa-file"></i></span>
+												</div>
+											</div>
+											<span class="form-text text-muted">File Size should be less than 20 mb</span>
+
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">Property PDF (Optional)</label>
+											<div class="input-group mb-2">
+												@Html.TextBoxFor(m => m.Broucher, "", new { type = "file", name = "Broucher", @class = "form-control", @accept = "application/pdf" })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fa fa-file"></i></span>
+												</div>
+											</div>
+											<span class="form-text text-muted">File Size should be less than 20 mb</span>
+
+										</div>
+									</div>
+									<!--Faqs Start-->
+									<div class="row px-4">
+										<div class="col-md-12 col-sm-12">
+											<h3 class="font-size-lg text-dark font-weight-bold mt-10 card-label">Frequently Asked Questions:</h3>
+										</div>
+										<div class="col-md-12 col-sm-12">
+											<label class="control-label">FAQs</label>
+											<div class="form-group">
+												<div class="input-group mb-2">
+													<input type="hidden" name="Faqs" id="Faqs" />
+													<div id="div_editor1" class="richtexteditor">
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-12 col-sm-12">
+											<label class="control-label">FAQs (Ar)</label>
+											<div class="form-group">
+												<div class="input-group mb-2">
+													<input type="hidden" name="FaqsAr" id="FaqsAr" />
+													<div id="div_editor2" class="richtexteditor">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--Faqs End-->
+								</div>
+							</form>
+						</div>
+						<div class="card-footer text-right">
+							<a href="/Admin/property/index" class="btn btn-secondary">Back</a>
+							@*<button class="btn btn-secondary" disabled="disabled">Creating Property <i class="fas fa-spinner"></i></button>*@
+							<button type="submit" id="createbutton" class="btn btn-custom" form="createform">Submit</button>
+						</div>
+						<div class="example-preview" id="kt_blockui_content">
+
+						</div>
+					</div>
+					<!--end::Card-->
+				</div>
+			</div>
+
+			<!--end::Dashboard-->
+		</div>
+		<!--end::Container-->
+	</div>
+</div>
+
+
+<!--end::Page Scripts-->
+@section IndexScript {
+
+	<script>
+		$('#DevelopmentID').attr("data-live-search", "true").attr("data-size", "6");
+		//$('#CountryID').attr("data-live-search", "true").attr("data-size", "6");
+		//$('#CityID').attr("data-live-search", "true").attr("data-size", "6");
+		//$('#AreaID').attr("data-live-search", "true").attr("data-size", "6");
+		var KTBootstrapSelect = function () {
+
+			// Private functions
+			var demos = function () {
+				// minimum setup
+				$('.kt-selectpicker').selectpicker();
+			}
+
+			return {
+				// public functions
+				init: function () {
+					demos();
+				}
+			};
+		}();
+		$(document).ready(function () {
+			//unblocking the form
+			unblockui();
+			//dropdown
+			KTBootstrapSelect.init();
+			//end dropdown
+
+			//$('#CountryID').change(function () {
+
+			//	var count = 0;
+			//	var $dropdown = $("#CityID");
+			//	var $dropdown1 = $("#AreaID").empty();
+			//	$dropdown1.append($("<option />").val('').text("Please Select City First!"));
+			//	$dropdown1.selectpicker('refresh');
+
+			//	if ($(this).val() == 0) {
+			//		$dropdown.empty();
+			//		$dropdown.append($("<option />").val('').text("Please Select Country First!"));
+			//		$dropdown.selectpicker('refresh');
+			//	}
+			//	else {
+			//		$.ajax({
+			//			type: 'Get',
+			//			url: '/Admin/City/GetCitiesByCountry/' + $(this).val(),
+			//			success: function (response) {
+			//				$dropdown.empty();
+			//				$dropdown.append($("<option />").val('').text("Select City"));
+			//				if (response.data.length > 0 && response.data != null) {
+			//					$.each(response.data, function (k, v) {
+			//						$dropdown.append($("<option />").val(v.value).text(v.text));
+			//						count++;
+			//					});
+			//					$dropdown.selectpicker('refresh');
+			//				}
+			//				else {
+			//					$dropdown.empty();
+			//					$dropdown.append($("<option />").val('').text("Please Add City"));
+			//					$dropdown.selectpicker('refresh');
+			//				}
+
+			//			}
+			//		});
+			//	}
+			//});
+			//$('#CityID').change(function () {
+
+			//	var count = 0;
+			//	var $dropdown = $("#AreaID");
+			//	if ($(this).val() == 0) {
+			//		$dropdown.empty();
+			//		$dropdown.append($("<option />").val('').text("Please Select City First!"));
+
+			//		$dropdown.selectpicker('refresh');
+			//	}
+			//	else {
+			//		$.ajax({
+			//			type: 'Get',
+			//			url: '/Admin/Area/GetAreasByCity/' + $(this).val(),
+			//			success: function (response) {
+			//				$dropdown.empty();
+			//				$dropdown.append($("<option />").val('').text("Select Area"));
+
+			//				if (response.data.length > 0 && response.data != null) {
+			//					$.each(response.data, function (k, v) {
+			//						$dropdown.append($("<option />").val(v.value).text(v.text));
+			//						count++;
+			//					});
+			//					$dropdown.selectpicker('refresh');
+			//				}
+			//				else {
+			//					$dropdown.empty();
+			//					$dropdown.append($("<option />").val('').text("Please Add Area First"));
+			//					$dropdown.selectpicker('refresh');
+			//				}
+			//			}
+
+			//		});
+			//	}
+			//});
+
+		});
+
+		var _URL = window.URL || window.webkitURL;
+		//Thumbnail Image Validation Begin
+
+		$("#Thumbnail").change(function (e) {
+
+
+			var file, img;
+
+			if ((file = this.files[0])) {
+
+				img = new Image();
+				img.onload = function () {
+
+					if (this.width !== 1092 || this.height !== 615) {
+						Swal.fire({
+							icon: 'error',
+							title: 'Oops...',
+							text: 'Image dimension should be 1092 x 615 pixels!',
+
+						}).then(function (result) {
+							$("#Thumbnail").val("");
+						});
+					}
+					//else if (this.height < 460 || this.height > 460) {
+					//    Swal.fire({
+					//        icon: 'error',
+					//        title: 'Oops...',
+					//        text: 'Image dimension should be 690 x 460 !',
+
+					//    }).then(function (result) {
+					//        $("#Thumbnail").val("");
+					//    });
+					//}
+					else if (this.size > 200000) {
+						Swal.fire({
+							icon: 'error',
+							title: 'Oops...',
+							text: 'Image size must be less than 200 kb!',
+
+						}).then(function (result) {
+							$("#Thumbnail").val("");
+						});
+					}
+					else {
+						img.onerror = function () {
+							$("#Thumbnail").val("");
+							alert("not a valid file: " + file.type);
+						};
+					}
+				};
+				img.src = _URL.createObjectURL(file);
+			}
+		});
+		//Image Validation End
+
+		//Image Validation End
+		//Floor Image Validation Begin
+		$("#FloorPlan").change(function (e) {
+			var doc;
+			doc = this.files[0];
+			if (doc.size > 20 * (1000000)) {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'File Size Should be Lower than 20mb!',
+
+				}).then(function (result) {
+					$("#Broucher").val('');
+				});
+
+			}
+			else {
+				doc.onerror = function () {
+					alert("not a valid file: " + file.type);
+				};
+			}
+		});
+		//Image Validation End
+
+		//Property Pdf Validation Begin
+		$("#Broucher").change(function (e) {
+			var doc;
+			doc = this.files[0];
+			if (doc.size > 20 * (1000000)) {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'File Size Should be Lower than 20mb!',
+
+				}).then(function (result) {
+					$("#Broucher").val('');
+				});
+
+			}
+			else if (doc.type != "application/pdf") {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Please Upload Pdf files only !',
+
+				}).then(function (result) {
+					$("#Broucher").val('');
+				});
+			}
+			else {
+				doc.onerror = function () {
+					alert("not a valid file: " + file.type);
+				};
+			}
+		});
+		//Property Pdf Validation End
+
+		//video validation
+		$("#Video").change(function (e) {
+			var file;
+			if ((file = this.files[0])) {
+				if (!file.type.match('video.*')) {
+					Swal.fire({
+						icon: 'error',
+						title: 'Oops...',
+						text: 'Please upload valid video file !',
+
+					}).then(function (result) {
+						$("#Video").val("");
+					});
+				}
+				else if (file.size >= 20 * (1000000)) {
+					Swal.fire({
+						icon: 'error',
+						title: 'Oops...',
+						text: 'Video size must be less than 20 MB!',
+
+					}).then(function (result) {
+						$("#Video").val("");
+					});
+				}
+			}
+
+		});
+		function blockui() {
+
+			$("#createbutton").addClass("spinner spinner-dark spinner-right");
+			$("#createbutton").prop('disabled', true);
+			$("#createbutton").html("Creating Project");
+			KTApp.blockPage({
+				overlayColor: '#000000',
+				state: 'primary',
+				message: 'Creating Project Please Wait...'
+			});
+
+		}
+		function unblockui() {
+			KTApp.unblockPage();
+			$("#createbutton").removeClass("spinner spinner-dark spinner-right");
+			$("#createbutton").prop('disabled', false);
+			$("#createbutton").html("Submit");
+		}
+		function ValidateLatLng() {
+			var lat = document.getElementById("Latitude").value;
+			var lng = document.getElementById("Longitude").value;
+
+			if (lat) {
+				if (lat < -90 || lat > 90) {
+					toastr.error("Latitude must be between -90 and 90 degrees inclusive.");
+					return false;
+				}
+			}
+			if (lng) {
+				if (lng < -180 || lng > 180) {
+					toastr.error("Longitude must be between -180 and 180 degrees inclusive.");
+					return false;
+				}
+			}
+			return true;
+		}
+		$("#createform").submit(function (e) {
+			e.preventDefault();
+			if (!ValidateLatLng()) {
+				return false
+			}
+			var data = new FormData();
+			data.append("Title", $('#Title').val());
+			data.append("TitleAr", $('#TitleAr').val());
+			//data.append("ShortDescription", $('#ShortDescription').val());
+			//data.append("ShortDescriptionAr", $('#ShortDescriptionAr').val());
+			data.append("Description", $('#Description').val());
+			data.append("DescriptionAr", $('#DescriptionAr').val());
+			//data.append("Address", $("#Address").val());
+			data.append("Thumbnail", $("#Thumbnail")[0].files[0]);
+			data.append("Video", $("#Video")[0].files[0]);
+			//data.append("VRTour", $("#VRTour")[0].files[0]);
+			data.append("VRTour", $('#VRTour').val());
+			data.append("Broucher", $("#Broucher")[0].files[0]);
+			data.append("FloorPlan", $("#FloorPlan")[0].files[0]);
+			data.append("Latitude", $("#Latitude").val());
+			data.append("Longitude", $("#Longitude").val());
+			//data.append("CountryID", $("#CountryID").val());
+			//data.append("CityID", $("#CityID").val());
+			//data.append("AreaID", $("#AreaID").val());
+			data.append("DevelopmentID", $("#DevelopmentID").val());
+			data.append("IsFeatured", $("#IsFeatured").prop("checked"));
+			data.append("Faqs", $("#Faqs").val());
+			data.append("FaqsAr", $("#FaqsAr").val());
+			data.append("__RequestVerificationToken", $('input[name=__RequestVerificationToken]').val());
+			blockui();
+			$.ajax({
+				url: "/Admin/Property/Create/",
+				type: "POST",
+				processData: false,
+				contentType: false,
+				data: data,
+				success: function (response) {
+					if (response.success) {
+						window.location.href = "/Admin/Property/Index/";
+					} else {
+						toastr.error(response.message);
+					}
+					unblockui();
+				},
+				error: function (er) {
+					unblockui();
+					toastr.error(er);
+				}
+			});
+			return false;
+		});
+		var editor1cfg = {}
+		editor1cfg.toolbar = "basic";
+		var editor1 = new RichTextEditor(document.getElementById("div_editor1"));
+		var editor2 = new RichTextEditor(document.getElementById("div_editor2"));
+		editor1.attachEvent("change", function () {
+			document.getElementById("Faqs").value = editor1.getHTMLCode();
+		});
+		editor2.attachEvent("change", function () {
+			document.getElementById("FaqsAr").value = editor2.getHTMLCode();
+		});
+		$('.rte_command_insertimage').hide()
+		$('.rte_command_insertvideo').hide()
+		$('.rte_command_insertdocument').hide()
+	</script>
+}
+<!--end::Page Scripts-->

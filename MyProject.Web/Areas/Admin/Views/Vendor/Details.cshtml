@@ -1,0 +1,447 @@
+@model Project.Data.Vendor
+@{
+    ViewBag.Title = "Details";
+    Layout = null;
+}
+<div class="modal-header">
+    <h5 class="modal-title">Details</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <i aria-hidden="true" class="ki ki-close"></i>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="float-left mb-3">
+                <i class="fa fa-tag"></i>
+                <label class="control-label kt-font-bold">Vendor Code : </label>
+                <label class="control-label" readonly="readonly">@Model.VendorCode</label>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="float-right mb-3">
+                <i class="fa fa-calendar"></i>
+                <b>@Html.Label("Creation Date:", htmlAttributes: new { @class = "control-label" })</b>
+                @if (Model.CreatedOn.HasValue)
+                {
+                    var date = Model.CreatedOn.Value.ToString("dd MMM yyyy, h:mm tt");
+                    <label class="control-label" readonly="readonly">@date</label>
+                }
+                else
+                {
+                    <label class="control-label" readonly="readonly"> - </label>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 text-center">
+            <div class="flex-shrink-0 mr-7">
+                <div class="symbol symbol-50 symbol-lg-120">
+                    <img alt="Pic" src="@Model.Logo">
+                </div>
+            </div>
+        </div>
+        @*<div class="col-md-6 col-sm-12 text-center">
+            <div class="flex-shrink-0 mr-7">
+                <div class="symbol symbol-50 symbol-lg-120">
+                    <img alt="Pic" src="@Model.CoverImage" style="max-width: 500px;">
+                </div>
+            </div>
+        </div>*@
+
+        <hr />
+        <div class="col-md-12 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Legal Name as per Trade License</label>
+                <div class="input-group mb-2">
+                    <label class="form-control" readonly="readonly"> @Model.Name</label>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-tag"></i></span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Website</label>
+                <div class="input-group mb-2">
+                    <label class="form-control" readonly="readonly"> @Model.Website</label>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-globe"></i></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12" hidden>
+            <div class="form-group">
+                <label class="control-label">Commission</label>
+                <div class="input-group mb-2">
+                    <label class="form-control" readonly="readonly"> @Model.Commission</label>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-percent"></i></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <div class="input-group mb-2">
+                    <label class="form-control" readonly="readonly"> @Model.Email</label>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-envelope"></i></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Landline</label>
+                <div class="input-group mb-2">
+                    <label class="form-control" readonly="readonly"> @Model.Contact</label>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-phone"></i></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Mobile</label>
+                <div class="input-group mb-2">
+                    <label class="form-control" readonly="readonly"> @Model.Mobile</label>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-mobile"></i></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Emirates ID </label>
+                <div class="input-group mb-2">
+                    <label class="form-control" readonly="readonly"> @Model.IDNo</label>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-hashtag"></i></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">TAX Return Number</label>
+                <div class="input-group mb-2">
+                    <label class="form-control" readonly="readonly"> @Model.TRN</label>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-hashtag"></i></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">License No</label>
+                <div class="input-group mb-2">
+                    <label class="form-control" readonly="readonly"> @Model.License</label>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-file-invoice"></i></span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-12" hidden>
+            <div class="form-group">
+                <label class="control-label">Fax No</label>
+                <div class="input-group mb-2">
+                    <label class="form-control" readonly="readonly"> @Model.FAX</label>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-fax"></i></span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 col-sm-12" hidden>
+            <div class="form-group">
+                <label class="control-label">About</label>
+                <div class="input-group mb-2">
+                    <textarea class="form-control" readonly="readonly" rows="3">@Model.About</textarea>
+                </div>
+            </div>
+        </div>
+
+        @*<div class="col-md-12 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Term & Condition </label>
+                <div class="input-group mb-2">
+                    <textarea class="form-control" readonly="readonly" rows="3">@Model.TermAndConditionWebEn</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Term & Condition (Ar)</label>
+                <div class="input-group mb-2">
+                    <textarea class="form-control" readonly="readonly" rows="3">@Model.TermAndConditionWebAr</textarea>
+                </div>
+            </div>
+        </div>*@
+
+        <div class="col-md-12 col-sm-12 mt-5">
+            <div class="form-group">
+                <h5 class="control-label">Package And Modules</h5>
+                <div class="border-bottom w-100"></div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Package Name</label>
+                <div class="input-group mb-2">
+                    @Html.DropDownList("VendorPackageID", null, "Select Package", htmlAttributes: new { @class = "form-control txtdisabled", disabled = "disabled" })
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-coins"></i></span></div>
+                </div>
+                @Html.ValidationMessageFor(model => model.VendorPackageID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @*<div class="row col-md-12 col-sm-12">
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Facility Module</label>
+                    <span class="switch ml-10">
+                        <label>
+                            @Html.CheckBox("EnableFacilityModule", new { @readonly = "readonly" })
+                            <span></span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Coaching Module</label>
+                    <span class="switch ml-10">
+                        <label>
+                            @Html.CheckBox("EnableAcademyModule", new { @readonly = "readonly" })
+                            <span></span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Events Module</label>
+                    <span class="switch ml-10">
+                        <label>
+                            @Html.CheckBox("EnableOrganizerModule", new { @readonly = "readonly" })
+                            <span></span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Ecommerce Module</label>
+                    <span class="switch ml-10">
+                        <label>
+                            @Html.CheckBox("EnableEcommerceModule", new { @readonly = "readonly" })
+                            <span></span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+        </div>*@
+
+
+
+        <div class="col-md-12 col-sm-12 mt-5">
+            <div class="form-group">
+                <h5 class="control-label">Location Details</h5>
+                <div class="border-bottom w-100"></div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Country Name</label>
+                <div class="input-group mb-2">
+                    <label class="form-control" readonly="readonly">@(Model.Country != null ? Model.Country.Name : "-")</label>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-flag"></i></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">City Name</label>
+                <div class="input-group mb-2">
+                    <label class="form-control" readonly="readonly">@(Model.City != null ? Model.City.Name : "-")</label>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-home"></i></span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Address</label>
+                <div class="input-group mb-2">
+                    <textarea class="form-control" readonly="readonly">@Model.Address</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 col-sm-12 mt-5">
+            <div class="form-group">
+                <h5 class="control-label">Bank Details</h5>
+                <div class="border-bottom w-100"></div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Bank Name</label>
+                <div class="input-group mb-2">
+                    <label class="form-control" readonly="readonly">@(Model.BankID != null ? Model.Bank.Name : "-")</label>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-flag"></i></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">CBank Account Holder Name</label>
+                <div class="input-group mb-2">
+                    <label class="form-control" readonly="readonly">@(Model.AccountHolderName != null ? Model.AccountHolderName : "-")</label>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-home"></i></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Bank Account Number</label>
+                <div class="input-group mb-2">
+                    <label class="form-control" readonly="readonly">@(Model.BankAccountNumber != null ? Model.BankAccountNumber : "-")</label>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-home"></i></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">IBAN</label>
+                <div class="input-group mb-2">
+                    <label class="form-control" readonly="readonly">@(Model.IBAN != null ? Model.IBAN : "-")</label>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-home"></i></span></div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $("#Test").removeClass("modal-sm").attr('disabled', false);
+        $("#Test").addClass("modal-xl").attr('disabled', false);
+
+		$("input[name=EnableFacilityModule]").attr("disabled", true);
+		$("input[name=EnableEcommerceModule]").attr("disabled", true);
+		$("input[name=EnableAcademyModule]").attr("disabled", true);
+		$("input[name=EnableOrganizerModule]").attr("disabled", true);
+		$("input[name=EnableFacilityModule]").attr("disabled", true);
+
+
+		$("#VendorPackageID").trigger('change');
+	});
+
+	$("#VendorPackageID").change(function () {
+
+		var VendorPackageID = $('#VendorPackageID').val();
+
+		getVendorPackages(VendorPackageID);
+	});
+
+
+	function getVendorPackages(VendorPackageID) {
+		if (VendorPackageID == "") { VendorPackageID = -1; }
+		var json = { "id": VendorPackageID };
+		if (VendorPackageID == -1) {
+			$("input[name=EnableFacilityModule]").prop("checked", false);
+			$("input[name=EnableEcommerceModule]").prop("checked", false);
+			$("input[name=EnableAcademyModule]").prop("checked", false);
+			$("input[name=EnableOrganizerModule]").prop("checked", false);
+
+
+			$("input[name=EnableFacilityModule]").attr("disabled", true);
+			$("input[name=EnableEcommerceModule]").attr("disabled", true);
+			$("input[name=EnableAcademyModule]").attr("disabled", true);
+			$("input[name=EnableOrganizerModule]").attr("disabled", true);
+			$("input[name=EnableFacilityModule]").attr("disabled", true);
+			//               $("input[name=EnableFacilityModule]").prop("checked", false);
+			//$("input[name=EnableEcommerceModule]").prop("checked", false);
+			//$("input[name=EnableAcademyModule]").prop("checked", false);
+			//$("input[name=EnableOrganizerModule]").prop("checked", false);
+		}
+		else {
+			$.ajax({
+				type: "GET",
+				contentType: "application/json; charset=utf-8",
+				url: '/Admin/Vendor/GetVendorPackagesByID/' + VendorPackageID,
+				async: true,
+				success: function (response) {
+					
+					if (response.data != 0) {
+						$("input[name=EnableFacilityModule]").prop("checked", false);
+						$("input[name=EnableEcommerceModule]").prop("checked", false);
+						$("input[name=EnableAcademyModule]").prop("checked", false);
+						$("input[name=EnableOrganizerModule]").prop("checked", false);
+						if (response.data.Facility) {
+
+							$("input[name=EnableFacilityModule]").attr("disabled", true);
+							$("input[name=EnableFacilityModule]").prop("checked", true);
+
+						}
+						else {
+							$("input[name=EnableFacilityModule]").attr("disabled", true);
+							$("input[name=EnableFacilityModule]").prop("checked", false);
+						}
+
+						if (response.data.Ecommerce) {
+
+							$("input[name=EnableEcommerceModule]").attr("disabled", true);
+							$("input[name=EnableEcommerceModule]").prop("checked", true);
+
+						}
+						else {
+							$("input[name=EnableEcommerceModule]").attr("disabled", true);
+							$("input[name=EnableEcommerceModule]").prop("checked", false);
+						}
+
+						if (response.data.Coaching) {
+
+							$("input[name=EnableAcademyModule]").attr("disabled", true);
+							$("input[name=EnableAcademyModule]").prop("checked", true);
+
+						}
+						else {
+							$("input[name=EnableAcademyModule]").attr("disabled", true);
+							$("input[name=EnableAcademyModule]").prop("checked", false);
+						}
+
+						if (response.data.Events) {
+
+							$("input[name=EnableOrganizerModule]").attr("disabled", true);
+							$("input[name=EnableOrganizerModule]").prop("checked", true);
+
+						}
+						else {
+							$("input[name=EnableOrganizerModule]").attr("disabled", true);
+							$("input[name=EnableOrganizerModule]").prop("checked", false);
+						}
+
+					}
+					else {
+						toastr.options = {
+							"positionClass": "toast-bottom-right",
+						};
+
+						toastr.success(data.message);
+
+						//setTimeout(function () { location.reload(); }, 2000);
+					}
+				},
+				error: function (err) { console.log(err); }
+			});
+		}
+	}
+</script>

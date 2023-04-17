@@ -1,0 +1,150 @@
+﻿@{
+	Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kavaan VIRTUAL_TOUR</title>
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="~/favicon.ico" />
+	<style>
+		body {
+			overflow: hidden;
+		}
+
+			/*body scroll*/
+			body::-webkit-scrollbar {
+				/*width: .7em;*/
+				width: 10px;
+			}
+
+			body::-webkit-scrollbar-track {
+				/*box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.9);*/
+				/*background-color: #000;*/
+				border-radius: 100vh;
+				background: #edf2f7;
+			}
+
+			body::-webkit-scrollbar-thumb {
+				/*background-color: #F9B35E;*/
+				/*outline: 1px solid #b82223;*/
+				/*border-radius: 5px;*/
+				background: #F9B35E;
+				border-radius: 100vh;
+				border: 3px solid #F9B35E;
+			}
+
+				body::-webkit-scrollbar-thumb:hover {
+					/*background: #a0aec0;*/
+				}
+
+		/*Loader Screen Starts*/
+
+		@@keyframes load3 {
+			from {
+				transform: rotate(0deg);
+			}
+
+			to {
+				transform: rotate(359deg);
+			}
+		}
+
+		.body-loader {
+			width: 100%;
+			z-index: 50;
+			position: fixed;
+			top: 0px;
+			right: 0px;
+			bottom: 0px;
+			left: 0px;
+			background: white;
+		}
+
+		.loader {
+			top: 50%;
+			left: 50%;
+			margin: -20px 0 0 -20px;
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			position: relative;
+			-webkit-animation: load3 1.0s infinite linear;
+			animation: load3 1.0s infinite linear;
+			-webkit-transform: translateZ(0);
+			-ms-transform: translateZ(0);
+			transform: translateZ(0);
+			background: #e9a655 !important;
+			background: -webkit-linear-gradient(left, #e9a655 10%, rgba(255, 88, 81, 0) 42%) !important;
+			background: -moz-linear-gradient(left, #e9a655 10%, rgba(255, 88, 81, 0) 42%) !important;
+			background: -o-linear-gradient(left, #e9a655 10%, rgba(255, 88, 81, 0) 42%) !important;
+			background: -ms-linear-gradient(left, #e9a655 10%, rgba(255, 88, 81, 0) 42%) !important;
+			background: linear-gradient(to right, #e9a655 10%, rgba(255, 88, 81, 0) 42%) !important;
+		}
+
+			.loader:before {
+				width: 50%;
+				height: 50%;
+				border-radius: 100% 0 0 0;
+				position: absolute;
+				top: 0;
+				left: 0;
+				content: "";
+			}
+
+			.loader:after {
+				background: #fff;
+				width: 75%;
+				height: 75%;
+				border-radius: 50%;
+				content: "";
+				margin: auto;
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+			}
+
+		iframe {
+			width: 102%;
+			/*min-height: clamp(16rem,10vW,116rem);*/
+			margin: -1rem;
+			border: 0;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="body-loader ">
+		<div class="loader"></div>
+	</div>
+
+	<iframe id="myIframe" name="myIframe"></iframe>
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('#myIframe').attr('src', 'https://www.p4panorama.com/panos/cityscapeglobal/');
+
+			setTimeout(function () {
+				$('.body-loader').hide();
+			}, 1500);
+
+			iframeResize();
+
+			$(window).resize(function () {
+				iframeResize();
+			});
+		});
+
+		function iframeResize() {
+			$('#myIframe').height(window.innerHeight + 10).width(window.innerWidth + 10);
+		}
+	</script>
+</body>
+</html>

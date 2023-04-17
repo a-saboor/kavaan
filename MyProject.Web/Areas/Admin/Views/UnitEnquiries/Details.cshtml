@@ -1,0 +1,119 @@
+﻿@model MyProject.Data.UnitEnquiry
+
+
+@{
+	ViewBag.Title = "Details";
+	Layout = null;
+}
+<div class="modal-header">
+	<h5 class="modal-title">Details</h5>
+
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<i aria-hidden="true" class="ki ki-close"></i>
+	</button>
+</div>
+
+@using (Html.BeginForm("Edit", "UnitPaymentPlan", new { area = "Admin" }, FormMethod.Post, new { id = "frm-edit", @class = "form", @readonly = "readonly" }))
+{
+	<fieldset disabled="disabled">
+		<div class="modal-body">
+			@Html.AntiForgeryToken()
+			<div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+			<div class="row">
+
+
+				<div class="col-md-6 col-sm-12">
+					<div class="form-group">
+						<label class="control-label">Unit Name</label>
+						<div class="input-group mb-3">
+							@Html.EditorFor(model => model.Unit.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter amount here ...", required = "required" } })
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-building"></i></span>
+							</div>
+						</div>
+						@Html.ValidationMessageFor(model => model.Unit.Title, "", new { @class = "text-danger" })
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12">
+					<div class="form-group">
+						<label class="control-label">Full Unit Address </label>
+						<div class="input-group mb-2">
+							<input type="text" class="form-control" value="@string.Format("{0},{1},{2}",Model.Unit.Area.Name,Model.Unit.City.Name,Model.Unit.Country.Name)" />
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fa fa-server"></i></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12">
+					<div class="form-group">
+						<label class="control-label">Full Name </label>
+						<div class="input-group mb-2">
+							<input type="text" value="@Model.FullName" class="form-control" />
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fa fa-user"></i></span>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12">
+					<div class="form-group">
+						<label class="control-label">Contact </label>
+						<div class="input-group mb-2">
+							@Html.EditorFor(model => model.Contact, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter amount here ...", required = "required" } })
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fa fa-phone"></i></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12">
+					<div class="form-group">
+						<label class="control-label">Email </label>
+						<div class="input-group mb-2">
+							@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter amount here ...", required = "required" } })
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fa fa-envelope"></i></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12" hidden>
+					<div class="form-group">
+						<label class="control-label">Status </label>
+						<div class="input-group mb-2">
+							<input type="text" value="@(Model.Status == true? "Completed": Model.Status == false? "Cancelled" : "Pending")" class="form-control" />
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fa fa-server"></i></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12 col-sm-12" hidden>
+					<div class="form-group">
+						<label class="control-label">Remarks</label>
+						<div class="card card-body bg-light m-0 py-10 px-5 max-h-250px overflow-auto">
+							@Html.Raw(Model.Reply)
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</fieldset>
+}
+<div class="modal-footer">
+	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+</div>
+
+<script>
+	
+	var SuccessMessage = '@ViewBag.SuccessMessage';
+	var ErrorMessage = '@ViewBag.ErrorMessage';
+</script>
+
+
+
+

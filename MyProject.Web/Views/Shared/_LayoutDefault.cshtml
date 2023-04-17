@@ -1,0 +1,36 @@
+﻿@{
+	var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+	bool RTL = CultureHelper.IsRighToLeft();
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>KAVAAN</title>
+	<link href="~/Assets/css/loader.css" rel="stylesheet" />
+	<link rel="stylesheet" href="~/Assets/css/tailwind/style.css">
+</head>
+<body>
+	<section class="">
+		<a href="/@culture/">
+			<div class="flex justify-center py-4">
+				<img src="~/Assets/images/logo.png" alt="Logo" style="width: 240px;">
+			</div>
+		</a>
+	</section>
+
+	@RenderBody()
+
+	<div id="message" class="message-alert" style="display:none"></div>
+
+	<section class="mt-10 bg-black text-white flex flex-col justify-center items-center py-5 lg:flex-row lg:justify-between lg:px-20">
+		<div>
+			<p class="font-Rubik text-xs text-center">All rights reserved by <span class="text-gk-golden"> Kavaan Real Estate </span></p>
+		</div>
+	</section>
+	<script src="~/Assets/js/vendor/jquery-3.3.1.min.js"></script>
+	@RenderSection("IndexScript", required: false)
+</body>
+</html>

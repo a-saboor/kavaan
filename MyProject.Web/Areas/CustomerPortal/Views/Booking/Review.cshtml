@@ -1,0 +1,100 @@
+﻿@model MyProject.Data.ServiceBooking
+@{
+    ViewBag.Title = "Service Booking Review";
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+    bool RTL = CultureHelper.IsRighToLeft();
+    Layout = null;
+}
+
+<!-- #region Modal-->
+<section class="font-Rubik w-full bg-black/50 fixed inset-0 modal fade flex flex-wrap top-0 left-0 justify-center items-center overflow-x-hidden overflow-y-auto h-auto z-[60] overflow-scroll-none popup-section"
+         id="review_section">
+    <!-- Main Modal -->
+    <div class="max-w-screen-4xl 4xl:mx-auto w-full relative">
+        <!-- Modal Content -->
+        <div class="bg-white rounded-lg w-[80%] md:w-[40%] mx-auto m-10">
+            <!-- Header Section -->
+            <div class="modal-header flex justify-between items-center border-b bg-ak-light p-6 rounded-t-lg">
+                <div class="heading">
+                    <h3 class="text-gray-900 font-semibold text-xl md:text-2xl" id="Rating_heading">
+                        Write a Review
+                    </h3>
+                    <!-- <p class="text-ak-blue font-semibold text-xxs md:text-xs">Deep Cleaning</p> -->
+                </div>
+                <button type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white close-modal">
+                    <svg class="w-5 h-5" fill="text-gray-900" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Header Section End -->
+            <!-- Body Section -->
+            <div class="modal-body p-4 md:py-2 px-6 md:px-4 space-y-6">
+                <!-- form -->
+                <form class="font-Rubik" id="review_form">
+                    <!-- anti-forgery token here -->
+                    @Html.AntiForgeryToken()
+                    <input name="ServiceBookingID" value="@Model.ID" hidden />
+                    <input name="ServiceCategoryID" value="@Model.ServiceCategoryID" hidden/>
+                    <input name="ServiceID" value="@Model.ServiceID" hidden/>
+                    <!--Alert Message-->
+                    <div class="alert-div px-2"></div>
+                    <!--Alert Message End-->
+                    <div class="flex flex-col flex-wrap items-center justify-between md:flex-row mx-auto">
+
+                        <div class="flex flex-col form-group md:my-2 md:w-full my-3 px-2 w-full">
+                            <label for="Rating" class="hidden">Rating</label>
+
+                            <div class="bg-white box-shadow-md flex flex-row flex-wrap items-center justify-between outline-none-input px-3 py-3 rating-stars rounded-lg text-sm w-full">
+                                <p for="Rating" class="text-[#a3aab5]">Rating</p>
+
+                                <div class="rate-1 flex flex-row ">
+                                    <input type="hidden" class="rating-input form-field" value="@ViewBag.Rating" name="Rating" min="0" max="5" step="1">
+                                    <span class="fa fa-star stars text-ak-gray-light/60 px-[0.06rem] cursor-pointer text-md md:text-lg"></span>
+                                    <span class="fa fa-star stars text-ak-gray-light/60 px-[0.06rem] cursor-pointer text-md md:text-lg"></span>
+                                    <span class="fa fa-star stars text-ak-gray-light/60 px-[0.06rem] cursor-pointer text-md md:text-lg"></span>
+                                    <span class="fa fa-star stars text-ak-gray-light/60 px-[0.06rem] cursor-pointer text-md md:text-lg"></span>
+                                    <span class="fa fa-star stars text-ak-gray-light/60 px-[0.06rem] cursor-pointer text-md md:text-lg"></span>
+                                </div>
+
+                            </div>
+                            <small class="form-text-validation text-xss text-danger py-1"></small>
+                        </div>
+
+                        <div class="flex flex-col form-group md:my-2 my-3 px-2 w-full">
+                            <label for="Review" class="hidden">Review</label>
+                            <textarea type="text" name="Review" class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md input-field form-field Review" id="Review" maxlength="100" autocomplete="off" data-required="" placeholder="Review" rows="8" spellcheck="false" data-ms-editor="true">@ViewBag.Review</textarea>
+                            <small class="form-text-validation text-xss text-danger py-1"></small>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+            <!-- Body Section End -->
+            <!-- Footer Section -->
+            <div class="modal-footer flex items-center justify-end p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                <button class="btn-primary bg-white hover:bg-ak-light focus:outline-none border border-gray-300 close-modal">
+                    <p class="p-btn-primary text-gray-700 hover:text-gray-900">Close</p>
+                </button>
+                <button class="btn-primary bg-ak-gold/90 hover:bg-ak-gold focus:outline-none" id="submitButton" type="button"
+                        form="review_form">
+                    <p class="p-btn-primary text-white">Submit</p>
+                </button>
+            </div>
+            <!-- Footer Section End -->
+        </div>
+        <!-- Modal Content End -->
+    </div>
+    <!-- Main Modal End -->
+</section>
+<!-- #endregion Modal -->
+<!--Write js Here-->
+<script src="@Url.ContentVersioned("~/Assets/Admin/js/customer/booking/review.js")"></script>
+<script>
+   
+    
+</script>

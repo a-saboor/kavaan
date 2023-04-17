@@ -1,0 +1,237 @@
+﻿@model MyProject.Data.PropertyFeature
+
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = null; }
+
+
+<div class="modal-header">
+    <h5 class="modal-title">Update</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <i aria-hidden="true" class="ki ki-close"></i>
+    </button>
+</div>
+<form enctype="multipart/form-data" typeof="post" id="editform">
+    <div class="modal-body">
+
+        @Html.AntiForgeryToken()
+        <div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <input type="hidden" name="PropertyFeID" value="@Model.ID" id="PropertyFeID" />
+
+        <input type="hidden" name="PropertyID" value="@Model.PropertyID" id="PropertyID" />
+        <div class="form-group row">
+            <div class="col-lg-12 text-center">
+                <div class="image-input image-input-outline" id="kt_image_1">
+                    <div class="image-input-wrapper" style="background-image:url('@Model.Cover')"></div>
+                    <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change logo">
+                        <i class="fa fa-pen icon-sm text-muted"></i>
+                        <input type="file" name="Cover" id="featuresimg" accept=".png, .jpg, .jpeg" />
+                        <input type="hidden" name="profile_avatar_remove" />
+                    </label>
+                    <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow cancelimage" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                        <i class="ki ki-bold-close icon-xs text-muted"></i>
+                    </span>
+                </div>
+                <span class="form-text text-muted">Image dimensions should be 690 x 460 pixels and Image size must be less than 100 kb</span>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Features</label>
+                    <div class="input-group mb-2">
+                        @Html.DropDownList("FeatureID", null, "Select Features ", htmlAttributes: new { @class = "form-control", required = "required" })
+
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-server"></i></span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.FeatureID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Feature Position</label>
+                    <div class="input-group mb-2">
+                        @Html.TextBoxFor(model => model.Position, new { @type = "number", @class = "form-control", placeholder = "Enter position here...", @min = "0", @max = "100000" })
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-sort-numeric-up"></i></span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Description</label>
+                    <div class="input-group mb-3">
+                        @Html.TextAreaFor(model => model.Description, 5, 20, new { @class = "form-control", placeholder = "Enter description here ..." })
+                        @*@Html.TextAreaFor(model => model.TitleDescriptionAr, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter description (ar) here ...", required = "required", dir = "rtl" } })*@
+
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Description(Ar)</label>
+                    <div class="input-group mb-3">
+                        @Html.TextAreaFor(model => model.DescriptionAr, 5, 20, new { @class = "form-control", placeholder = " ...Enter description (Ar) here" })
+                        @*@Html.TextAreaFor(model => model.TitleDescriptionAr, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter description (ar) here ...", required = "required", dir = "rtl" } })*@
+
+                    </div>
+                    @Html.ValidationMessageFor(model => model.DescriptionAr, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-custom" form="editform">Edit Changes</button>
+    </div>
+</form>
+<script>
+	var SuccessMessage = '@ViewBag.SuccessMessage';
+	var ErrorMessage = '@ViewBag.ErrorMessage';
+</script>
+
+
+
+
+
+<!--end::Page Scripts-->
+
+
+<script>
+
+    // Class definition
+    var KTImageInputDemo = function () {
+        // Private functions
+        var initDemos = function () {
+            
+            var avatar1 = new KTImageInput('kt_image_1');
+        }
+
+        return {
+            // public functions
+            init: function () {
+                initDemos();
+            }
+        };
+    }();
+
+    'use strict';
+    KTUtil.ready(function () {
+        KTImageInputDemo.init();
+
+
+    });
+
+
+
+
+
+
+    var _URL = window.URL || window.webkitURL;
+    //Image Validation Begin
+    $("#featuresimg").change(function (e) {
+        
+
+        var file, img;
+
+        if ((file = this.files[0])) {
+
+            img = new Image();
+            img.onload = function () {
+
+                if (this.width < 690 || this.width > 690) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Image dimension should be 690 x 460 !',
+
+                    }).then(function (result) {
+                        $("#featuresimg").attr("src", "/Assets/AppFiles/Images/default.png");
+                        $(".cancelimage").trigger('click');
+                    });
+                }
+                else if (this.height < 460 || this.height > 460) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Image dimension should be 690 x 460 !',
+
+                    }).then(function (result) {
+                        $("#featuresimg").attr("src", "/Assets/AppFiles/Images/default.png");
+                        $(".cancelimage").trigger('click');
+                    });
+                }
+                else if (this.size > 100000) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Image size must be less than 200 kb!',
+
+                    }).then(function (result) {
+                        $("#featuresimg").attr("src", "/Assets/AppFiles/Images/default.png");
+                        $(".cancelimage").trigger('click');
+                    });
+                }
+                else {
+                    img.onerror = function () {
+                        alert("not a valid file: " + file.type);
+                    };
+                }
+            };
+            img.src = _URL.createObjectURL(file);
+        }
+    });
+    $("#editform").submit(function () {
+        
+        $(this).closest('.modal').find('button[type=submit]').addClass('spinner spinner-sm spinner-left').attr('disabled', true);
+
+        var data = new FormData();
+
+        data.append("Cover", $("#featuresimg")[0].files[0]);
+        data.append("FeatureID", $("#FeatureID").val());
+        data.append("Position", $('#Position').val());
+        data.append("PropertyID", $('#PropertyID').val());
+        data.append("Description", $('#Description').val());
+        data.append("DescriptionAr", $('#DescriptionAr').val());
+        data.append("ID", $('#PropertyFeID').val());
+        data.append("__RequestVerificationToken", $('input[name=__RequestVerificationToken]').val());
+     
+        
+        $.ajax({
+            url: "/Admin/PropertyFeatures/Update/",
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: data,
+            success: function (response) {
+
+                if (callback) {
+                    callback($('#myModalContent'), element, true, response);
+                }
+            },
+            error: function (er) {
+                toastr.error(er);
+            }
+        });
+        return false;
+    });
+</script>
+
+<!--end::Page Scripts-->

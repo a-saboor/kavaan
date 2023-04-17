@@ -1,0 +1,103 @@
+﻿@model MyProject.Data.Team
+@{
+	ViewBag.Title = "Workforce Person";
+	var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+	bool RTL = CultureHelper.IsRighToLeft();
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!--Body Content-->
+<div class="render-body" style="">
+	<!-- Hero Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<div class="">
+			<div class="h-[150px] mx-auto bg-team-details bg-cover flex flex-col justify-center items-center md:h-[200px] lg:h-[300px]">
+                <h1 class="uppercase font-Rubik text-xl font-medium text-center text-white lg:text-4xl lg:mb-2">WORKFORCE</h1>
+				<div class="flex items-center">
+                    <a href="/@culture/home/index" class="font-Rubik text-xs uppercase text-white">HOME</a>
+					<svg viewBox="0 0 192 512" class="w-1.5 mx-2 fill-current text-white flip-horizontal-rtl"><path fill="" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class="fill-white"></path></svg>
+                    <a href="/@culture/our-story" class="font-Rubik text-xs uppercase text-white">OUR_STORY</a>
+					<svg viewBox="0 0 192 512" class="w-1.5 mx-2 fill-current text-white flip-horizontal-rtl"><path fill="" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class="fill-white"></path></svg>
+                    <a href="/@culture/workforce" class="font-Rubik text-xs uppercase text-white">WORKFORCE</a>
+					<svg viewBox="0 0 192 512" class="w-1.5 mx-2 fill-current text-white flip-horizontal-rtl"><path fill="" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path></svg>
+					<p class="font-Rubik text-xs uppercase text-white">@(culture == "en-ae" ? Model.Name : Model.NameAr)</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero Section End -->
+	<!-- Team Details Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<div class="w-[80%] mx-auto py-10 xl:w-[60%]">
+			<div class="sm:flex sm:flex-wrap sm:items-center">
+				<div class="sm:w-[25%]">
+					<img src="@Url.Content(Model.Image)" alt="" class="w-full h-[300px] sm:h-[150px] rounded-lg lg:h-[200px] xl:h-[220px]">
+				</div>
+				<div class="mt-4 sm:pl-4">
+					<p class="font-Rubik text-xs text-gk-blue uppercase font-medium">
+						@if (Model.JoiningDate.HasValue && Model.JoiningDate != new DateTime())
+						{
+                        <span>SINCE @Model.JoiningDate.Value.ToString("MMMM"), @Model.JoiningDate.Value.ToString("yyyy")</span>
+						}
+					</p>
+					<h1 class="font-Rubik text-xl font-medium capitalize mb-4 sm:text-4xl">@(culture == "en-ae" ? Model.Name : Model.NameAr)</h1>
+					<div class="flex items-center mb-2 sm:mb-0">
+						<svg class="h-4 w-4 fill-current text-gk-gold flip-horizontal-rtl" viewBox="0 0 20 20" fill="">
+							<path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+						</svg>
+						<p class="font-Rubik text-xs font-medium ml-2">@Model.Address</p>
+					</div>
+					@*<div class="flex items-center mb-2 sm:mb-0">
+							<svg class="h-4 w-4 fill-current text-gk-gold flip-horizontal-rtl" viewBox="0 0 20 20" fill="">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+							</svg>
+							<p class="font-Rubik text-xs font-medium ml-2">Mon: 2:00PM - 6:00PM</p>
+						</div>*@
+
+					<div class="flex items-center mb-2 sm:mb-0">
+						<svg class="h-4 w-4 fill-current text-gk-gold flip-horizontal-rtl" viewBox="0 0 20 20" fill="currentColor">
+							<path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+						</svg>
+						<p class="font-Rubik text-xs font-medium ml-2">@Model.Designation</p>
+					</div>
+					<div class="flex items-center mb-2 sm:mb-0">
+						<svg class="h-4 w-4 fill-current text-gk-gold flip-horizontal-rtl" viewBox="0 0 20 20" fill="currentColor">
+							<path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+						</svg>
+						<p class="font-Rubik text-xs font-medium ml-2">@Model.Email</p>
+					</div>
+					@if (!string.IsNullOrEmpty(Model.Contact1))
+					{
+						<div class="flex items-center mb-2 sm:mb-0">
+							<svg class="h-4 w-4 fill-current text-gk-gold flip-horizontal-rtl" viewBox="0 0 20 20" fill="currentColor">
+								<path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+							</svg>
+							<p class="font-Rubik text-xs font-medium ml-2">@Model.Contact1</p>
+						</div>
+					}
+					@if (!string.IsNullOrEmpty(Model.Contact2))
+					{
+						<div class="flex items-center mb-2 sm:mb-0">
+							<svg class="h-4 w-4 fill-current text-gk-gold flip-horizontal-rtl" viewBox="0 0 20 20" fill="currentColor">
+								<path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+							</svg>
+							<p class="font-Rubik text-xs font-medium ml-2">@Model.Contact2</p>
+						</div>
+					}
+				</div>
+			</div>
+			<div class="sm:mt-4">
+				<p class="font-Rubik text-xs text-justify mb-2">@(culture == "en-ae" ? Model.About : Model.AboutAr)</p>
+			</div>
+		</div>
+	</section>
+	<!-- Team Details Section End -->
+</div>
+<!--Body Content End-->
+<!--Write js Here-->
+@section IndexScript {
+	@*<script src="@Url.ContentVersioned("~/Assets/js/web/teams-person/index.js")"></script>*@
+
+}

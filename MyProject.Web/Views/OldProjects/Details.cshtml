@@ -1,0 +1,424 @@
+﻿@model MyProject.Data.Property
+@{
+	ViewBag.Title = "Projects";
+	var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+	bool RTL = CultureHelper.IsRighToLeft();
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+	<style>
+		.owl-carousel .owl-nav button.owl-prev {
+			left: 1rem;
+			background: #f9f9f9;
+			border-radius: 100px;
+			transform: translate(0px, -30px);
+		}
+
+		.owl-carousel .owl-nav button.owl-next {
+			right: 1rem;
+			background: #f9f9f9;
+			border-radius: 100px;
+			transform: translate(0px, -30px);
+		}
+
+			.owl-carousel .owl-nav button.owl-prev:hover, .owl-carousel .owl-nav button.owl-next:hover {
+				background: #f9f9f9 !important;
+			}
+	</style>
+}
+
+<!--Body Content-->
+<div class="render-body" style="">
+	@Html.HiddenFor(model => model.ID)
+	<!-- Hero Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto" id="project_section">
+		<div class="w-[80%] mx-auto lg:w-full lg:flex lg:items-center main-div">
+			<div class="pt-10 lg:w-1/2 lg:px-12 xl:px-24">
+				<h1 class="font-Rubik text-xs text-gk-blue uppercase font-medium mb-2"><a href="/@culture/developments/@Model.DevelopmentID">@(culture == "en-ae" ? Model.Development.Name : Model.Development.NameAr)</a> | PROJECT</h1>
+				<h1 class="font-Rubik text-lg uppercase font-medium mb-2 md:text-3xl">
+					@(culture == "en-ae" ? Model.Title : Model.TitleAr)
+				</h1>
+				<div class="flex flex-wrap mb-2 mt-2 align-middle align-items-center">
+					@*<a href="javascript: window.location = document.referrer;">*@
+					<a href="/@culture/developments/@Model.DevelopmentID">
+						<h1 class="font-Rubik text-xs text-gk-purple uppercase font-medium flex p-1">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+								 stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+									  d="M15 19l-7-7 7-7" />
+							</svg>
+							GO_TO_LISTING
+						</h1>
+					</a>
+					<h1 class="mx-2">|</h1>
+					<a href="javascript:void(0);" onclick="showModalDiv('faqs_section',true)">
+						<h1 class="font-Rubik text-xs text-gk-blue uppercase font-medium flex p-1">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor"
+								 viewBox="0 0 24 24" stroke="currentColor">
+								<path d="M14.601 21.5c0 1.38-1.116 2.5-2.499 2.5-1.378 0-2.499-1.12-2.499-2.5s1.121-2.5 2.499-2.5c1.383 0 2.499 1.119 2.499 2.5zm-2.42-21.5c-4.029 0-7.06 2.693-7.06 8h3.955c0-2.304.906-4.189 3.024-4.189 1.247 0 2.57.828 2.684 2.411.123 1.666-.767 2.511-1.892 3.582-2.924 2.78-2.816 4.049-2.816 7.196h3.943c0-1.452-.157-2.508 1.838-4.659 1.331-1.436 2.986-3.222 3.021-5.943.047-3.963-2.751-6.398-6.697-6.398z" />
+							</svg>
+							FAQS
+						</h1>
+					</a>
+				</div>
+				<div class="flex justify-between mb-4 md:w-[50%] hidden hidden-starting-from">
+					<!--need to be discuss-->
+					<div class="flex flex-col items-center justify-end">
+						<img src="/assets/images/web-icons/rooms-icon.png" alt="" class="lg:w-10 ">
+						@*<p class="font-Rubik text-[10px] mt-4">Starting from</p>*@
+						<h1 class="font-Rubik text-xs font-medium">@(Model.Units.Count()> 0 ? Model.Units.Select(u => u.NoOfRooms).Min() : 0) ROOMS</h1>
+					</div>
+					<div class="flex flex-col items-center justify-end">
+						<img src="/assets/images/web-icons/baths-icon.png" alt="" class="lg:w-10 ">
+						@*<p class="font-Rubik text-[10px] mt-4">Starting from</p>*@
+						<h1 class="font-Rubik text-xs font-medium">@(Model.Units.Count()> 0 ? Model.Units.Select(u => u.NoOfBaths).Min() : 0) BATHROOMS</h1>
+					</div>
+					<div class="flex flex-col items-center justify-end">
+						<img src="/assets/images/web-icons/rooms-icon.png" alt="" class="lg:w-10 ">
+						@*<p class="font-Rubik text-[10px] mt-4">Starting from</p>*@
+						<h1 class="font-Rubik text-xs font-medium">@(Model.Units.Count()> 0 ? Model.Units.Select(u => u.Size).Min() : 0) SQ_FT</h1>
+					</div>
+				</div>
+				<h1 class="font-Rubik text-base capitalize font-medium">DESCRIPTION</h1>
+				<textarea hidden id="description">@(culture == "en-ae" ? Html.Raw(Model.Description) : Html.Raw(Model.DescriptionAr))</textarea>
+				<p class="font-Rubik text-xs my-2 text-justify" id="Description">
+					@*@(culture == "en-ae" ? Html.Raw(Model.Description) : Html.Raw(Model.DescriptionAr))*@
+				</p>
+				@if (!string.IsNullOrEmpty(Model.Broucher) || !string.IsNullOrEmpty(Model.VRTour))
+				{
+					<div>
+						<div class="sm:flex sm:flex-wrap sm:justify-between">
+							@if (!string.IsNullOrEmpty(Model.Broucher))
+							{
+								<a href="@Url.Content(MyProject.Web.Helpers.Routing.CustomURL.GetImageServer()+Model.Broucher)" target="_blank" class="border-2 border-gray-300 py-4 px-4 flex items-center rounded-md my-2 sm:w-[49%] capitalize">
+									<div class="mr-2">
+										<img src="/assets/images/web-icons/document.png" alt="">
+									</div>
+									<div class="font-Rubik text-xs">
+										<div class="mr-2">
+											<h1 class="font-medium uppercase">PROPERTY_PDF</h1>
+										</div>
+										<p>@(""+EVERYTHING_ABOUT_THIS_PROPERTY_YOU_NEED_TO_KNOW).</p>
+									</div>
+								</a>
+							}
+							@if (!string.IsNullOrEmpty(Model.VRTour))
+							{
+								<a href="@Model.VRTour" target="_blank" class="border-2 border-gray-300 py-4 px-4 flex items-center rounded-md my-2 sm:w-[49%] capitalize">
+									@*<a href="@Url.Content(MyProject.Web.Helpers.Routing.CustomURL.GetImageServer()+Model.VRTour)" class="mr-2">*@
+									<div class="mr-2">
+										<img src="/assets/images/web-icons/vr.png" alt="">
+									</div>
+									<div class="font-Rubik text-xs">
+										<div>
+											<h1 class="font-medium uppercase">VIRTUAL_TOUR</h1>
+										</div>
+										<p>TAKE_A_VIRTUAL_TOUR_OF_THE_PROPERTY_IN_VR</p>
+									</div>
+								</a>
+							}
+						</div>
+					</div>
+				}
+
+			</div>
+			<div class="lg:w-1/2 pt-10" id="gk-ozone">
+				<div class="owl-carousel owl-theme single-item" style="width: 100% !important;">
+					<div class="item">
+						<img src="@Url.Content(MyProject.Web.Helpers.Routing.CustomURL.GetImageServer() + Model.Thumbnail)" alt="" class="h-[11.5rem] sm:h-[24rem] lg:object-fill rounded-lg">
+					</div>
+					@if (Model.PropertyImages.Count() > 0)
+					{
+						foreach (var item in Model.PropertyImages)
+						{
+							<div class="item">
+								<img src="@Url.Content(MyProject.Web.Helpers.Routing.CustomURL.GetImageServer() + item.Image)" alt="" class="h-[11.5rem] sm:h-[24rem] lg:object-fill rounded-lg">
+							</div>
+						}
+					}
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero Section End -->
+	<!-- Features Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto" id="features_section">
+		@if (Model.PropertyFeatures.Count() > 0)
+		{
+			<div class="w-[80%] mx-auto">
+				<h1 class="font-Rubik text-base font-medium py-8 lg:text-xl text-center">PROJECT_FEATURES</h1>
+			</div>
+			<div class="w-[80%] mx-auto sm:flex sm:flex-wrap justify-center main-div">
+				@foreach (var item in Model.PropertyFeatures.Where(x => x.IsDeleted == false))
+				{
+					<div class="flex items-center justify-center flex-col mb-4 sm:w-[50%] md:w-[22.5%]">
+						<img src="@Url.Content(MyProject.Web.Helpers.Routing.CustomURL.GetImageServer()+item.Feature.Image)" alt="" class="img-feature w-[50%]">
+						<h1 class="font-Rubik text-xs font-medium mt-2">@(item.Feature != null ? (culture == "en-ae" ? item.Feature.Name : item.Feature.NameAr) : "")</h1>
+						<p class="font-Rubik text-xs text-center hidden">
+							@(item.Feature != null ? (culture == "en-ae" ? item.Feature.Description : item.Feature.DescriptionAr) : "")
+						</p>
+					</div>
+				}
+				<!-- design code
+
+							<div class="flex items-center justify-center flex-col mb-4 sm:w-[50%] md:w-[30%]">
+								<img src="/assets/images/web-icons/houses-icon.png" alt="">
+								<h1 class="font-Rubik text-xs font-medium mt-2">Houses</h1>
+								<p class="font-Rubik text-xs text-center">
+									The quick, brown fox jumps over a lazy dog. DJs flock by when DJs flock by when DJs flock by when
+								</p>
+							</div>
+							<div class="flex items-center justify-center flex-col mb-4 sm:w-[50%] md:w-[30%]">
+								<img src="/assets/images/web-icons/houses-icon.png" alt="">
+								<h1 class="font-Rubik text-xs font-medium mt-2">Parks</h1>
+								<p class="font-Rubik text-xs text-center">
+									The quick, brown fox jumps over a lazy dog. DJs flock by when DJs flock by when DJs flock by when
+								</p>
+							</div>
+							<div class="flex items-center justify-center flex-col mb-4 sm:w-[50%] md:w-[30%]">
+								<img src="/assets/images/web-icons/golf-icon.png" alt="">
+								<h1 class="font-Rubik text-xs font-medium mt-2">18 Hole Golf Course</h1>
+								<p class="font-Rubik text-xs text-center">
+									The quick, brown fox jumps over a lazy dog. DJs flock by when DJs flock by when DJs flock by when
+								</p>
+							</div>
+							<div class="flex items-center justify-center flex-col mb-4 sm:w-[50%] md:w-[30%]">
+								<img src="/assets/images/web-icons/theaters-icon.png" alt="">
+								<h1 class="font-Rubik text-xs font-medium mt-2">Theaters</h1>
+								<p class="font-Rubik text-xs text-center">
+									The quick, brown fox jumps over a lazy dog. DJs flock by when DJs flock by when DJs flock by when
+								</p>
+							</div>
+							<div class="flex items-center justify-center flex-col mb-4 sm:w-[50%] md:w-[30%]">
+								<img src="/assets/images/web-icons/theaters-icon.png" alt="">
+								<h1 class="font-Rubik text-xs font-medium mt-2">Hospitals</h1>
+								<p class="font-Rubik text-xs text-center">
+									The quick, brown fox jumps over a lazy dog. DJs flock by when DJs flock by when DJs flock by when
+								</p>
+							</div>
+							<div class="flex items-center justify-center flex-col pb-4 sm:w-[50%] md:w-[30%]">
+								<img src="/assets/images/web-icons/theaters-icon.png" alt="">
+								<h1 class="font-Rubik text-xs font-medium mt-2">Restaurants</h1>
+								<p class="font-Rubik text-xs text-center">
+									The quick, brown fox jumps over a lazy dog. DJs flock by when DJs flock by when DJs flock by when
+								</p>
+							</div>
+				-->
+
+			</div>
+		}
+	</section>
+	<!-- Features Section End -->
+	<!-- Walkthrough Video Section Start -->
+	@if (!string.IsNullOrEmpty(Model.Video))
+	{
+		<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto pb-10" id="video_section">
+			<div class="w-[80%] mx-auto relative xl:flex lg:w-[60%]">
+				<video src="@Model.Video" loop preload="auto" class="w-full rounded-md" onclick="PlayVideo(this);">
+				</video>
+				<a href="javascript:void(0);" onclick="PlayVideo(this);">
+					<span class="w-8 h-8 rounded-full absolute top-1/2 left-1/2 ">
+						<i class="fa fa fa-2x fa-play-circle text-white"></i>
+					</span>
+				</a>
+			</div>
+		</section>
+	}
+	<!-- Walkthrough Video Section End -->
+	<!-- Available Units Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto" id="units_section">
+		@if (Model.Units.Count() > 0)
+		{
+			<div class="w-[80%] mx-auto">
+				<h1 class="font-Rubik text-base text-center font-medium py-8 lg:text-xl">AVAILABLE_UNITS</h1>
+			</div>
+			<div class="w-[80%] mx-auto xl:flex xl:flex-wrap py-5 justify-between main-div" style="display:none;">
+				<div class="xl:w-[49%]">
+					<a href="javascript:void(0);" class="px-1">
+						<div class="bg-white hover:bg-white hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 p-4 rounded-lg sm:flex sm:flex-wrap">
+							<div class="relative sm:w-[28%]">
+								<div class="bg-gk-gold w-14 flex px-2 py-1 rounded-md items-center justify-center absolute top-4 -left-4">
+									<svg viewBox="0 0 384 512" class="w-2 mr-1">
+										<path fill="white"
+											  d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"
+											  class=""></path>
+									</svg>
+									<p class="font-Rubik font-medium text-[10px] text-white">Dubai</p>
+								</div>
+								<img src="/assets/images/bg/blog-01.png" alt="" class="rounded-lg sm:object-cover sm:h-40 img-unit">
+							</div>
+							<div class="sm:w-[67%] sm:ml-4">
+								<h1 class="font-Rubik text-xs font-medium my-2">TITLE FOR DEVELOPMENT N0.2</h1>
+								<h1 class="font-Rubik text-xl font-medium my-2">AED 850,100</h1>
+								<div class="flex justify-between my-2">
+									<div class="sm:flex sm:items-center">
+										<img src="/assets/images/web-icons/rooms-icon.png" alt="" class="sm:h-5 sm:mr-2">
+										<p class="font-Rubik text-xs font-medium sm:text-[10px] sm:mr-2">4 Room</p>
+									</div>
+									<div class="sm:flex sm:items-center">
+										<img src="/assets/images/web-icons/rooms-icon.png" alt="" class="sm:h-5 sm:mr-2">
+										<p class="font-Rubik text-xs font-medium sm:text-[10px] sm:mr-2">4 Room</p>
+									</div>
+									<div class="sm:flex sm:items-center">
+										<img src="/assets/images/web-icons/rooms-icon.png" alt="" class="sm:h-5 sm:mr-2">
+										<p class="font-Rubik text-xs font-medium sm:text-[10px] sm:mr-2">4 Room</p>
+									</div>
+									<div class="sm:flex sm:items-center">
+										<img src="/assets/images/web-icons/rooms-icon.png" alt="" class="sm:h-5 sm:mr-2">
+										<p class="font-Rubik text-xs font-medium sm:text-[10px] sm:mr-2">4 Room</p>
+									</div>
+								</div>
+								<div class="sm:flex sm:flex-wrap sm:justify-between">
+									<div class="my-2 sm:w-[28%] sm:mr-2">
+										<button class="border-2 border-black/20 w-full py-2 rounded-md text-black/40 font-Rubik text-xs">
+											ENQUIRE
+										</button>
+									</div>
+									<div class="my-2 sm:w-[35%] sm:mr-2">
+										<button class="border-2 border-black/20 w-full py-2 rounded-md text-black/40 font-Rubik text-xs">
+											PAYMENT
+											PLANS
+										</button>
+									</div>
+									<div class="mt-2 sm:w-[28%] sm:mr-2">
+										<button class="border-2 border-black/20 w-full py-2 rounded-md text-black/40 font-Rubik text-xs">
+											BOOK
+											NOW
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+				<div class="xl:w-[49%]">
+					<a href="javascript:void(0);" class="px-1">
+						<div class="bg-white hover:bg-white hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 p-4 rounded-lg sm:flex sm:flex-wrap">
+							<div class="relative sm:w-[28%]">
+								<div class="bg-gk-gold w-14 flex px-2 py-1 rounded-md items-center justify-center absolute top-4 -left-4">
+									<svg viewBox="0 0 384 512" class="w-2 mr-1">
+										<path fill="white"
+											  d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"
+											  class=""></path>
+									</svg>
+									<p class="font-Rubik font-medium text-[10px] text-white">Dubai</p>
+								</div>
+								<img src="/assets/images/bg/blog-01.png" alt="" class="rounded-lg sm:object-cover sm:h-40 img-unit">
+							</div>
+							<div class="sm:w-[67%] sm:ml-4">
+								<h1 class="font-Rubik text-xs font-medium my-2">TITLE FOR DEVELOPMENT N0.2</h1>
+								<h1 class="font-Rubik text-xl font-medium my-2">AED 850,100</h1>
+								<div class="flex justify-between my-2">
+									<div class="sm:flex sm:items-center">
+										<img src="/assets/images/web-icons/rooms-icon.png" alt="" class="sm:h-5 sm:mr-2">
+										<p class="font-Rubik text-xs font-medium sm:text-[10px] sm:mr-2">4 Room</p>
+									</div>
+									<div class="sm:flex sm:items-center">
+										<img src="/assets/images/web-icons/rooms-icon.png" alt="" class="sm:h-5 sm:mr-2">
+										<p class="font-Rubik text-xs font-medium sm:text-[10px] sm:mr-2">4 Room</p>
+									</div>
+									<div class="sm:flex sm:items-center">
+										<img src="/assets/images/web-icons/rooms-icon.png" alt="" class="sm:h-5 sm:mr-2">
+										<p class="font-Rubik text-xs font-medium sm:text-[10px] sm:mr-2">4 Room</p>
+									</div>
+									<div class="sm:flex sm:items-center">
+										<img src="/assets/images/web-icons/rooms-icon.png" alt="" class="sm:h-5 sm:mr-2">
+										<p class="font-Rubik text-xs font-medium sm:text-[10px] sm:mr-2">4 Room</p>
+									</div>
+								</div>
+								<div class="sm:flex sm:flex-wrap sm:justify-between">
+									<div class="my-2 sm:w-[28%] sm:mr-2">
+										<button class="border-2 border-black/20 w-full py-2 rounded-md text-black/40 font-Rubik text-xs">
+											ENQUIRE
+										</button>
+									</div>
+									<div class="my-2 sm:w-[35%] sm:mr-2">
+										<button class="border-2 border-black/20 w-full py-2 rounded-md text-black/40 font-Rubik text-xs">
+											PAYMENT
+											PLANS
+										</button>
+									</div>
+									<div class="mt-2 sm:w-[28%] sm:mr-2">
+										<button class="border-2 border-black/20 w-full py-2 rounded-md text-black/40 font-Rubik text-xs">
+											BOOK
+											NOW
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="flex justify-center items-center animate-pulse ">
+				<a href="javascript:void(0);" class="bg-gk-gold uppercase font-Rubik text-xs text-center font-medium py-2 mb-12 px-4 hover:bg-gk-gold hover:text-white cursor-pointer transition delay-150 duration-300 ease-in-out hover:delay-0 rounded see-more" style="display:none;">SEE_MORE</a>
+				<a href="javascript:void(0);" class="bg-gk-gold ease-in-out font-Rubik font-medium px-4 py-2 mb-12 text-center text-xs uppercase rounded no-more" style="display:none;"><i class="fa fa-exclamation-circle mr-1"></i> COMING_SOON</a>
+			</div>
+		}
+	</section>
+	<!-- Available Units Section End -->
+	<!-- FAQs POPUP END -->
+	<div class="bg-black/50 fixed inset-0 modal fade flex flex-wrap top-0 left-0 justify-center items-center overflow-x-hidden overflow-y-auto h-auto z-50 popup-section" id="faqs_section" style="display:none;">
+		<div class="bg-white pb-2 rounded-lg w-[80%] sm:w-[60%] md:w-[60%] xl:w-[60%] m-10">
+			<!-- popup image section -->
+			<div class="relative">
+				<a href="javascript:void(0)" class="close-popup-section">
+					<svg class="h-4 w-4 absolute top-4 right-4" viewBox="0 0 20 20" fill="currentColor">
+						<path fill-rule="evenodd"
+							  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+							  clip-rule="evenodd" />
+					</svg>
+				</a>
+			</div>
+			<!-- faqs section -->
+			<div class="w-[90%] mx-auto main-div">
+				<h1 class="font-Rubik font-medium text-center text-[1.5em] mt-4">FAQs</h1>
+				<div class="project-faqs mt-2">
+					@if (!string.IsNullOrEmpty(Model.Faqs))
+					{
+						@Html.Raw(RTL ? Model.FaqsAr : Model.Faqs)
+					}
+					else
+					{
+						<div class="py-5 flex justify-center items-center animate-pulse ">
+							<a href="javascript:void(0);" class="bg-gk-gold ease-in-out font-Rubik font-medium px-4 py-2 mb-12 text-center text-xs uppercase rounded no-more" style=""><i class="fa fa-exclamation-circle mr-1"></i> Coming soon ...</a>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- FAQs POPUP END -->
+</div>
+<!--Body Content End-->
+<!--Modal Popups-->
+@Html.Action("UnitModal", "ModalPopups", new { culture = culture })
+<!--Modal Popups End-->
+<!--Write js Here-->
+@section IndexScript {
+	<script>
+		$('.owl-carousel.single-item').owlCarousel({
+			rtl: direction == "ltr" ? false : true,
+			loop: false,
+			navText: ["<img src='/assets/images/web-icons/left-arrow.png'>", "<img src='/assets/images/web-icons/right-arrow.png'>"],
+			nav: true,
+			margin: 2,
+			dots: true,
+			responsiveClass: true,
+			autoWidth: false,
+			rewind: true,
+			autoplay: true,
+			smartSpeed: 1000,
+			autoplayTimeout: 10000,
+			autoplayHoverPause: true,
+			responsive: {
+				0: {
+					items: 1,
+				},
+			}
+		})
+	</script>
+	<script>OnErrorImage(0.5, 'feature')</script>
+	<script src="@Url.ContentVersioned("~/Assets/js/web/projects/details.js")"></script>
+	<script src="@Url.ContentVersioned("~/Assets/js/web/units/unit-related.js")"></script>
+}

@@ -1,0 +1,81 @@
+﻿@model IEnumerable<MyProject.Data.ServiceBooking>
+
+@{
+    ViewBag.Title = "List";
+    Layout = null;
+}
+
+<style>
+    #kt_datatable1 tbody tr td:last-child {
+        white-space: nowrap;
+    }
+</style>
+<!--begin::Row-->
+<div class="row">
+    <div class="col-xl-12">
+        <!--begin::Card-->
+        <div class="card card-custom gutter-b">
+            <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                <div class="card-title">
+                    <h3 class="card-label">
+                        Pending Service Bookings
+                        <span class="d-block text-muted pt-2 font-size-sm">Manage Pending Service Bookings Here...</span>
+                    </h3>
+                </div>
+                <div class="card-toolbar">
+                    <!--begin::Dropdown-->
+                    <div class="dropdown dropdown-inline mr-2">
+                        @using (Html.BeginForm("PendingBookingReport", "ServiceBooking", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="text" value="" id="from" name="FromDate" class="form-control kt_datepicker_range" hidden />
+                            <input type="text" value="" id="to" name="ToDate" class="form-control kt_datepicker_range" hidden />
+                            <button type="submit" id="btnSubmit" class="btn btn-dark btn-sm" @(Model.Count() > 0 ? "" : "disabled")>
+                                <i class="far fa-file-excel"></i>
+                                Export Excel
+                            </button>
+                        }
+                    </div>
+                    <!--end::Dropdown-->
+                </div>
+            </div>
+            <div class="card-body">
+                @Html.AntiForgeryToken()
+                <!--begin: Datatable-->
+                <table class="table table-separate table-head-custom table-checkable" id="kt_datatable1">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Customer</th>
+                            <th>Booking No</th>
+                            <th>Service</th>
+                            <th>Amount</th>
+                            <th>Vendor</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody style="display:none">
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>@item.CreatedOn</td>
+                            <td>@(item.Customer != null ? item.Customer.Logo : "-") | @item.CustomerName | @item.CustomerContact</td>
+                            <td>@item.BookingNo</td>
+                            <td>@item.Service.Name</td>
+                            <td class="price"> @item.Total</td>
+                            <td>@(item.Vendor != null ? item.Vendor.Name : "-")</td>
+                            <td>@item.Status</td>
+                            <td nowrap="nowrap">@item.ID|@item.IsQuoteApproved</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+                <!--end: Datatable-->
+            </div>
+        </div>
+        <!--end::Card-->
+    </div>
+</div>
+
+

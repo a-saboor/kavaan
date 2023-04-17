@@ -1,0 +1,35 @@
+@model IEnumerable<MyProject.Data.SP_GetCustomerOrders_Result>
+
+@{
+	ViewBag.Title = "Orders";
+	Layout = null;
+}
+
+<h3>Orders</h3>
+<div class="table-responsive">
+	<table class="table">
+		<thead class="alt-font">
+			<tr>
+				<th>#</th>
+				<th style="max-width:200px">Car</th>
+				<th>Date</th>
+				<th>Status</th>
+				<th>Total</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.OrderNo</td>
+					<td style="max-width:200px">@item.Cars</td>
+					<td>@item.Date</td>
+					<td>@item.Status</td>
+					<td>@item.TotalAmount @item.Currency</td>
+					<td><a class="view" href="/Customer/Order/Details/@item.ID">view</a></td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

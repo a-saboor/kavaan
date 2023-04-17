@@ -1,0 +1,125 @@
+﻿@model MyProject.Data.User
+@{
+    ViewBag.Title = "Edit";
+    Layout = null;
+}
+
+<div class="modal-header">
+    <h5 class="modal-title">Update</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <i aria-hidden="true" class="ki ki-close"></i>
+    </button>
+</div>
+<div class="modal-body">
+    @using (Html.BeginForm("Edit", "User", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data", id = "Usersform", @class = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.IsDeleted)
+        @Html.HiddenFor(model => model.CreatedOn)
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, "Full Name", htmlAttributes: new { @class = "control-label" })
+                    <div class="input-group mb-2">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter full name here ..." } })
+                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-user"></i></span></div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmailAddress, "Email Address", htmlAttributes: new { @class = "control-label" })
+                    <div class="input-group">
+                        @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter email here ...", type = "text", onkeyup = "isEmailValid(this)", onChange = "emailVerification(this," + Model.ID + ",'/Admin/User/EmailVerification/')", id = "EmailAddress" } })
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, "Password", htmlAttributes: new { @class = "control-label" })
+                    <div class="input-group">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control required-custom password s-p", placeholder = "Enter password here ...", type = "password", onkeyup = "isPasswordValid(this)" } })
+                        <div class="input-group-append">
+                            <span class="input-group-text cursor-pointer" onclick="seePassword(this)">
+                                <i class="fa fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    @*<span class="form-text text-danger" style="font-size: 9px;">Min. 8 characters, at least one uppercase letter, one lowercase letter, and one number</span>*@
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label class="contrl-label">Confirm Password</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control required-custom confirm-password s-p" id="confirmPassword" placeholder="Enter confirm password here..." onkeyup="isPasswordMatch(this)" value="@Model.Password" />
+                        <div class="input-group-append">
+                            <span class="input-group-text cursor-pointer" onclick="seePassword(this)">
+                                <i class="fa fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <span class="field-validation-valid text-danger" data-valmsg-for="confirmPassword" data-valmsg-replace="true"></span>
+                    <span class="form-text text-danger" style="font-size: 9px;" id="confPassError"></span>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group intr-form-group">
+                    @Html.LabelFor(model => model.MobileNo, "Mobile No", htmlAttributes: new { @class = "control-label" })
+                    <div class="input-group mb-3 flex-nowrap">
+                        @*<div class="input-group-prepend">
+                                <span class="input-group-text">971</span>
+                            </div>*@
+                        @*<input class="input-group-text code" value="92" name="PhoneCode" hidden />*@
+                        @Html.HiddenFor(model => model.PhoneCode, new { @class = "code" })
+                        @Html.EditorFor(model => model.MobileNo, new { htmlAttributes = new { @class = "form-control required-custom intr-phone remove-space", placeholder = "Enter Mobile No here ...", onkeypress = "return isNumber(event)", onChange = "contactVerification(this," + Model.ID + ",'/Admin/User/ContactVerification/')", id = "MobileNo", maxlength = "20", autocomplete = "off", pattern = "[0-9\\-]*" } })
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserRoleID, "Role", htmlAttributes: new { @class = "control-label" })
+                    <div class="input-group mb-3">
+                        @Html.DropDownList("UserRoleID", null, "Select User Role", htmlAttributes: new { @class = "form-control kt-selectpicker required-custom", @data_actions_box = "true" })
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-user-secret"></i></span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.UserRoleID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-custom" id="btnsubmit" form="Usersform">Save Changes</button>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        SelectSearchable.init();
+        
+    });
+    //initiate intl dropdown
+    initIntlInputs();
+    removeSpace();
+    $('.kt-selectpicker').attr("data-live-search", "true").attr("data-size", "8");;
+
+</script>

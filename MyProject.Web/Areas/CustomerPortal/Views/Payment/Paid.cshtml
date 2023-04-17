@@ -1,0 +1,83 @@
+﻿@model MyProject.Data.UnitBooking
+@{
+	ViewBag.Title = @Resources.PAYMENT_PROCESSING;
+	var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+	bool RTL = CultureHelper.IsRighToLeft();
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!--Body Content-->
+<div class="render-body" style="min-height: 300px;">
+	<!-- Hero Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<div class="">
+			<div class="h-[150px] mx-auto bg-intro-details bg-cover flex flex-col justify-center items-center md:h-[200px] lg:h-[300px]">
+                <h1 class="uppercase font-Rubik text-xl font-medium text-center text-white lg:text-4xl lg:mb-2">@Resources.PAYMENT</h1>
+				<div class="flex items-center">
+                    <a href="/@culture/home/index" class="font-Rubik text-xs uppercase text-white">@Resources.HOME</a>
+					<svg viewBox="0 0 192 512" class="w-1.5 mx-2 fill-current text-white flip-horizontal-rtl"><path fill="" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class="fill-white"></path></svg>
+                    <a href="/@culture/our-story" class="font-Rubik text-xs uppercase text-white">@Resources.PAYMENT</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero Section End -->
+	<!-- Processing Section -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<div class="w-[80%] mx-auto xl:w-[60%] py-10">
+			<!-- message section -->
+			@if (ViewBag.SuccessMessage != null)
+			{
+				<div class="w-[90%] mx-auto main-div result-div">
+					<div class="alert-div"></div>
+                    <h1 class="font-Rubik font-medium text-xl mt-4 text-center">@Resources.BookingNo # @Model.BookingNo</h1>
+					<div class="flex items-center w-full my-3 justify-center">
+						<img src="/assets/images/web-icons/result-icon-check.svg" alt="" class="h-32 mx-2 result-icon" />
+					</div>
+					<p class="font-Rubik text-center text-sm mt-4 ">@ViewBag.SuccessMessage</p>
+					<p class="text-gk-purple font-medium font-Rubik text-center text-sm flex justify-center mb-2 uppercase"><a href="/@culture/home">@Resources.CLICK_HERE_TO_GO_TO_HOME_PAGE</a></p>
+				</div>
+			}
+			else
+			{
+				<div class="w-[90%] mx-auto main-div result-div">
+					<div class="alert-div"></div>
+                    <h1 class="font-Rubik font-medium text-xl mt-4 text-center">@Resources.BookingNo # @Model.BookingNo</h1>
+					<div class="flex items-center w-full my-3 justify-center">
+						<img src="/assets/images/web-icons/result-icon-exclamation.svg" alt="" class="h-32 mx-2 result-icon" />
+					</div>
+					<p class="font-Rubik text-center text-sm mt-4 ">@ViewBag.ErrorMessage</p>
+					<p class="text-gk-purple font-medium font-Rubik text-center text-sm flex justify-center mb-2 uppercase">
+						<a href="javascript:void(0);" onclick="InitiatePayment(this,@Model.ID,'@Model.BookingNo')">Pay</a>
+					</p>
+				</div>
+				@*<div class="empty-page-content text-center">
+						<div class="alert-div"></div>
+						<img src="/Assets/images/order/failure.png" />
+						<h5>Order # @Model.OrderNo</h5>
+						<h4>@ViewBag.ErrorMessage</h4>
+						<p>
+							<a href="/Customer/Order/details/@Model.ID" class="btn btn--has-icon-after">
+								<i class="fa fa-eye" aria-hidden="true"></i>
+								View Order
+							</a>
+							<a href="javascript:;" class="btn btn--has-icon-after" onclick="InitiatePayment(this,@Model.ID,'@Model.OrderNo')">
+								<i class="fa fa-credit-card" aria-hidden="true"></i> Pay
+							</a>
+						</p>
+					</div>*@
+			}
+
+		</div>
+	</section>
+	<!-- Processing Section End -->
+</div>
+<!--Body Content End-->
+<!--Write js Here-->
+@section IndexScript {
+	<script src="~/Assets/Admin/js/customer/payment/paid.js"></script>
+}
+

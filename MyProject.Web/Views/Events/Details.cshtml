@@ -1,0 +1,152 @@
+﻿@model MyProject.Data.Event
+@{
+	ViewBag.Title = "";//NEWS___EVENTS;
+	var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+	bool RTL = CultureHelper.IsRighToLeft();
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!-- #region Content-->
+<!-- Hero Section -->
+<section class="4xl:mx-auto relative font-Rubik bg-hero-pages-ak -mt-[5rem]" id="hero-section">
+	<div class="container mx-auto pt-20 md:py-40 2xl:py-52">
+		<div class="flex flex-wrap justify-center">
+			<div class="flex flex-col justify-center items-center px-4">
+				<h1 class="text-2xl md:text-4xl font-semibold text-center text-white bg-[#c08843b3] px-6 py-6 md:px-10 md:py-6 rounded-lg md:rounded-xl uppercase text-shadow-hero-bg">
+					News Feed
+				</h1>
+				<p class="text-sm md:text-xl text-[#505050] text-center p-4">
+					<a href="/@culture/home" class="hover:text-ak-gold transition-[0.3s_all_ease-in-out]">Home</a>
+					<span>/</span>
+					<a href="/@culture/newsfeed" class="hover:text-ak-gold transition-[0.3s_all_ease-in-out]">
+						News
+						Feed
+					</a>
+					<span>/</span>
+					<a>Details</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Hero Section End -->
+<!-- Main Section -->
+<section class="max-w-screen-4xl 4xl:mx-auto relative font-Rubik bg-layer-2">
+	<!-- News Feed -->
+
+	<div class="container flex flex-col flex-wrap justify-between w-[80%] mx-auto py-0 relative pb-[20%] lg:pb-[12%] ">
+		<div class="mx-auto text-center pt-8 pb-4 md:pt-14 md:pb-8">
+
+			<div class="relative heading text-center flex flex-col justify-center items-center">
+				<h2 class="text-[#707070] font-semibold text-2xl md:text-3xl leading-2 md:leading-[2.2rem] 2xl:leading-[2.8rem]">
+					News Feed
+				</h2>
+				<h2 class="text-3xl md:text-5xl 2xl:text-7xl leading-2 md:leading-[2.2rem] 2xl:leading-[2.8rem] mb-8 absolute text-[#616161] opacity-10 font-medium translate-x-[-50%] translate-y-[-50%] top-[0%] left-[50%] select-none">
+					Updates
+				</h2>
+			</div>
+
+		</div>
+		<!-- Image/ Video -->
+		<div class="relative content-div">
+			<div class="my-2 w-full h-[10rem] sm:h-[12rem] md:h-[18rem] xl:h-[24rem] mx-auto bg-center sm:bg-center xl:bg-cover rounded-[4px] filter brightness-90 ak-image"
+				 style="background-image: url('/assets/images/bg/newsfeed-bg.png');">
+			</div>
+			<div class="my-2 w-full h-[10rem] sm:h-[12rem] md:h-[18rem] xl:h-[24rem] mx-auto bg-center sm:bg-center xl:bg-cover rounded-[4px] ak-video relative hidden">
+				<video controls loop onclick="PlayVideo(this)"
+					   class="w-[100%] h-[10rem] sm:h-[12rem] md:h-[18rem] xl:h-[24rem] mx-auto bg-center sm:bg-center xl:bg-cover object-cover ak-video rounded-[4px] filter brightness-90">
+					<source src="/assets/videos/cleaning-car.mp4" type="video/mp4">
+				</video>
+				<!-- <img src="/assets/images/web-icons/hero-play-icon.png"
+				   class="video-icon-pp select-none control translate-x-[-50%] translate-y-[-50%] left-[50%] top-[50%]"
+				   onclick="PlayVideo(this)"> -->
+			</div>
+			<i class="cursor-pointer absolute translate-x-[-50%] translate-y-[-50%] left-[50%] top-[20%] md:top-[14%] fa fa-image box-shadow-btn-white-1 bg-white text-ak-gold rounded-full" data-content="ak-video" onclick="changeContent(this);"></i>
+		</div>
+		<!-- Image/ Video End -->
+
+		<div class="flex flex-col w-full justify-between text-justify mt-2">
+			<p class="text-ak-gold font-normal text-xs md:text-base 2xl:text-xl my-2">
+				09 Jun, 2022
+			</p>
+		</div>
+		<div class="heading flex flex-row w-full justify-between pt-2 mt-4 text-justify">
+			<div class="relative">
+				<h2 class="text-[#707070] font-semibold text-2xl md:text-3xl leading-2 md:leading-[2.2rem] 2xl:leading-[2.8rem]">
+					Lorem ipsum dolor sit amet, consetetur sadipscing elitr vero eos et accusam et justo duo dolores dolor
+					sit amet.
+				</h2>
+				<h2 class="text-3xl md:text-5xl 2xl:text-7xl leading-2 md:leading-[2.2rem] 2xl:leading-[2.8rem] mb-8 absolute text-[#616161] opacity-10 font-medium top-[-0.3em] left-[-0.3em] select-none">
+					Title
+				</h2>
+			</div>
+		</div>
+		<div class="flex flex-col w-full justify-between pt-2 text-justify">
+			<p class="text-[#00000085] font-normal text-xs md:text-base 2xl:text-xl my-2">
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+				labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
+				ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
+				dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
+				magna aliquyam erat, sed diam voluptua.
+			</p>
+			<p class="text-[#00000085] font-normal text-xs md:text-base 2xl:text-xl my-2">
+				At vero eos et accusam et justo duo dolores et ea rebum. Stet
+				clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet,
+				consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+				erat, sed diam
+			</p>
+			<p class="text-[#00000085] font-normal text-xs md:text-base 2xl:text-xl my-2">
+				At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+				est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+				eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+			</p>
+			<p class="text-[#00000085] font-normal text-xs md:text-base 2xl:text-xl my-2">
+				At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+				est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+				eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+			</p>
+			<p class="text-[#00000085] font-normal text-xs md:text-base 2xl:text-xl my-2">
+				At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+				est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+				eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+			</p>
+		</div>
+	</div>
+	<!-- News Feed End -->
+</section>
+<!-- Main Section End -->
+<!-- #endregion Content -->
+<!--Write js Here-->
+@section IndexScript {
+	@*<script>
+		var temp = $("<input>");
+		var url = $(location).attr('href');
+
+		$(document).ready(function () {
+			OnErrorImage(0.5, 'event');
+
+			let description = $('#description').val();
+			if (description.includes("\n")) {
+				description = description.split('\n');
+				$.each(description, function (k, v) {
+					$('#TitleDescription').append(`<p class="text-xs text-justify font-medium pb-1">${v}</p>`)
+				});
+			}
+			else {
+				description = description;
+				$('#TitleDescription').html(description);
+			}
+		});
+
+		function CopyLink(elem) {
+			$(elem).append(temp);
+			temp.val(url).select();
+			document.execCommand("copy");
+			temp.remove();
+			//show message popup
+			ToastrMessage('success', ChangeString('Link copied to clipboard.', 'تم نسخ الرابط إلى الحافظة.'), 6);
+		}
+	</script>*@
+}

@@ -1,0 +1,200 @@
+﻿@model Project.Web.Areas.Admin.ViewModels.QuotationViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+<link href="~/Assets/Admin/plugins/custom/richtextarea/rte_theme_default.css" rel="stylesheet" />
+
+<div class="modal-header">
+    <h5 class="modal-title">Quotation Details</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <i aria-hidden="true" class="ki ki-close"></i>
+    </button>
+</div>
+
+<div class="modal-body pl-18 pr-18">
+    <!-- begin: Invoice-->
+    <!-- begin: Invoice header-->
+    <div class="justify-content-center px-8 px-md-0 py-8 row">
+        <div class="col-md-10">
+
+            <div class="d-flex justify-content-between pt-6">
+                <div class="d-flex flex-column flex-root">
+                    <span class="text-center font-weight-bolder mb-2">SERVICE CATEGORY</span>
+                    <span class="text-center opacity-70">@Model.ServiceCategoryName</span>
+                </div>
+                <div class="d-flex flex-column flex-root">
+                    <span class="text-center font-weight-bolder mb-2">SERVICE</span>
+                    <span class="text-center opacity-70">@Model.ServiceName</span>
+                </div>
+                <div class="d-flex flex-column flex-root">
+                    <span class="text-center font-weight-bolder mb-2">BOOKING DATE</span>
+                    <span class="text-center opacity-70">@(Model.CreatedOn.HasValue ? Model.CreatedOn.Value.ToString("MMM dd, yyyy, h:mm tt") : "")</span>
+                </div>
+                <div class="d-flex flex-column flex-root">
+                    <span class="text-center font-weight-bolder mb-2">BOOKING NO</span>
+                    <span class="text-center opacity-70">@Model.BookingNo</span>
+                </div>
+                <div class="@*d-flex flex-column flex-root*@" hidden>
+                    <span class="text-center font-weight-bolder mb-2">CUSTOMER</span>
+                    <span class="text-center opacity-70">
+                        <i class="fa fa-user"></i>
+                        @Model.CustomerName
+                        <br />
+                        <i class="fa fa-phone-alt"></i>
+                        @Model.CustomerContact
+                    </span>
+                </div>
+
+                <div class="d-flex flex-column flex-root">
+                    <span class="text-center font-weight-bolder mb-2">BOOKING STATUS</span>
+                    <span class="text-center align-middle">
+                        <span class="label label-lg label-light-primary label-inline">@Model.Status</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end: Invoice header-->
+    <!-- begin: Invoice body-->
+    <div class="border-bottom w-100"></div>
+    <div class="row justify-content-center py-8 px-8 py-md-10 px-md-0">
+        <div class="col-md-12 bg-light-o-70">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-left font-weight-bold text-muted text-uppercase">Vendor Name</th>
+                            <th class="text-left font-weight-bold text-muted text-uppercase">Product</th>
+                            <th class="text-center font-weight-bold text-muted text-uppercase">Price</th>
+                            <th class="text-center font-weight-bold text-muted text-uppercase">Quantity</th>
+                            <th class="text-center pr-0 font-weight-bold text-muted text-uppercase">Charges</th>
+                            <th class="text-center pr-0 font-weight-bold text-muted text-uppercase">Subtotal</th>
+                            <th class="text-right pr-0 font-weight-bold text-muted text-uppercase">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.quotationDetails)
+                        {
+                            <tr class="font-weight-boldest">
+                                <td class="text-left pt-7 align-middle">@item.Vendor.Name</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="symbol symbol-50 flex-shrink-0 mr-4">
+                                            <div class="symbol-label" style="background-image: url('@item.Product.Thumbnail')"></div>
+                                        </div>
+                                        <div>
+                                            <a href="javascript:;" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">
+                                                @item.Product.Name
+                                            </a>
+                                            <span class="text-muted font-weight-bold d-block">  @item.Product.SKU   </span>
+                                            @*<span class="text-muted font-weight-bold d-block">  @item.Product.ProductVariations   </span>
+                                                <span class="text-muted font-weight-bold d-block">  @item.Product.PurchaseNote   </span>*@
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center pt-7 align-middle">@item.Price</td>
+                                <td class="text-center pt-7 align-middle">@item.Quantity</td>
+                                <td class="text-center pt-7 align-middle">@item.Charges</td>
+                                <td class="text-center pt-7 align-middle">@item.Subtotal</td>
+                                <td class="text-primary pr-0 pt-7 text-right align-middle price">@item.Total</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="border-bottom w-100 mb-10"></div>
+    @if (!string.IsNullOrEmpty(Model.CancellationReason))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-Left font-weight-bold text-muted text-uppercase">Cancelation Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="font-weight-boldest">
+                                <td class="text-mid pt-7 align-middle">
+                                    <textarea class="form-control" rows="5" readonly="readonly" disabled="disabled">@Model.CancellationReason</textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-4 col-lg-4 mb-4 cart__body">
+            <p class="font-weight-bolder mb-2"><i class="fas fa-user fa-sm"></i> CUSTOMER  </p>
+            <div class="d-flex">
+                <div class="symbol symbol-50 flex-shrink-0 mr-4">
+                    <div class="symbol-label" style="background-image: url(@Model.CustomerLogo)"></div>
+                </div>
+                <span class="font-weight-bolder mb-2 text-left">
+                    @Model.CustomerName
+                    <p class="opacity-70">@Model.CustomerContact</p>
+                </span>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-4 col-lg-4 mb-4 cart__body">
+            <h5><i class="icon fa fa-map-marker-alt "></i> Delivery Address</h5>
+            <div class="cart__footer mt-5">
+                <div class="row  pb-2">
+                    <span class="col-12 col-sm-12 cart__subtotal-title">
+                        @Model.MapLocation
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-4 col-lg-4 ">
+            <h5><i class="fa fa-shopping-cart "></i> Billing Details</h5>
+            <div class="cart__footer mt-5">
+                <div class="solid-border">
+                    <div class="row border-bottom pb-2">
+                        <span class="col-12 col-sm-6 cart__subtotal-title">Subtotal</span>
+                        <span class="col-12 col-sm-6 text-right"><span class="money price">@Model.Amount</span></span>
+                    </div>
+                    <div class="row border-bottom pb-2">
+                        <span class="col-12 col-sm-6 cart__subtotal-title">Tax</span>
+                        <span class="col-12 col-sm-6 text-right price">@Model.Tax</span>
+                    </div>
+
+                    <div class="row border-bottom pb-2 pt-2" style="color:darkred">
+                        <span class="col-12 col-sm-6 cart__subtotal-title"><strong>Total Amount</strong></span>
+                        <span class="col-12 col-sm-6 cart__subtotal-title cart__subtotal text-right">
+                            <strong><span class="money price">@Model.TotalAmount</span></strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+
+    </div>
+    <!-- end: Invoice body-->
+    <!-- begin: Invoice footer-->
+    <!-- end: Invoice footer-->
+    <!-- begin: Invoice action-->
+    <!-- end: Invoice action-->
+    <!-- end: Invoice-->
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+</div>
+
+<!--end::Page Scripts-->
+<script src="~/Assets/Admin/plugins/custom/richtextarea/rte.js"></script>
+<script src="~/Assets/Admin/plugins/custom/richtextarea/all_plugins.js"></script>
+<script src="~/Assets/Admin/plugins/custom/richtextarea/rte-upload.js"></script>
+
+

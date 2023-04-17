@@ -1,0 +1,323 @@
+﻿@model MyProject.Data.Blog
+
+@{
+	ViewBag.Title = "Create";
+	Layout = null;
+}
+<link href="~/Assets/Admin/plugins/custom/richtextarea/rte_theme_default.css" rel="stylesheet" />
+
+<div class="modal-header">
+	<h5 class="modal-title">Create</h5>
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<i aria-hidden="true" class="ki ki-close"></i>
+	</button>
+</div>
+
+<div class="modal-body">
+
+    <form id="createform" action="/Admin/Blog/Create/" name="form" enctype="multipart/form-data" class="form-file-custom" onsubmit="return form_file_custom(this)">
+            @Html.AntiForgeryToken()
+
+            <div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group row">
+                <div class="col-lg-12 text-center">
+                    <div class="image-input image-input-outline" id="kt_image_1">
+                        <div class="image-input-wrapper" style="background-image: url('../../../../Assets/AppFiles/Images/default.png')"></div>
+                        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change logo">
+                            <i class="fa fa-pen icon-sm text-muted"></i>
+                            <input type="file" name="BannerImage" data-width="1200" class="img-upload" data-height="800" data-size="500" id="cover" accept=".png, .jpg, .jpeg" onchange="imgUpload(this);" />
+                            <input type="hidden" name="profile_avatar_remove" />
+                        </label>
+                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow cancelimage" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                            <i class="ki ki-bold-close icon-xs text-muted"></i>
+                        </span>
+                    </div>
+                    <span class="form-text text-muted">Image dimensions should be 1200 x 800 pixels and Image size must be less than 500 kb</span>
+                </div>
+            </div>
+            <div class="row">
+
+
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Title</label>
+                        <div class="input-group mb-2">
+                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter title here ..." } })
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-server"></i></span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                @*<div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Title (Ar)</label>
+                <div class="input-group mb-2">
+                    @Html.EditorFor(model => model.TitleAr, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "...Enter title (Ar) here", dir = "rtl" } })
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="fa fa-server"></i></span>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.TitleAr, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Description</label>
+                        <div class="input-group mb-2">
+                            @*@Html.HiddenFor(model => model.TitleDescription)*@
+                            @*<div id="TitleDescriptionTXT" class="richtexteditor"></div>*@
+                            @Html.TextAreaFor(model => model.TitleDescription, new { @class = "form-control", rows = "2", placeholder = "Enter description here ..." })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.TitleDescription, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <!--<div class="col-md-6 col-sm-12">
+        <div class="form-group">
+            <label class="control-label">Description(Ar)</label>
+            <div class="input-group mb-2">-->
+                @*@Html.HiddenFor(model => model.TitleDescriptionAr)*@
+                @*<div id="TitleDescriptionArTXT" class="richtexteditor"></div>*@
+                <!--@Html.TextAreaFor(model => model.TitleDescriptionAr, new { @class = "form-control", rows = "2", placeholder = "...Enter description (Ar) here", dir = "rtl" })
+            </div>
+            @Html.ValidationMessageFor(model => model.TitleDescriptionAr, "", new { @class = "text-danger" })
+        </div>
+    </div>-->
+
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Video</label>
+                        <div class="input-group mb-2">
+                            @Html.TextBox("Video", "", new { type = "file", name = "Video", @class = "h-100 form-control" })
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-video"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Twitter Url</label>
+                        <div class="input-group mb-2">
+                            @Html.EditorFor(model => model.TwitterUrl, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter twitter url here ..." } })
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fab fa-twitter"></i></span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.TwitterUrl, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Facebook URL</label>
+                        <div class="input-group mb-2">
+                            @Html.EditorFor(model => model.FacebookURL, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter facebook url here ..." } })
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fab fa-facebook"></i></span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.FacebookURL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">LinkedIn Url</label>
+                        <div class="input-group mb-2">
+                            @Html.EditorFor(model => model.LinkedinURL, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter linkedin url here ..." } })
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fab fa-linkedin"></i></span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.LinkedinURL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Instagram Url</label>
+                        <div class="input-group mb-2">
+                            @Html.EditorFor(model => model.InstagramURL, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter instagram url here ..." } })
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fab fa-instagram"></i></span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.InstagramURL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Email Address</label>
+                        <div class="input-group mb-2">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter email address here ..." } })
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Author</label>
+                        <div class="input-group mb-2">
+                            @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter author name here ..." } })
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Post Position</label>
+                        <div class="input-group mb-2">
+                            @Html.TextBoxFor(model => model.Position, new { @type = "number", @class = "form-control required-custom", placeholder = "Enter position here...", @min = "0", @max = "100000" })
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-sort-numeric-up"></i></span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <label class="control-label">Blog Date</label>
+                    <div class="input-daterange input-group kt_datepicker_range">
+                        @Html.EditorFor(model => model.PostedDate, new { htmlAttributes = new { @class = "form-control kt_datepicker_range", type = "text", id = "PostedDate", placeholder = " MM/DD/YYYY" } })
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Enable Featured</label>
+                        <div class="input-group mb-2">
+                            <span class="switch">
+                                <label>
+                                    @{
+
+                                    }
+                                    @Html.CheckBox("IsFeatured", false)
+                                    <span></span>
+                                </label>
+                            </span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.IsFeatured, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </form>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	<button type="submit" class="btn btn-custom" form="createform">Submit</button>
+</div>
+
+<!--end::Page Scripts-->
+<script src="~/Assets/Admin/plugins/custom/richtextarea/rte.js"></script>
+<script src="~/Assets/Admin/plugins/custom/richtextarea/all_plugins.js"></script>
+<script src="~/Assets/Admin/plugins/custom/richtextarea/rte-upload.js"></script>
+<script>
+	// Class definition
+	var KTImageInputDemo = function () {
+		// Private functions
+		var initDemos = function () {
+
+			var avatar1 = new KTImageInput('kt_image_1');
+		}
+
+		return {
+			// public functions
+			init: function () {
+				initDemos();
+			}
+		};
+	}();
+
+	'use strict';
+	KTUtil.ready(function () {
+		KTImageInputDemo.init();
+
+
+	});
+
+	$(document).ready(function () {
+
+		//#region Rich Text editor configuration
+		//let editor1 = new RichTextEditor(document.getElementById("TitleDescriptionTXT"));
+		//let editor2 = new RichTextEditor(document.getElementById("TitleDescriptionArTXT"));
+
+		//editor1.setHTMLCode('');
+		//editor2.setHTMLCode('');
+
+		//editor1.attachEvent("change", function () {
+		//	document.getElementById("TitleDescription").value = editor1.getHTMLCode();
+		//});
+		//editor2.attachEvent("change", function () {
+		//	document.getElementById("TitleDescriptionAr").value = editor2.getHTMLCode();
+		//});
+		//$('.rte_command_insertimage').hide()
+		//$('.rte_command_insertvideo').hide()
+		//$('.rte_command_insertdocument').hide()
+		//#endregion
+
+	});
+
+	$("#PostedDate").datepicker({
+		todayHighlight: true,
+		format: 'dd MM yyyy',
+	});
+
+	var _URL = window.URL || window.webkitURL;
+	//Image Validation Begin
+	
+	//Image Validation End
+
+	
+
+	//$("#createform").submit(function () {
+	//	var data = new FormData();
+	//	data.append("BannerImage", $("#cover")[0].files[0]);
+	//	data.append("Title", $("#Title").val());
+	//	data.append("TitleAr", $("#TitleAr").val());
+	//	data.append("TitleDescription", $("#TitleDescription").val());
+	//	data.append("TitleDescriptionAr", $("#TitleDescriptionAr").val());
+	//	data.append("Video", $("#Video")[0].files[0]);
+	//	data.append("TwitterUrl", $("#TwitterUrl").val());
+	//	data.append("FacebookURL", $("#FacebookURL").val());
+	//	data.append("LinkedinURL", $("#LinkedinURL").val());
+	//	data.append("InstagramURL", $("#InstagramURL").val());
+	//	data.append("Email", $("#Email").val());
+	//	data.append("Author", $("#Author").val());
+	//	data.append("Position", $("#Position").val());
+	//	data.append("PostedDate", $("#PostedDate").val());
+	//	data.append("IsFeatured", $("#IsFeatured").prop("checked"));
+	//	data.append("__RequestVerificationToken", $('input[name=__RequestVerificationToken]').val());
+	//	$.ajax({
+	//		url: "/Admin/Blog/Create/",
+	//		type: "POST",
+	//		processData: false,
+	//		contentType: false,
+	//		data: data,
+	//		success: function (response) {
+
+	//			if (callback) {
+	//				callback($('#myModalContent'), element, true, response);
+	//			}
+	//		},
+	//		error: function (er) {
+
+	//			toastr.error(er);
+	//		}
+	//	});
+	//	return false;
+	//});
+
+</script>
+
+<!--end::Page Scripts-->

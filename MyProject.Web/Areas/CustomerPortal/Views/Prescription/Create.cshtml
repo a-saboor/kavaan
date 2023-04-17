@@ -1,0 +1,198 @@
+﻿<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!-- #region Content-->
+<!-- Main Section -->
+
+<section class="max-w-screen-4xl 4xl:mx-auto relative font-Rubik bg-building-1 flex flex-row -mt-[5rem] pt-[5rem]">
+
+    <div class="container flex flex-col flex-wrap justify-between w-[80%] mx-auto md:ml-auto md:mr-0 pt-5 md:pt-10 py-10 relative pb-[18%] lg:pb-[12%] ">
+
+        <!-- Dashboard-->
+        <!-- Heading -->
+        <div>
+            <h1 class="text-2xl md:text-4xl font-semibold text-center text-ak-gold px-6 md:px-10 rounded-lg md:rounded-xl capitalize text-shadow-hero-bg heading-dashboard">
+                Customer Portal
+            </h1>
+        </div>
+
+        <!-- Upload Image -->
+        <div class="w-full flex flex-row flex-wrap items-center justify-center md:justify-start text-center md:text-left my-6 md:my-0 gap-4">
+            <img src="@MyProject.Web.Helpers.CustomerSessionHelper.Photo" alt="person" class="w-[3.25rem] select-none rounded-full img-person">
+            <div class="flex flex-col">
+                <h2 class="text-black font-semibold text-sm md:text-base 2xl:text-xl hello-person">Hello, @MyProject.Web.Helpers.CustomerSessionHelper.UserName</h2>
+                <form>
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <input type="file" hidden name="ImageFile" accept=".png, .jpg, .jpeg" class="img-upload" data-width="250" data-height="250" data-size="300" @*300 kb*@ />
+                        <a class="cursor-pointer text-ak-blue font-normal text-xs md:text-sm 2xl:text-sm" for="ImageFile">Upload Image</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="flex flex-col md:flex-row w-full justify-between items-start pt-0 md:pt-8 relative">
+
+            <!-- Tabs -->
+            <div class="md:pr-0 w-[100%] text-center md:text-left md:w-[30%]" id="dashboard_tab">
+                <div class="container w-full">
+                    <div class="border-[2px] bg-ak-light border-ak-gold/40 rounded-lg p-6 flex flex-col dashboard-tabs filter drop-shadow">
+
+                        <h4 class="text-[#707070] font-semibold text-xl md:text-2xl 2xl:text-3xl mb-4">
+                            Information
+                        </h4>
+
+                        <a class="cursor-pointer text-sm w-full my-1.5 py-2.5 px-3.5 bg-white text-black/60 hover:bg-ak-gold hover:text-white/90 dashboard-tabs-link" href="#account-info">Account Information</a>
+                        <a class="cursor-pointer text-sm w-full my-1.5 py-2.5 px-3.5 bg-white text-black/60 hover:bg-ak-gold hover:text-white/90 dashboard-tabs-link" href="#documents">Documents</a>
+                        <a class="cursor-pointer text-sm w-full my-1.5 py-2.5 px-3.5 bg-white text-black/60 hover:bg-ak-gold hover:text-white/90 dashboard-tabs-link" href="#notifications">Notifications</a>
+                        <a class="cursor-pointer text-sm w-full my-1.5 py-2.5 px-3.5 bg-white text-black/60 hover:bg-ak-gold hover:text-white/90 dashboard-tabs-link" href="#my-bookings">My Bookings</a>
+                        <a class="cursor-pointer text-sm w-full my-1.5 py-2.5 px-3.5 bg-white text-black/60 hover:bg-ak-gold hover:text-white/90 dashboard-tabs-link" href="#coupons">Coupons</a>
+                        <a class="cursor-pointer text-sm w-full my-1.5 py-2.5 px-3.5 bg-white text-black/60 hover:bg-ak-gold hover:text-white/90 dashboard-tabs-link" href="#suggestions">Suggestions</a>
+                        <a class="cursor-pointer text-sm w-full my-1.5 py-2.5 px-3.5 bg-white text-black/60 hover:bg-ak-gold hover:text-white/90 dashboard-tabs-link" href="#change-password">Change Password</a>
+                        <a href="/@culture/Customer/Account/Logout?v=@Guid.NewGuid()" class="cursor-pointer text-sm w-full my-1.5 py-2.5 px-3.5 bg-white text-black/60 hover:bg-ak-gold hover:text-white/90">Logout</a>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Tabs End -->
+
+            <div class="hidden w-0 md:w-[5%] md:flex"></div>
+
+            <!-- Partial -->
+            <!-- Render Section Div -->
+            <div class="mt-8 md:mt-0 md:pr-0 w-[100%] md:w-[70%]" id="dashboard_render_section">
+
+                <section class="container w-full md:pr-10" id="loading">
+                    <div class="bg-white border border-ak-light drop-shadow filter flex flex-col h-full my-auto rounded-lg">
+                        <div class="flex flex-col my-auto py-2 text-center w-[100%]" style="">
+                            @*<i class="fa fa-2x fa-circle-notch fa-spin text-ak-gold"></i>
+                                <p class="mt-1 text-ak-gold">Loading ...</p>*@
+                            <div class="mt-1 mx-auto dot-flashing text-center w-[100%]"></div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            <!-- Render Section Div End -->
+
+        </div>
+        <!-- Dashboard End -->
+
+    </div>
+
+    <!-- Side Image -->
+    <div class="hidden md:flex w-[10%]">
+        <img src="/assets/images/bg/dashboard-side.png" alt="side-image"
+             class="w-[70%] m-auto mr-0 object-cover mt-[50%] select-none">
+    </div>
+</section>
+<!-- Main Section End -->
+<!-- #endregion Content -->
+<!--Write js Here-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@model MyProject.Data.Prescription
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/CustomerPortal/Views/Shared/_Layout.cshtml";
+}
+
+<!--Body Content-->
+<div id="page-content" style="min-height: 600px;">
+    <!--Page Title-->
+    <div class="page section-header text-center">
+        <div class="page-title">
+            <div class="wrapper"><h1 class="page-width">Prescription</h1></div>
+            <div class="bredcrumbWrap m-0">
+                <div class="container breadcrumbs">
+                    <a href="/Home/Index" title="Back to the home page">Home</a><span aria-hidden="true">›</span><span>Prescription</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Page Title-->
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 main-col">
+                <div class="mb-4">
+                    <form action="/Customer/Prescription/Create" method="post" enctype="multipart/form-data" id="FormPrescription">
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="FilePath" style="margin-top: 12px;">Description</label>
+                                    <textarea required="" rows="10" id="Description" name="Description" placeholder="Write description here ..."></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group mb-0">
+                                    <label for="FilePath" style="margin-top: 12px;">Attach Images</label>
+                                    <input type="file" name="FilePath" id="FilePath" placeholder="Browse" multiple required />
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="text-center col-12 col-sm-12 col-md-12 col-lg-12">
+                                <button type="submit" class="btn mb-3" id="btnSubmit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Body Content-->
+@section IndexScript {
+    <script src="@Url.ContentVersioned("~/Assets/Admin/js/customer/prescription/create.js")"></script>
+
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <script>
+		$(document).ready(function () {
+			$('#message').html('<span class="fa fa-check mr-1"></span> ' + '@ViewBag.SuccessMessage')
+			$('#message').slideDown();
+			setTimeout(function () {
+				$('#message').slideUp();
+			}, 6000);
+		})
+        </script>
+    }
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <script>
+
+		$(document).ready(function () {
+			$('#message').html('<span class="fas fa-exclamation-triangle mr-1"></span> ' + '@ViewBag.ErrorMessage')
+			$('#message').slideDown();
+			setTimeout(function () {
+				$('#message').slideUp();
+			}, 6000);
+		})
+        </script>
+    }
+}
+<!--End Body Content-->

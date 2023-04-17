@@ -1,0 +1,56 @@
+﻿@{
+	ViewBag.Title = "";
+	var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+	bool RTL = CultureHelper.IsRighToLeft();
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!--Body Content-->
+<div class="render-body" style="">
+	<!-- Hero Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<div class="">
+			<div class="h-[150px] mx-auto bg-cm-details bg-cover flex flex-col justify-center items-center md:h-[200px] lg:h-[300px]">
+                <h1 class="uppercase font-Rubik text-xl font-medium text-center text-white lg:text-4xl lg:mb-2">CHAIRMAN_S_MESSAGE</h1>
+				<div class="flex items-center">
+                    <a href="/@culture/home/index" class="font-Rubik text-xs uppercase text-white">HOME</a>
+					<svg viewBox="0 0 192 512" class="w-1.5 mx-2 fill-current text-white flip-horizontal-rtl"><path fill="" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class="fill-white"></path></svg>
+                    <a href="/@culture/our-story" class="font-Rubik text-xs uppercase text-white">OUR_STORY</a>
+					<svg viewBox="0 0 192 512" class="w-1.5 mx-2 fill-current text-white flip-horizontal-rtl"><path fill="" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class="fill-white"></path></svg>
+                    <p class="font-Rubik text-xs uppercase text-white">CHAIRMAN_S_MESSAGE</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero Section End -->
+	<!-- Chairman Message section start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto sm:my-20 py-10">
+		<div class="w-[80%] mx-auto xl:w-[60%]">
+			<div class="sm:flex sm:relative">
+				<div class="sm:w-[50%] sm:py-8">
+                    <h1 class="font-Rubik text-base uppercase text-left font-medium pt-4 lg:text-xl pb-4 w-[90%] mx-auto">WORDS_FROM_OUR_CHAIRMAN</h1>
+					<div class="relative">
+						<img src="/assets/images/web-icons/quote-left.png" alt="" class="absolute top-0 -left-6">
+                        <p class="font-Rubik text-xs w-[90%] mx-auto text-justify">THE_PROGRESSING_21ST_CENTURY_IS_AN_</p>
+						<img src="/assets/images/web-icons/quote-right.png" alt="" class="absolute -bottom-4 left-16 sm:left-[15rem] lg:left-[13rem] xl:left-[13rem] 2xl:left-[27rem]">
+					</div>
+					<div class="flex mt-4 justify-end">
+						<p class="font-Rubik text-base font-medium">-</p>
+                        <h1 class="font-Rubik text-base font-medium text-gk-gold">ATIF_RAHMAN</h1>
+					</div>
+				</div>
+				<div class="flex justify-center pb-10 sm:w-[50%] sm:pb-0">
+					<img src="/assets/images/arifrahman.png" alt="" class="sm:absolute sm:-top-10 sm:h-[20rem] sm:-right-16">
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Chairman Message section End -->
+</div>
+<!--Body Content End-->
+<!--Write js Here-->
+@section IndexScript {
+	@*<script src="@Url.ContentVersioned("~/Assets/js/web/chairman-message/index.js")"></script>*@
+}

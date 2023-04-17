@@ -1,0 +1,84 @@
+﻿@model IEnumerable<MyProject.Data.Team>
+@{
+	ViewBag.Title = "";
+	var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+	bool RTL = CultureHelper.IsRighToLeft();
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!--Body Content-->
+<div class="render-body" style="">
+	<!-- Hero Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<div class="">
+            <div class="h-[150px] mx-auto bg-team-details bg-cover flex flex-col justify-center items-center md:h-[200px] lg:h-[300px]">
+                <h1 class="uppercase font-Rubik text-xl font-medium text-center text-white lg:text-4xl lg:mb-2">WORKFORCE</h1>
+                <div class="flex items-center">
+                    <a href="/@culture/home/index" class="font-Rubik text-xs uppercase text-white">HOME</a>
+                    <svg viewBox="0 0 192 512" class="w-1.5 mx-2 fill-current text-white flip-horizontal-rtl"><path fill="" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class="fill-white"></path></svg>
+                    <a href="/@culture/our-story" class="font-Rubik text-xs uppercase text-white">OUR_STORY</a>
+                    <svg viewBox="0 0 192 512" class="w-1.5 mx-2 fill-current text-white flip-horizontal-rtl"><path fill="" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path></svg>
+                    <p class="font-Rubik text-xs uppercase text-white">WORKFORCE</p>
+                </div>
+            </div>
+		</div>
+	</section>
+	<!-- Hero Section End -->
+	<!-- Teams section start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<div class="w-[80%] mx-auto py-10">
+			@if (Model.Count() > 0)
+			{
+				<div class="owl-carousel owl-theme">
+					@foreach (var item in Model)
+					{
+						<div>
+							<a href="/@culture/workforce-person/@item.ID">
+								<img src="@Url.Content(item.Image)" alt="">
+
+								<h1 class="font-Rubik text-xs uppercase font-medium text-center pt-4">@item.Name</h1>
+								<p class="font-Rubik text-xs uppercase text-center text-black/40">@item.Designation</p>
+							</a>
+						</div>
+					}
+				</div>
+			}
+			else
+			{
+				<div class="py-10 flex justify-center items-center animate-pulse ">
+					<a href="javascript:void(0);" class="bg-gk-gold ease-in-out font-Rubik font-medium px-4 py-2 mb-12 text-center text-xs uppercase rounded no-more" style=""><i class="fa fa-exclamation-circle mr-1"></i> COMING_SOON</a>
+				</div>
+			}
+		</div>
+	</section>
+	<!-- Teams section End -->
+</div>
+<!--Body Content End-->
+<!--Write js Here-->
+@section IndexScript {
+	@*<script src="@Url.ContentVersioned("~/Assets/js/web/teams/index.js")"></script>*@
+	<script>
+		$('.owl-carousel').owlCarousel({
+			rtl: direction == "ltr" ? false : true,
+			loop: false,
+			navText: ["", ""],
+			nav: false,
+			margin: 16,
+			dots: false,
+			responsiveClass: true,
+			responsive: {
+				0: {
+					items: 3,
+				},
+				600: {
+					items: 5,
+				},
+				1000: {
+					items: 5,
+				}
+			}
+		})
+	</script>
+}

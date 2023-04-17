@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5f03fd0eae8246de971f6e9c274b2b92" Name="Diagram1" ZoomLevel="10">
+        <EntityTypeShape EntityType="admin_stagorofacModel.Amenity" Width="1.5" PointX="22.5" PointY="99.625" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Appointment" Width="1.5" PointX="24.75" PointY="140.375" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Area" Width="1.5" PointX="11.25" PointY="114" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.AssetImage" Width="1.5" PointX="21" PointY="142.375" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Asset" Width="1.5" PointX="18.75" PointY="127.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.AssetsCategory" Width="1.5" PointX="7.5" PointY="157.375" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.AssetsContractor" Width="1.5" PointX="16.5" PointY="105.125" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.AssetsProduct" Width="1.5" PointX="9.75" PointY="136.875" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.AssetsSpecification" Width="1.5" PointX="21" PointY="145" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Attribute" Width="1.5" PointX="16.5" PointY="90.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Award" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Bank" Width="1.5" PointX="3" PointY="134.625" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Banner" Width="1.5" PointX="2.75" PointY="9.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Blog" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.BookingCancellation" Width="1.5" PointX="24.75" PointY="125.875" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.BookingImage" Width="1.5" PointX="21.75" PointY="127.125" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Booking" Width="1.5" PointX="19.5" PointY="113.875" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Brand" Width="1.5" PointX="5.25" PointY="104.25" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.BusinessBranchSetting" Width="1.5" PointX="8" PointY="7" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.BusinessSetting" Width="1.5" PointX="5.75" PointY="5.25" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.CandidateEducation" Width="1.5" PointX="12" PointY="87.5" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.CandidateExperience" Width="1.5" PointX="12" PointY="84.375" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Category" Width="1.5" PointX="5.25" PointY="129.875" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.City" Width="1.5" PointX="3" PointY="113.875" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Community" Width="1.5" PointX="13.5" PointY="103.875" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.CommunityFeature" Width="1.5" PointX="18.75" PointY="102.875" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.CommunityImage" Width="1.5" PointX="15.75" PointY="127.125" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Consultant" Width="1.5" PointX="10.75" PointY="7.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ContentManagement" Width="1.5" PointX="10.75" PointY="11.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Contractor" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Country" Width="1.5" PointX="0.75" PointY="114" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.CouponCategory" Width="1.5" PointX="12.75" PointY="141" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.CouponRedemption" Width="1.5" PointX="33" PointY="123.5" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Coupon" Width="1.5" PointX="28.5" PointY="102.625" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.CustomerCoupon" Width="1.5" PointX="30.75" PointY="118.875" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.CustomerDocument" Width="1.5" PointX="30.75" PointY="113.875" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.CustomerDocumentDetail" Width="1.5" PointX="24.75" PointY="144.625" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.CustomerDocumentType" Width="1.5" PointX="28.5" PointY="112.375" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.CustomerLoyaltySetting" Width="1.5" PointX="12.75" PointY="4.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.CustomerRelation" Width="1.5" PointX="28.5" PointY="108.5" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Customer" Width="1.5" PointX="22.5" PointY="113.875" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.CustomerSession" Width="1.5" PointX="24.75" PointY="109.375" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.CustomerSuggestion" Width="1.5" PointX="24.75" PointY="153.625" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Department" Width="1.5" PointX="7.5" PointY="146.875" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Development" Width="1.5" PointX="11.25" PointY="95.375" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.EmailSetting" Width="1.5" PointX="7.75" PointY="12.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Enquiry" Width="1.5" PointX="24.75" PointY="112.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Event" Width="1.5" PointX="12.75" PointY="8.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Faq" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Feature" Width="1.5" PointX="16.5" PointY="94.375" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Feedback" Width="1.5" PointX="24.75" PointY="133.375" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Introduction" Width="1.5" PointX="5.75" PointY="1" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.IntroductionImage" Width="1.5" PointX="8" PointY="1" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Invoice" Width="1.5" PointX="2.75" PointY="13.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.JobCandidate" Width="1.5" PointX="9.75" PointY="83.125" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.JobOpening" Width="1.5" PointX="7.5" PointY="85.125" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Location" Width="1.5" PointX="13.5" PointY="117.125" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.NewsFeed" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.NotificationReceiver" Width="1.5" PointX="3" PointY="5.5" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Notification" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.NumberRange" Width="1.5" PointX="4.75" PointY="14.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Ozone" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.OzoneImage" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Partner" Width="1.5" PointX="14.75" PointY="7.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.PaymentGatewaySetting" Width="1.5" PointX="14.75" PointY="11.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.PaymentMethod" Width="1.5" PointX="9.75" PointY="15.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Product" Width="1.5" PointX="7.5" PointY="104.875" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ProductAttribute" Width="1.5" PointX="18.75" PointY="98.5" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ProductAttributeSetting" Width="1.5" PointX="21.75" PointY="109.875" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ProductCategory" Width="1.5" PointX="14.75" PointY="99" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ProductImage" Width="1.5" PointX="9.75" PointY="105.625" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ProductRating" Width="1.5" PointX="9.75" PointY="100" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ProductRatingImage" Width="1.5" PointX="12" PointY="100.5" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ProductReturn" Width="1.5" PointX="11.75" PointY="15.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ProductReturnImage" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ProductTag" Width="1.5" PointX="15.75" PointY="102" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ProductVariant" Width="1.5" PointX="24" PointY="104" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ProductVariationAttribute" Width="1.5" PointX="27" PointY="133.5" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ProductVariationImage" Width="1.5" PointX="18" PointY="140.625" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ProductVariation" Width="1.5" PointX="9.75" PointY="147.25" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Progress" Width="1.5" PointX="22.5" PointY="152.875" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Property" Width="1.5" PointX="13.5" PointY="124.375" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.PropertyFeature" Width="1.5" PointX="15.75" PointY="138.5" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.PropertyImage" Width="1.5" PointX="15.75" PointY="134.625" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.PropertyProgress" Width="1.5" PointX="24.75" PointY="129.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Quotation" Width="1.5" PointX="36" PointY="127.625" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.QuotationDetail" Width="1.5" PointX="38.25" PointY="117.125" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.QuotationNote" Width="1.5" PointX="38.25" PointY="133.625" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Route" Width="1.5" PointX="7.5" PointY="170.5" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ServicebookingImage" Width="1.5" PointX="33" PointY="119.5" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ServiceBooking" Width="1.5" PointX="30.75" PointY="122.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ServiceImage" Width="1.5" PointX="9.75" PointY="157.125" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ServiceRating" Width="1.5" PointX="36" PointY="122.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Service" Width="1.5" PointX="7.5" PointY="123.125" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ShippingClass" Width="1.5" PointX="5.25" PointY="108" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Staff" Width="1.5" PointX="21.75" PointY="130.25" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.StaffRole" Width="1.5" PointX="12.75" PointY="133.125" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.StaffSession" Width="1.5" PointX="24" PointY="149.5" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.StaffSuggestion" Width="1.5" PointX="27" PointY="130.125" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Subscriber" Width="1.5" PointX="16.75" PointY="3.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Tag" Width="1.5" PointX="13.5" PointY="91.875" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.TaxSetting" Width="1.5" PointX="16.75" PointY="6.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Team" Width="1.5" PointX="6.75" PointY="16.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.TicketDocument" Width="1.5" PointX="16.75" PointY="10.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.TicketMessage" Width="1.5" PointX="12.75" PointY="137.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Ticket" Width="1.5" PointX="10.5" PointY="127.375" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Transaction" Width="1.5" PointX="16.75" PointY="13.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.UnitAmenity" Width="1.5" PointX="24.75" PointY="122.875" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.UnitBooking" Width="1.5" PointX="27.75" PointY="115.625" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.UnitBookingsPaymentHistory" Width="1.5" PointX="33" PointY="127.125" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.UnitEnquiry" Width="1.5" PointX="24.75" PointY="118.5" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.UnitImage" Width="1.5" PointX="18.75" PointY="110" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.UnitPaymentPlan" Width="1.5" PointX="18.75" PointY="136.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Unit" Width="1.5" PointX="16.5" PointY="114.25" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.UnitType" Width="1.5" PointX="14.25" PointY="95.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.UserRolePrivilege" Width="1.5" PointX="15.75" PointY="142.375" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.UserRole" Width="1.5" PointX="6" PointY="93" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.User" Width="1.5" PointX="8.25" PointY="93.875" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.VendorDocument" Width="1.5" PointX="7.5" PointY="150.5" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.VendorIndustry" Width="1.5" PointX="3" PointY="110.25" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.VendorPackage" Width="1.5" PointX="3" PointY="130.625" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Vendor" Width="1.5" PointX="5.25" PointY="111.5" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.VendorSection" Width="1.5" PointX="3" PointY="127.5" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.VendorService" Width="1.5" PointX="21.75" PointY="105.875" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.VendorSession" Width="1.5" PointX="0.75" PointY="17.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.VendorSuggestion" Width="1.5" PointX="7.5" PointY="135.375" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.VendorTransactionHistory" Width="1.5" PointX="10.5" PointY="109.625" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.VendorType" Width="1.5" PointX="3" PointY="106.375" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.VendorUser" Width="1.5" PointX="9.75" PointY="131.625" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.VendorUserRole" Width="1.5" PointX="7.5" PointY="143.375" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.VendorUserRolePrivilege" Width="1.5" PointX="9.75" PointY="143.75" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.VendorWalletShare" Width="1.5" PointX="7.5" PointY="166.25" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.VendorWalletShareHistory" Width="1.5" PointX="7.5" PointY="154" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.VendorWalletShareHistoryOrder" Width="1.5" PointX="9.75" PointY="154.375" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.VendorWithdrawalRequest" Width="1.5" PointX="7.5" PointY="163" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.BookingReview" Width="1.5" PointX="27.75" PointY="125.625" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UnitAmeni__Ameni__68487DD7" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Appointments_Customers" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CityID__18EBB532" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CityID__19DFD96B" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CityID__1AD3FDA4" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CityID__1BC821DD" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CityID__1CBC4616" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CityID__37C5420D" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CityID__38B96646" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CityID__39AD8A7F" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CityID__3AA1AEB8" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CityID__3B95D2F1" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CityID__3CBF0154" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CityID__3DB3258D" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CityID__3EA749C6" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CityID__3F9B6DFF" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CityID__408F9238" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CityID__41B8C09B" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CityID__42ACE4D4" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CityID__43A1090D" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CityID__44952D46" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CityID__4589517F" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CountryID__1DB06A4F" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CountryID__1EA48E88" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CountryID__1F98B2C1" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CountryID__208CD6FA" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CountryID__2180FB33" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CountryID__3C89F72A" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CountryID__3D7E1B63" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CountryID__3E723F9C" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CountryID__3F6663D5" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CountryID__405A880E" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CountryID__4183B671" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CountryID__4277DAAA" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CountryID__436BFEE3" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CountryID__4460231C" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CountryID__45544755" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CountryID__467D75B8" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CountryID__477199F1" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CountryID__4865BE2A" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CountryID__4959E263" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Areas__CountryID__4A4E069C" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Units__AreaID__6C190EBB" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Area_Communities" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_AssetContractors_Areas" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Bookings_Areas" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Customers_Areas" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Location_Areas" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Property_Areas" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Staff_Areas" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_UnitBookings_Areas" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_AssetImages_Assets" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Assets_AssetContractors" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Assets_AssetsCategories" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Assets_AssetsCategoriesParent" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Assets_AssetsProducts" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Assets_Departments" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Assets_Location" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Assets_Staff" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Assets_Vendors" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_AssetsSpecifications_Assets" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_AssetsCategories_AssetsCategories1" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_AssetsCategories_Vendors" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_AssetsProductsChildID_AssetsCategoryID" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_AssetsProductsParentID_AssetsCategoriesParentID" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_AssetContractors_AssetContractors" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_AssetContractors_Cities" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_AssetContractors_Countries" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_AssetsProducts_Vendors" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ProductAt__Attri__4D4A6ED8" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ProductAt__Attri__5026DB83" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Vendors__BankID__1995C0A8" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_BookingCancellation_Bookings" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_BookingCancellation_Customers" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_BookingCancellation_Services" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_BookingImages_Bookings" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_BookingReviews_Bookings" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Bookings_Cities" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Bookings_Countries" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Bookings_Customers" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Bookings_Services" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Bookings_Vendors" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Product_ProductCategory" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Bussiness__Busin__5BE2A6F2" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_CandidateEducation_JobCandidates" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_CandidateExperience_JobCandidates" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ProductCa__Produ__5D80D6A1" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ServiceBo__Servi__7093AB15" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ServiceRa__Servi__764C846B" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Category_Category" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_JobOpenings_Category" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Quotation_Category" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Services_Category" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Cities__CountryI__2645B050" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Cities__CountryI__2739D489" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Cities__CountryI__282DF8C2" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Cities__CountryI__29221CFB" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Cities__CountryI__2A164134" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Cities__CountryI__414EAC47" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Cities__CountryI__4242D080" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Cities__CountryI__4336F4B9" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Cities__CountryI__442B18F2" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Cities__CountryI__451F3D2B" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Cities__CountryI__46486B8E" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Cities__CountryI__473C8FC7" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Cities__CountryI__4830B400" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Cities__CountryI__4924D839" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Cities__CountryI__4A18FC72" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Cities__CountryI__4B422AD5" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Cities__CountryI__4C364F0E" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Cities__CountryI__4D2A7347" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Cities__CountryI__4E1E9780" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Cities__CountryI__4F12BBB9" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Units__CityID__6D0D32F4" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_City_Communities" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Customers_Cities" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Location_Cities" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Property_Cities" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Staff_Cities" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_UnitBookings_Cities" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Vendors_Cities" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__00DF2177" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__01D345B0" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__02C769E9" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__03BB8E22" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__04AFB25B" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__05A3D694" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__0697FACD" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__078C1F06" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__0880433F" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__09746778" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__0A688BB1" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__0B5CAFEA" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__0C50D423" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__0D44F85C" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__0E391C95" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__0F2D40CE" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__10216507" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__11158940" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__1209AD79" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__13F1F5EB" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__14E61A24" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__15DA3E5D" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__16CE6296" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__17C286CF" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__18B6AB08" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__19AACF41" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__1A9EF37A" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__1B9317B3" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__1C873BEC" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__1D7B6025" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__1E6F845E" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__1F63A897" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__2057CCD0" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__214BF109" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__22401542" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__2334397B" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__24285DB4" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__251C81ED" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__2610A626" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Commu__7FEAFD3E" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Countries_Communites" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Community__Featu__619B8048" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Units__CountryID__6E01572D" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Customers_Countries" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Location_Countries" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Property_Countries" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Staff_Countries" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_UnitBookings_Countries" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Vendors_Countries" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_CouponCategories_Coupons" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_CouponCategories_Services" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__CouponRed__Booki__11007AA7" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_CouponRedemption_Coupons" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_CouponRedemption_Customers" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_CustomerCoupons_Coupons" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_CustomerCoupons_Customers" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__CustomerD__Custo__01BE3717" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_CustomerDocument_CustomerDocumentTypes" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_CustomerDocument_Customers" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_CustomerDocumentDetails_Customers" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__CustomerS__Custo__02E7657A" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ServiceBo__Custo__6EAB62A3" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Servicebo__Custo__737017C0" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ServiceRa__Custo__75586032" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_BookingReviews_Customers" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_CustomerSessions_Customers" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Enquiries_Customers" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Feedbacks_Customers" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Quotation_Customers" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_UnitBookings_Customers" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_UnitEnquiries_Customers" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Departments_Vendors" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Staff_Departments" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Table_1_Departments" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Property_Development" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__PropertyF__Featu__57A801BA" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_IntroductionImages_Introduction" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_JobCandidates_JobOpenings" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Location_Vendors" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Staff_Location" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_NotificationReceivers_Notifications" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_OzoneImages_Ozone" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ProductAt__Produ__4C564A9F" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ProductAt__Produ__4F32B74A" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ProductCa__Produ__5E74FADA" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ProductIm__Produ__511AFFBC" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ProductRa__Produ__520F23F5" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ProductTa__Produ__53F76C67" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ProductVa__Produ__55DFB4D9" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ProductVa__Produ__57C7FD4B" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ProductVa__Produ__5B988E2F" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ProductVa__Produ__5C8CB268" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Product_ShippingClasses" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Product_Vendors" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_QuotationDetails_Product" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ProductVa__Produ__56D3D912" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ProductVa__Produ__58BC2184" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ProductRa__Produ__5303482E" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ProductTa__TagID__54EB90A0" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ProductVa__Produ__59B045BD" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ProductVa__Produ__5AA469F6" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__PropertyP__Progr__7AF13DF7" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Propertie__Prope__66EA454A" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__PropertyF__Prope__56B3DD81" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__PropertyI__Prope__6754599E" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Properties_Units" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Quotation_ServiceBookings" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Quotation_Services" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Quotation_Staff" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Quotation_Vendors" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_QuotationDetails_Quotation" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_QuotationNote_Quotation" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_QuotationDetails_Vendors" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__Route__4F9CCB9E" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__Route__5090EFD7" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__Route__51851410" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__Route__52793849" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__Route__536D5C82" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__Route__54968AE5" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__Route__558AAF1E" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__Route__567ED357" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__Route__5772F790" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__Route__58671BC9" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__Route__59904A2C" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__Route__5A846E65" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__Route__5B78929E" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__Route__5C6CB6D7" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__Route__5D60DB10" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__Route__5D95E53A" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__Route__5E8A0973" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__Route__5F7E2DAC" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__Route__607251E5" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__Route__6166761E" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_VendorUserRolePrivileges_Routes" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Servicebo__Servi__727BF387" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ServiceBo__Servi__7187CF4E" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ServiceBo__Staff__11F49EE0" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ServiceBo__Vendo__6F9F86DC" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ServiceRa__Servi__74643BF9" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_ServiceImages_Services" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__ServiceRa__Servi__7740A8A4" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_BookingReviews_Services" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Services_Services" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Services_Vendors" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_VendorServices_Services" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__StaffSess__Staff__1D66518C" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__StaffSugg__Staff__3BEAD8AC" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Staff_StaffRoles" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Staff_Vendors" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Table_1_Vendors" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_StaffSuggestion_Vendors" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_TicketMessages_Tickets" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Tickets_Users" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Tickets_Vendors" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UnitAmeni__UnitI__693CA210" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_UnitBookings_Units" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_UnitBookingsPaymentHistory_UnitBookings" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UnitBooki__UnitP__48EFCE0F" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UnitEnqui__UnitD__6CA31EA0" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UnitImage__UnitD__6A30C649" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UnitPayme__UnitD__6B24EA82" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Units_UnitTypes" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__UserR__6BAEFA67" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__UserR__6CA31EA0" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__UserR__6D9742D9" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__UserR__6E8B6712" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__UserR__6F7F8B4B" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__UserR__7073AF84" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__UserR__7167D3BD" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__UserR__725BF7F6" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__UserR__73501C2F" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__UserR__74444068" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__UserR__753864A1" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__UserR__762C88DA" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__UserR__7720AD13" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__UserR__7814D14C" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__UserR__7908F585" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__UserR__79FD19BE" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__UserR__7AF13DF7" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__UserR__7BE56230" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__UserR__7CD98669" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__UserRoleP__UserR__7DCDAAA2" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Roles_Users" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_VendorDocument_Vendor" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Vendors__VendorI__67FE6514" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Vendors_VendorPackages" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_VendorTransactionHistory_VendorPackages" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Vendors__VendorS__66161CA2" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__Vendors__VendorT__670A40DB" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__VendorSug__Vendo__0C70CFB4" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__VendorWal__Vendo__6339AFF7" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__VendorWal__Vendo__6521F869" />
+        <AssociationConnector Association="admin_stagorofacModel.FK__VendorWit__Vendo__642DD430" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_VendorServices_Vendors" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_VendorTransactionHistory_Vendors" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_VendorUser_Vendor" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_VendorUserRole_Vendor" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_VendorUser_VendorUserRole" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_VendorUserRolePrivileges_VendorUserRole" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_VendorWalletShareHistoryOrders_VendorWalletShareHistory" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.IntroductionSetting" Width="1.5" PointX="8.25" PointY="118.25" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_IntroductionSetting_Cities" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_IntroductionSetting_Countries" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ProjectImage" Width="1.5" PointX="18.875" PointY="21.375" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ProjectType" Width="1.5" PointX="14.375" PointY="21.25" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.Project" Width="1.5" PointX="16.625" PointY="19.125" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_ProjectImages_Projects" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_Projects_ProjectTypes" />
+        <EntityTypeShape EntityType="admin_stagorofacModel.ProjectTag" Width="1.5" PointX="18.875" PointY="55.75" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_ProjectTags_Projects" />
+        <AssociationConnector Association="admin_stagorofacModel.FK_ProjectTags_Tags" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

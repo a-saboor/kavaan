@@ -1,0 +1,240 @@
+﻿@model MyProject.Data.NewsFeed
+
+
+@{
+	ViewBag.Title = "Create";
+	Layout = null;
+}
+<style>
+	.video-frame {
+		width: 100%;
+		height: auto;
+		box-shadow: 0 0.5rem 1.5rem 0.5rem rgb(0 0 0 / 8%);
+		border-radius: 5px;
+		padding: 10px;
+	}
+</style>
+<!--begin::Content-->
+<div class="modal-header">
+	<h5 class="modal-title">Details</h5>
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<i aria-hidden="true" class="ki ki-close"></i>
+	</button>
+</div>
+
+<div class="modal-body">
+
+	@Html.AntiForgeryToken()
+	<div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+	<div class="form-group row">
+		<div class="col-lg-12 text-center">
+			<div class="image-input image-input-outline" id="kt_image_1">
+				<div class="image-input-wrapper" style="background-image: url('@Model.BannerImage')"></div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+
+		<div class="col-md-12 col-sm-12">
+			<div class="form-group">
+				<label class="control-label">Title</label>
+				<div class="input-group mb-2">
+					@Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", placeholder = "Enter title here ...", required = "required" } })
+					<div class="input-group-append"><span class="input-group-text"><i class="fa fa-server"></i></span></div>
+				</div>
+				@Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+			</div>
+		</div>
+		@*<div class="col-md-6 col-sm-12">
+			<div class="form-group">
+				<label class="control-label">Title (Ar)</label>
+				<div class="input-group mb-2">
+					@Html.EditorFor(model => model.TitleAr, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", placeholder = "Enter title (Ar) here ...", required = "required" } })
+					<div class="input-group-append"><span class="input-group-text"><i class="fa fa-server"></i></span></div>
+				</div>
+				@Html.ValidationMessageFor(model => model.TitleAr, "", new { @class = "text-danger" })
+			</div>
+		</div>*@
+		<div class="col-md-12 col-sm-12">
+			<div class="form-group">
+				<label class="control-label">Description</label>
+				<div class="input-group mb-2">
+					@*<div class="card card-body m-0 py-5 px-5 max-h-300px overflow-auto">
+						@Html.Raw(Model.TitleDescription)
+					</div>*@
+					@Html.TextAreaFor(model => model.TitleDescription, 5, 20, new { @class = "form-control", @readonly = "readonly", placeholder = "Enter description here ..." })
+				</div>
+				@Html.ValidationMessageFor(model => model.TitleDescription, "", new { @class = "text-danger" })
+			</div>
+		</div>
+		<!--<div class="col-md-6 col-sm-12">
+			<div class="form-group">
+				<label class="control-label">Description(Ar)</label>
+				<div class="input-group mb-2">-->
+					@*<div class="card card-body m-0 py-5 px-5 max-h-300px overflow-auto">
+						@Html.Raw(Model.TitleDescriptionAr)
+					</div>*@
+					<!--@Html.TextAreaFor(model => model.TitleDescriptionAr, 5, 20, new { @class = "form-control", @readonly = "readonly", placeholder = "Enter description(Ar) here ..." })
+				</div>
+				@Html.ValidationMessageFor(model => model.TitleDescriptionAr, "", new { @class = "text-danger" })
+			</div>
+		</div>-->
+		<div class="col-md-12 d-flex justify-content-center mb-12">
+			<div class="col-md-8 col-sm-12">
+				@if (!string.IsNullOrEmpty(Model.Video))
+				{
+					<div class="video-frame">
+						<video style="width: 100%; height: 100%;" controls>
+							<source src="@Url.Content(Model.Video)" type="video/mp4" />
+
+						</video>
+
+					</div>
+				}
+			</div>
+		</div>
+
+		<div class="col-md-6 col-sm-12">
+			<div class="form-group">
+				<label class="control-label">Host</label>
+				<div class="input-group mb-2">
+					@Html.EditorFor(model => model.Host, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", placeholder = "Enter host here ...", required = "required" } })
+					<div class="input-group-append">
+						<span class="input-group-text"><i class="fa fa-server"></i></span>
+					</div>
+				</div>
+				@Html.ValidationMessageFor(model => model.Host, "", new { @class = "text-danger" })
+			</div>
+		</div>
+		<br />
+		<br />
+		<br />
+		<br />
+		<div class="col-md-6 col-sm-12">
+			<label class="control-label">Event Date</label>
+			<div class="input-daterange input-group kt_datepicker_range">
+				@Html.EditorFor(model => model.EventDate, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control kt_datepicker_range date-format-1", type = "text", id = "EventDate", placeholder = " MM/DD/YYYY", required = "required" } });
+				<div class="input-group-append">
+					<span class="input-group-text">
+						<i class="fa fa-calendar"></i>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-12">
+			<div class="form-group">
+				<label class="control-label">Twitter Url</label>
+				<div class="input-group mb-2">
+					@Html.EditorFor(model => model.TwitterUrl, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", placeholder = "enter twitter Url here ...", required = "required" } })
+					<div class="input-group-append">
+						<span class="input-group-text"><i class="fab fa-twitter"></i></span>
+					</div>
+				</div>
+				@Html.ValidationMessageFor(model => model.TwitterUrl, "", new { @class = "text-danger" })
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-12">
+			<div class="form-group">
+				<label class="control-label">Facebook URL</label>
+				<div class="input-group mb-2">
+					@Html.EditorFor(model => model.FacebookURL, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", placeholder = "Enter facebook url here ...", required = "required" } })
+					<div class="input-group-append">
+						<span class="input-group-text"><i class="fab fa-facebook"></i></span>
+					</div>
+				</div>
+				@Html.ValidationMessageFor(model => model.FacebookURL, "", new { @class = "text-danger" })
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-12">
+			<div class="form-group">
+				<label class="control-label">LinkedIn Url</label>
+				<div class="input-group mb-2">
+					@Html.EditorFor(model => model.LinkedinURL, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", placeholder = "Enter linkedin url here ...", required = "required" } })
+					<div class="input-group-append">
+						<span class="input-group-text"><i class="fab fa-linkedin"></i></span>
+					</div>
+				</div>
+				@Html.ValidationMessageFor(model => model.LinkedinURL, "", new { @class = "text-danger" })
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-12">
+			<div class="form-group">
+				<label class="control-label">Instagram Url</label>
+				<div class="input-group mb-2">
+					@Html.EditorFor(model => model.InstagramURL, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", placeholder = "Enter instagram url here ...", required = "required" } })
+					<div class="input-group-append">
+						<span class="input-group-text"><i class="fab fa-instagram"></i></span>
+					</div>
+				</div>
+				@Html.ValidationMessageFor(model => model.InstagramURL, "", new { @class = "text-danger" })
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-12">
+			<div class="form-group">
+				<label class="control-label">Email Address</label>
+				<div class="input-group mb-2">
+					@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", placeholder = "Enter email address here ...", required = "required" } })
+					<div class="input-group-append">
+						<span class="input-group-text"><i class="fa fa-envelope"></i></span>
+					</div>
+				</div>
+				@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label class="control-label">Post Position</label>
+				<div class="input-group mb-2">
+					@Html.TextBoxFor(model => model.Position, new { @type = "number", @class = "form-control", @readonly = "readonly", placeholder = "Enter position here...", @min = "0", @max = "100000" })
+					<div class="input-group-append">
+						<span class="input-group-text"><i class="fa fa-sort-numeric-up"></i></span>
+					</div>
+				</div>
+
+				@Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="col-md-6 col-sm-12">
+			<label class="control-label">Posted Date</label>
+			<div class="input-daterange input-group kt_datepicker_range">
+				@Html.EditorFor(model => model.PostedDate, new { htmlAttributes = new { @class = "form-control kt_datepicker_range date-format-1", @readonly = "readonly", type = "text", id = "PostedDate", placeholder = " MM/DD/YYYY", required = "required" } })
+				<div class="input-group-append">
+					<span class="input-group-text">
+						<i class="fa fa-calendar"></i>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-6">
+			<div class="form-group">
+				<label class="control-label">Enable Featured</label>
+				<div class="input-group mb-2">
+					<span class="switch">
+						<label>
+							@if (Model.IsFeatured != null && Model.IsFeatured == true)
+							{
+								@Html.CheckBox("IsFeatured", true, new { @disabled = "disabled" })
+							}
+							else
+							{
+								@Html.CheckBox("IsFeatured", false, new { @disabled = "disabled" })
+							}
+							<span></span>
+						</label>
+					</span>
+				</div>
+				@Html.ValidationMessageFor(model => model.IsFeatured, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+</div>
+<script>
+    setTimeout(function () { dateFormat(1); }, 500);
+</script>

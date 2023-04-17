@@ -1,0 +1,147 @@
+﻿@model MyProject.Data.ServiceBooking
+@{
+    ViewBag.Title = "Cancel Service Booking";
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+    bool RTL = CultureHelper.IsRighToLeft();
+    Layout = null;
+}
+
+<!-- #region Modal-->
+<section class="font-Rubik w-full bg-black/50 fixed inset-0 modal fade flex flex-wrap top-0 left-0 justify-center items-center overflow-x-hidden overflow-y-auto h-auto z-[60] overflow-scroll-none popup-section"
+         id="cancellation_section">
+    <!-- Main Modal -->
+    <div class="max-w-screen-4xl 4xl:mx-auto w-full relative">
+        <!-- Modal Content -->
+        <div class="bg-white rounded-lg w-[80%] md:w-[40%] mx-auto m-10">
+            <!-- Header Section -->
+            <div class="modal-header flex justify-between items-center border-b bg-ak-light p-6 rounded-t-lg">
+                <div class="heading">
+                    <h3 class="text-gray-900 font-semibold text-xl md:text-2xl">
+                        Cancellation Reason
+                    </h3>
+                    <p class="text-ak-blue font-semibold text-xs md:text-xs">Deep Cleaning</p>
+                </div>
+                <button type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white close-modal">
+                    <svg class="w-5 h-5" fill="text-gray-900" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Header Section End -->
+            <!-- Body Section -->
+            <div class="modal-body bg-booking-1 p-4 md:py-2 px-8 md:px-6 space-y-6 bg-">
+                <!-- form -->
+                <form class="font-Rubik" id="cancellation_form">
+                    <!-- anti-forgery token here -->
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="IDD" name="ID" value="@Model.ID" />
+                    <!--Alert Message-->
+                    <div class="alert-div md:px-6 px-2"></div>
+                    <!--Alert Message End-->
+                    <div class="flex flex-col flex-wrap items-center justify-between md:flex-row mx-auto">
+
+                        <div class="flex flex-row flex-wrap form-group justify-start items-center md:my-2 md:w-full my-3 px-2 w-full">
+                            <input type="hidden" name="BookingID" value="">
+                            <p class="text-black/80 font-medium text-xs md:text-sm my-2">Booking No :</p>
+                            <p class="text-ak-gold font-medium text-xs md:text-sm my-2 ml-2"> @Model.BookingNo</p>
+                        </div>
+
+                        <hr class="mx-auto w-full mb-3">
+
+                        <div class="flex flex-col form-group items-center md:my-2 md:w-full my-3 px-2 w-full">
+
+                            <div class="w-full flex flex-row font-normal items-center md:text-sm space-x-4 py-2 text-xs radio-group">
+                                <input type="radio" id="reason_1" name="CancellationReason"
+                                       class="accent-ak-gold-1 transform-scale-half-3 ml-2 peer form-field" value="Service created by mistake." required="" checked>
+                                <label for="reason_1" class="text-ak-gray/80 peer-checked:text-black/80 pt-[0.1rem]">
+                                    Service
+                                    created
+                                    by mistake.
+                                </label>
+                            </div>
+
+
+                            <div class="w-full flex flex-row font-normal items-center md:text-sm space-x-4 py-2 text-xs radio-group">
+                                <input type="radio" id="reason_2" name="CancellationReason" value="Service cost too high"
+                                       class="accent-ak-gold-1 transform-scale-half-3 ml-2 peer form-field" required="">
+                                <label for="reason_2" class="text-ak-gray/80 peer-checked:text-black/80 pt-[0.1rem]">
+                                    Service
+                                    cost
+                                    too high
+                                </label>
+                            </div>
+
+                            <div class="w-full flex flex-row font-normal items-center md:text-sm space-x-4 py-2 text-xs radio-group">
+                                <input type="radio" id="reason_3" name="CancellationReason" value="Service is not required anymore"
+                                       class="accent-ak-gold-1 transform-scale-half-3 ml-2 peer form-field" required="">
+                                <label for="reason_3" class="text-ak-gray/80 peer-checked:text-black/80 pt-[0.1rem]">
+                                    Service is
+                                    not required anymore
+                                </label>
+                            </div>
+
+                            <div class="w-full flex flex-row font-normal items-center md:text-sm space-x-4 py-2 text-xs radio-group">
+                                <input type="radio" id="reason_4" name="CancellationReason" value=" Service created by mistake"
+                                       class="accent-ak-gold-1 transform-scale-half-3 ml-2 peer form-field" required="">
+                                <label for="reason_4" class="text-ak-gray/80 peer-checked:text-black/80 pt-[0.1rem]">
+                                    Service
+                                    created
+                                    by mistake
+                                </label>
+                            </div>
+
+                            <div class="w-full flex flex-row font-normal items-center md:text-sm space-x-4 py-2 text-xs radio-group">
+                                <input type="radio" id="reason_5" name="CancellationReason" value="Service cost too high"
+                                       class="accent-ak-gold-1 transform-scale-half-3 ml-2 peer form-field" required="">
+                                <label for="reason_5" class="text-ak-gray/80 peer-checked:text-black/80 pt-[0.1rem]">
+                                    Service
+                                    cost
+                                    too high
+                                </label>
+                            </div>
+
+                            <div class="w-full flex flex-row flex-wrap font-normal items-center md:text-sm space-x-4 py-2 text-xs radio-group">
+                                <input type="radio" id="reason_6" name="CancellationReason"
+                                       class="accent-ak-gold-1 transform-scale-half-3 ml-2 peer form-field" required="">
+                                <label for="reason_6" class="text-ak-gray/80 peer-checked:text-black/80 pt-[0.1rem]">Other</label>
+
+                                <div class="flex group flex-row flex-wrap font-normal items-center md:text-sm space-x-4 mt-4 py-0 text-xs invisible opacity-0 h-0 w-0 peer-checked:w-full peer-checked:h-auto peer-checked:visible peer-checked:opacity-100" style="margin-left: 0.5rem;transition: visibility 0s, opacity 0.3s linear;">
+                                    <textarea type="text" name="CancellationReason"
+                                              class="w-full rounded-lg text-sm outline-none-input py-3 px-3 bg-white border box-shadow-md input-field form-field" maxlength="100" autocomplete="off" data-required="" placeholder="Reason"
+                                              rows="6" spellcheck="false" data-ms-editor="true"></textarea>
+
+                                </div>
+                            </div>
+
+
+
+                            <small class="form-text-validation text-xss text-danger py-1"></small>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+            <!-- Body Section End -->
+            <!-- Footer Section -->
+            <div class="modal-footer flex items-center justify-end p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                <button class="btn-primary bg-white hover:bg-ak-light focus:outline-none border border-gray-300 close-modal">
+                    <p class="p-btn-primary text-gray-700 hover:text-gray-900">Close</p>
+                </button>
+                <button class="flex flex-row justify-center btn-primary bg-ak-gold/90 hover:bg-ak-gold focus:outline-none text-white" type="button"
+                        form="cancellation_form">
+                    <p class="p-btn-primary text-white">Submit</p>
+                </button>
+            </div>
+            <!-- Footer Section End -->
+        </div>
+        <!-- Modal Content End -->
+    </div>
+</section>
+<!-- Main Modal End -->
+<!-- #endregion Modal -->
+<!--Write js Here-->
+<script src="@Url.ContentVersioned("~/Assets/Admin/js/customer/booking/cancel.js")"></script>

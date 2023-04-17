@@ -1,0 +1,124 @@
+﻿@model MyProject.Payment.ViewModel.OrderPaymentProcessingViewModel
+@{
+    ViewBag.Title = Resources.PAYMENT_PROCESSING;
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+    bool RTL = CultureHelper.IsRighToLeft();
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="@Model.PaymentGatewaySetting.GatewayUrl"
+        data-error="errorCallback"
+        data-cancel="cancelCallback">
+</script>
+
+<script type="text/javascript">
+
+	window.onload = function () {
+		//document.myform.action = Checkout.showPaymentPage();
+		setTimeout(function () {
+			Checkout.showPaymentPage();
+		}, 1000);
+	}
+
+	function errorCallback(error) {
+		//window.location = "/" + "@@culture" + "/Customer/Payment/Paid/" +@@Model.Invoice.RecordID;
+	}
+
+	function cancelCallback() {
+		//window.location = "/" + "@@culture" + "/Customer/Payment/Paid/"+@@Model.Invoice.RecordID;
+	}
+
+	//adding merchant details, order information from session and master card session.
+	Checkout.configure({
+		merchant: '@Model.PaymentGatewaySetting.MerchantID',
+		session: {
+			id: '@Model.mastercard_session_id',
+			@*version: '@Model.mastercard_session_version'*@
+		},
+		order: {
+			amount: function () {
+				//returning amount from amount session
+				return @String.Format("{0:0.00}", Model.Invoice.Amount);
+			},
+			currency: '@Model.PaymentGatewaySetting.Currency',
+			description: 'Property Booking',
+			id: function () {
+				//returning order from order id session
+				return '@Model.Invoice.InvoiceNo';
+			}
+		},
+		//entering billing detials from session...
+		billing: {
+			address: {
+				street: '@Model.Customer.Address',
+				street2: '@Model.Customer.Address2',
+				city: '@Model.Customer.CustomerCity',
+				postcodeZip: '@Model.Customer.ZipCode',
+				stateProvince: '@Model.Customer.CustomerCity',
+				country: '@Model.Customer.Country'
+			}
+		},
+
+		//entering customer information from session
+		customer: {
+			email: '@Model.Customer.Email',
+			phone: '@Model.Customer.Contact',
+		},
+		//please enter your merchant name and address details
+		interaction: {
+			merchant: {
+                name: 'KAVAAN Real Estate Development',
+				address: {
+                    line1: 'Near Bentley Showroom, Umm Al Sheif, Sheikh Zayed Road, PO Box: 112466',
+                    line2: 'Dubai, United Arab Emirates'
+				},
+				logo: '@MyProject.Web.Helpers.Routing.CustomURL.GetFormatedURL(Resources.APP_LOGO_PATH)'
+			},
+			//displayControl: {
+			//	billingAddress: 'HIDE',
+			//	customerEmail: 'HIDE',
+			//	orderSummary: 'SHOW',
+			//	shipping: 'HIDE'
+			//}
+		}
+	});
+
+</script>
+
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!--Body Content-->
+<div class="render-body" style="min-height: 300px;">
+    <!-- Hero Section Start -->
+    <section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+        <div class="">
+            <div class="h-[150px] mx-auto bg-intro-details bg-cover flex flex-col justify-center items-center md:h-[200px] lg:h-[300px]">
+                <h1 class="uppercase font-Rubik text-xl font-medium text-center text-white lg:text-4xl lg:mb-2">@Resources.PAYMENT_PROCESSING</h1>
+                <div class="flex items-center">
+                    <a href="/@culture/home/index" class="font-Rubik text-xs uppercase text-white">@Resources.HOME</a>
+                    <svg viewBox="0 0 192 512" class="w-1.5 mx-2 fill-current text-white flip-horizontal-rtl"><path fill="" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class="fill-white"></path></svg>
+                    <a href="/@culture/our-story" class="font-Rubik text-xs uppercase text-white">@Resources.PAYMENT_PROCESSING</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+    <!-- Processing Section -->
+    <section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto py-10">
+        <div class="w-[80%] mx-auto xl:w-[60%] xl:pt-10">
+            <section class="text-center w-full" style=""><i class="fa fa-2x fa-circle-o-notch fa-spin"></i></section>
+            <h1 class="font-Rubik text-base font-medium pt-4 pb-4 lg:text-xl text-center">@Resources.PROCESSING_FOR_PAYMENT_</h1>
+
+            @*<button type="button" onclick="Checkout.showPaymentPage()">GO</button>*@
+
+        </div>
+    </section>
+    <!-- Processing Section End -->
+</div>
+<!--Body Content End-->
+<!--Write js Here-->
+@section IndexScript {
+
+}

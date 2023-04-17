@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = ""+ "";
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+   bool RTL = false;
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!--Body Content-->
+<div class="render-body" style="">
+	<!-- Hero Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<div class="">
+			<div class="mx-auto bg-career-bg bg-cover">
+				<div class="bg-[#00000080] flex flex-col h-[150px] items-center justify-center lg:h-[300px] md:h-[200px] rounded-lg">
+					<h1 class="uppercase font-Rubik text-xl font-medium text-center text-white lg:text-4xl lg:mb-2">CAREERS</h1>
+					<div class="flex items-center">
+						<a href="/@culture/home/index" class="font-Rubik text-xs uppercase text-white">HOME</a>
+						<svg viewBox="0 0 192 512" class="w-1.5 mx-2 fill-current text-white flip-horizontal-rtl"><path fill="" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class="fill-white"></path></svg>
+						<p class="font-Rubik text-xs uppercase text-white">DEPARTMENTS</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero Section End -->
+	<!-- careers Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto" id="department_section">
+		<div>
+			<h1 class="uppercase font-Rubik text-xl font-medium text-center pb-4 pt-4 lg:pt-14 xl:pb-10">DEPARTMENTS</h1>
+		</div>
+		<div class="w-[80%] mx-auto pb-10 sm:flex sm:flex-wrap sm:justify-between xl:w-[70%] main-div" style="display:none;">
+			<a href="" class="cursor-pointer sm:w-[49%] md:w-[32%]">
+				<div class="bg-white p-4 shadow-xl mb-4 lg:p-6">
+					<h1 class="font-Rubik text-lg font-medium uppercase">ADMINISTRATIVE</h1>
+					<p class="font-Rubik text-xs">_9_POSITIONS_AVAILABLE</p>
+				</div>
+			</a>
+			<a href="" class="cursor-pointer sm:w-[49%] md:w-[32%]">
+				<div class="bg-white p-4 shadow-xl mb-4 lg:p-6">
+					<h1 class="font-Rubik text-lg font-medium uppercase">ADMINISTRATIVE</h1>
+					<p class="font-Rubik text-xs">_9_POSITIONS_AVAILABLE</p>
+				</div>
+			</a>
+			<a href="" class="cursor-pointer sm:w-[49%] md:w-[32%]">
+				<div class="bg-white p-4 shadow-xl mb-4 lg:p-6">
+					<h1 class="font-Rubik text-lg font-medium uppercase">ADMINISTRATIVE</h1>
+					<p class="font-Rubik text-xs">_9_POSITIONS_AVAILABLE</p>
+				</div>
+			</a>
+			<a href="" class="cursor-pointer sm:w-[49%] md:w-[32%]">
+				<div class="bg-white p-4 shadow-xl mb-4 lg:p-6">
+					<h1 class="font-Rubik text-lg font-medium uppercase">ADMINISTRATIVE</h1>
+					<p class="font-Rubik text-xs">_9_POSITIONS_AVAILABLE</p>
+				</div>
+			</a>
+			<a href="" class="cursor-pointer sm:w-[49%] md:w-[32%]">
+				<div class="bg-white p-4 shadow-xl mb-4 lg:p-6">
+					<h1 class="font-Rubik text-lg font-medium uppercase">ADMINISTRATIVE</h1>
+					<p class="font-Rubik text-xs">_9_POSITIONS_AVAILABLE</p>
+				</div>
+			</a>
+			<a href="" class="cursor-pointer sm:w-[49%] md:w-[32%]">
+				<div class="bg-white p-4 shadow-xl mb-4 lg:p-6">
+					<h1 class="font-Rubik text-lg font-medium uppercase">ADMINISTRATIVE</h1>
+					<p class="font-Rubik text-xs">_9_POSITIONS_AVAILABLE</p>
+				</div>
+			</a>
+			<a href="" class="cursor-pointer sm:w-[49%] md:w-[32%]">
+				<div class="bg-white p-4 shadow-xl mb-4 lg:p-6">
+					<h1 class="font-Rubik text-lg font-medium uppercase">ADMINISTRATIVE</h1>
+					<p class="font-Rubik text-xs">_9_POSITIONS_AVAILABLE</p>
+				</div>
+			</a>
+			<a href="" class="cursor-pointer sm:w-[49%] md:w-[32%]">
+				<div class="bg-white p-4 shadow-xl mb-4 lg:p-6">
+					<h1 class="font-Rubik text-lg font-medium uppercase">ADMINISTRATIVE</h1>
+					<p class="font-Rubik text-xs">_9_POSITIONS_AVAILABLE</p>
+				</div>
+			</a>
+			<a href="" class="cursor-pointer sm:w-[49%] md:w-[32%]">
+				<div class="bg-white p-4 shadow-xl mb-4 lg:p-6">
+					<h1 class="font-Rubik text-lg font-medium uppercase">ADMINISTRATIVE</h1>
+					<p class="font-Rubik text-xs">_9_POSITIONS_AVAILABLE</p>
+				</div>
+			</a>
+		</div>
+		<div class="flex justify-center items-center animate-pulse ">
+			<a href="javascript:void(0);" class="bg-gk-gold ease-in-out font-Rubik font-medium px-4 py-2 mb-12 text-center text-xs uppercase rounded no-more" style="display:none;"><i class="fa fa-exclamation-circle mr-1"></i> COMING_SOON</a>
+		</div>
+	</section>
+	<!-- careers Section End -->
+</div>
+<!--Body Content End-->
+<!--Write js Here-->
+@section IndexScript {
+	<script src="@Url.ContentVersioned("~/Assets/js/web/departments/index.js")"></script>
+}

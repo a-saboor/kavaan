@@ -1,0 +1,245 @@
+﻿@model MyProject.Data.CustomerDocument
+
+@{
+	Layout = null;
+	ViewBag.Title = "Documents";
+	var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+	bool RTL = CultureHelper.IsRighToLeft();
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!-- Documents Section -->
+<section class="container w-full dashboard-sections" id="documents">
+
+	<div class="flex flex-col rounded-lg filter drop-shadow border bg-white border-ak-light" id="personal_documents">
+
+		<!-- heading -->
+		<h6 class="text-sm w-full mt-4 mb-2 text-black/60 text-center">Personal Documents</h6>
+
+		<!-- form -->
+		<form id="form_documents_1" class="px-4 mb-4" autocomplete="off">
+			@Html.AntiForgeryToken()
+			<!--Alert Message-->
+			<div class="alert-div"></div>
+			<!--Alert Message End-->
+			<input type="hidden" name="IsFamily" value="false" />
+			<input type="hidden" name="CustomerRelationID" value="@(@ViewBag.PersonalID != null ? ViewBag.PersonalID.ID : 1)" />
+			<div class="md:flex justify-between">
+
+				<div class="form-group md:w-[40%] flex flex-col my-3 md:my-2 px-2 select-shadow-white-div mb-0">
+					<label for="CustomerDocumentTypeID" class="hidden">Document Type</label>
+					@Html.DropDownList("CustomerDocumentTypeID", null, "Document Type", htmlAttributes: new { @class = "w-full select-shadow-white outline-none-select bg-dropdown-arrow bg-right appearance-none form-field select2-dd", @data_strict = "1" })
+					@*<select class="w-full select-shadow-white outline-none-select bg-dropdown-arrow bg-right appearance-none select2-dd"
+								name="CustomerDocumentTypeID" style="width: 100%;">
+							<option>Document Type</option>
+							<option value="Passport">Passport</option>
+							<option value="License">License</option>
+						</select>*@
+					<small class="form-text-validation text-xss text-danger py-1"></small>
+				</div>
+
+				<div class="form-group md:w-[40%] flex flex-col my-3 md:my-2 px-2">
+					<label for="Expiry" class="hidden">Expiry Date</label>
+					<input type="text"
+						   class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md border-0 foucs:border-b-0 focus-within:border-b-0 active:foucs:border-b-0 form-field date-picker-1"
+						   name="ExpiryDate" data-required placeholder="Expiry Date" data-strict="1" attr-date="gijgo-date">
+					<small class="form-text-validation text-xss text-danger py-1"></small>
+				</div>
+				<div class="form-group flex flex-col my-3 md:my-2 px-2">
+					<label for="file" class="hidden">Document File</label>
+					<div class="file-upload flex items-center justify-center text-center">
+						<input type="file" class="file-upload-input hidden form-field doc-upload" name="Path" data-strict="1" accept=".docx, .pdf" data-size="10">
+						<i for="Path" class="fa fa-paperclip text-black text-xl p-[0.5rem] border-[1.5px] border-dashed border-black/50 rounded-lg text-stroke-white-1 cursor-pointer" title="Upload Document"></i>
+					</div>
+					<small class="form-text-validation text-xss text-danger py-1"></small>
+				</div>
+				<div class="form-group md:w-[20%] flex flex-col my-3 md:my-2 px-2">
+					<button class="flex flex-row justify-center rounded-lg bg-ak-gold/90 hover:bg-ak-gold focus:outline-none py-2.5 mx-2 w-[97%] text-white" type="button" form="form_documents_1">
+						<p class="p-btn-primary text-white mx-1 mt-0.5">Upload</p>
+					</button>
+				</div>
+
+			</div>
+		</form>
+
+		<!-- table/ list -->
+		<div class="border-t border-ak-gray-light/60 table-wrapper overflow-x-scroll md:overflow-x-hidden overflow-scroll-custom max-h-11rem document-grid">
+
+			<table class="min-w-full table-rounded-lg">
+				<thead class="bg-white">
+
+					<tr class="uppercase text-black/60">
+
+						<th scope="col" class="text-[0.7rem] leading-3 font-medium px-6 py-3 text-center">
+							Document type
+						</th>
+
+						<th scope="col" class="text-[0.7rem] leading-3 font-medium px-6 py-3 text-center">
+							Document
+						</th>
+
+						<th scope="col" class="text-[0.7rem] leading-3 font-medium px-6 py-3 text-center">
+							Expiry
+						</th>
+
+						<th scope="col" class="text-[0.7rem] leading-3 font-medium px-6 py-3 text-center">
+							Actions
+						</th>
+
+					</tr>
+
+				</thead>
+
+				<tbody>
+
+					@*<tr class="bg-white odd:bg-ak-light uppercase text-black/90">
+							<td class="text-[0.65rem] leading-3 font-medium px-6 py-2.5 text-center">Passport</td>
+							<td class="text-[0.65rem] leading-3 font-medium px-6 py-2.5 text-center">PASSPORT.PNG</td>
+							<td class="text-[0.65rem] leading-3 font-medium px-6 py-2.5 text-center">28/04/2022</td>
+							<td class="text-[0.65rem] leading-3 font-medium px-6 py-2.5 text-center">
+								<div class="flex flex-row flex-wrap justify-center text-[0.65rem] leading-3 gap-2">
+									<a class="cursor-pointer bg-ak-gold h-6 w-6 hover:bg-white hover:text-ak-gold hover:border-[1px] hover:border-ak-gold rounded text-white transition-[0.3s_all_ease-in-out] relative">
+										<i class="fa fa-arrow-down text-stroke-ak-gold absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></i>
+									</a>
+									<a class="cursor-pointer bg-ak-gold h-6 w-6 hover:bg-white hover:text-ak-gold hover:border-[1px] hover:border-ak-gold rounded text-white transition-[0.3s_all_ease-in-out] relative">
+										<i class="fa fa-pen text-stroke-ak-gold absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></i>
+									</a>
+									<a class="cursor-pointer bg-ak-gold h-6 w-6 hover:bg-white hover:text-ak-gold hover:border-[1px] hover:border-ak-gold rounded text-white transition-[0.3s_all_ease-in-out] relative">
+										<i class="fa fa-trash text-stroke-ak-gold absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></i>
+									</a>
+								</div>
+							</td>
+						</tr>*@
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="flex flex-col rounded-lg filter drop-shadow border bg-white border-ak-light mt-8" id="family_documents">
+
+		<!-- heading -->
+		<h6 class="text-sm w-full mt-4 mb-2 text-black/60 text-center">Family Documents</h6>
+
+		<!-- form -->
+		<form id="form_documents_2" class="px-4 mb-4" autocomplete="off">
+			@Html.AntiForgeryToken()
+			<!--Alert Message-->
+			<div class="alert-div"></div>
+			<!--Alert Message End-->
+
+			<div class="md:flex justify-between">
+
+				<div class="form-group md:w-[26.66%] flex flex-col my-3 md:my-2 px-2 select-shadow-white-div mb-0">
+					<label for="CustomerDocumentTypeID" class="hidden">Document Type</label>
+					@Html.DropDownList("CustomerDocumentTypeID", null, "Document Type", htmlAttributes: new { @class = "w-full select-shadow-white outline-none-select bg-dropdown-arrow bg-right appearance-none form-field select2-dd", @id = "CustomerDocumentTypeID2", @data_strict = "1" })
+					@*<select class="w-full select-shadow-white outline-none-select bg-dropdown-arrow bg-right appearance-none select2-dd"
+								name="CustomerDocumentTypeID" style="width: 100%;">
+							<option>Document Type</option>
+							<option value="Passport">Passport</option>
+							<option value="License">License</option>
+						</select>*@
+					<small class="form-text-validation text-xss text-danger py-1"></small>
+				</div>
+
+				<div class="form-group md:w-[26.66%] flex flex-col my-3 md:my-2 px-2 select-shadow-white-div mb-0">
+					<label for="CustomerRelation" class="hidden">Relation</label>
+					@Html.DropDownList("CustomerRelationID", null, "Select Relation", htmlAttributes: new { @class = "w-full select-shadow-white outline-none-select bg-dropdown-arrow bg-right appearance-none form-field select2-dd", @data_strict = "1" })
+					@*<select class="w-full select-shadow-white outline-none-select bg-dropdown-arrow bg-right appearance-none select2-dd"
+								name="CustomerRelation" style="width: 100%;">
+							<option>Relation</option>
+							<option value="Passport">Passport</option>
+							<option value="License">License</option>
+						</select>*@
+					<small class="form-text-validation text-xss text-danger py-1"></small>
+				</div>
+
+				<div class="form-group md:w-[40%] flex flex-col my-3 md:my-2 px-2">
+					<label for="Expiry" class="hidden">Expiry Date</label>
+					<input type="text"
+						   class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md border-0 foucs:border-b-0 focus-within:border-b-0 active:foucs:border-b-0 form-field date-picker-1"
+						   name="ExpiryDate" data-required placeholder="Expiry Date" data-strict="1" attr-date="gijgo-date">
+					<small class="form-text-validation text-xss text-danger py-1"></small>
+				</div>
+				<div class="form-group flex flex-col my-3 md:my-2 px-2">
+					<label for="file" class="hidden">Document File</label>
+					<div class="file-upload flex items-center justify-center text-center">
+						<input type="file" class="file-upload-input hidden form-field doc-upload" name="Path" data-strict="1" accept=".docx, .pdf" data-size="10">
+						<i for="Path" class="fa fa-paperclip text-black text-xl p-[0.5rem] border-[1.5px] border-dashed border-black/50 rounded-lg text-stroke-white-1 cursor-pointer" title="Upload Document"></i>
+					</div>
+					<small class="form-text-validation text-xss text-danger py-1"></small>
+				</div>
+				<div class="form-group md:w-[20%] flex flex-col my-3 md:my-2 px-2">
+					<button class="flex flex-row justify-center rounded-lg bg-ak-gold/90 hover:bg-ak-gold focus:outline-none py-2.5 mx-2 w-[97%] text-white" type="button" form="form_documents_2">
+						<p class="p-btn-primary text-white mx-1 mt-0.5">Upload</p>
+					</button>
+				</div>
+			</div>
+		</form>
+
+		<!-- table/ list -->
+		<div class="border-t border-ak-gray-light/60 table-wrapper overflow-x-scroll md:overflow-x-hidden overflow-scroll-custom max-h-11rem document-grid">
+
+			<table class="min-w-full table-rounded-lg">
+				<thead class="bg-white">
+
+					<tr class="uppercase text-black/60">
+
+						<th scope="col" class="text-[0.7rem] leading-3 font-medium px-6 py-3 text-center">
+							Document type
+						</th>
+
+						<th scope="col" class="text-[0.7rem] leading-3 font-medium px-6 py-3 text-center">
+							Document
+						</th>
+
+						<th scope="col" class="text-[0.7rem] leading-3 font-medium px-6 py-3 text-center">
+							Relation
+						</th>
+
+						<th scope="col" class="text-[0.7rem] leading-3 font-medium px-6 py-3 text-center">
+							Expiry
+						</th>
+
+						<th scope="col" class="text-[0.7rem] leading-3 font-medium px-6 py-3 text-center">
+							Actions
+						</th>
+
+					</tr>
+
+				</thead>
+
+				<tbody>
+
+					@*<tr class="bg-white odd:bg-ak-light uppercase text-black/90">
+							<td class="text-[0.65rem] leading-3 font-medium px-6 py-2.5 text-center">Passport</td>
+							<td class="text-[0.65rem] leading-3 font-medium px-6 py-2.5 text-center">PASSPORT.PNG</td>
+							<td class="text-[0.65rem] leading-3 font-medium px-6 py-2.5 text-center">28/04/2022</td>
+							<td class="text-[0.65rem] leading-3 font-medium px-6 py-2.5 text-center">
+								<div class="flex flex-row flex-wrap justify-center text-[0.65rem] leading-3 gap-2">
+									<a class="cursor-pointer bg-ak-gold h-6 w-6 hover:bg-white hover:text-ak-gold hover:border-[1px] hover:border-ak-gold rounded text-white transition-[0.3s_all_ease-in-out] relative">
+										<i class="fa fa-arrow-down text-stroke-ak-gold absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></i>
+									</a>
+									<a class="cursor-pointer bg-ak-gold h-6 w-6 hover:bg-white hover:text-ak-gold hover:border-[1px] hover:border-ak-gold rounded text-white transition-[0.3s_all_ease-in-out] relative">
+										<i class="fa fa-pen text-stroke-ak-gold absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></i>
+									</a>
+									<a class="cursor-pointer bg-ak-gold h-6 w-6 hover:bg-white hover:text-ak-gold hover:border-[1px] hover:border-ak-gold rounded text-white transition-[0.3s_all_ease-in-out] relative">
+										<i class="fa fa-trash text-stroke-ak-gold absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></i>
+									</a>
+								</div>
+							</td>
+						</tr>*@
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</section>
+
+<!-- Documents Section End -->
+<!--Write js Here-->
+<script src="@Url.ContentVersioned("~/Assets/Admin/js/customer/documents/index.js")"></script>
+

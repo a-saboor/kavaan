@@ -1,0 +1,53 @@
+﻿@model MyProject.Data.Notification
+
+@{
+	Layout = null;
+	ViewBag.Title = "Notifications";
+	var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+	bool RTL = CultureHelper.IsRighToLeft();
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!-- Notifications Section -->
+<section class="container w-full dashboard-sections overflow-scroll-custom overflow-y-auto max-h-36_5rem" id="notifications">
+
+	<!-- notifications -->
+	<div class="row flex flex-col mx-auto items-center space-y-4 md:mx-4 main-div">
+
+		@*<div class="bg-white border border-ak-gold py-4 px-8 rounded-lg flex flex-row flex-wrap items-center justify-between w-full">
+				<div class="text">
+					<h6 class="text-xs md:text-lg leading-[1rem] md:leading-[1.5rem] text-[#707070] font-medium">
+						Reminder
+					</h6>
+					<p class="p text-xs md:text-base leading-[1rem] md:leading-[1.5rem]">Your service has been Assigned to vendor</p>
+				</div>
+				<div class="time ml-auto">
+					<p class="p text-xs md:text-base leading-[1rem] md:leading-[1.5rem]">2 hrs</p>
+					<p class="leading-[1rem] md:leading-[1.5rem] rounded-full text-ak-blue text-center text-xs new-notification">New</p>
+				</div>
+			</div>*@
+
+	</div>
+
+	<!-- Loading -->
+	@*<section class="py-2 text-center loading" style="display:none;"><i class="fa fa-2x fa-circle-notch text-ak-gold fa-spin"></i></section>*@
+	<section class="flex flex-col my-auto py-3 text-center w-[100%] loading" style=""><i class="mt-1 mx-auto dot-flashing text-center w-[100%]"></i></section>
+
+	<!-- load more button -->
+	<div class="w-full flex mx-auto text-center items-center align-middle">
+		@*<button class="btn-primary bg-ak-gold/90 hover:bg-ak-gold focus:outline-none mx-auto load-more"
+					style="display:block;">
+				<p class="p-btn-primary text-white">Load More</p>
+			</button>*@
+		<button class="btn-primary bg-ak-gold/90 hover:bg-ak-gold focus:outline-none mx-auto no-more"
+				style="display:none;">
+			<p class="p-btn-primary text-white">No Data Found</p>
+		</button>
+	</div>
+
+</section>
+<!-- Notifications Section End -->
+<!--Write js Here-->
+<script src="@Url.ContentVersioned("~/Assets/Admin/js/customer/notification/notification.js")"></script>

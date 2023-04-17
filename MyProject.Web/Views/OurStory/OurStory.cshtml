@@ -1,0 +1,202 @@
+﻿@{
+    ViewBag.Title = ""+ "";
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+   bool RTL = false;
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+	@if (RTL)
+	{
+		<style>
+			@@media (min-width: 640px) {
+				.our-story-intro {
+					position: relative;
+				}
+
+					.our-story-intro h1 {
+						position: absolute;
+						bottom: 2rem;
+					}
+
+				.our-story-structure {
+					position: relative;
+				}
+
+					.our-story-structure h1 {
+						position: absolute;
+						bottom: 1.3rem;
+						left: 1rem;
+					}
+
+				.our-story-workforce {
+					position: relative;
+				}
+
+					.our-story-workforce h1 {
+						position: absolute;
+						bottom: 3.7rem;
+						left: -1.3rem;
+					}
+
+				.our-story-awards {
+					position: relative;
+				}
+
+					.our-story-awards h1 {
+						position: absolute;
+						bottom: 5.1rem;
+						left: -2.3rem;
+					}
+
+				.our-story-partners {
+					position: relative;
+				}
+
+					.our-story-partners h1 {
+						position: absolute;
+						bottom: 2.4rem;
+						left: 0.3rem;
+					}
+			}
+		</style>
+
+	}
+}
+<!--Body Content-->
+<div class="render-body" style="">
+	<!-- Our story section start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<h1 class="font-Rubik text-base font-medium capitalize text-center pt-4 md:text-2xl">OUR_STORY</h1>
+		<div class="w-[80%] mx-auto">
+			@if (!RTL)
+			{
+				<div class="pb-10 sm:flex sm:justify-between xl:pb-20">
+					<div class="sm:w-[19%] sm:h-[210px] md:h-[360px] xl:h-[460px]">
+						<a href="/@culture/introduction">
+							<div class="bg-chairman-our-story-bg bg-cover rounded-lg w-full h-[150px] flex justify-center items-center my-4 sm:h-full sm:items-end sm:justify-end uppercase">
+								<h1 class="font-Rubik text-xl font-medium text-white sm:transform sm:-rotate-90 sm:mb-[5rem]
+                            sm:mr-[-3.2rem]">
+									INTRODUCTION
+								</h1>
+							</div>
+						</a>
+					</div>
+					<!-- <div class="sm:w-[19%] sm:h-[210px] md:h-[360px] xl:h-[460px]">
+						<a href="/@culture/chairman-message">
+							<div class="bg-chairman-bg bg-cover rounded-lg w-full h-[150px] flex justify-center items-center my-4 sm:h-full sm:items-end sm:justify-end">
+								<h1 class="font-Rubik text-xl font-medium text-white sm:transform sm:-rotate-90 sm:mb-[3.5rem]
+								sm:mr-[-2rem]">CHAIRMAN'S MESSAGE</h1>
+							</div>
+						</a>
+					</div> -->
+					<div class="sm:w-[19%] sm:h-[210px] md:h-[360px] xl:h-[460px]">
+						<a href="/@culture/structure">
+							<div class="bg-structure-bg bg-cover rounded-lg w-full h-[150px] flex justify-center items-center my-4 sm:h-full sm:items-end sm:justify-end uppercase">
+								<h1 class="font-Rubik text-xl font-medium text-white sm:transform sm:-rotate-90 sm:mb-[4rem]
+                            sm:mr-[-2.2rem]">
+									STRUCTURE
+								</h1>
+							</div>
+						</a>
+					</div>
+					<div class="sm:w-[19%] sm:h-[210px] md:h-[360px] xl:h-[460px]">
+						<a href="/@culture/workforce">
+							<div class="bg-team-bg bg-cover rounded-lg w-full h-[150px] flex justify-center items-center my-4 sm:h-full sm:items-end sm:justify-end uppercase">
+								<h1 class="font-Rubik text-xl font-medium text-white sm:transform sm:-rotate-90 sm:mb-[4rem]
+                            sm:mr-[-2.2rem]">
+									WORKFORCE
+								</h1>
+							</div>
+						</a>
+					</div>
+					<div class="sm:w-[19%] sm:h-[210px] md:h-[360px] xl:h-[460px]">
+						<a href="/@culture/awards">
+							<div class="bg-awards-bg bg-cover rounded-lg w-full h-[150px] flex justify-center items-center my-4 sm:h-full sm:items-end sm:justify-end uppercase">
+								<h1 class="font-Rubik text-xl font-medium text-white sm:transform sm:-rotate-90 sm:mb-[3rem]
+                            sm:mr-[-1rem]">
+									AWARDS
+								</h1>
+							</div>
+						</a>
+					</div>
+					<div class="sm:w-[19%] sm:h-[210px] md:h-[360px] xl:h-[460px]">
+						<a href="/@culture/partners">
+							<div class="bg-partner-bg bg-cover rounded-lg w-full h-[150px] flex justify-center items-center my-4 sm:h-full sm:items-end sm:justify-end uppercase">
+								<h1 class="font-Rubik text-xl font-medium text-white sm:transform sm:-rotate-90 sm:mb-[3.5rem]
+                            sm:mr-[-1.8rem]">
+									PARTNERS
+								</h1>
+							</div>
+						</a>
+					</div>
+				</div>
+			}
+			else
+			{
+				<div class="pb-10 sm:flex sm:justify-between xl:pb-20">
+					<div class="sm:w-[19%] sm:h-[210px] md:h-[360px] xl:h-[460px]">
+						<a href="/@culture/introduction">
+							<div class="bg-chairman-our-story-bg bg-cover rounded-lg w-full h-[150px] flex justify-center items-center my-4 sm:h-full sm:items-end sm:justify-end uppercase our-story-intro">
+								<h1 class="font-Rubik text-2xl font-medium text-white sm:transform sm:rotate-90">
+									INTRODUCTION
+								</h1>
+							</div>
+						</a>
+					</div>
+					<!-- <div class="sm:w-[19%] sm:h-[210px] md:h-[360px] xl:h-[460px]">
+						<a href="/@culture/chairman-message">
+							<div class="bg-chairman-bg bg-cover rounded-lg w-full h-[150px] flex justify-center items-center my-4 sm:h-full sm:items-end sm:justify-end">
+								<h1 class="font-Rubik text-xl font-medium text-white sm:transform sm:-rotate-90 sm:mb-[3.5rem]
+								sm:mr-[-2rem]">CHAIRMAN'S MESSAGE</h1>
+							</div>
+						</a>
+					</div> -->
+					<div class="sm:w-[19%] sm:h-[210px] md:h-[360px] xl:h-[460px]">
+						<a href="/@culture/structure">
+							<div class="bg-structure-bg bg-cover rounded-lg w-full h-[150px] flex justify-center items-center my-4 sm:h-full sm:items-end sm:justify-end uppercase our-story-structure">
+								<h1 class="font-Rubik text-2xl font-medium text-white sm:transform sm:rotate-90">
+									STRUCTURE
+								</h1>
+							</div>
+						</a>
+					</div>
+					<div class="sm:w-[19%] sm:h-[210px] md:h-[360px] xl:h-[460px]">
+						<a href="/@culture/workforce">
+							<div class="bg-team-bg bg-cover rounded-lg w-full h-[150px] flex justify-center items-center my-4 sm:h-full sm:items-end sm:justify-end uppercase our-story-workforce">
+								<h1 class="font-Rubik text-xl font-medium text-white sm:transform sm:rotate-90">
+									WORKFORCE
+								</h1>
+							</div>
+						</a>
+					</div>
+					<div class="sm:w-[19%] sm:h-[210px] md:h-[360px] xl:h-[460px]">
+						<a href="/@culture/awards">
+							<div class="bg-awards-bg bg-cover rounded-lg w-full h-[150px] flex justify-center items-center my-4 sm:h-full sm:items-end sm:justify-end uppercase our-story-awards">
+								<h1 class="font-Rubik text-xl font-medium text-white sm:transform sm:rotate-90">
+									AWARDS
+								</h1>
+							</div>
+						</a>
+					</div>
+					<div class="sm:w-[19%] sm:h-[210px] md:h-[360px] xl:h-[460px]">
+						<a href="/@culture/partners">
+							<div class="bg-partner-bg bg-cover rounded-lg w-full h-[150px] flex justify-center items-center my-4 sm:h-full sm:items-end sm:justify-end uppercase our-story-partners">
+								<h1 class="font-Rubik text-xl font-medium text-white sm:transform sm:rotate-90">
+									PARTNERS
+								</h1>
+							</div>
+						</a>
+					</div>
+				</div>
+			}
+		</div>
+	</section>
+	<!-- Our story section End -->
+</div>
+
+
+<!--Body Content End-->
+<!--Write js Here-->
+@section IndexScript {
+	@*<script src="@Url.ContentVersioned("~/Assets/js/web/ourstory/index.js")"></script>*@
+}

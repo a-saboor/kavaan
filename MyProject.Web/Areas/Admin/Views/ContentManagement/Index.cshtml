@@ -1,0 +1,409 @@
+﻿@*@model List<TanjimSquad.Data.ContentManagement>*@
+@model MyProject.Web.Areas.Admin.ViewModels.ContentViewModel
+@{
+    ViewBag.Title = "Content Management";
+    ViewBag.Page = "Index";
+}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<style>
+    .btn-lang {
+        position: absolute;
+        top: 2px;
+    }
+
+    .file-group {
+        font-size: 0.9375rem;
+        font-weight: 400;
+        font-family: "Source Sans Pro", sans-serif;
+        padding: 50px 18px;
+        height: 50px;
+        color: #5c5c5c;
+        border-radius: 4px;
+        background-clip: unset;
+        caret-color: #999;
+        width: 100%;
+        background-color: white;
+        border: 1px solid #e3e3e3;
+    }
+
+    .custom-file-upload {
+        background: #ffffff;
+        border: 1px solid #e3e3e3;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        display: inline-block;
+        cursor: pointer;
+        margin-bottom: 0px !important;
+        padding: 8px 12px;
+    }
+
+    .text-danger-custom {
+        color: #c44c4e;
+    }
+
+    .video-frame {
+        width: 100%;
+        height: auto;
+        box-shadow: 0 0 6px 3px #0000004f;
+        border-radius: 5px;
+        padding: 10px;
+        background: white;
+    }
+</style>
+
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Subheader-->
+    <div class="subheader py-2 py-lg-12 subheader-transparent" id="kt_subheader">
+        <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+            <!--begin::Info-->
+            <div class="d-flex align-items-center flex-wrap mr-1">
+                <!--begin::Heading-->
+                <div class="d-flex flex-column">
+
+                    <!--begin::Breadcrumb-->
+                    <div class="d-flex align-items-center font-weight-bold my-2">
+                        <!--begin::Item-->
+                        <a href="/Admin/Dashboard/Index" class="opacity-75 hover-opacity-100">
+                            <i class="flaticon2-shelter text-white icon-1x"></i>
+                        </a>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <a href="/Admin/Dashboard/Index" class="text-white text-hover-white opacity-75 hover-opacity-100">&nbsp;&nbsp;Dashboard</a>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
+                        <a href="javascript:;" class="text-white text-hover-white opacity-75 hover-opacity-100">Banners</a>
+                        <!--end::Item-->
+                    </div>
+                    <!--end::Breadcrumb-->
+                </div>
+                <!--end::Heading-->
+            </div>
+            <!--end::Info-->
+        </div>
+    </div>
+    <!--end::Subheader-->
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Dashboard-->
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <!--begin::Card-->
+                    <div class="card card-custom gutter-b">
+                        <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                            <div class="card-title">
+                                <h3 class="card-label">
+                                    Banner Settings
+                                    <span class="d-block text-muted pt-2 font-size-sm">Manage Website Banners Here...</span>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-md-8 offset-md-2">
+                                <!--begin::Forms Widget 1-->
+                                <div class="card card-custom shadow-none gutter-b">
+                                    <!--begin::Header-->
+                                    <div class="card-header border-0">
+                                        <h3 class="card-title font-weight-bold text-dark">@(Model.VideoFirst != null ? "" : "Upload") Banner Video</h3>
+                                    </div>
+                                    <!--end::Header-->
+                                    <!--begin::Body-->
+                                    <div class="card-body mt-n10">
+                                        @if (Model.VideoFirst != null)
+                                        {
+                                            <div class="content-div">
+                                                <div class="video-frame video-frame-first">
+                                                    <input type="hidden" id="video-first-id" value="@Model.VideoFirst.ID" />
+                                                    <input type="hidden" id="video-first-type" value="@Model.VideoFirst.Type" />
+                                                    <span class="btn btn-circle btn-hover-text-primary btn-icon btn-white btn-pill btn-shadow btn-xs float-right mb-3" data-action="cancel" id="video-file-first-delete" data-toggle="tooltip" title="Delete Video">
+                                                        <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                                    </span>
+                                                    <span class="btn btn-circle btn-hover-text-primary btn-icon btn-white btn-pill btn-shadow btn-xs float-right mb-3 mr-2" data-action="cancel" id="" data-toggle="tooltip" title="Change">
+                                                        <i class="icon-xs fa fa-pen text-muted"></i>
+                                                    </span>
+                                                   
+
+                                                        <video style="width: 100%; height: 100%;" controls="controls" preload="metadata">
+
+                                                            <source src="@Url.Content(Model.VideoFirst.Path)" type="video/mp4" />
+
+
+                                                        </video>
+                                                    
+                                                  
+                                                    @*<div class="mt-4">
+                                                        <h6 class="font-weight-bold text-dark">Title</h6>
+                                                        <input type="text" class="form-control" disabled name="Title" placeholder="Write title here ... (optional)" value="@Model.VideoFirst.Title" />
+                                                    </div>
+                                                    <div class="mt-4">
+                                                        <h6 class="font-weight-bold text-dark">TitleAr</h6>
+                                                        <input type="text" class="form-control" disabled name="TitleAr" placeholder="Write titlear here ... (optional)" value="@Model.VideoFirst.TitleAr" />
+                                                    </div>
+                                                    <div class="mt-4">
+                                                        <label class="font-weight-bold text-dark">Description</label>
+                                                        <input type="text" class="form-control" disabled name="description" placeholder="Enter description here ... " value="@Model.VideoFirst.Description" />
+
+                                                    </div>
+                                                    <div class="mt-4">
+                                                        <label class="font-weight-bold text-dark">Description (Ar)</label>
+                                                        <input type="text" class="form-control" disabled name="descriptionar" placeholder="Enter description here ... " value="@Model.VideoFirst.DescriptionAr" />
+
+                                                    </div>*@
+                                                    <div class="col-12 mt-4">
+                                                        <label class="col-form-label">Enabled</label>
+                                                        <div class="">
+                                                            <span class="switch switch-icon">
+                                                                <label>
+                                                                    @Html.CheckBoxFor(model => model.VideoFirst.IsEnable, new { @class = "checkbox-video isenablevideo", @disabled = "disabled" })
+                                                                    @*<input type="checkbox" value="@Model.VideoFirst.IsEnable" name="isenable" checked />*@
+                                                                    <span></span>
+                                                                </label>
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="btn-video-url mt-3 text-right" style="display:none;">
+                                                        @*<button type="button" class="btn btn-secondary font-weight-bold mr-1">
+                                                            <i class="fa fa-sm ki ki-bold-close"></i> Cancel
+                                                        </button>*@
+                                                        <button type="button" class="btn btn-custom font-weight-bold btn-video-url-save">
+                                                            <i class="fa fa-sm fa-save text-white"></i> Save
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        <!--begin::Form-->
+                                        <form class="form" id="FormVideoFirst" action="/Admin/ContentManagement/Create" method="post" enctype="multipart/form-data" style="@(Model.VideoFirst != null ? "display:none;" : "")">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="Type" value="Video" />
+
+                                            @*<div class="form-group">
+                                                <label class="control-label">Title</label>
+                                                <input type="text" class="form-control" name="Title" placeholder="Enter title here ..." required />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label">TitleAr</label>
+                                                <input type="text" class="form-control" name="TitleAr" placeholder="Enter title (Ar) here ..." required />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label">Description</label>
+                                                <input type="text" class="form-control" name="description" placeholder="Enter description here ..." required />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label">DescriptionAr</label>
+                                                <input type="text" class="form-control" name="descriptionar" placeholder="Enter description (Ar) here ..." required />
+                                            </div>*@
+                                            <div class="form-group row">
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div class="file-group h-auto">
+                                                        <label for="video-file-first" class="custom-file-upload" id="video-file-first-label">
+                                                            <i class="fa fa-file-video text-danger-custom mr-1"></i>
+                                                            Browse
+                                                        </label>
+                                                        <label class="custom-file-upload video-file-first-remove" style="display:none;">
+                                                            <i class="fa fa-times-circle text-danger-custom mr-1"></i>
+                                                            Remove
+                                                        </label>
+                                                        <span class="video-file-first-span m-2">No File Chosen</span>
+                                                        <input type="file" accept="video/mp4,video/x-m4v,video/*" name="file" id="video-file-first" placeholder="Browse" style="display:none;">
+                                                    </div>
+                                                    <label class="font-size-sm font-">Video size should be less than 50 MB </label>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <label class="col-form-label">Enabled</label>
+                                                    <div class="">
+                                                        <span class="switch switch-icon">
+                                                            <label>
+                                                                <input type="checkbox" value="true" class="isenablevideo" name="isenable" />
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <button type="button" class="btn btn-custom font-weight-bold" id="BtnVideoFirst">
+                                                    <i class="fa fa-sm fa-upload text-white"></i> Upload
+                                                </button>
+                                            </div>
+                                        </form>
+                                        <!--end::Form-->
+                                    </div>
+                                    <!--end::Body-->
+                                </div>
+                                <!--end::Forms Widget 1-->
+                                <hr class="col-8" />
+                                <!--begin::Forms Widget 2-->
+                                <div class="card card-custom shadow-none gutter-b">
+                                    <!--begin::Header-->
+                                    <div class="card-header border-0">
+                                        <h3 class="card-title font-weight-bold text-dark">@(Model.Image != null ? "" : "Upload") Banner Image</h3>
+                                    </div>
+                                    <!--end::Header-->
+                                    <!--begin::Body-->
+                                    <div class="card-body mt-n10">
+                                        @if (Model.Image != null)
+                                        {
+                                            <div class="content-div">
+                                                <div class="video-frame image-frame">
+                                                    <input type="hidden" id="image-id" value="@Model.Image.ID" />
+                                                    <input type="hidden" id="image-type" name="Type" value="@Model.Image.Type" />
+                                                    <span class="btn btn-circle btn-hover-text-primary btn-icon btn-white btn-pill btn-shadow btn-xs float-right mb-3" data-action="cancel" id="image-file-delete" data-toggle="tooltip" title="Delete Image">
+                                                        <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                                    </span>
+                                                    <span class="btn btn-circle btn-hover-text-primary btn-icon btn-white btn-pill btn-shadow btn-xs float-right mb-3 mr-2" data-action="cancel" id="image-file-edit" data-toggle="tooltip" title="Change">
+                                                        <i class="icon-xs fa fa-pen text-muted"></i>
+                                                    </span>
+                                                    <section id="imagepath" attr-data="@Model.Image.Path" class="bgi-no-repeat bgi-size-cover rounded min-h-200px shadow-sm mt-10" style="background-position: 50% 50%;background-image: url(@Model.Image.Path);background-position: bottom;
+    background-size: cover;"></section>
+                                                 
+                                                    @*<div class="mt-4">
+                                                        <h6 class="font-weight-bold text-dark">Title</h6>
+                                                        <input type="text" disabled class="form-control title-image" name="Title" placeholder="Write title here ..." value="@Model.Image.Title" />
+                                                    </div>
+                                                    <div class="mt-4">
+                                                        <h6 class="font-weight-bold text-dark">TitleAr</h6>
+                                                        <input type="text" disabled class="form-control titlear-image" name="TitleAr" placeholder="Write title (Ar) here ..." value="@Model.Image.TitleAr" />
+                                                    </div>
+                                                    <div class="mt-4">
+                                                        <h6 class="font-weight-bold text-dark">Description</h6>
+                                                        <input type="text" disabled class="form-control description-image" name="Description" placeholder="Write description here ..." value="@Model.Image.Description" />
+                                                    </div>
+                                                    <div class="mt-4">
+                                                        <h6 class="font-weight-bold text-dark">Description (Ar)</h6>
+                                                        <input type="text" disabled class="form-control descriptionar-image" name="DescriptionAr" placeholder="Write description (Ar) here ..." value="@Model.Image.DescriptionAr" />
+                                                    </div>*@
+                                                    <div class="col-12 mt-4">
+                                                        <label class="col-form-label">Enabled</label>
+                                                        <div class="">
+                                                            <span class="switch switch-icon">
+                                                                <label>
+                                                                    @Html.CheckBoxFor(model => model.Image.IsEnable, new { @class = "checkbox-image isenableimage", @disabled = "disabled" })
+                                                                    @*<input type="checkbox" value="@Model.VideoFirst.IsEnable" name="isenable" checked />*@
+                                                                    <span></span>
+                                                                </label>
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="btn-image-url mt-3 text-right" style="display:none;">
+                                                        @*<button type="button" class="btn btn-secondary font-weight-bold mr-1 btn-image-url-cancel">
+                                                            <i class="fa fa-sm ki ki-bold-close"></i> Cancel
+                                                        </button>*@
+                                                        <button type="button" class="btn btn-custom font-weight-bold btn-image-url-save">
+                                                            <i class="fa fa-sm fa-save text-white"></i> Save
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        <!--begin::Form-->
+                                        <form class="form" id="FormImage" action="/Admin/ContentManagement/Create" method="post" enctype="multipart/form-data" style="@(Model.Image != null ? "display:none;" : "")">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="Type" value="Image" />
+
+                                            @*<div class="form-group">
+                                                <input type="text" class="form-control" name="Title" placeholder="Write title here ..." required />
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="TitleAr" placeholder="Write title (Ar) here ..." required />
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="Description" placeholder="Write description here ..." required />
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="DescriptionAr" placeholder="Write description (Ar) here ..." required />
+                                            </div>*@
+                                            <div class="form-group row">
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div class="file-group h-auto">
+                                                        <label for="image-file" class="custom-file-upload" id="image-file-label">
+                                                            <i class="fa fa-file-image text-danger-custom mr-1"></i>
+                                                            Browse
+                                                        </label>
+                                                        <label class="custom-file-upload image-file-remove" style="display:none;">
+                                                            <i class="fa fa-times-circle text-danger-custom mr-1"></i>
+                                                            Remove
+                                                        </label>
+                                                        <span class="image-file-span m-2">No File Chosen</span>
+                                                        <input type="file" accept="image/*" name="file" id="image-file" placeholder="Browse" style="display:none;">
+                                                    </div>
+                                                    <label class="font-size-sm font-">Image size should be equal to 300 KB and dimension should be 1920 x 966</label>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <label class="col-form-label">Enabled</label>
+                                                    <div class="">
+                                                        <span class="switch switch-icon">
+                                                            <label>
+                                                                <input type="checkbox" value="true" class="isenableimage" name="isenable" id="" />
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <button type="button" class="btn btn-custom font-weight-bold" id="BtnImage">
+                                                    <i class="fa fa-sm fa-upload text-white"></i> Upload
+                                                </button>
+                                            </div>
+                                        </form>
+                                        <!--end::Form-->
+                                    </div>
+                                    <!--end::Body-->
+                                </div>
+                                <!--end::Forms Widget 2-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Dashboard-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+</div>
+<!--end::Content-->
+<!--begin::Modal-->
+<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content" style="min-height:100px">
+            <div id='myModalContent'>
+                <div class="row justify-content-center">
+                    <div class="col-16">
+                        <div class="kt-spinner kt-spinner--lg kt-spinner--dark kt-spinner-modal"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Modal-->
+@section IndexScript {
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <script>
+            toastr.success('@ViewBag.SuccessMessage');
+        </script>
+    }
+    else if (ViewBag.ErrorMessage != null)
+    {
+        <script>
+            toastr.error('@ViewBag.ErrorMessage');
+        </script>
+    }
+    <!--begin::Page Scripts(used by this page)-->
+    <script src="@Url.ContentVersioned("~/Assets/Admin/js/admin/contentmanagement/index.js")"></script>
+    <!--end::Page Scripts-->
+    <script src="~/Assets/Admin/js/general/ModalPopup.js"></script>
+    <!--end::Page Scripts-->
+}

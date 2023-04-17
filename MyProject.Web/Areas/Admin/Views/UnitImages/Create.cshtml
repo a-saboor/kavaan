@@ -1,0 +1,287 @@
+﻿@model List<MyProject.Data.UnitImage>
+
+
+@{
+    ViewBag.Title = "Create";
+    Layout = null; }
+
+
+<div class="modal-header">
+    <h5 class="modal-title">Upload Unit Images (@TempData["UnitTitle"])</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <i aria-hidden="true" class="ki ki-close"></i>
+    </button>
+</div>
+<form enctype="multipart/form-data" method="post" id="createform">
+
+    <div class="modal-body">
+        @Html.AntiForgeryToken()
+
+        <div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group row">
+            <div class="col-lg-3 text-center">
+                <div class="image-input image-input-outline" id="kt_image_1">
+                    <div class="image-input-wrapper" style="background-image: url(@(Model.FirstOrDefault(x=>x.Position==1)!=null?Model.FirstOrDefault(x=>x.Position==1).Image:"../../../../Assets/AppFiles/Images/default.png"))"></div>
+                    <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change logo">
+                        <i class="fa fa-pen icon-sm text-muted"></i>
+                        <input type="file" name="Image" id="BannerImage1" accept=".png, .jpg, .jpeg" />
+                        <input type="hidden" name="profile_avatar_remove" />
+                    </label>
+                    <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow cancelimage" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                        <i class="ki ki-bold-close icon-xs text-muted"></i>
+                    </span>
+
+
+                </div>
+                <input type="text" value="@TempData["UnitID"]" id="unitid" style="display:none;" />
+                <input type="text" value="@TempData["UnitTitle"]" id="unittitle" style="display:none;" />
+
+                <span class="form-text text-muted">Image Position 1</span>
+            </div>
+            <div class="col-lg-3 text-center">
+                <div class="image-input image-input-outline" id="kt_image_2">
+                    <div class="image-input-wrapper" style="background-image: url(@(Model.FirstOrDefault(x=>x.Position==2)!=null?Model.FirstOrDefault(x=>x.Position==2).Image:"../../../../Assets/AppFiles/Images/default.png"))"></div>
+                    <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change logo">
+                        <i class="fa fa-pen icon-sm text-muted"></i>
+                        <input type="file" name="Image" id="BannerImage2" accept=".png, .jpg, .jpeg" />
+                        <input type="hidden" name="profile_avatar_remove" />
+                    </label>
+                    <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow cancelimage" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                        <i class="ki ki-bold-close icon-xs text-muted"></i>
+                    </span>
+
+                </div>
+                <span class="form-text text-muted">Image Position 2</span>
+            </div>
+            <div class="col-lg-3 text-center">
+                <div class="image-input image-input-outline" id="kt_image_3">
+                    <div class="image-input-wrapper" style="background-image: url(@(Model.FirstOrDefault(x=>x.Position==3)!=null?Model.FirstOrDefault(x=>x.Position==3).Image:"../../../../Assets/AppFiles/Images/default.png"))"></div>
+                    <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change logo">
+                        <i class="fa fa-pen icon-sm text-muted"></i>
+                        <input type="file" name="Image" id="BannerImage3" accept=".png, .jpg, .jpeg" />
+                        <input type="hidden" name="profile_avatar_remove" />
+                    </label>
+                    <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow cancelimage" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                        <i class="ki ki-bold-close icon-xs text-muted"></i>
+                    </span>
+ </div>
+                <span class="form-text text-muted">Image Position 3</span>
+            </div>
+            <div class="col-lg-3 text-center">
+                <div class="image-input image-input-outline" id="kt_image_4">
+                    <div class="image-input-wrapper" style="background-image: url(@(Model.FirstOrDefault(x=>x.Position==4)!=null?Model.FirstOrDefault(x=>x.Position==4).Image:"../../../../Assets/AppFiles/Images/default.png"))"></div>
+                    <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change logo">
+                        <i class="fa fa-pen icon-sm text-muted"></i>
+                        <input type="file" name="Image" id="BannerImage4" accept=".png, .jpg, .jpeg" />
+                        <input type="hidden" name="profile_avatar_remove" />
+                    </label>
+                    <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow cancelimage" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                        <i class="ki ki-bold-close icon-xs text-muted"></i>
+                    </span>
+
+                    @*<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
+            <i class="ki ki-bold-close icon-xs text-muted"></i>
+        </span>*@
+                </div>
+                <span class="form-text text-muted">Image Position 4</span>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+</form>
+
+
+
+
+
+
+<!--end::Page Scripts-->
+
+
+<script>
+
+    var data = new FormData();
+    var image1;
+    var image2;
+    var image3;
+    var image4;
+    var _URL1 = window.URL || window.webkitURL;
+    var _URL2 = window.URL || window.webkitURL;
+    var _URL3 = window.URL || window.webkitURL;
+    var _URL4 = window.URL || window.webkitURL;
+    var unitid;
+    var unittitle;
+    // Class definition
+    var KTImageInputDemo = function () {
+        // Private functions
+        var initDemos = function () {
+            image1 = new KTImageInput('kt_image_1');
+            image2 = new KTImageInput('kt_image_2');
+            image3 = new KTImageInput('kt_image_3');
+            image4 = new KTImageInput('kt_image_4');
+        }
+
+        return {
+            // public functions
+            init: function () {
+                initDemos();
+            }
+        };
+    }();
+
+    'use strict';
+    KTUtil.ready(function () {
+        KTImageInputDemo.init();
+        unitid = $("#unitid").val();
+        unittitle = $("#unittitle").val();
+
+
+    })
+
+
+
+    image1.on('cancel', function (imageInput) {
+        data.delete("1");
+
+    });
+    $("#BannerImage1").change(function (e) {
+        var file, img;
+        if ((file = this.files[0])) {
+
+            img = new Image();
+            img.src = _URL1.createObjectURL(file)
+            data.append("1", file);
+            data.append("Image", $("#BannerImage1").val())
+            sendajax(unitid, unittitle, 1, data)
+        }
+    });
+
+    image2.on('cancel', function (imageInput) {
+        data.delete("2");
+
+    });
+    $("#BannerImage2").change(function (e) {
+        var file, img;
+
+        if ((file = this.files[0])) {
+
+            img = new Image();
+            img.src = _URL2.createObjectURL(file)
+            data.append("Image", $("#BannerImage2").val())
+            data.append("2", file);
+            sendajax(unitid, unittitle, 2, data)
+        }
+    });
+
+    image3.on('cancel', function (imageInput) {
+        data.delete("3");
+
+    });
+    $("#BannerImage3").change(function (e) {
+        var file, img;
+
+        if ((file = this.files[0])) {
+
+            img = new Image();
+            img.src = _URL3.createObjectURL(file);
+            data.append("Image", $("#BannerImage3").val());
+            data.append("3", file);
+            sendajax(unitid, unittitle, 3, data)
+        }
+    });
+
+    image4.on('cancel', function (imageInput) {
+        data.delete("4");
+
+    });
+    $("#BannerImage4").change(function (e) {
+        var file, img;
+
+        if ((file = this.files[0])) {
+
+            img = new Image();
+            img.src = _URL4.createObjectURL(file)
+            data.append("4", file);
+            data.append("Image", $("#BannerImage4").val());
+            sendajax(unitid, unittitle, 4, data)
+        }
+    });
+
+
+
+    function BindImages(unitid) {
+        $.ajax({
+            url: "/Admin/unit/Edit/" + unitid + "",
+            type: 'GET',
+            success: function (response) {
+                if (response.success) {
+
+                } else {
+                }
+            }
+        });
+    }
+    function DeleteVenueImage(elem, record) {
+        $(elem).addClass('spinner spinner-light spinner-right').prop('disabled', true);
+        $(elem).find('i').hide();
+        $.ajax({
+            url: '/Admin/unit/Delete/' + record,
+            type: 'POST',
+            data: {
+                "__RequestVerificationToken":
+                    $("input[name=__RequestVerificationToken]").val()
+            },
+            success: function (response) {
+                if (response.success) {
+                    toastr.success(response.message);
+                }
+                else {
+                    return false;
+                    toastr.error(response.message);
+
+                }
+            },
+            error: function (e) {
+                toastr.error("Ooops, something went wrong.Try to refresh this page or contact Administrator if the problem persists.");
+            },
+            failure: function (e) {
+                toastr.error("Ooops, something went wrong.Try to refresh this page or contact Administrator if the problem persists.");
+            }
+        });
+    }
+    //$("#createform").submit(function () {
+
+
+
+
+
+    //});
+    function sendajax(unitid, unittitle, imageposition, data) {
+        
+        data.append("__RequestVerificationToken", $('input[name=__RequestVerificationToken]').val());
+        $.ajax({
+            url: "/admin/unitimages/createimages?unitid=" + unitid + "&imageposition=" + imageposition + "&unittitle=" + unittitle.replace(/\s+/g,'')+"",
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: data,
+            success: function (response) {
+
+                toastr.success(response.message);
+            },
+            error: function (er) {
+                toastr.error(er);
+            }
+        });
+
+        return false;
+    }
+</script>
+
+<!--end::Page Scripts-->

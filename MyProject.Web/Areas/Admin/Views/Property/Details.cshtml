@@ -1,0 +1,434 @@
+﻿@model MyProject.Data.Property
+
+
+@{
+	ViewBag.Title = "Details";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<style>
+	.video-frame {
+		width: 100%;
+		height: auto;
+		border-radius: 5px;
+		padding: 10px;
+		/*  //     box-shadow: 0 0.5rem 1.5rem 0.5rem rgb(0 0 0 / 8%);*/
+		background-color: rgb(0 0 0 / 8%);
+	}
+
+	.video-frame1 {
+		width: 100%;
+		height: auto;
+		border-radius: 5px;
+		padding: 10px;
+		background-color: rgb(0 0 0 / 8%);
+		s
+	}
+</style>
+
+
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Subheader-->
+	<div class="subheader py-2 py-lg-12 subheader-transparent" id="kt_subheader">
+		<div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+			<!--begin::Info-->
+			<div class="d-flex align-items-center flex-wrap mr-1">
+				<!--begin::Heading-->
+				<div class="d-flex flex-column">
+
+					<!--begin::Breadcrumb-->
+					<div class="d-flex align-items-center font-weight-bold my-2">
+						<!--begin::Item-->
+						<a href="/Admin/Dashboard/Index" class="opacity-75 hover-opacity-100">
+							<i class="flaticon2-shelter text-white icon-1x"></i>
+						</a>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<a href="/Admin/Dashboard/Index" class="text-white text-hover-white opacity-75 hover-opacity-100">&nbsp;&nbsp;Dashboard</a>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
+						<a href="javascript:;" class="text-white text-hover-white opacity-75 hover-opacity-100">Project</a>
+						<!--end::Item-->
+					</div>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Heading-->
+			</div>
+			<!--end::Info-->
+		</div>
+	</div>
+	<!--end::Subheader-->
+	<!--begin::Entry-->
+	<div class="d-flex flex-column-fluid">
+		<!--begin::Container-->
+		<div class="container">
+			<!--begin::Dashboard-->
+			<div class="row">
+				<div class="col-xl-12">
+					<!--begin::Card-->
+					<div class="card card-custom gutter-b">
+						<div class="card-header flex-wrap border-0 pt-6 pb-0">
+							<div class="card-title">
+								<h3 class="card-label">
+									Project
+									<span class="d-block text-muted pt-2 font-size-sm">Project Details Here...</span>
+								</h3>
+							</div>
+							<div class="card-toolbar">
+								<!--begin::Button-->
+								<div class="dropdown dropdown-inline mr-2">
+
+								</div>
+								<a href="/Admin/property/index" class="btn btn-custom font-weight-bolder">
+									<span class="svg-icon svg-icon-md svg-icon-white">
+										<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+												<rect x="0" y="0" width="24" height="24" />
+												<circle fill="#ffffff" cx="9" cy="15" r="6" />
+												<path d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z" fill="#ffffff" opacity="0.3" />
+											</g>
+										</svg>
+										<!--end::Svg Icon-->
+									</span>Back
+								</a>
+								<!--end::Button-->
+							</div>
+						</div>
+						<div class="card-body">
+
+							<!--begin: form-->
+
+							@Html.AntiForgeryToken()
+							<div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+							@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+							@Html.HiddenFor(m => m.ID)
+							<div class="form-group row">
+								<div class="col-lg-12 text-center">
+									<div class="image-input image-input-outline" id="kt_image_1">
+										@if (string.IsNullOrEmpty(Model.Thumbnail))
+										{
+											<div class="image-input-wrapper" style="background-image:url('../../../../Assets/AppFiles/Images/default.png')"></div>
+										}
+										else
+										{
+											<div class="image-input-wrapper" style="background-image:url('@Model.Thumbnail')"></div>
+										}
+										@*<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change logo">
+												<i class="fa fa-pen icon-sm text-muted"></i>
+												<input type="file" name="Thumbnail" id="cover" accept=".png, .jpg, .jpeg" />
+												<input type="hidden" name="profile_avatar_remove" />
+											</label>*@
+
+									</div>
+									<span class="form-text text-muted">Thumbnail</span>
+
+								</div>
+							</div>
+							<h3 class="font-size-lg text-dark font-weight-bold mb-6 card-label">Basic Info:</h3>
+
+							<div class="row">
+								<div class="col-md-10 col-sm-10">
+									<div class="form-group">
+										<label class="control-label">Development Type</label>
+										<div class="input-group mb-2">
+
+											@Html.DropDownListFor(m => m.DevelopmentID, null, "Select Development ", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+
+											<div class="input-group-append">
+												<span class="input-group-text"><i class="fa fa-server"></i></span>
+											</div>
+
+											@Html.ValidationMessageFor(model => model.DevelopmentID, "", new { @class = "text-danger" })
+
+										</div>
+									</div>
+								</div>
+								<div class="col-md-2 col-sm-2">
+									<div class="form-group">
+										<label class="control-label">Enable Featured</label>
+										<div class="input-group mb-2">
+											<span class="switch">
+												<label>
+
+													@Html.CheckBox("IsFeatured", new { id = "IsFeatured", @readonly = "readonly" })
+													<span></span>
+												</label>
+											</span>
+										</div>
+
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-12">
+									<div class="form-group">
+										<label class="control-label">Title</label>
+										<div class="input-group mb-2">
+											@Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter title here ...", @readonly = "readonly" } })
+											<div class="input-group-append">
+												<span class="input-group-text"><i class="fa fa-server"></i></span>
+											</div>
+										</div>
+										@Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-12">
+									<div class="form-group">
+										<label class="control-label">Title (Ar)</label>
+										<div class="input-group mb-2">
+											@Html.EditorFor(model => model.TitleAr, new { htmlAttributes = new { @class = "form-control", placeholder = " ...Enter title (Ar) here", @readonly = "readonly", dir = "rtl" } })
+											<div class="input-group-append">
+												<span class="input-group-text"><i class="fa fa-server"></i></span>
+											</div>
+										</div>
+										@Html.ValidationMessageFor(model => model.TitleAr, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+								@*<div class="col-md-6 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">Short Description</label>
+											<div class="input-group mb-3">
+												@Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter short description here ...", @readonly = "readonly" } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fa fa-server"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">Short Description(Ar)</label>
+											<div class="input-group mb-3">
+												@Html.EditorFor(model => model.ShortDescriptionAr, new { htmlAttributes = new { @class = "form-control", placeholder = " ...Enter short description (Ar) here", @readonly = "readonly", dir = "rtl" } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fa fa-server"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.ShortDescriptionAr, "", new { @class = "text-danger" })
+										</div>
+									</div>*@
+								<div class="col-md-6 col-sm-12">
+									<div class="form-group">
+										<label class="control-label">Description</label>
+										<div class="input-group mb-3">
+											@Html.TextAreaFor(model => model.Description, 3, 20, new { @class = "form-control", placeholder = "Enter description here ...", @readonly = "readonly" })
+											@*@Html.TextAreaFor(model => model.TitleDescriptionAr, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter description (ar) here ...", required = "required", dir = "rtl" } })*@
+
+										</div>
+										@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-12">
+									<div class="form-group">
+										<label class="control-label">Description(Ar)</label>
+										<div class="input-group mb-3">
+											@Html.TextAreaFor(model => model.DescriptionAr, 3, 20, new { @class = "form-control", placeholder = " ...Enter title (Ar) here", @readonly = "readonly", dir = "rtl" })
+											@*@Html.TextAreaFor(model => model.TitleDescriptionAr, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter description (ar) here ...", required = "required", dir = "rtl" } })*@
+
+										</div>
+										@Html.ValidationMessageFor(model => model.DescriptionAr, "", new { @class = "text-danger" })
+									</div>
+								</div>
+							</div>
+							<h3 class="font-size-lg text-dark font-weight-bold mb-6 card-label">Address:</h3>
+
+							<div class="row">
+								@*<div class="col-md-4 col-sm-4">
+										<div class="form-group">
+											<label class="control-label">Countries</label>
+											<div class="input-group mb-2">
+												@Html.DropDownList("CountryID", null, "Select Countries ", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-globe-asia"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-4">
+										<div class="form-group">
+											<label class="control-label">Cities</label>
+											<div class="input-group mb-2">
+												@Html.DropDownList("CityID", null, "Select Country First ", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-city"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-4">
+										<div class="form-group">
+											<label class="control-label">Areas</label>
+											<div class="input-group mb-2">
+												@Html.DropDownList("AreaID", null, "Select City First ", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+
+
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-map"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.AreaID, "", new { @class = "text-danger" })
+										</div>
+									</div>*@
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label class="control-label">Latitude</label>
+										<div class="input-group mb-2">
+											<input type="number" min="-90" max="90" step="00.000001" placeholder="Enter latitude here ##.######" name="Latitude" id="Latitude" class="form-control" pattern="^[1-9]\d*(\.\d+)?$" value="@Model.Latitude" readonly />
+											<div class="input-group-append">
+												<span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+											</div>
+										</div>
+										@Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label class="control-label">Longitude</label>
+										<div class="input-group mb-2">
+											<input type="number" min="-180" max="180" step="00.000001" placeholder="Enter latitude here ##.#######" class="form-control" name="Longitude" id="Longitude" pattern="^[1-9]\d*(\.\d+)?$" value="@Model.Longitude" readonly />
+											<div class="input-group-append">
+												<span class="input-group-text"><i class="fas fa-map-marker"></i></span>
+											</div>
+										</div>
+										@Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+									</div>
+								</div>
+								@*<div class="col-md-12 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">Address</label>
+											<div class="input-group mb-3">
+												@Html.TextAreaFor(model => model.Address, 1, 20, new { @class = "form-control", placeholder = "Enter address here ...", @readonly = "readonly" })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-address-card"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+										</div>
+									</div>*@
+							</div>
+							<h3 class="font-size-lg text-dark font-weight-bold mb-6 card-label">Media:</h3>
+							<div class="row">
+								<div class="col-md-12 col-sm-12">
+									<label class="control-label">VRTour Link</label>
+									<div class="form-group">
+										<div class="input-group mb-2">
+											@Html.TextBox("VRTour", "", new { type = "file", name = "VRTour", @class = "form-control", @readonly = "readonly" })
+											<div class="input-group-append">
+												<span class="input-group-text"><i class="fa fa-video"></i></span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-12 video-framediv">
+									<div class="form-group video-frame">
+										<div class="input-group mb-2">
+											@if (Model.Video != null)
+											{
+												<div>
+													<label class="control-label">Video</label>
+
+													<center>
+														<video style="width: 100%; height: 100%;" controls>
+
+															<source src="@Url.Content(Model.Video)" type="video/mp4" name="Video" />
+
+														</video>
+													</center>
+												</div>
+											}
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-12 my-auto text-center" id="">
+									<div class="form-group">
+										<label>Floor Plan</label>
+										<div></div>
+										@if (string.IsNullOrEmpty(Model.FloorPlan))
+										{
+											<span>No Floor Plan Present</span>
+										}
+										else
+										{
+									<a href="@Model.FloorPlan" target="_blank" id="filename" class="btn btn-secondary"><i class="fa fa-eye" aria-hidden="true"></i>View Floor Plan</a>
+										}
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-12 my-auto text-center" id="inputfiled">
+									<div class="form-group">
+										<label>Broucher</label>
+										<div></div>
+										@if (string.IsNullOrEmpty(Model.Broucher))
+										{
+											<span>No Broucher Present</span>
+										}
+										else
+										{
+											<a href="@Model.Broucher" target="_blank" id="filename" class="btn btn-secondary"><i class="fa fa-eye" aria-hidden="true"></i>View Broucher</a>
+										}
+									</div>
+								</div>
+								<!--Faqs Start-->
+								<div class="row px-4 w-100">
+									<div class="col-md-12 col-sm-12">
+										<h3 class="font-size-lg text-dark font-weight-bold mt-10 card-label">Frequently Asked Questions:</h3>
+									</div>
+									<div class="col-md-12 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">FAQs</label>
+											<div class="card card-body m-0 py-5 px-5 max-h-600px overflow-auto">
+												@Html.Raw(Model.Faqs)
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">FAQs (Ar)</label>
+											<div class="card card-body m-0 py-5 px-5 max-h-600px overflow-auto">
+												@Html.Raw(Model.FaqsAr)
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--Faqs End-->
+							</div>
+							<!--end: form-->
+						</div>
+					</div>
+					<!--end::Card-->
+				</div>
+			</div>
+
+			<!--end::Dashboard-->
+		</div>
+		<!--end::Container-->
+	</div>
+	<!--end::Entry-->
+</div>
+<!--end::Page Scripts-->
+
+@section IndexScript {
+
+	@if (ViewBag.ErrorMessage != null && !String.IsNullOrEmpty(ViewBag.ErrorMessage))
+	{
+		<script type="text/javascript">
+        toastr.error('@ViewBag.ErrorMessage');
+		</script>
+	}
+
+}
+<!--end::Page Scripts-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--end::Page Scripts-->
+<script>
+	var SuccessMessage = '@ViewBag.SuccessMessage';
+    var ErrorMessage = '@ViewBag.ErrorMessage';
+
+    $(document).ready(function () {
+    })
+</script>

@@ -1,0 +1,182 @@
+﻿@{
+	ViewBag.Title = "";//NEWS___EVENTS;
+	var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+	bool RTL = CultureHelper.IsRighToLeft();
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!-- #region Content-->
+<!-- Hero Section -->
+<section class="4xl:mx-auto relative font-Rubik bg-hero-pages-ak -mt-[5rem]" id="hero-section">
+	<div class="container mx-auto pt-20 md:py-40 2xl:py-52">
+		<div class="flex flex-wrap justify-center">
+			<div class="flex flex-col justify-center items-center px-4">
+				<h1 class="text-2xl md:text-4xl font-semibold text-center text-white bg-[#c08843b3] px-6 py-6 md:px-10 md:py-6 rounded-lg md:rounded-xl uppercase text-shadow-hero-bg">
+					News Feed
+				</h1>
+				<p class="text-sm md:text-xl text-[#505050] text-center p-4">
+					<a href="/@culture/home" class="hover:text-ak-gold transition-[0.3s_all_ease-in-out]">Home</a>
+					<span>/</span>
+					<a>News Feed</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Hero Section End -->
+<!-- Main Section -->
+
+<section class="max-w-screen-4xl 4xl:mx-auto relative font-Rubik bg-white">
+	<div class="container flex flex-col flex-wrap justify-between w-[80%] mx-auto pt-10 pb-4">
+
+		<!-- News Feed -->
+		<div class="w-[80%] mx-auto text-center py-5">
+
+			<div class="relative heading text-center flex flex-col justify-center items-center ">
+				<h2 class="text-[#707070] font-semibold text-2xl md:text-3xl leading-2 md:leading-[2.2rem] 2xl:leading-[2.8rem]">
+					News Feed
+				</h2>
+				<h2 class="text-3xl md:text-5xl leading-2 md:leading-[2.2rem] 2xl:leading-[2.8rem] mb-8 absolute text-[#616161] opacity-10 font-medium translate-x-[-50%] translate-y-[-50%] top-[0%] left-[50%] select-none">
+					Updates
+				</h2>
+			</div>
+
+		</div>
+		<!-- News Feed End -->
+
+	</div>
+</section>
+
+<section class="max-w-screen-4xl 4xl:mx-auto relative font-Rubik bg-white pb-[12%] lg:pb-[6%]">
+	<div class="half-bg-ak-gray-light"></div>
+	<div class="container flex flex-col flex-wrap justify-between w-[80%] mx-auto pt-2 pb-8">
+
+		<!-- Grid -->
+		<div class="row flex flex-col mx-auto items-center align-middle z-[1]">
+
+			<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 2xl:grid-cols-5 gap-8">
+
+				<div class="flex h-auto">
+					<a class="relative group" href="/@culture/newsfeed-details">
+						<img src="/assets/images/service-images/Handyman.png"
+							 class="w-full mx-auto rounded-xl filter-br-bl-1" alt="img">
+						<div class="absolute text-start bottom-[-6%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full px-4 md:px-6">
+							<h2 class="text-white font-normal text-sm md:text-base leading-[0.8rem] md:leading-[1.2rem] truncate">
+								Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed
+							</h2>
+							<p class="text-white/90 font-extralight text-xs md:text-xs py-1">
+								09 Jun, 2022
+							</p>
+							<p class="text-white/90 font-extralight text-xxs md:text-xs opacity-0 group-hover:opacity-100 transition ease-in-out duration-300">
+								Read More &nbsp;<i class="fa fa-angle-right"></i>
+							</p>
+						</div>
+					</a>
+				</div>
+				<div class="flex h-auto">
+					<a class="relative group" href="/@culture/newsfeed-details">
+						<img src="/assets/images/service-images/room_cleaner.png"
+							 class="w-full mx-auto rounded-xl filter-br-bl-1" alt="img">
+						<div class="absolute text-start bottom-[-6%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full px-4 md:px-6">
+							<h2 class="text-white font-normal text-sm md:text-base leading-[0.8rem] md:leading-[1.2rem] truncate">
+								Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed
+							</h2>
+							<p class="text-white/90 font-extralight text-xs md:text-xs py-1">
+								09 Jun, 2022
+							</p>
+							<p class="text-white/90 font-extralight text-xxs md:text-xs opacity-0 group-hover:opacity-100 transition ease-in-out duration-300">
+								Read More &nbsp;<i class="fa fa-angle-right"></i>
+							</p>
+						</div>
+					</a>
+				</div>
+				<div class="flex h-auto">
+					<a class="relative group" href="/@culture/newsfeed-details">
+						<img src="/assets/images/service-images/electronics.png"
+							 class="w-full mx-auto rounded-xl filter-br-bl-1" alt="img">
+						<div class="absolute text-start bottom-[-6%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full px-4 md:px-6">
+							<h2 class="text-white font-normal text-sm md:text-base leading-[0.8rem] md:leading-[1.2rem] truncate">
+								Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed
+							</h2>
+							<p class="text-white/90 font-extralight text-xs md:text-xs py-1">
+								09 Jun, 2022
+							</p>
+							<p class="text-white/90 font-extralight text-xxs md:text-xs opacity-0 group-hover:opacity-100 transition ease-in-out duration-300">
+								Read More &nbsp;<i class="fa fa-angle-right"></i>
+							</p>
+						</div>
+					</a>
+				</div>
+				<div class="flex h-auto">
+					<a class="relative group" href="/@culture/newsfeed-details">
+						<img src="/assets/images/service-images/home.png" class="w-full mx-auto rounded-xl filter-br-bl-1"
+							 alt="img">
+						<div class="absolute text-start bottom-[-6%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full px-4 md:px-6">
+							<h2 class="text-white font-normal text-sm md:text-base leading-[0.8rem] md:leading-[1.2rem] truncate">
+								Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed
+							</h2>
+							<p class="text-white/90 font-extralight text-xs md:text-xs py-1">
+								09 Jun, 2022
+							</p>
+							<p class="text-white/90 font-extralight text-xxs md:text-xs opacity-0 group-hover:opacity-100 transition ease-in-out duration-300">
+								Read More &nbsp;<i class="fa fa-angle-right"></i>
+							</p>
+						</div>
+					</a>
+				</div>
+				<div class="flex h-auto">
+					<a class="relative group" href="/@culture/newsfeed-details">
+						<img src="/assets/images/service-images/camera.png" class="w-full mx-auto rounded-xl filter-br-bl-1"
+							 alt="img">
+						<div class="absolute text-start bottom-[-6%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full px-4 md:px-6">
+							<h2 class="text-white font-normal text-sm md:text-base leading-[0.8rem] md:leading-[1.2rem] truncate">
+								Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed
+							</h2>
+							<p class="text-white/90 font-extralight text-xs md:text-xs py-1">
+								09 Jun, 2022
+							</p>
+							<p class="text-white/90 font-extralight text-xxs md:text-xs opacity-0 group-hover:opacity-100 transition ease-in-out duration-300">
+								Read More &nbsp;<i class="fa fa-angle-right"></i>
+							</p>
+						</div>
+					</a>
+				</div>
+				<div class="flex h-auto">
+					<a class="relative group" href="/@culture/newsfeed-details">
+						<img src="/assets/images/service-images/projector.png"
+							 class="w-full mx-auto rounded-xl filter-br-bl-1" alt="img">
+						<div class="absolute text-start bottom-[-6%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full px-4 md:px-6">
+							<h2 class="text-white font-normal text-sm md:text-base leading-[0.8rem] md:leading-[1.2rem] truncate">
+								Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed
+							</h2>
+							<p class="text-white/90 font-extralight text-xs md:text-xs py-1">
+								09 Jun, 2022
+							</p>
+							<p class="text-white/90 font-extralight text-xxs md:text-xs opacity-0 group-hover:opacity-100 transition ease-in-out duration-300">
+								Read More &nbsp;<i class="fa fa-angle-right"></i>
+							</p>
+						</div>
+					</a>
+				</div>
+
+			</div>
+
+			<div class="w-full flex mx-auto text-center items-center align-middle mt-8 md:mt-12 md:mb-8">
+				<button class="btn-primary bg-ak-gold/90 hover:bg-ak-gold focus:outline-none mx-auto load-more" style="display:block;">
+					<p class="p-btn-primary text-white">Load More</p>
+				</button>
+			</div>
+
+		</div>
+	</div>
+	<!-- Grid End -->
+</section>
+
+<!-- Main Section End -->
+<!-- #endregion Content -->
+<!--Write js Here-->
+@section IndexScript {
+	@*<script src="@Url.ContentVersioned("~/Assets/js/web/events/index.js")"></script>*@
+}

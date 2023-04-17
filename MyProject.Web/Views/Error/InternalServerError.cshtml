@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "500 Erorr";
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+    bool RTL = CultureHelper.IsRighToLeft();
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+}
+<!-- #region Content-->
+<!-- BREADCRUMB AREA START -->
+<div class="ltn__breadcrumb-area text-left bg-overlay-white-30 bg-image mt-5 mb-5" data-bs-bg="/Assets/img/bg/14.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ltn__breadcrumb-inner">
+                    <h1 class="page-title">500 Erorr</h1>
+                    <div class="ltn__breadcrumb-list">
+                        <ul>
+                            <li><a href="~/home"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Home</a></li>
+                            <li>500 Erorr</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BREADCRUMB AREA END -->
+<!-- 404 area start -->
+<div class="ltn__404-area ltn__404-area-1 mb-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="error-404-inner text-center">
+                    <div class="error-img mb-30">
+                        <img src="~/Assets/img/others/error-1.png" alt="#">
+                    </div>
+                    <h1 class="error-404-title d-none">500</h1>
+                    <h2>Server Error!</h2>
+                    <!-- <h3>Oops! Looks like something going rong</h3> -->
+                    <p>Oops, something went wrong.Try to refresh this page or feel free to contact us if the problem persists.</p>
+                    <div class="btn-wrapper">
+                        <a href="~/home" class="btn btn-transparent"><i class="fas fa-long-arrow-alt-left"></i> BACK TO HOME</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 404 area end -->
+<!-- #endregion Content -->
+<!--Write js Here-->
+<script>const checkUrlfalse = false;</script>
+@section IndexScript {
+
+}

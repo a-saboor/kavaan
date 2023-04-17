@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Project.Data.VendorWithdrawalRequest>
+
+@{
+    Layout = null;
+}
+
+<div class="card-body">
+    <table class="table table-separate table-head-custom table-checkable" id="kt_datatable123">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Vendor</th>
+                <th>Amount</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody style="display:none">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(item.CreatedOn.HasValue ? item.CreatedOn.Value.ToString("dd MMM yyyy, h:mm tt") : "-")</td>
+                    <td>
+                    @item.Vendor.Logo,@item.Vendor.Name,@item.Vendor.VendorCode                        
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>                   
+                    <td nowrap="nowrap">@item.ID</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

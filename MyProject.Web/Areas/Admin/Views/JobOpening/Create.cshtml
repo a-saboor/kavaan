@@ -1,0 +1,166 @@
+﻿@model MyProject.Data.JobOpening
+@{
+	ViewBag.Title = "Create";
+	Layout = null;
+}
+<div class="modal-header">
+	<h5 class="modal-title">Create</h5>
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<i aria-hidden="true" class="ki ki-close"></i>
+	</button>
+</div>
+<div class="modal-body">
+
+	@using (Html.BeginForm("Create", "JobOpening", new { area = "Admin" }, FormMethod.Post, new { id = "Userform", @class = "form" }))
+	{
+		@Html.AntiForgeryToken()
+
+		<div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+				<div class="form-group">
+					@Html.LabelFor(model => model.CategoryID, "Category", htmlAttributes: new { @class = "control-label" })
+					<div class="input-group mb-3">
+						@Html.DropDownList("CategoryID", null, "Select Category", htmlAttributes: new { @class = "form-control", required = "required" })
+						@Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+						<div class="input-group-append">
+							<span class="input-group-text"><i class="fa fa-list"></i></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-12">
+				<div class="form-group">
+					@Html.LabelFor(model => model.Title, "Title", htmlAttributes: new { @class = "control-label" })
+					<div class="input-group mb-2">
+						@Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter title here ...", required = "required" } })
+						@Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+						<div class="input-group-append">
+							<span class="input-group-text">
+								<i class="fa fa-tag"></i>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-12">
+				<div class="form-group">
+					<label class="control-label">No of Positions</label>
+					<div class="input-group mb-2">
+						@Html.EditorFor(model => model.Position, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter position here ...", required = "required" } })
+						@Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+						<div class="input-group-append">
+							<span class="input-group-text">
+								<i class="fa fa-hashtag"></i>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-12">
+				<div class="form-group">
+					<label class="control-label">Location</label>
+					<div class="input-group mb-2">
+						@Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter location here ...", required = "required" } })
+						@Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+						<div class="input-group-append">
+							<span class="input-group-text">
+								<i class="fa fa-map"></i>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			@*<div class="col-md-6 col-sm-12" hidden>
+					<div class="form-group">
+						@Html.LabelFor(model => model.TitleAr, "Title (Ar)", htmlAttributes: new { @class = "control-label" })
+						<div class="input-group mb-2">
+							@Html.EditorFor(model => model.TitleAr, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter title (ar) here ...", required = "required", dir = "rtl" } })
+							@Html.ValidationMessageFor(model => model.TitleAr, "", new { @class = "text-danger" })
+							<div class="input-group-append">
+								<span class="input-group-text">
+									<i class="fa fa-tag"></i>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>*@
+
+			<input type="text" class="" value="-" name="TitleAr" hidden="" />
+			<input type="text" class="" value="-" name="RequirementsAr" hidden="" />
+
+			<div class="col-md-6 col-sm-12">
+				<div class="form-group mb-1">
+					<label class="control-label">Last Date</label>
+					<div class="input-daterange input-group kt_datepicker_range">
+						@Html.EditorFor(model => model.LastDate, new { htmlAttributes = new { @class = "form-control kt_datepicker_range", type = "text", id = "LastDate", placeholder = " DD MMM YYYY", required = "required",@readonly="readonly" } })
+						<div class="input-group-append">
+							<span class="input-group-text">
+								<i class="fa fa-calendar"></i>
+							</span>
+						</div>
+					</div>
+				</div>
+				@*<div class="form-group">
+						<label class="control-label">Last Date</label>
+						<div class="input-group mb-2">
+							@Html.EditorFor(model => model.LastDate, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter last date here ...", required = "required" } })
+							@Html.ValidationMessageFor(model => model.LastDate, "", new { @class = "text-danger" })
+							<div class="input-group-append">
+								<span class="input-group-text">
+									<i class="fa fa-calender"></i>
+								</span>
+							</div>
+						</div>
+					</div>*@
+			</div>
+			<div class="col-md-12 col-sm-12">
+				<div class="form-group">
+					<label class="control-label">Requirements</label>
+					<div class="input-group mb-2">
+						@Html.TextAreaFor(model => model.Requirements, 5, 30, new { @class = "form-control", placeholder = "Enter requirements  here ..." })
+					</div>
+					@Html.ValidationMessageFor(model => model.Requirements, "", new { @class = "text-danger" })
+				</div>
+			</div>
+			@*<div class="col-md-6 col-sm-12" hidden>
+					<div class="form-group">
+						<label class="control-label">Requirements (Ar)</label>
+						<div class="input-group mb-3">
+							@Html.TextAreaFor(model => model.RequirementsAr, 10, 30, new { @class = "form-control", placeholder = "Enter requirements (Ar) here ..." })
+						</div>
+						@Html.ValidationMessageFor(model => model.RequirementsAr, "", new { @class = "text-danger" })
+					</div>
+				</div>*@
+		</div>
+	}
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	<button type="submit" class="btn btn-custom" form="Userform">Submit</button>
+</div>
+
+<script>
+	'use strict';
+
+	var arrows;
+	if (KTUtil.isRTL()) {
+		arrows = {
+			leftArrow: '<i class="la la-angle-right"></i>',
+			rightArrow: '<i class="la la-angle-left"></i>'
+		}
+	} else {
+		arrows = {
+			leftArrow: '<i class="la la-angle-left"></i>',
+			rightArrow: '<i class="la la-angle-right"></i>'
+		}
+	}
+
+	// Date Range
+	$("#LastDate").datepicker({
+		todayHighlight: true,
+        format: 'dd M yyyy',
+	});
+</script>

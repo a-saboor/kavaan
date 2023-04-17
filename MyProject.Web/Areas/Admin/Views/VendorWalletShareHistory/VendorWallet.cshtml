@@ -1,0 +1,343 @@
+﻿@model Project.Data.VendorWalletShare
+
+@{
+    Layout = null;
+}
+
+@Html.AntiForgeryToken()
+<div class="row">
+    <div class="col-md-8" id="request">
+        <div class="card" style="min-height: 100%; ">
+            <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                <div class="card-title">
+                    <h3 class="card-label">
+                        Pending Requests
+                        <span class="d-block text-muted pt-2 font-size-sm">Manage Pending Requests Here...</span>
+                    </h3>
+                </div>
+            </div>
+            @{ Html.RenderAction("PendingReuests", "VendorWalletShareHistory", new { area = "Admin" }); }
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card" style="min-height: 100%; ">
+            <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                <div class="card-title">
+                    <h3 class="card-label">
+                        Vendor Wallet Share
+                        <span class="d-block text-muted pt-2 font-size-sm">Transfer Amount To Vendor Wallets Here...</span>
+                    </h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @using (Html.BeginForm("TransferAmount", "VendorWalletShareHistory", new { area = "Admin" }, FormMethod.Post, new { id = "TransferAmountForm", @class = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group mt-3">
+                                @Html.LabelFor(model => model.VendorID, "Vendor Name", htmlAttributes: new { @class = "control-label" })
+                                <div class="input-group">
+                                    @Html.DropDownList("VendorID", null, "Select Vendor", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.VendorID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group" hidden>
+                                @Html.LabelFor(model => model.TotalEarning, htmlAttributes: new { @class = "control-label" })
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.TotalEarning, new { htmlAttributes = new { @class = "form-control", id = "txtEarning", @type = "number" } })
+                                    @Html.ValidationMessageFor(model => model.TotalEarning, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group" hidden>
+                                @Html.LabelFor(model => model.PendingAmount, htmlAttributes: new { @class = "control-label" })
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.PendingAmount, new { htmlAttributes = new { @class = "form-control", id = "txtPending" } })
+                                    @Html.ValidationMessageFor(model => model.PendingAmount, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Transferring Amount</label>
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.TransferedAmount, new { htmlAttributes = new { @class = "form-control", id = "txtTransferred", @type = "number", @required = "required", @min = "1", @step = "0.01", oninput = "validity.valid||(value='');" } })
+                                    @Html.ValidationMessageFor(model => model.TransferedAmount, "", new { @class = "text-danger" })
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            AED
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 text-right">
+                                    <button type="submit" class="btn btn-dark" id="btnTransferAmount">
+                                        Transfer
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                        <hr />
+                        <div class="row mt-5">
+                            <div class="col-4">
+                                <div class="card card-custom gutter-b">
+                                    <div class="card-body p-3 text-center">
+                                        <span class="menu-icon">
+                                            <i class="fa fa-money-bill fa-2x stats-color"></i>
+                                        </span>
+                                        <div class="text-dark font-weight-bolder font-size-h2 mt-3 points min-h-15px" id="earning"></div>
+                                        <a href="javascript:;" class="text-muted text-hover-primary font-weight-bold  mt-1" style="font-size: 13px;">Total Earning</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="card card-custom gutter-b">
+                                    <div class="card-body p-3 text-center">
+                                        <span class="menu-icon">
+                                            <i class="fa fa-money-bill fa-2x stats-color"></i>
+                                        </span>
+                                        <div class="text-dark font-weight-bolder font-size-h2 mt-3 points min-h-15px" id="pendingamount"></div>
+                                        <a href="javascript:;" class="text-muted text-hover-primary font-weight-bold mt-1" style="font-size: 13px;">Pending Amount</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="card card-custom gutter-b">
+                                    <div class="card-body p-3 text-center">
+                                        <span class="menu-icon">
+                                            <i class="fa fa-money-bill fa-2x stats-color"></i>
+                                        </span>
+                                        <div class="text-dark font-weight-bolder font-size-h2 mt-3 points min-h-15px" id="transferedAmount"></div>
+                                        <a href="javascript:;" class="text-muted text-hover-primary font-weight-bold mt-1" style="font-size: 13px;">Transferred Amount</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card mt-5">
+    <div class="card-header flex-wrap border-0 pt-6 pb-0">
+        <div class="card-title">
+            <h3 class="card-label">
+                History
+                <span class="d-block text-muted pt-2 font-size-sm">View Transfer History Here...</span>
+            </h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-12 col-md-5">
+                        <div class="form-group mb-1">
+                            <label>From Date</label>
+                            <div class="input-daterange input-group ">
+                                @Html.Editor("FromDate", new { htmlAttributes = new { @class = "form-control datepicker", type = "text", id = "fromDate", placeholder = " MM/DD/YYYY", required = "required" } })
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-5">
+                        <div class="form-group mb-1">
+                            <label>To Date</label>
+                            <div class="input-daterange input-group ">
+                                @Html.Editor("ToDate", new { htmlAttributes = new { @class = "form-control datepicker", type = "text", id = "toDate", placeholder = " MM/DD/YYYY", required = "required" } })
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2" style="display: flex;flex-direction: column;justify-content: flex-end;align-items: center;margin-bottom: 5px;">
+                        <button type="button" class="btn btn-custom btn-block" id="btnSearch">
+                            <i class="fa fa-filter text-white"></i>Filter
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12" id="wallet">
+                <div class="alert alert-secondary" style="width: 70%;margin: 25px auto;text-align: center;">Please Select Vendor</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+<script>
+
+    "use strict";
+
+    $(document).ready(function () {
+
+        $('#TransferAmountForm').submit(function () {
+
+            $('#btnTransferAmount').addClass('spinner spinner-left spinner-sm').attr('disabled', true);
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $(this).serialize(),
+                success: function (response) {
+                    if (response.success) {
+                        toastr.success(response.message);
+
+                        $('#txtTransferred').val('');
+
+                        $('#btnTransferAmount').removeClass('spinner spinner-left spinner-sm').attr('disabled', false);
+
+                        $('select[name=VendorID]').trigger('change');
+
+                        $('#btnSearch').trigger('click');
+
+                    } else {
+                        $('#btnTransferAmount').removeClass('spinner spinner-left spinner-sm').attr('disabled', false);
+
+                        toastr.error(response.message);
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    if (xhr.status == 403) {
+                        try {
+                            var response = $.parseJSON(xhr.responseText);
+                            swal.fire(response.Error, response.Message, "warning").then(function () {
+                                $('#myModal').modal('hide');
+                            });
+                        } catch (ex) {
+                            swal.fire("Access Denied", "Your are not authorize to perform this action, For further details please contact administrator !", "warning").then(function () {
+                                $('#myModal').modal('hide');
+                            });
+                        }
+
+                        $('#btnTransferAmount').removeClass('spinner spinner-left spinner-sm').attr('disabled', false);
+                    }
+                }
+            });
+            return false;
+        });
+
+        $('.kt_datepicker_range').datepicker({
+            format: "mm/dd/yyyy",
+            todayHighlight: true
+        });
+
+        $("#fromDate").change(function () {
+
+            if (new Date($("#fromDate").val()) > new Date($("#toDate").val())) {
+                $('#toDate').datepicker('setDate', new Date($("#fromDate").val()).toString("mm/dd/yyy"));
+                $("#toDate").datepicker("option", "minDate", new Date($("#fromDate").val()).toString("mm/dd/yyy"));
+            }
+        });
+
+        $("#toDate").change(function () {
+
+            if (new Date($("#fromDate").val()) > new Date($("#toDate").val())) {
+                $('#fromDate').datepicker('setDate', new Date($("#toDate").val()).toString("mm/dd/yyy"));
+                $("#fromDate").datepicker("option", "maxDate", new Date($("#toDate").val()).toString("mm/dd/yyy"));
+            }
+        });
+
+        $("#btnSearch").on("click", function () {
+            if ($('#VendorID').val()) {
+                $('#btnSearch').find('i').hide();
+                $('#btnSearch').addClass('spinner spinner-left spinner-sm').attr('disabled', true);
+
+                var fromDate = $('#fromDate').val();
+                var toDate = $('#toDate').val();
+                var html = "<h3 style=margin-top:208px; margin-bottom:76px; align=center >Filtered Subscribers</h3><br/>";
+
+                { html += "<h4>From:    " + fromDate + "            TO:    " + toDate + " </h4>"; }
+
+                if (fromDate == "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Please! Select Date',
+                        //footer: '<a href>Image size should be less than or equal to  100KB and dimension should be 1713x540</a>'
+                    })
+                }
+                else if (toDate == "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Please! Select Date',
+                        //footer: '<a href>Image size should be less than or equal to  100KB and dimension should be 1713x540</a>'
+                    })
+                }
+
+                $.ajax({
+                    url: "/Admin/VendorWalletShareHistory/WalletHitoryList",
+                    type: 'POST',
+                    data: {
+                        sd: $('#fromDate').val(),
+                        ed: $('#toDate').val(),
+                        VendorID: $('#VendorID').val(),
+                    },
+                    success: function (data) {
+                        var table1;
+                        if (data != null) {
+                            $("#wallet").html(data);
+                            $('#kt_datatable_history').dataTable({
+                                dom: 'Bfrtip',
+                                buttons: [
+                               {
+                                   extend: 'excel',
+                                   messageTop: function () {
+                                       return 'Vendor Transfer History';
+                                   },
+                                   title: '',
+                                   exportOptions: {
+                                       columns: [0, 1]
+                                   }
+                               }
+                                ],
+                            });
+                        }
+                        $('#btnSearch').removeClass('spinner spinner-left spinner-sm').attr('disabled', false);
+                        $('#btnSearch').find('i').show();
+                    }
+                });
+            } else {
+
+                //toastr.error("Please select the vendor first!");
+
+                $('html, body').animate({
+                    scrollTop: $("#VendorID").offset().top - 200
+                }, 500);
+
+                $("#VendorID").focus();
+
+            }
+        });
+    })
+
+    var KTBootstrapDaterangepicker = function () {
+
+        // Private functions
+        var demos = function () {
+
+
+
+        }
+
+        return {
+            // public functions
+            init: function () {
+                demos();
+            }
+        };
+    }();
+</script>

@@ -1,0 +1,311 @@
+@model MyProject.Data.Customer
+@{
+	ViewBag.Title = "Edit";
+	Layout = null;
+}
+<link rel="stylesheet" href="@Url.ContentVersioned("~/Assets/css/intlTelInput/intlTelInput.css")">
+
+<div class="modal-header">
+	<h5 class="modal-title">Update</h5>
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<i aria-hidden="true" class="ki ki-close"></i>
+	</button>
+</div>
+<div class="modal-body">
+    <form id="editform" action="/Admin/Customer/Edit/" name="form" enctype="multipart/form-data" class="form-file-custom" onsubmit="return form_file_custom(this)">
+            @Html.AntiForgeryToken()
+            <div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ID)
+            @Html.HiddenFor(model => model.IsDeleted)
+            @Html.HiddenFor(model => model.CreatedOn)
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Full Name</label>
+                        <div class="input-group mb-2">
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter name here ...", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group intr-form-group">
+                        <label class="control-label">Contact</label>
+                        <div class="input-group mb-2 flex-nowrap">
+                            @Html.HiddenFor(model => model.PhoneCode, new { @class = "code" })
+                            @Html.EditorFor(model => model.Contact, new { htmlAttributes = new { @class = "form-control intr-phone w-100 rounded-right-0", placeholder = "Enter contact here ...", required = "required", maxlength = "20", autocomplete = "off", pattern = "[0-9\\-]*" } })
+                            @Html.ValidationMessageFor(model => model.Contact, "", new { @class = "text-danger" })
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Email</label>
+                        <div class="input-group mb-2">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter email here ...", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Password, "Password", htmlAttributes: new { @class = "control-label" })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter password here ...", type = "password" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                            </div>
+                        </div>
+                        <span class="form-text text-danger" style="font-size: 9px;">Min. 8 characters, at least one uppercase letter, one lowercase letter, and one number</span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label class="contrl-label">Confirm Password</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="confirmPassword" onkeyup="checkForConfirm(this.value)" value="@Model.Password" />
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                            </div>
+                        </div>
+                        <span class="form-text text-danger" style="font-size: 9px;" id="confPassError"></span>
+                    </div>
+                </div>
+                @*<div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Address</label>
+                        <div class="input-group mb-2">@Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter address here ...", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-home"></i></span>
+                            </div>
+                        </div>
+                        </div>
+                    </div>*@
+                @*<div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Country</label>
+                        <div class="input-group mb-2">
+                        @Html.DropDownList("CountryID", null, "Select country", htmlAttributes: new { @class = "form-control", required = "required" })@Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                            <i class="fa fa-flag"></i>
+                            </span>
+                            </div>
+                        </div>
+                        </div>
+                    </div>*@
+                @*<div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label">City</label>
+                            <div class="input-group mb-2">
+                                @Html.DropDownList("CityID", null, "Select city", htmlAttributes: new { @class = "form-control", required = "required" })
+                                @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-home"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                @*<div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label">Area</label>
+                            <div class="input-group mb-2">
+                                @Html.DropDownList("AreaID", null, "Select area", htmlAttributes: new { @class = "form-control", required = "required", id = "AreaID" })
+                                @Html.ValidationMessageFor(model => model.AreaID, "", new { @class = "text-danger" })
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-server"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                @*<div class="col-md-6 col-sm-12" hidden>
+                    <div class="form-group">
+                        <label class="control-label">Password</label>
+                        <div class="input-group mb-2">@Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password", placeholder = "Enter Password here ...", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                            <i class="fa fa-tag"></i>
+                            </span>
+                            </div>
+                        </div>
+                        </div>
+                    </div>*@
+                @*<div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label">Account Type</label>
+                            <div class="input-group mb-2">
+                                <select class="col-sm-12 form-control" name="AccountType" id="AccountType">
+                                    <option value="Basic">Basic</option>
+                                    <option value="Premium">Premium</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-tag"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+            </div>
+        </form>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	<button type="submit" class="btn btn-custom" form="editform" id="Submit">Save Changes</button>
+</div>
+<script src="@Url.ContentVersioned("~/Assets/js/intlTelInput/intlTelInput.js")"></script>
+
+<script>
+
+    var Passwordchange = false;
+    $('#Password').keyup(function () {
+        var value = $(this).val();
+
+        if (value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z@@*$&#%!~()\d]{8,}$/)) {
+            //true condition
+            Passwordchange = true;
+            $("#Password").removeClass("border border-danger");
+            $("#Password").addClass("border border-success");
+            //$('#btnsubmit').prop('disabled', false);
+        }
+        else {
+            Passwordchange = true;
+            $("#Password").removeClass("border border-success");
+            $("#Password").addClass("border border-danger");
+            //$('#Password').val("");
+            //$('#btnsubmit').prop('disabled', true);
+        }
+
+        $('#confirmPassword').val('');
+    });
+
+    function validate(evt) {
+
+        var theEvent = evt || window.event;
+
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+            // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+        var regex = /[0-9]|\./;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+
+    function checkForConfirm(v) {
+        if ($('#Password').val() != v) {
+            $('#confPassError').text("Confirm password doesn't match, Type again!");
+            $('#confirmPassword').removeClass("border border-success").addClass("border border-danger");
+            $('#Submit').prop('disabled', true);
+        }
+        else {
+            $('#confPassError').text('');
+            $('#confirmPassword').removeClass("border border-danger").addClass("border border-success");
+            $('#Submit').prop('disabled', false);
+        }
+
+    }
+    $('#Submit').click(function () {
+
+    });
+
+    //$('#frm-edit').submit(function () {
+    //    var value = $("#Password").val();
+    //    if (Passwordchange) {
+    //        if (!value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z@@*$&#%!~()\d]{8,}$/)) {
+    //            $("#Password").addClass("border border-danger");
+    //            toastr.error('Password must contain min. 8 characters, at least one uppercase letter, one lowercase letter, and one number');
+    //            return false;
+    //        }
+    //        else {
+    //            $("#Password").removeClass("border-danger").addClass("border-success");
+    //        }
+    //    }
+    //    else {
+    //        return true;
+    //    }
+
+    //    return false;
+    //});
+
+    jQuery(document).ready(function () {
+
+        @*$("#CountryID").val("@Model.CountryID");
+        $("#CityID").val("@Model.CityID");
+        $("#AreaID").val("@Model.AreaID");
+        $("#AccountType").val("@Model.AccountType");*@
+
+	  //  $('#CountryID').change(function () {
+
+			//var count = 0;
+			//var $dropdown = $("#CityID");
+			//if ($(this).val() == 0) {
+			//	$dropdown.empty();
+			//	$dropdown.append($("<option />").val('').text("Please Select Country First!"));
+			//}
+			//else {
+			//	$.ajax({
+			//		type: 'GET',
+			//		url: '/Admin/Customer/GetCitiesByCountry?id=' + $(this).val(),
+			//		success: function (response) {
+			//			$dropdown.empty();
+			//			$dropdown.append($("<option />").val('').text("Select City"));
+
+			//			$.each(response.data, function (k, v) {
+			//				$dropdown.append($("<option />").val(v.value).text(v.text));
+			//				count++;
+			//			});
+			//		}
+			//	});
+			//}
+	  //  });
+
+	  //  $('#CityID').change(function () {
+
+	  //      var count = 0;
+	  //      var $dropdown = $("#AreaID");
+	  //      if ($(this).val() == 0) {
+	  //          $dropdown.empty();
+	  //          $dropdown.append($("<option />").val('').text("Please Select City First!"));
+	  //      }
+	  //      else {
+	  //          $.ajax({
+	  //              type: 'GET',
+	  //              url: '/Admin/Customer/GetAreasByCity?id=' + $(this).val(),
+	  //              success: function (response) {
+	  //                  $dropdown.empty();
+	  //                  $dropdown.append($("<option />").val('').text("Select Area"));
+
+	  //                  $.each(response.data, function (k, v) {
+	  //                      $dropdown.append($("<option />").val(v.value).text(v.text));
+	  //                      count++;
+	  //                  });
+	  //              }
+	  //          });
+	  //      }
+	  //  });
+    });
+
+</script>

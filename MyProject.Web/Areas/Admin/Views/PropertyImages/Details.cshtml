@@ -1,0 +1,105 @@
+﻿@model MyProject.Data.PropertyFeature
+
+
+@{
+    ViewBag.Title = "Create";
+    Layout = null; }
+
+
+<div class="modal-header">
+    <h5 class="modal-title">Details</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <i aria-hidden="true" class="ki ki-close"></i>
+    </button>
+</div>
+<div class="modal-body">
+    <form>
+        <fieldset disabled="disabled">
+            @Html.AntiForgeryToken()
+            <div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group row">
+                <div class="col-lg-12 text-center">
+                    <div class="image-input image-input-outline" id="kt_image_1">
+                        <div class="image-input-wrapper" style="background-image:url('@Model.Cover')"></div>
+                           
+                      
+                    </div>
+                    <span class="form-text text-muted">Image dimensions should be 690 x 460 pixels and Image size must be less than 100 kb</span>
+                </div>
+            </div>
+            <input type="hidden" name="PropertyID" value="@TempData["PropertyID"]" />
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">Features</label>
+                        <div class="input-group mb-2">
+                            @Html.DropDownList("FeatureID", null, "Select Features ", htmlAttributes: new { @class = "form-control", required = "required" })
+
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-server"></i></span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.FeatureID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Feature Position</label>
+                        <div class="input-group mb-2">
+                            @Html.TextBoxFor(model => model.Position, new { @type = "number", @class = "form-control", placeholder = "Enter position here...", @min = "0", @max = "100000" })
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-sort-numeric-up"></i></span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Description</label>
+                        <div class="input-group mb-3">
+                            @Html.TextAreaFor(model => model.Description, 5, 20, new { @class = "form-control", placeholder = "Enter description here ..." })
+                            @*@Html.TextAreaFor(model => model.TitleDescriptionAr, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter description (ar) here ...", required = "required", dir = "rtl" } })*@
+
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Description(Ar)</label>
+                        <div class="input-group mb-3">
+                            @Html.TextAreaFor(model => model.DescriptionAr, 5, 20, new { @class = "form-control", placeholder = "Enter description (Ar) here ..." })
+                            @*@Html.TextAreaFor(model => model.TitleDescriptionAr, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter description (ar) here ...", required = "required", dir = "rtl" } })*@
+
+                        </div>
+                        @Html.ValidationMessageFor(model => model.DescriptionAr, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            </fieldset>
+    </form>
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+   
+</div>
+
+<script>
+	var SuccessMessage = '@ViewBag.SuccessMessage';
+	var ErrorMessage = '@ViewBag.ErrorMessage';
+</script>
+
+
+
+
+

@@ -1,0 +1,1227 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>OMW</title>
+	<meta name="description" content="description">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="~/favicon.ico" />
+	<!-- Plugins CSS -->
+	<link rel="stylesheet" href="~/assets/css/plugins.css">
+	<!-- Bootstap CSS -->
+	<link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+	<!-- Main Style CSS -->
+	<link rel="stylesheet" href="~/assets/css/style.css">
+	<link rel="stylesheet" href="~/assets/css/responsive.css">
+	<link href="~/Assets/css/Layout.css" rel="stylesheet" />
+	<style>
+
+		.wishlist-style {
+			margin-left: -10px;
+			top: 5px !important;
+			left: -2px;
+		}
+
+		.wishlist-style-mobile {
+			right: 42px;
+		}
+
+		.compare-style {
+			margin-left: -10px;
+			top: 5px !important;
+			left: -2px;
+		}
+
+		.compare-style-mobile {
+			right: 70px;
+		}
+
+		#header-cart .qtyField .qtyBtn, #header-cart .qtyField .qty {
+			width: 50px;
+		}
+
+		.dot {
+			height: 14px;
+			width: 14px;
+			background-color: #bbb;
+			border-radius: 50%;
+			display: inline-block;
+			padding-top: 1px;
+			position: relative;
+			top: 2px;
+		}
+
+		.footer-links li {
+			font-weight: 600;
+		}
+
+		.footer-2 .footer-top h4, .footer-2 .footer-top .h4 {
+			font-size: 16px;
+			font-weight: 600;
+		}
+
+		.footer-2 .footer-top, .footer-2 .footer-links a, .footer-2 .footer-top p, .footer-2 .footer-bottom, .footer-2 .footer-bottom a {
+			color: #ffffff;
+			font-weight: 600;
+		}
+
+		.footer-2 .site-footer {
+			background-color: #110044;
+		}
+
+		#footer {
+			margin-top: 0px !important;
+		}
+
+		.home2-default .top-header {
+			background: #110044;
+			color: #ffffff;
+		}
+
+		.top-header {
+			background: #110044;
+		}
+
+			.top-header p, .top-header a, .top-header select, .top-header .fa, .top-header span.selected-currency, .top-header .language-dd {
+				color: #ffffff;
+				font-size: 14px;
+			}
+
+		.footer-2 .site-footer .addressFooter .icon {
+			color: #ffffff !important;
+			margin-top: 2px;
+		}
+
+		.fadeInDown .main-header-logo {
+			width: 50px;
+		}
+
+		.fadeInDown .search__input form-control {
+			margin-bottom: 0px !important;
+		}
+
+		.fadeInDown .form-group {
+			margin-bottom: 0px !important;
+		}
+
+		.fadeInDown .desktop-header-right {
+			padding-top: 10px;
+		}
+
+		.fadeInDown .main-header-search {
+			margin-top: 0px;
+		}
+
+		.fadeInDown .main-header {
+			padding: 5px 30px;
+		}
+
+		#message {
+			background: #000 !important;
+		}
+
+		#message {
+			color: #fff;
+			/*line-height: 38px;*/
+			cursor: pointer;
+			/*font-size: 20px;*/
+			height: 40px;
+			right: 10px;
+			position: fixed;
+			border-radius: 3px;
+			text-align: center;
+			transition: all 0.3s ease 0s;
+			-moz-transition: all 0.3s ease 0s;
+			-webkit-transition: all 0.3s ease 0s;
+			/*width: 40px;*/
+			bottom: 60px;
+			z-index: 444;
+			display: none;
+			background: #000;
+			padding: 10px;
+		}
+
+		#couponpromotion > i {
+			color: #ffffff;
+		}
+
+		#siteNav {
+			max-width: 1300px;
+		}
+
+		@@media (min-width: 990px) {
+			#siteNav > li > a:hover:hover, #siteNav > li > a:hover {
+				color: #7a62c1;
+			}
+		}
+
+		@@media (min-width: 990px) {
+			#siteNav a {
+				font-size: 12px;
+			}
+		}
+
+		.search-results {
+			position: absolute;
+			height: 500px;
+			width: 400px;
+			overflow-y: auto;
+			border-radius: 5px;
+			background: #fff;
+			box-shadow: 2px 2px 5px #00000052;
+			z-index: 5;
+			left: -30px;
+			padding: 0px 10px;
+		}
+
+			.search-results .car-image {
+				width: 30px;
+				height: 30px;
+				border-radius: 5px;
+				box-shadow: 0px 0px 5px #0000001c;
+			}
+
+			.search-results h4 {
+				display: inline;
+				padding-left: 5px;
+			}
+
+			.search-results .dataset {
+				padding: 0px 10px;
+			}
+
+		.searched-result-cars h2, .searched-result-vendors h2, .searched-result-categories h2 {
+			background: black;
+			padding: 10px 10px;
+			color: #fff;
+			border-radius: 5px 5px 0px 0px;
+		}
+
+		.searched-result-cars, .searched-result-vendors, .searched-result-categories {
+			border-radius: 5px;
+			box-shadow: 1px 1px 5px #00000057;
+			margin: 5px 0px;
+		}
+
+		.search-results .dataset .car {
+			border-bottom: 1px solid #00000014;
+			padding: 5px 0px;
+			display: block;
+		}
+
+		.search-results .dataset .vendor {
+			border-bottom: 1px solid #00000014;
+			padding: 5px 0px;
+			display: block;
+		}
+
+		.search-results .dataset .category {
+			border-bottom: 1px solid #00000014;
+			padding: 5px 0px;
+			display: block;
+		}
+
+		.search-results::-webkit-scrollbar {
+			width: .3em;
+		}
+
+		.search-results::-webkit-scrollbar-track {
+			/*box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.9);*/
+			background-color: #000;
+		}
+
+		#site-scroll {
+			background: #110044 !important;
+		}
+
+		.search-results::-webkit-scrollbar-thumb {
+			background-color: #110044;
+			outline: 1px solid #110044;
+		}
+
+
+		body::-webkit-scrollbar {
+			width: .7em;
+		}
+
+		body::-webkit-scrollbar-track {
+			/*box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.9);*/
+			background-color: #000;
+		}
+
+		body::-webkit-scrollbar-thumb {
+			background-color: #f57400;
+			outline: 1px solid #f57400;
+		}
+
+		.whatsapp-link {
+			position: fixed;
+			right: 5px;
+			bottom: 10px;
+			background: #110044;
+			border-radius: 10px 10px 0px 10px;
+			color: #ffffff;
+			font-size: 16px;
+			padding: 10px 10px 10px 45px;
+			font-weight: 700;
+		}
+
+			.whatsapp-link:hover {
+				color: #ffffff;
+				text-decoration: unset;
+			}
+
+			.whatsapp-link i {
+				color: #ffffff;
+				font-size: 30px;
+				position: absolute;
+				left: 10px;
+				top: 6px;
+			}
+
+		h4 {
+			font-family: "Poppins",Helvetica,Tahoma,Arial,serif;
+		}
+	</style>
+</head>
+<body class="template-index home2-default">
+	@*
+		<div id="pre-loader">
+		<img src="~/assets/images/loader.gif" alt="Loading..." />
+						</div>*@
+	<div class="pageWrapper">
+		<!--Promotion Bar-->
+		@*
+						<div class="notification-bar mobilehide">
+									<a href="#" class="notification-bar__message">20% off your very first purchase, use promo code: Dt0000</a>
+			<span class="close-announcement">×</span>
+												</div>*@
+		<!--End Promotion Bar-->
+		<!--Top Header-->
+		<div class="top-header">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-10 col-sm-8 col-md-5 col-lg-4">
+						@*	<div class="currency-picker">
+								<span class="selected-currency">USD</span>
+								<ul id="currencies">
+									<li data-currency="INR" class="">INR</li>
+									<li data-currency="GBP" class="">GBP</li>
+									<li data-currency="CAD" class="">CAD</li>
+									<li data-currency="USD" class="selected">USD</li>
+									<li data-currency="AUD" class="">AUD</li>
+									<li data-currency="EUR" class="">EUR</li>
+									<li data-currency="JPY" class="">JPY</li>
+								</ul>
+							</div>*@
+						@*<div class="language-dropdown">
+								<span class="language-dd">EN</span>
+								<ul id="language">
+									<li class="" value="en">English</li>
+									<li class="" value="ar">Arabic</li>
+								</ul>
+							</div>*@
+						<p class="phone-no">
+							<i class="anm anm-phone-s"></i> +950 (111) 044 833
+						</p>
+					</div>
+					<div class="col-sm-4 col-md-4 col-lg-4 d-none d-lg-none d-md-block d-lg-block">
+						<div class="text-center">
+							<p class="top-header_middle-text">
+								<marquee id="couponpromotion" direction="left">
+								</marquee>
+								@*20% off your very first purchase, use promo code: Dt0000*@
+							</p>
+						</div>
+					</div>
+					<div class="col-2 col-sm-4 col-md-3 col-lg-4 text-right">
+						<span class="user-menu d-block d-lg-none">
+							<i class="anm anm-user-al" aria-hidden="true"></i>
+						</span>
+						@if (Session["CustomerID"] != null)
+						{
+							<ul class="customer-links list-inline">
+								<li>
+									<a href="/Customer/Dashboard/Index">
+										<i class="anm anm-user-al" aria-hidden="true"></i> @Session["CustomerName"]
+									</a>
+								</li>
+								<li>
+									<a href="javascript:;">
+										|
+									</a>
+								</li>
+								<li>
+                                    <a href="javascript:void(0)" class="logout-anchor" >Logout</a>
+								</li>
+							</ul>
+						}
+						else
+						{
+							<ul class="customer-links list-inline">
+								<li>
+									<a href="/Customer/Account/Login">Login</a>
+								</li>
+								<li>
+									<a href="/Customer/Account/Signup">Create Account</a>
+								</li>
+							</ul>
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--End Top Header-->
+		<!--Header-->
+		<div class="header-wrap animated d-flex">
+			<div class="container-fluid" style="padding:0px 15px">
+				<div class="d-none d-lg-block">
+					<div class="row main-header">
+						<div class="col-1"></div>
+						<div class="col-2">
+							<!--Search Form Drawer-->
+							@*
+								<div class="search">
+								<div class="search__form">
+																		<form class="search-bar__form" action="#">
+																			<button class="go-btn search__button" type="submit">
+								<i class="icon anm anm-search-l"></i>
+																			</button>
+								<input class="search__input" type="search" name="q" value="" placeholder="Search entire store..." aria-label="Search" autocomplete="off">
+																		</form>
+																		<button type="button" class="search-trigger close-btn">
+								<i class="anm anm-times-l"></i>
+																		</button>
+																	</div>
+																</div>*@
+							<!--End Search Form Drawer-->
+							@*
+								<div class="site-header__search main-header-search">
+																	<button type="button" class="search-trigger">
+								<i class="icon anm anm-search-l"></i>
+																	</button>
+																</div>*@
+							<form class="main-header-search" id="FormSearch">
+								@Html.AntiForgeryToken()
+								<div class="form-group">
+									<div class="input-group">
+										<input class="search__input form-control" type="search" name="q" value="" placeholder="Search entire store..." aria-label="Search" autocomplete="off">
+										<div class="input-group-append">
+											<button class="input-group-text" type="submit" style="cursor:pointer">
+												<i class="icon anm anm-search-l"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+								<div class="search-results" style="display:none">
+									<div class="searched-result-cars">
+										<h2 class="m-0">Cars</h2>
+										<hr class="m-0 mb-1" />
+										<div class="dataset">
+
+										</div>
+									</div>
+									<div class="searched-result-vendors">
+										<h2 class="m-0">Vendors</h2>
+										<hr class="m-0 mb-1" />
+										<div class="dataset">
+										</div>
+									</div>
+									<div class="searched-result-categories">
+										<h2 class="m-0">Categories</h2>
+										<hr class="m-0 mb-1" />
+										<div class="dataset">
+
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="col-6 text-center">
+							<a href="/@culture/">
+								<img class="main-header-logo" src="~/Assets/images/logo/KAVAAN_logo_md.png" alt="KAVAAN" title="KAVAAN" />
+							</a>
+						</div>
+						<div class="col-3 desktop-header-right">
+
+							<div class="site-cart">
+								<a href="#;" class="site-header__cart" title="Cart">
+									<i class="icon anm anm-bag-l"></i>
+									<span style="position: relative;top: -5px;">CART</span>
+									<span id="CartCount" class="site-header__cart-count" data-cart-render="item_count"></span>
+								</a>
+								<!--Minicart Popup-->
+								<div id="header-cart" class="block block-cart">
+									<ul class="mini-cars-list"></ul>
+									<div class="total">
+										<div class="total-in">
+											<span class="label">Cart Subtotal:</span>
+											<span class="car-price">
+												<span class="money">AED 0.0</span>
+											</span>
+										</div>
+										<div class="buttonSet text-center">
+											<a href="/cart" class="btn btn-secondary btn--small">View Cart</a>
+											<a href="/checkout" class="btn btn-secondary btn--small btn-check-out" id="btnCheckOut">Checkout</a>
+										</div>
+									</div>
+								</div>
+								<!--End Minicart Popup-->
+							</div>
+							<a href="/Wishlist" class="wish-list" title="WISHLIST">
+								<i class="icon anm anm-heart-l"></i>
+								<span>WISHLIST</span>
+								<span id="WishlistCount">
+									<span class="site-header__wishlist-count wishlist-style wishlist-count" data-cart-render="item_count"></span>
+								</span>
+							</a>
+							<a href="javascript:void(0)" onclick="CarCompareForm()" class="wish-list" title="COMPARE">
+								<i class="icon anm anm-random-r"></i>
+								<span>COMPARE</span>
+								<span id="CompareCount">
+									<span class="site-header__compare-count compare-style compare-count" data-cart-render="item_count"></span>
+								</span>
+							</a>
+						</div>
+						@*<div class="col-1"></div>*@
+					</div>
+				</div>
+				<div class="row align-items-center" style="background-color: #110044;">
+					<!--Desktop Logo-->
+					@*
+						<div class="logo col-md-2 col-lg-2 d-none d-lg-block">
+																		<a href="/Home/Index">
+						<img src="~/Assets/images/logo/logo.png" alt="KAVAAN" title="KAVAAN" style="width:159px;height:60px;" />
+																									</a>
+																								</div>*@
+					<!--End Desktop Logo-->
+					<div class="col-2 col-sm-3 col-md-3 col-lg-12">
+						<div class="d-block d-lg-none">
+							<button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open">
+								<i class="icon anm anm-times-l"></i>
+								<i class="ml-3 anm anm-bars-r"></i>
+							</button>
+						</div>
+						<!--Desktop Menu-->
+						<nav class="grid__item" id="AccessibleNav">
+							<!-- for mobile -->
+							<ul id="siteNav" class="site-nav medium center hidearrow"></ul>
+						</nav>
+						<!--End Desktop Menu-->
+					</div>
+					<div class="col-2 col-sm-3 col-md-3 col-lg-12">
+
+					</div>
+					<!--Mobile Logo-->
+					<div class="col-4 col-sm-5 col-md-5 col-lg-2 d-block d-lg-none mobile-logo">
+						<div class="logo">
+							<a href="/@culture/">
+								<img src="~/Assets/images/logo/KAVAAN_logo_md.png" alt="KAVAAN" title="KAVAAN" />
+							</a>
+						</div>
+					</div>
+					<div class="col-4 col-sm-4 col-md-4 col-lg-2 d-block d-lg-none mobile-header-right">
+						<div class="site-cart">
+							<a href="#;" class="site-header__cart" title="Cart">
+								<i class="icon anm anm-bag-l"></i>
+								<span id="CartCount" class="site-header__cart-count" data-cart-render="item_count"></span>
+							</a>
+							<!--Minicart Popup-->
+							<div id="header-cart" class="block block-cart">
+								<ul class="mini-cars-list" id="cart-container"></ul>
+								<div class="total">
+									<div class="total-in">
+										<span class="label">Cart Subtotal:</span>
+										<span class="car-price">
+											<span class="money">AED 0.00</span>
+										</span>
+									</div>
+									<div class="buttonSet text-center">
+										<a href="/cart" class="btn btn-secondary btn--small">View Cart</a>
+										<a href="/checkout" class="btn btn-secondary btn--small">Checkout</a>
+									</div>
+								</div>
+							</div>
+							<!--End Minicart Popup-->
+						</div>
+						<a href="/Wishlist" class="wish-list" title="WISHLIST">
+							<i class="icon anm anm-heart-l"></i>
+							<span id="WishlistCount" class="site-header__wishlist-count wishlist-style-mobile wishlist-count-mobile" data-cart-render="item_count"></span>
+						</a>
+						<a href="javascript:void(0)" onclick="CarCompareForm()" class="wish-list" title="COMPARE">
+							<i class="icon anm anm-random-r"></i>
+							<span id="CompareCount" class="site-header__compare-count compare-style-mobile compare-count-mobile" data-cart-render="item_count"></span>
+						</a>
+					</div>
+					<!--Mobile Logo-->
+				</div>
+			</div>
+		</div>
+		<!--End Header-->
+		<!--Mobile Menu-->
+		<div class="mobile-nav-wrapper" role="navigation">
+			<div class="closemobileMenu">
+				<i class="icon anm anm-times-l pull-right"></i> Close Menu
+			</div>
+			<ul id="MobileNav" class="mobile-nav"></ul>
+		</div>
+		<!--End Mobile Menu-->
+		@RenderBody()
+		<!--Footer-->
+		<footer id="footer" class="footer-2">
+			<div class="newsletter-section mt-5">
+				<div class="container">
+					<div class="row">
+						<div class="col-12 col-sm-12 col-md-12 col-lg-7 w-100 d-flex justify-content-start align-items-center">
+							<div class="display-table">
+								<div class="display-table-cell footer-newsletter">
+									<div class="section-header text-center">
+										<label class="h2">
+											<span>sign up for </span>newsletter
+										</label>
+									</div>
+									<form action="/Subscribers/Create" method="post" id="formSubscribe">
+										@*@Html.AntiForgeryToken()*@
+										<div class="input-group">
+											<input type="email" class="input-group__field newsletter__input" id="EmailID" name="EmailID" value="" placeholder="Email address" required="">
+											<span class="input-group__btn">
+												<button type="submit" class="btn newsletter__submit" name="commit" id="Subscribe">
+													<span class="newsletter__submit-text--large">Subscribe</span>
+												</button>
+											</span>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-sm-12 col-md-12 col-lg-5 d-flex justify-content-end align-items-center">
+							<div class="footer-social">
+								<ul class="list--inline site-footer__social-icons social-icons">
+									@*<li>
+											<a id="contact_facebook" href="javascript:;" target="_blank" class="social-icons__link" title="Maru Deals Social Links">
+												<i class="icon icon-facebook"></i>
+											</a>
+										</li>
+										<li>
+											<a id="contact_instagram" href="javascript:;" target="_blank" class="social-icons__link" title="Maru Deals Social Links">
+												<i class="icon icon-instagram"></i>
+												<span class="icon__fallback-text"></span>
+											</a>
+										</li>
+										<li>
+											<a id="contact_youtube" href="javascript:;" target="_blank" class="social-icons__link" title="Maru Deals Social Links">
+												<i class="icon icon-youtube"></i>
+												<span class="icon__fallback-text"></span>
+											</a>
+										</li>
+										<li>
+											<a id="contact_twitter" href="javascript:;" target="_blank" class="social-icons__link" title="Maru Deals Social Links">
+												<i class="icon icon-twitter "></i>
+												<span class="icon__fallback-text"></span>
+											</a>
+										</li>
+										<li>
+											<a id="contact_snapchat" href="javascript:;" target="_blank" class="social-icons__link" title="Maru Deals Social Links">
+												<i class="fa fa-snapchat fa-lg"></i>
+											</a>
+										</li>
+										<li>
+											<a id="contact_linkedin" href="javascript:;" target="_blank" class="social-icons__link" title="Maru Deals Social Links">
+												<i class="icon icon-linkedin"></i>
+												<span class="icon__fallback-text"></span>
+											</a>
+										</li>
+										<li>
+											<a id="contact_behance" href="javascript:;" target="_blank" class="social-icons__link" title="Maru Deals Social Links">
+												<i class="fa fa-behance fa-lg"></i>
+												<span class="icon__fallback-text"></span>
+											</a>
+										</li>
+										<li>
+											<a id="contact_pinterest" href="javascript:;" target="_blank" class="social-icons__link" title="Maru Deals Social Links">
+												<i class="icon icon-pinterest"></i>
+												<span class="icon__fallback-text"></span>
+											</a>
+										</li>*@
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="site-footer">
+				<div class="container">
+					<!--Footer Links-->
+					<div class="footer-top">
+						<div class="row">
+							<div class="col-12 col-sm-12 col-md-3 col-lg-3 footer-links">
+								<h4 class="h4">Maru Deals</h4>
+								<ul>
+									<li style="text-align:justify;">Established in 1998 by Founder & Chief Executive Officer, Maru Deals is a leading fashion retailer offering compelling home and clothing</li>
+									<li></li>
+								</ul>
+							</div>
+							<div class="col-12 col-sm-12 col-md-3 col-lg-3 footer-links">
+								<h4 class="h4">Informations</h4>
+								<ul>
+									<li>
+										<a href="/about-us">About us</a>
+									</li>
+									<li>
+										<a href="/privacy-policy">Privacy Policy</a>
+									</li>
+									<li>
+										<a href="/terms-and-conditions">Terms &amp; Conditions</a>
+									</li>
+									<li>
+										<a href="/newsfeed">News Feed</a>
+									</li>
+									<li>
+										<a href="/Customer/Dashboard/Index">My Account</a>
+									</li>
+									<li>
+										<a href="/become-a-seller">Become A Seller</a>
+									</li>
+								</ul>
+							</div>
+							<div class="col-12 col-sm-12 col-md-3 col-lg-3 footer-links">
+								<h4 class="h4">Customer Services</h4>
+								<ul>
+									<li>
+										<a href="/careers">Careers</a>
+									</li>
+									<li>
+										<a href="/Customer/Prescription/Create">Prescription</a>
+									</li>
+									<li>
+										<a href="/frequently-asked-questions">FAQ's</a>
+									</li>
+
+									<li>
+										<a href="/contact-us">Contact Us</a>
+									</li>
+									<li>
+										<a href="/return-policy">Shipment &amp; Return Policy</a>
+									</li>
+								</ul>
+							</div>
+							<div class="col-12 col-sm-12 col-md-3 col-lg-3 contact-box">
+								<h4 class="h4">Contact Us</h4>
+								<ul class="addressFooter" id="contact_footer">
+									@*
+										<li>
+											<i class="icon anm anm-map-marker-al"></i><p id="contact_address">Al AIN, 2568 steet, 23568 UAE</p>
+										</li>
+										<li class="fax">
+											<i class="icon anm anm-fax"></i><p id="contact_fax">+950 (111) 044 833</p>
+										</li>
+										<li class="phone">
+											<i class="icon anm anm-phone-s"></i><p id="contact_phone1">+950 (111) 044 833</p>
+										</li>
+										<li class="phone">
+											<i class="icon anm anm-phone-s"></i><p id="contact_phone2">+950 (111) 044 833</p>
+										</li>
+										<li class="email">
+											<i class="icon anm anm-envelope-l"></i><p id="contact_email">info@MyProject.com</p>
+										</li>
+									*@
+
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!--End Footer Links-->
+				</div>
+			</div>
+		</footer>
+		<footer id="footer" class="footer-2">
+			<div class="site-footer" style="background-color: #000;">
+				<div class="container">
+					<div class="footer-bottom">
+						<div class="row">
+							<!--Footer Copyright-->
+							<div class="col-12 col-sm-12 col-md-6 col-lg-6 order-1 order-md-0 order-lg-0 order-sm-1 copyright text-sm-center text-md-left text-lg-left">
+								<span style="color:white;">© 2021 MyProject. All Rights Reserved.</span>
+							</div>
+							<!--End Footer Copyright-->
+							<!--Footer Payment Icon-->
+							<div class="col-12 col-sm-12 col-md-6 col-lg-6 order-0 order-md-1 order-lg-1 order-sm-0 payment-icons text-right text-md-center">
+								<img src="~/Assets/images/paymenticon.png" style="width: 181px;margin-top: -24px;" alt="Payment">
+							</div>
+							<!--End Footer Payment Icon-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!--End Footer-->
+		<!--Scoll Top-->
+		<span id="site-scroll">
+			<i class="icon anm anm-angle-up-r"></i>
+		</span>
+		<!--End Scoll Top-->
+		<!--Scoll Top-->
+		<span id="message">
+			<i class="icon anm anm-message"></i>
+		</span>
+		<!--End Scoll Top-->
+		<!--Whatsapp Link-->
+		<a id="whatsapp_link" class="whatsapp-link text-decoration-none " href="https://api.whatsapp.com/send?phone=971556384789" method="get" target="_blank">
+			<i class="fa fa-whatsapp"></i>
+			How can we help you?
+		</a>
+		<!--End Whatsapp Link-->
+		<!-- Cancel Order Popup -->
+		<div class="modal fade quick-view-popup" id="CancelOrder">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div id="CarSection-car-template" class="car-template__container prstyle1">
+							<div class="car-single">
+								<!-- Start model close -->
+								<a href="javascript:void()" data-dismiss="modal" class="model-close-btn pull-right" title="close"><span class="icon icon anm anm-times-l"></span></a>
+								<!-- End model close -->
+								<h4 class="text-center">Cancel Order</h4>
+								<div class="row">
+									<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+										<div class="car-single__meta">
+											<strong> Order No :</strong>
+											<h6 class="car-single__title" id="OrderNo">OrderNo</h6>
+											<span class="float-left">
+												<strong> Order Status :</strong>
+												<span id="Status"></span>
+											</span>
+											<span class="float-right">
+												<strong> Order Amount :</strong>
+												<span id="Amount"></span>
+											</span>
+											<form method="post" action="/Customer/Order/Cancel?lang=en" id="CancelOrderForm" accept-charset="UTF-8" class="" enctype="multipart/form-data">
+												@Html.AntiForgeryToken()
+												<input type="hidden" name="ID" id="ID" />
+												<div class="mb-1 mt-5">
+													<textarea rows="5" class="form-control input-group__field newsletter__input" name="CancelationReason" value="" placeholder="Cancelation Reason" required=""></textarea>
+													<span class="input-group__btn">
+													</span>
+												</div>
+											</form>
+											<div class="display-table shareRow mt-3">
+												<div class="display-table-cell text-center">
+													<button type="submit" class="btn btn-soft-danger mb-3 mb-md-0 font-weight-normal px-5 px-md-4 px-lg-5 w-100 w-md-auto" form="CancelOrderForm">
+														<span class="">Cancel Order</span>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--End-car-single-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Cancel Order Popup -->
+		@*<div class="modal" id="popup-container" tabindex="-1" role="dialog" style="background:transparent; height:100%">
+				<div class="modal-dialog">
+					<div class="modal-content">
+
+						<div class="modal-body">
+							<a href="javascript:void(0)" data-dismiss="modal" class="model-close-btn pull-right" title="close"><span class="icon icon anm anm-times-l"></span></a>
+							<div class="display-table-cell width40">
+								<img id="CarImage" src="assets/images/newsletter-img.jpg" alt="Title" title="Title" />
+							</div>
+							<div class="display-table-cell width60 text-center">
+								<div class="newsletter-left pb-0 pt-0">
+									<h2 id="CarTitle">Title</h2>
+									<p id="CarVariants">Options</p>
+									<form action="/Customer/Rating/Create?lang=en" method="post" enctype="multipart/form-data" id="CarRatingForm">
+										@Html.AntiForgeryToken()
+										<input type="hidden" name="OrderDetailID" id="OrderDetailID" />
+										<input type="hidden" name="CarID" id="CarID" />
+										<input type="hidden" name="Rating" id="Rating" />
+										<div class="rateit" id="CarRating" data-rateit-mode="font" style="font-size:50px">
+										</div>
+										<div class="input-group mb-1">
+											<textarea rows="2" class="input-group__field newsletter__input" name="Remarks" value="" placeholder="Remarks" required=""></textarea>
+											<span class="input-group__btn">
+											</span>
+										</div>
+										<div class="row mb-1">
+											<div class="col-12 text-center">
+												<div class="default-image">
+													<input type="file" class="input-group__field newsletter__input" name="CarImage1" id="CarImage1" style="display:none;" />
+													<img src="~/Assets/AppFiles/Images/default.png" id="Image1" class="img-default mr-3" />
+												</div>
+
+												<div class="default-image">
+													<input type="file" class="input-group__field newsletter__input" name="CarImage2" id="CarImage2" style="display:none;" />
+													<img src="~/Assets/AppFiles/Images/default.png" id="Image2" class="img-default" />
+												</div>
+												<br />
+												<small class="text-small">Tap to upload / Change</small>
+											</div>
+										</div>
+										<button type="submit" class="btn">
+											<span class="newsletter__submit-text--large">Submit</span>
+										</button>
+									</form>
+								</div>
+							</div>
+
+
+						</div>
+
+
+					</div>
+				</div>
+			</div>*@
+
+
+		<div class="modal fade bd-example-modal-lg quick-view-popup" style="overflow-y: auto;" id="viewRate" tabindex="-1" role="dialog" aria-labelledby="viewRate" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3>Car Rating</h3>
+						<a href="javascript:void(0)" data-dismiss="modal" class="model-close-btn pull-right" title="close"><span class="icon icon anm anm-times-l"></span></a>
+					</div>
+					<div class="modal-body">
+						<div id="CarSection-car-template" class="car-template__container prstyle1">
+							<div class="car-single">
+								<div class="row">
+									<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+										<div class="car-single__meta">
+											<form action="/Customer/Rating/Create?lang=en" method="post" enctype="multipart/form-data" id="CarRatingForm">
+												@Html.AntiForgeryToken()
+												<div class="row">
+													<div class="col-lg-4 col-md-4 col-sm-12 col-6">
+														<div class="car-details-img">
+															<div class="card">
+																<div class="car-details-img text-center m-2">
+																	<div class="pl-20">
+																		<img id="CarImage" src="~/assets/images/car-detail-page/default.png" style="height:200px" alt="Title" title="Title" />
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-lg-8 col-md-8 col-sm-12 col-6">
+														<h2 class="car-single__title" id="CarTitle">Title</h2>
+														<p id="CarVariants">Options</p>
+														<input type="hidden" name="OrderDetailID" id="OrderDetailID" />
+														<input type="hidden" name="CarID" id="CarID" />
+														<input type="hidden" name="Rating" id="Rating" />
+														@*<div class="rateit" id="CarRating" data-rateit-mode="font" style="font-size:50px">
+														</div>*@
+														<div class="rating22" id="CarRating">
+															<i class="fas fa fa-2x fa-star"></i>
+															<i class="fas fa fa-2x fa-star"></i>
+															<i class="fas fa fa-2x fa-star"></i>
+															<i class="fas fa fa-2x fa-star"></i>
+															<i class="fas fa fa-2x fa-star"></i>
+														</div>
+
+													</div>
+												</div>
+												<div class="input-group mb-1">
+													<textarea rows="5" class="input-group__field newsletter__input" name="Remarks" value="" placeholder="Remarks" required=""></textarea>
+													<span class="input-group__btn">
+													</span>
+												</div>
+												<div class="card" style="width:100%">
+
+													<h4 style="margin:15px;">Car Images</h4>
+													<div class="mb-1 mb-2">
+
+														<div class="col-12 text-left">
+															<div class="row">
+																<div class="col-lg-4 col-md-4 col-sm-12 col-6">
+																	<div class="default-image">
+																		<input type="file" class="input-group__field newsletter__input" name="CarImage1" id="CarImage1" style="display:none;" />
+																		<img src="~/Assets/AppFiles/Images/default.png" id="Image1" class="img-default mr-3" />
+																	</div>
+																	<div class="default-image">
+																		<input type="file" class="input-group__field newsletter__input" name="CarImage2" id="CarImage2" style="display:none;" />
+																		<img src="~/Assets/AppFiles/Images/default.png" id="Image2" class="img-default" />
+																	</div>
+																</div>
+																<div class="col-lg-8 col-md-8 col-sm-12 col-6">
+																	<large class="text-large">Tap to upload / Change</large>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+											<div class="display-table shareRow mt-3">
+												<div class="display-table-cell text-center">
+													<button type="submit" class="btn" form="CarRatingForm">
+														<span class="newsletter__submit-text--large">Submit</span>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--End-car-single-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Newsletter Popup -->
+		<!--<div class="newsletter-wrap" id="popup-container">
+		<div id="popup-window">
+			<a class="btn closepopup"><i class="icon icon anm anm-times-l"></i></a>-->
+		<!-- Modal content-->
+		<!--<div class="display-table splash-bg" style="padding: 10px;">
+					<div class="display-table-cell width40">
+						<img id="CarImage" src="assets/images/newsletter-img.jpg" alt="Title" title="Title" />
+					</div>
+					<div class="display-table-cell width60 text-center">
+						<div class="newsletter-left pb-0 pt-0">
+							<h2 id="CarTitle">Title</h2>
+							<p id="CarVariants">Options</p>
+							<form action="/Customer/Rating/Create?lang=en" method="post" enctype="multipart/form-data" id="CarRatingForm">
+
+								<input type="hidden" name="OrderDetailID" id="OrderDetailID" />
+								<input type="hidden" name="CarID" id="CarID" />
+								<input type="hidden" name="Rating" id="Rating" />
+								<div class="rateit" id="CarRating" data-rateit-mode="font" style="font-size:50px">
+								</div>
+								<div class="input-group mb-1">
+									<textarea rows="2" class="input-group__field newsletter__input" name="Remarks" value="" placeholder="Remarks" required=""></textarea>
+									<span class="input-group__btn">
+									</span>
+								</div>
+								<div class="row mb-1">
+									<div class="col-12 text-center">
+										<div class="default-image">
+											<input type="file" class="input-group__field newsletter__input" name="CarImage1" id="CarImage1" style="display:none;" />
+											<img src="~/Assets/AppFiles/Images/default.png" id="Image1" class="img-default mr-3" />
+										</div>
+
+										<div class="default-image">
+											<input type="file" class="input-group__field newsletter__input" name="CarImage2" id="CarImage2" style="display:none;" />
+											<img src="~/Assets/AppFiles/Images/default.png" id="Image2" class="img-default" />
+										</div>
+										<br />
+										<small class="text-small">Tap to upload / Change</small>
+									</div>
+								</div>
+								<button type="submit" class="btn">
+									<span class="newsletter__submit-text--large">Submit</span>
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>-->
+		<!-- End Newsletter Popup -->
+		<!--Car Return popup-->
+		<div class="modal fade bd-example-modal-lg quick-view-popup" id="content_quickview" style="overflow-y: auto;">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 style="margin-top: -27px">Return Car</h3>
+						<span><a href="javascript:void(0)" data-dismiss="modal" class="model-close-btn pull-right" title="close"><span class="icon icon anm anm-times-l"></span></a></span>
+					</div>
+					<div class="modal-body">
+						<div id="CarSection-car-template" class="car-template__container prstyle1">
+							<div class="car-single">
+								<div class="row">
+									<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+										<div class="car-single__meta">
+
+											<form method="post" action="/Customer/CarReturn/Create?lang=en" id="CarReturnForm" accept-charset="UTF-8" class="" enctype="multipart/form-data">
+												<div class="row">
+													<div class="col-lg-4 col-md-4 col-sm-12 col-12">
+														<div class="card">
+															<div class="car-details-img text-center m-2">
+																<div class="pl-20">
+																	<img id="CarImage" src="~/assets/images/car-detail-page/default.png" style="height:200px" alt="Title" title="Title" />
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-lg-8 col-md-8 col-sm-12 col-12">
+														<h2 class="car-single__title" id="CarTitle">Title</h2>
+														<p id="CarVariants">Options</p>
+														@Html.AntiForgeryToken()
+														<input type="hidden" name="OrderDetailID" id="OrderDetailID" />
+														<input type="hidden" name="CarID" id="CarID" />
+													</div>
+													<div class="input-group mb-1">
+														<select class="input-group__field newsletter__input" id="ReturnMethod" name="ReturnMethod" required>
+															<option value="">Select Return Method</option>
+															<option value="Return Car">Return Car</option>
+															<option value="Replace Car">Replace Car</option>
+														</select>
+														<span class="input-group__btn">
+														</span>
+													</div>
+													<div class="input-group mb-1">
+														<textarea rows="5" class="input-group__field newsletter__input" id="Reason" name="Reason" value="" placeholder="Reason" required=""></textarea>
+														<span class="input-group__btn">
+														</span>
+													</div>
+													<div class="card" style="width:100%">
+
+														<h4 style="margin:15px">Car Images</h4>
+														@*<hr class="m-1" />*@
+														<div class="mb-1 mb-2">
+
+															<div class="col-12 text-left">
+																<div class="row">
+
+
+																	<div class="col-lg-4 col-md-4 col-sm-12 col-6">
+																		<div class="default-image">
+																			<input type="file" class="input-group__field newsletter__input" name="CarImage3" id="CarImage3" style="display:none;" />
+																			<img src="~/Assets/AppFiles/Images/default.png" id="Image3" class="img-default mr-3" />
+																		</div>
+
+																		<div class="default-image">
+																			<input type="file" class="input-group__field newsletter__input" name="CarImage4" id="CarImage4" style="display:none;" />
+																			<img src="~/Assets/AppFiles/Images/default.png" id="Image4" class="img-default" />
+																		</div>
+																	</div>
+
+																	<div class="col-lg-8 col-md-8 col-sm-12 col-6">
+																		<large class="text-large">Tap to upload / Change</large>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+											<div class="display-table shareRow mt-3">
+												<div class="display-table-cell text-center">
+													<button type="submit" class="btn" form="CarReturnForm">
+														<span class="newsletter__submit-text--large">Submit</span>
+													</button>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<!--End-car-single-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--End Car Return popup-->
+		<!-- Newsletter Popup -->
+		@*<div class="newsletter-wrap" id="return-container">
+				<div id="return-window">
+					<a class="btn closepopup"><i class="icon icon anm anm-times-l"></i></a>
+					 Modal content
+					<div class="display-table splash-bg" style="padding: 10px;">
+						<div class="display-table-cell width40">
+							<img id="CarImage" src="assets/images/newsletter-img.jpg" alt="Title" title="Title" />
+						</div>
+						<div class="display-table-cell width60 text-center">
+							<div class="newsletter-left pb-0 pt-0">
+								<h2 id="CarTitle">Title</h2>
+								<p id="CarVariants">Options</p>
+								<form action="/Customer/CarReturn/Create" method="post" enctype="multipart/form-data" id="CarReturnForm">
+									@Html.AntiForgeryToken()
+									<input type="hidden" name="OrderDetailID" id="OrderDetailID" />
+									<input type="hidden" name="CarID" id="CarID" />
+									<div class="input-group mb-1">
+										<select class="input-group__field newsletter__input" id="ReturnMethod" name="ReturnMethod" required>
+											<option value="">Select Return Method</option>
+											<option value="Return Car">Return Car</option>
+											<option value="Replace Car">Replace Car</option>
+										</select>
+										<span class="input-group__btn">
+										</span>
+									</div>
+									<div class="input-group mb-1">
+										<textarea rows="2" class="input-group__field newsletter__input" id="Reason" name="Reason" value="" placeholder="Reason" required=""></textarea>
+										<span class="input-group__btn">
+										</span>
+									</div>
+									<div class="row mb-1">
+										<div class="col-12 text-center">
+											<div class="default-image">
+												<input type="file" class="input-group__field newsletter__input" name="CarImage3" id="CarImage3" style="display:none;" />
+												<img src="~/Assets/AppFiles/Images/default.png" id="Image3" class="img-default mr-3" />
+											</div>
+
+											<div class="default-image">
+												<input type="file" class="input-group__field newsletter__input" name="CarImage4" id="CarImage4" style="display:none;" />
+												<img src="~/Assets/AppFiles/Images/default.png" id="Image4" class="img-default" />
+											</div>
+											<br />
+											<small class="text-small">Tap to upload / Change</small>
+										</div>
+									</div>
+									<button type="submit" class="btn">
+										<span class="newsletter__submit-text--large">Submit</span>
+									</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>*@
+		<!-- End Newsletter Popup -->
+		<!-- Including Jquery -->
+		<script src="~/assets/js/vendor/jquery-3.3.1.min.js"></script>
+		<script src="~/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+		<script src="~/assets/js/vendor/jquery.cookie.js"></script>
+		<script src="~/assets/js/vendor/wow.min.js"></script>
+		<!-- Including Javascript -->
+		<script src="~/assets/js/bootstrap.min.js"></script>
+		<script src="~/assets/js/plugins.js"></script>
+		<script src="~/assets/js/popper.min.js"></script>
+		<script src="~/assets/js/lazysizes.js"></script>
+		<script src="~/assets/js/main.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+		<script src="@Url.ContentVersioned("~/Assets/js/web/shared/index.js")"></script>
+		<script src="@Url.ContentVersioned("~/Assets/js/web/ShoppingCart.js")"></script>
+		@if (Session["CustomerID"] != null)
+		{
+			<script>
+				var session = true;
+			</script>
+		}
+		@RenderSection("IndexScript", required: false)
+		<script>
+			$.fn.stars = function () {
+				return $(this).each(function () {
+					// Get the value
+					var val = parseFloat($(this).html());
+					// Make sure that the value is in 0 - 5 range, multiply to get width
+					var size = Math.max(0, (Math.min(5, val))) * 16;
+					// Create stars holder
+					var $span = $('<span />').width(size);
+					// Replace the numerical value with stars
+					$(this).html($span);
+				});
+			}
+
+
+		</script>
+		@*<script>
+				$(document).ready(function () {
+					$('.rateit-reset').trigger('click');
+					$('.rateit-reset').hide();
+				});
+			</script>*@
+
+
+
+	</div>
+</body>
+</html>	

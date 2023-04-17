@@ -1,0 +1,122 @@
+﻿@model IEnumerable<MyProject.Data.Award>
+@{
+    ViewBag.Title = ""+ "";
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+   bool RTL = false;
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!--Body Content-->
+<div class="render-body" style="">
+	<!-- Hero Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<div class="">
+			<div class="h-[150px] mx-auto bg-award-details bg-cover flex flex-col justify-center items-center md:h-[200px] lg:h-[300px]">
+                <h1 class="uppercase font-Rubik text-xl font-medium text-center text-white lg:text-4xl lg:mb-2">AWARDS</h1>
+				<div class="flex items-center">
+                    <a href="/@culture/home/index" class="font-Rubik text-xs uppercase text-white">HOME</a>
+					<svg viewBox="0 0 192 512" class="w-1.5 mx-2 fill-current text-white flip-horizontal-rtl"><path fill="" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class="fill-white"></path></svg>
+                    <a href="/@culture/our-story" class="font-Rubik text-xs uppercase text-white">OUR_STORY</a>
+					<svg viewBox="0 0 192 512" class="w-1.5 mx-2 fill-current text-white flip-horizontal-rtl"><path fill="" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class="fill-white"></path></svg>
+                    <p class="font-Rubik text-xs uppercase text-white">AWARDS</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero Section End -->
+	<!-- Awards section start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto py-5">
+		<div class="w-[80%] mx-auto py-14">
+			@if (Model.Count() > 0)
+			{
+				<div class="owl-carousel owl-theme">
+					@foreach (var item in Model)
+					{
+						<a href="javascript:void();" onclick="showReward(this);">
+							<img src="@Url.Content(item.Image)" alt="" class="">
+							<h1 class="font-Rubik text-xs uppercase font-medium my-2">@(culture == "en-ae" ? item.Title : item.TitleAr)</h1>
+							<p class="font-Rubik text-[10px] uppercase text-black/40 cut-text">@(culture == "en-ae" ? item.Description : item.DescriptionAr)</p>
+						</a>
+					}
+				</div>
+			}
+			else
+			{
+		<div class="flex justify-center items-center animate-pulse ">
+			<a href="javascript:void(0);" class="bg-gk-gold ease-in-out font-Rubik font-medium px-4 py-2 mb-12 text-center text-xs uppercase rounded no-more" style=""><i class="fa fa-exclamation-circle mr-1"></i> COMING_SOON</a>
+		</div>
+			}
+		</div>
+	</section>
+	<!-- Awards section End -->
+</div>
+<!--Body Content End-->
+<!-- Award Popup -->
+<div class="bg-black/50 fixed inset-0 flex justify-center items-center overflow-y-scroll h-auto z-50 popup-section overflow-hidden-rtl" id="award_popup_section" style="display:none;">
+	<div class=" bg-white rounded-lg w-[80%] sm:w-[50%] md:w-[40%] lg:w-[45%] xl:w-[40%] pb-2">
+		<div class="relative">
+			<a href="javascript:void(0)" class="close-popup-section">
+				<svg class="h-4 w-4 absolute top-4 right-4" viewBox="0 0 20 20" fill="currentColor">
+					<path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+				</svg>
+			</a>
+		</div>
+		<div class="lg:flex mt-5 w-[100%] main-div">
+			<div class="w-[80%] mx-auto lg:w-[40%]">
+				<img src="/assets/images/bg/awards-01.png" alt="" class="py-5 px-10 lg:px-5 mx-auto">
+			</div>
+			<!-- Description section -->
+			<div class="w-[90%] mx-auto lg:w-[60%] lg:pr-5 pb-2">
+				<h1 class="font-Rubik font-medium text-xl mt-4 mb-4">{Title}</h1>
+				<p class="font-Rubik text-sm uppercase text-black/90 text-justify mb-2">Our properties each have their own unique design aesthetic, providing an aspirational lifestyle within a thriving community, supported by Emaar’s community management team.</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Award Popup END -->
+<!--Write js Here-->
+@section IndexScript {
+	@*<script src="@Url.ContentVersioned("~/Assets/js/web/awards/index.js")"></script>*@
+
+	@if (Model.Count() > 0)
+	{
+		<script>
+			$('.owl-carousel').owlCarousel({
+				rtl: direction == "ltr" ? false : true,
+				loop: false,
+				navText: ["<img src='/assets/images/web-icons/left-arrow.png' class='flip-horizontal-rtl'>", "<img src='/assets/images/web-icons/right-arrow.png' class='flip-horizontal-rtl'>"],
+				nav: false,
+				margin: 16,
+				dots: false,
+				responsiveClass: true,
+				responsive: {
+					0: {
+						items: 1,
+					},
+					600: {
+						items: 3,
+					},
+					1000: {
+						items: 4,
+					}
+				}
+			});
+
+			function showReward(elem) {
+				$('#award_popup_section .main-div img').attr('src', '');
+				$('#award_popup_section .main-div h1').text('');
+				$('#award_popup_section .main-div p').text('');
+
+				$('#award_popup_section .main-div img').attr('src', $(elem).find('img').attr('src'));
+				$('#award_popup_section .main-div h1').text($(elem).find('h1').text());
+				$('#award_popup_section .main-div p').text($(elem).find('p').text());
+
+				$('#award_popup_section').show();
+			}
+
+		</script>
+	}
+
+}

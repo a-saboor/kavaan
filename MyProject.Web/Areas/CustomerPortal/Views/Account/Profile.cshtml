@@ -1,0 +1,277 @@
+﻿@model MyProject.Data.Customer
+@{
+    Layout = null;
+    ViewBag.Title = "Customer Profile";
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!-- #region Content-->
+<!-- PROFILE SECTION -->
+<div class="ltn__myaccount-tab-content-inner">
+    <!-- comment-area -->
+    <div class="ltn__comment-area mb-50">
+        <div class="ltn-author-introducing clearfix">
+            <div class="author-img">
+                <img src="~/assets/img/blog/author.jpg" alt="Author Image">
+            </div>
+            <div class="author-info">
+                <h6>My Profile</h6>
+                <h2>@Model.UserName</h2>
+                <div class="footer-address">
+                    <ul>
+                        <li>
+                            <div class="footer-address-icon">
+                                <i class="icon-user"></i>
+                            </div>
+                            <div class="footer-address-info">
+                                <p>@Model.FirstName @Model.LastName</p>
+                            </div>
+                        </li>
+                        @if (!String.IsNullOrEmpty(Model.Address))
+                        {
+                            <li>
+                                <div class="footer-address-icon">
+                                    <i class="icon-placeholder"></i>
+                                </div>
+                                <div class="footer-address-info">
+                                    <p>@Model.Address</p>
+                                </div>
+                            </li>
+                        }
+                        @if (!String.IsNullOrEmpty(Model.Contact))
+                        {
+                            <li>
+                                <div class="footer-address-icon">
+                                    <i class="icon-call"></i>
+                                </div>
+                                <div class="footer-address-info">
+                                    <p>+@Model.Contact</p>
+                                </div>
+                            </li>
+                        }
+                        @if (!String.IsNullOrEmpty(Model.Email))
+                        {
+                            <li>
+                                <div class="footer-address-icon">
+                                    <i class="icon-mail"></i>
+                                </div>
+                                <div class="footer-address-info">
+                                    <p>@Model.Email</p>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="ltn__form-box contact-form-box box-shadow white-bg">
+            <h4 class="title-2">Update Profile</h4>
+            <form class="" id="form_account" data-notvanished="1">
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label for="FirstName" hidden>First Name</label>
+                        <small class="form-text-validation py-1 font-normal text-danger"></small>
+                        <div class="input-item input-item-name ltn__custom-icon">
+                            <input class="form-field" type="text" placeholder="Enter first name" name="FirstName" data-strict="1" onkeypress="return isString(event)" maxlength="100" autocomplete="off" value="@Model.FirstName">
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="LastName" hidden>Last Name</label>
+                        <small class="form-text-validation py-1 font-normal text-danger"></small>
+                        <div class="input-item input-item-name ltn__custom-icon">
+                            <input class="form-field" type="text" placeholder="Enter last name" name="LastName" data-strict="1" onkeypress="return isString(event)" maxlength="100" autocomplete="off" value="@Model.LastName">
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="Email" hidden>Email Address</label>
+                        <small class="form-text-validation py-1 font-normal text-danger"></small>
+                        <div class="input-item input-item-email ltn__custom-icon">
+                            <input class="form-field" type="email" placeholder="Enter email address" name="Email" data-strict="1" maxlength="100" autocomplete="off" value="@Model.Email">
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <input type="hidden" class="code" inputmode="numeric" name="PhoneCode" value="@Model.PhoneCode">
+                        @*<input type="hidden" class="input-field" name="Contact" value="@Model.Contact" />*@
+
+                        <label for="Contact" hidden>Phone Number</label>
+                        <small class="form-text-validation py-1 font-normal text-danger"></small>
+                        <div class="input-item input-item-phone ltn__custom-icon">
+                            <input class="intr-phone numpad input-field form-field Contact" inputmode="numeric" type="text" placeholder="Enter phone number" name="Contact" onkeypress="return isNumber(event)" maxlength="15" autocomplete="off" pattern="[0-9\-]*" data-strict="1" value="@Model.Contact">
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-group mt-4 md-mt-0">
+                        <div class="input-item input-item-textarea ltn__custom-icon">
+                            <label for="Address" hidden>Address</label>
+                            <small class="form-text-validation py-1 font-normal text-danger "></small>
+                            <textarea class="form-field" placeholder="Enter address" name="Address" data-strict="1">@Model.Address</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                @*<p><label class="input-info-save mb-0"><input type="checkbox" name="agree"> Save my name, email, and website in this browser for the next time I comment.</label></p>*@
+                <div class="btn-wrapper mt-0">
+                    <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="button" form="form_account">Save Changes</button>
+                </div>
+                <p class="form-messege mb-0 mt-20"></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<section class="container w-full dashboard-sections" id="account-info" hidden>
+
+    <!-- form -->
+    <div id="form_acc" class="prevent mb-4" autocomplete="off" data-notvanished="1">
+
+        <!--Alert Message-->
+        <div class="alert-div px-2"></div>
+        <!--Alert Message End-->
+
+        <div class="md:flex md:flex-wrap justify-between">
+
+            <div class="form-group md:w-full flex flex-col my-3 md:my-2 px-2" style="display:none;">
+                <label for="UserName" class="hidden">User Name</label>
+                <input type="text"
+                       class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md form-field"
+                       data-strict="1" name="UserName" onkeypress="return isString(event)" maxlength="100" autocomplete="off" data-required
+                       value="@Model.UserName" placeholder="First Name">
+                <small class="form-text-validation text-xss text-danger py-1"></small>
+            </div>
+
+            <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2">
+                <label for="FirstName" class="hidden">First Name</label>
+                <input type="text"
+                       class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md form-field"
+                       data-strict="1" name="FirstName" onkeypress="return isString(event)" maxlength="100" autocomplete="off" data-required
+                       value="@Model.FirstName" placeholder="First Name">
+                <small class="form-text-validation text-xss text-danger py-1"></small>
+            </div>
+
+            <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2">
+                <label for="Name" class="hidden">Last Name</label>
+                <input type="text"
+                       class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md"
+                       name="LastName" onkeypress="return isString(event)" maxlength="100" autocomplete="off" data-required
+                       value="@Model.LastName" placeholder="Last Name">
+                <small class="form-text-validation text-xss text-danger py-1"></small>
+            </div>
+
+            <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2">
+                <label for="Email" class="hidden">Email</label>
+                <input type="text"
+                       class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md form-field Email"
+                       data-strict="1" name="Email" maxlength="100" autocomplete="off" data-required value="@Model.Email" placeholder="Email Address">
+                <small class="form-text-validation text-xss text-danger py-1"></small>
+            </div>
+
+            <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2 intr-form-group">
+                <label for="PhoneCode" class="hidden">Phone</label>
+                <input type="hidden" class="input-field" name="Contact" value="@Model.Contact" />
+                <input class="code" inputmode="numeric" name="PhoneCode" type="hidden" value="@Model.PhoneCode">
+                <input type="text" inputmode="numeric"
+                       class="rounded-lg text-sm outline-none-input-focus-none w-full py-3 px-3 bg-white box-shadow-md intr-phone numpad Contact form-field"
+                       data-strict="1" onkeypress="return isNumber(event)" maxlength="15" autocomplete="off" pattern="[0-9\-]*" data-required
+                       value="@Model.Contact" placeholder="Phone">
+                <small class="form-text-validation text-xss text-danger py-1"></small>
+            </div>
+
+            <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2 select-shadow-white-div mb-0">
+                <label for="CustomerCountry" class="hidden">Nationality</label>
+                <select class="w-full ak-countries select-shadow-white outline-none-select bg-dropdown-arrow bg-right appearance-none form-field select2-dd"
+                        data-strict="1" name="CustomerCountry" style="width: 100%;" value="@Model.CustomerCountry">
+                    <option>Select Nationality</option>
+                    @*@if (@Model.CustomerCountry != null)
+                        {
+                            <option selected value="@Model.CustomerCountry" class="capitalize">@Model.CustomerCountry</option>
+                        }*@
+                </select>
+                <small class="form-text-validation text-xss text-danger py-1"></small>
+            </div>
+
+            <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2">
+                <label for="City" class="hidden">City</label>
+                <input type="text"
+                       class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md form-field City"
+                       name="CustomerCity" onkeypress="return isString(event)" maxlength="100" autocomplete="off" data-required
+                       value="@Model.CustomerCity" placeholder="City">
+                <small class="form-text-validation text-xss text-danger py-1"></small>
+            </div>
+
+            <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2">
+                <label for="Address1" class="hidden">Address Line 1</label>
+                <input type="text"
+                       class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md form-field Address1"
+                       name="Address" maxlength="100" autocomplete="off" data-required value="@Model.Address" placeholder="Address Line 1">
+                <small class="form-text-validation text-xss text-danger py-1"></small>
+            </div>
+
+            <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2">
+                <label for="Address2" class="hidden">Address Line 2</label>
+                <input type="text"
+                       class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md form-field Address2"
+                       name="Address2" maxlength="100" autocomplete="off" data-required value="@Model.Address2" placeholder="Address Line 2">
+                <small class="form-text-validation text-xss text-danger py-1"></small>
+            </div>
+
+            <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2">
+                <label for="POBox" class="hidden">P.O.Box</label>
+                <input type="text"
+                       class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md form-field POBox"
+                       name="PoBox" maxlength="100" autocomplete="off" data-required value="@Model.PoBox" placeholder="P.O.Box">
+                <small class="form-text-validation text-xss text-danger py-1"></small>
+            </div>
+
+            <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2">
+                <label for="ZipCode" class="hidden">Zip Code</label>
+                <input type="text"
+                       class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md form-field ZipCode"
+                       name="ZipCode" maxlength="100" autocomplete="off" data-required value="@Model.ZipCode" placeholder="Zip Code">
+                <small class="form-text-validation text-xss text-danger py-1"></small>
+            </div>
+
+            <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2">
+                <label for="EmiratesID" class="hidden">Emirates ID</label>
+                <input type="text"
+                       class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md form-field EmiratesID mask-input" data-inputmask="'mask': '999-9999-9999999-9'"
+                       name="EmiratesID" maxlength="100" autocomplete="off" data-required value="@Model.EmiratesID" placeholder="Emirates ID">
+                <small class="form-text-validation text-xss text-danger py-1"></small>
+            </div>
+
+            <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2">
+                <label for="PassportExpiry" class="hidden">Emirates ID Expiry</label>
+                <input type="text"
+                       class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md border-0 foucs:border-b-0 focus-within:border-b-0 active:foucs:border-b-0 date-picker-1"
+                       name="EmiratesIDExpiry" data-required attr-date="gijgo-date" value="@(Model.EmiratesIDExpiry.HasValue ? Model.EmiratesIDExpiry.Value.ToString(MyProject.Web.Helpers.CustomHelper.GetDateFormat2 ) : "")" placeholder="Emirates ID Expiry">
+                <small class="form-text-validation text-xss text-danger py-1"></small>
+            </div>
+
+            <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2">
+                <label for="PassportNumber" class="hidden">Passport Number</label>
+                <input type="text"
+                       class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md form-field PassportNumber"
+                       name="PassportNo" maxlength="100" autocomplete="off" data-required value="@Model.PassportNo" placeholder="Passport Number">
+                <small class="form-text-validation text-xss text-danger py-1"></small>
+            </div>
+
+            <div class="form-group md:w-1/2 flex flex-col my-3 md:my-2 px-2">
+                <label for="PassportExpiry" class="hidden">Passport Expiry</label>
+                <input type="text"
+                       class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md border-0 foucs:border-b-0 focus-within:border-b-0 active:foucs:border-b-0 date-picker-2"
+                       name="PassportExpiry" data-required attr-date="gijgo-date" value="@(Model.PassportExpiry.HasValue ? Model.PassportExpiry.Value.ToString(MyProject.Web.Helpers.CustomHelper.GetDateFormat2 ) : "")" placeholder="Passport Expiry">
+                <small class="form-text-validation text-xss text-danger py-1"></small>
+            </div>
+
+        </div>
+        <button class="flex flex-row justify-center rounded-lg bg-ak-gold/90 hover:bg-ak-gold focus:outline-none py-3 mt-4 mx-2 w-[97%] text-white" type="button" form="form_acc">
+            <p class="p-btn-primary text-white mx-1 mt-0.5">Save</p>
+        </button>
+    </div>
+
+</section>
+<!-- PROFILE SECTION END -->
+<!-- #endregion Content -->
+<!--Write js Here-->
+<script src="@Url.ContentVersioned("~/Assets/Admin/js/customer/account/profile.js")"></script>

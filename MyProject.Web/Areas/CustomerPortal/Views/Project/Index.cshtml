@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!-- #region Content-->
+<!-- PRODUCT DETAILS AREA START -->
+<div class="ltn__myaccount-tab-content-inner" id="projects_section">
+    <div class="ltn__my-properties-table table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Wishlist</th>
+                    <th scope="col"></th>
+                    <th scope="col">Bedrooms</th>
+                    <th scope="col">Bathrooms</th>
+                    <th scope="col">Remove</th>
+                </tr>
+            </thead>
+            <tbody class="main-div">
+                <!--
+                <tr>
+                    <td class="ltn__my-properties-img">
+                        <a href="product-details.html"><img src="img/product-3/2.jpg" alt="#"></a>
+                    </td>
+                    <td>
+                        <div class="ltn__my-properties-info">
+                            <h6 class="mb-10"><a href="product-details.html">sdfasdfdsfsdafs</a></h6>
+                            <small><i class="icon-placeholder"></i> Brooklyn, New York, United States</small>
+                            <div class="product-ratting">
+                                <ul>
+                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                    <li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Feb 22, 2022</td>
+                    <td><a href="#">Edit</a></td>
+                    <td><a href="#"><i class="fa-solid fa-trash-can"></i></a></td>
+                </tr>
+                    -->
+            </tbody>
+        </table>
+    </div>
+    <div class="ltn__pagination-area text-center">
+        <!-- Loading -->
+        <section class="d-flex flex-col m-auto py-2 text-center w-full loading" style="display:none;"><i class="mt-1 m-auto dot-flashing text-center w-full"></i></section>
+
+        <!-- see more / no more -->
+        <button type="button" class="btn btn-transparent btn-effect-1 btn-border see-more" style="display:none;">LOAD MORE +</button>
+        <button type="button" class="btn btn-transparent btn-effect-1 btn-border no-more" style="display:none;">ITEM NOT FOUND</button>
+    </div>
+</div>
+<!-- PRODUCT DETAILS AREA END -->
+<!-- Main Section End -->
+<!-- #endregion Content -->
+<!--Write js Here-->
+<script src="@Url.ContentVersioned("~/Assets/Admin/js/customer/property/index.js")"></script>
+
+

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<MyProject.Data.JobCandidate>
+@{
+	ViewBag.Title = "List";
+	Layout = null;
+	var Server = MyProject.Web.Helpers.Routing.CustomURL.GetImageServer();
+}
+<style>
+	#kt_datatable1 tbody tr td:last-child {
+		white-space: nowrap;
+	}
+</style>
+<!--begin::Row-->
+<div class="row">
+	<div class="col-xl-12">
+		<!--begin::Card-->
+		<div class="card card-custom gutter-b">
+			<div class="card-header flex-wrap border-0 pt-6 pb-0">
+				<div class="card-title">
+					<h3 class="card-label">
+						Job Applicants
+						<span class="d-block text-muted pt-2 font-size-sm">Manage Job Applicants Here...</span>
+					</h3>
+				</div>
+				<div class="card-toolbar">
+					<!--begin::Button-->
+					<div class="dropdown dropdown-inline mr-2">
+						@using (Html.BeginForm("ApplicantsReport", "JobCandidates", FormMethod.Post , new { id = "form-excel"}))
+						{
+							@Html.AntiForgeryToken()
+							<input type="text" value="" name="FromDate" class="form-control kt_datepicker_range FromDate" hidden="" />
+							<input type="text" value="" name="ToDate" class="form-control kt_datepicker_range ToDate" hidden="" />
+
+							<button type="submit" class="btn btn-dark btn-sm excel-btn">
+								<i class="far fa-file-excel"></i>
+								Export Excel
+							</button>
+						}
+					</div>
+					<!--end::Button-->
+				</div>
+
+			</div>
+			<div class="card-body">
+				@Html.AntiForgeryToken()
+				<!--begin: Datatable-->
+				<table class="table table-separate table-head-custom table-checkable" id="kt_datatable1">
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>UCC</th>
+							<th>Applicant</th>
+							<th>Applied for</th>
+							<th>Status</th>
+							<th>Schedule</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody style="display:none">
+						@*@foreach (var item in Model)
+						{
+						<tr>
+							<td>@(item.CreatedOn.HasValue ? item.CreatedOn.Value.ToString(MyProject.Web.Helpers.CustomHelper.GetDateFormat) : "-")</td>
+							<td>@item.UCC</td>
+							<td>@item.Photo,@item.FirstName,@item.MiddleName,@item.LastName,@item.Email</td>
+							<td>@item.JobOpening.Category.CategoryName,@item.JobOpening.Title</td>
+							<td nowrap="nowrap">@item.Status</td>
+							<td nowrap="nowrap">@(item.Schedule.HasValue ? item.Schedule.Value.ToString(MyProject.Web.Helpers.CustomHelper.GetDateFormat) : "-")</td>
+							<td nowrap="nowrap">@item.Cv,@item.MarkAsRead,@item.IsFlaged,@item.ID</td>
+						</tr>
+						}*@
+					</tbody>
+				</table>
+				<!--end: Datatable-->
+			</div>
+		</div>
+		<!--end::Card-->
+	</div>
+</div>
+<!--end::Row-->

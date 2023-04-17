@@ -1,0 +1,89 @@
+﻿@model MyProject.Data.IntroductionSetting
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+<div class="modal-header">
+    <h5 class="modal-title">Create</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <i aria-hidden="true" class="ki ki-close"></i>
+    </button>
+</div>
+
+<div class="modal-body">
+
+    <form id="createform" action="/Admin/IntroductionSetting/Create/" name="form" enctype="multipart/form-data" class="form-file-custom" onsubmit="return form_file_custom(this)">
+            @Html.AntiForgeryToken()
+
+            <div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-4 col-sm-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.City, "City", htmlAttributes: new { @class = "control-label" })
+                        <div class="input-group mb-2">
+                            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter City name here ..." } })
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-city"></i></span></div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Heading, "Heading", htmlAttributes: new { @class = "control-label" })
+                        <div class="input-group mb-2">
+                            @Html.EditorFor(model => model.Heading, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter Heading here ..." } })
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-heading"></i></span></div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Heading, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.HeadingAr, "HeadingAr", htmlAttributes: new { @class = "control-label" })
+                        <div class="input-group mb-2">
+                            @Html.EditorFor(model => model.HeadingAr, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "... Enter Heading Ar name here", dir = "rtl" } })
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-heading"></i></span></div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.HeadingAr, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Paragraph, "Paragraph", htmlAttributes: new { @class = "control-label" })
+                        <div class="input-group mb-2">
+                            <textarea class="form-control required-custom" name="Paragraph" id="Paragraph" rows="3" placeholder="Enter Paragraph name here ...">@(Model != null?(String.IsNullOrEmpty(@Model.Paragraph) ? "" : @Model.Paragraph) :"")</textarea>
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-paragraph"></i></span></div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Paragraph, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ParagraphAr, "ParagraphAr", htmlAttributes: new { @class = "control-label" })
+                        <div class="input-group mb-2">
+                            <textarea class="form-control required-custom" name="ParagraphAr" id="ParagraphAr" rows="3" placeholder="... Enter Paragraph (Ar) name here" dir="rtl">@(Model != null?(String.IsNullOrEmpty(@Model.ParagraphAr) ? "" : @Model.ParagraphAr) :"")</textarea>
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-paragraph"></i></span></div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.ParagraphAr, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-custom" id="Submit" form="createform">Submit</button>
+</div>
+
+<script>
+
+	$(document).ready(function () {
+		SelectSearchable.init();
+		autoCompleteOff();
+	});
+
+	$('.kt-selectpicker').attr("data-live-search", "true").attr("data-size", "8");
+
+</script>

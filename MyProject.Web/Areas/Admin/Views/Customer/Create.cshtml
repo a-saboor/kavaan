@@ -1,0 +1,103 @@
+@model MyProject.Data.Customer
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+<div class="modal-header">
+    <h5 class="modal-title">Create</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <i aria-hidden="true" class="ki ki-close"></i>
+    </button>
+</div>
+<div class="modal-body">
+
+    @using (Html.BeginForm("Create", "Customer", new { area = "Admin" }, FormMethod.Post, new { id = "Userform", @class = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Full Name</label>
+                    <div class="input-group mb-2">
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control required-customn", placeholder = "Enter name here ..." } })
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fa fa-user"></i>
+                            </span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Contact</label>
+                    <div class="input-group mb-2 flex-nowrap">
+                        @Html.HiddenFor(model => model.PhoneCode, new { @class = "code" })
+                        @Html.EditorFor(model => model.Contact, new { htmlAttributes = new { @class = "form-control required-custom intr-phone remove-space", placeholder = "Enter contact here ...", onkeypress = "return isNumber(event)", id = "Contact", maxlength = "20", autocomplete = "off", pattern = "[0-9\\-]*" } })
+                        @*onChange = "contactVerification(this," + Model.ID + ",'/Admin/User/ContactVerification/')",*@
+                        @Html.ValidationMessageFor(model => model.Contact, "", new { @class = "text-danger" })
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Email</label>
+                    <div class="input-group mb-2">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter email here ...", type = "email" } })
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Password</label>
+                    <div class="input-group">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control required-custom password s-p", placeholder = "Enter password here ...", type = "password", onkeyup = "isPasswordValid(this)" } })
+                        <div class="input-group-append">
+                            <span class="input-group-text cursor-pointer" onclick="seePassword(this)">
+                                <i class="fa fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label class="contrl-label">Confirm Password</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control required-custom confirm-password" id="confirmPassword" placeholder="Enter confirm password here..." onkeyup="isPasswordMatch(this)" value="" />
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                        </div>
+                    </div>
+                    <span class="field-validation-valid text-danger" data-valmsg-for="confirmPassword" data-valmsg-replace="true"></span>
+                    @*<span class="form-text text-danger" style="font-size: 9px;" id="confPassError"></span>*@
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-custom" form="Userform" id="Submit">Submit</button>
+</div>
+
+<script>
+    //initiate intl dropdown
+    initIntlInputs();
+</script>

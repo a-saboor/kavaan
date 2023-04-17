@@ -1,0 +1,186 @@
+﻿@model MyProject.Data.Service
+
+@{
+	ViewBag.Title = "Create Service Booking";
+	var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+	bool RTL = CultureHelper.IsRighToLeft();
+	Layout = null;
+
+	var Customer = ViewData["Customer"] as MyProject.Data.Customer;
+}
+
+<!-- #region Modal-->
+<section class="font-Rubik w-full bg-black/50 fixed inset-0 modal fade flex flex-wrap top-0 left-0 justify-center items-center overflow-x-hidden overflow-y-auto h-auto z-[60] overflow-scroll-none popup-section"
+		 id="booking_section" style="display:none;">
+	<!-- Main Modal -->
+	<div class="max-w-screen-4xl 4xl:mx-auto w-full relative">
+		<!-- Modal Content -->
+		<div class="bg-white rounded-lg w-[80%] mx-auto m-10">
+			<!-- Header Section -->
+			<div class="modal-header flex justify-between items-center border-b bg-ak-light p-6 rounded-t-lg">
+				<div class="heading">
+					<h3 class="text-gray-900 font-semibold text-xl md:text-2xl">
+						Service Booking
+					</h3>
+					<p class="text-ak-blue font-semibold text-xs md:text-xs">@(culture == "en-ae" ? Model.Name : Model.NameAr)</p>
+				</div>
+				<button type="button"
+						class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white close-modal">
+					<svg class="w-5 h-5" fill="text-gray-900" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd"
+							  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+							  clip-rule="evenodd"></path>
+					</svg>
+				</button>
+			</div>
+			<!-- Header Section End -->
+			<!-- Body Section -->
+			<div class="modal-body bg-booking-1 p-4 md:py-2 px-6 md:px-2 space-y-6">
+				<!-- form -->
+				<form class="font-Rubik" autocomplete="off" enctype="multipart/form-data" id="booking_form">
+					<input type="hidden" name="ServiceCategoryID" value="@Model.CategoryID" />
+					<input type="hidden" name="ServiceID" value="@Model.ID" />
+
+					@Html.AntiForgeryToken()
+					<!--Alert Message-->
+					<div class="alert-div md:px-6 px-2"></div>
+					<!--Alert Message End-->
+
+					<div class="flex flex-col md:flex-row flex-wrap divide-y-[1.8px] md:divide-y-0 md:divide-x-[1.8px] justify-between items-start">
+
+						<div class="w-[100%] md:w-1/3 px-2 md:px-6 py-2 md:py-0 md:min-h-[18rem] flex items-start ">
+							<div class="container w-full">
+								<div class=" border-[#707070] rounded-lg">
+									<div class="form-group flex flex-col my-4">
+										<label for="FirstName" class="hidden">First Name</label>
+										<input type="text"
+											   class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md form-field"
+											   data-strict="1" name="FirstName" onkeypress="return isString(event)" maxlength="100" autocomplete="off" data-required value="@Customer.FirstName" placeholder="First Name">
+										<small class="form-text-validation text-xss text-danger py-1"></small>
+									</div>
+									<div class="form-group flex flex-col my-4">
+										<label for="LastName" class="hidden">Last Name</label>
+										<input type="text"
+											   class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md form-field"
+											   data-strict="1" name="LastName" onkeypress="return isString(event)" maxlength="100" autocomplete="off" data-required value="@Customer.LastName" placeholder="Last Name">
+										<small class="form-text-validation text-xss text-danger py-1"></small>
+									</div>
+									<div class="form-group flex flex-col my-4">
+										<label for="Email" class="hidden">Email Address</label>
+										<input type="text"
+											   class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md form-field Email"
+											   data-strict="1" name="CustomerEmail" maxlength="100" autocomplete="off" data-required value="@Customer.Email" placeholder="Email Address">
+										<small class="form-text-validation text-xss text-danger py-1"></small>
+									</div>
+									<div class="form-group w-full flex flex-col my-4 intr-form-group">
+										<label for="PhoneNumber" class="hidden">Phone Number</label>
+										<input type="hidden" class="input-field" name="CustomerContact" value="@Customer.Contact" />
+										<input class="code" inputmode="numeric" name="PhoneCode" type="hidden" value="@Customer.PhoneCode">
+										<input type="text" inputmode="numeric"
+											   class="rounded-lg text-sm outline-none-input-focus-none w-full py-3 px-3 bg-white box-shadow-md intr-phone numpad Contact form-field"
+											   data-strict="1" onkeypress="return isNumber(event)" maxlength="15" autocomplete="off" pattern="[0-9\-]*" data-required
+											   value="@Customer.Contact" placeholder="Phone">
+										<small class="form-text-validation text-xss text-danger py-1"></small>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="w-[100%] md:w-1/3 px-2 md:px-6 py-2 md:py-0 md:min-h-[18rem] flex items-start ">
+							<div class="container w-full">
+								<div class=" border-[#707070] rounded-lg">
+									<div class="form-group flex flex-col my-4">
+										<label for="DateOfVisit" class="hidden">Date of Visit</label>
+										<input type="text"
+											   class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md border-0 foucs:border-b-0 focus-within:border-b-0 active:foucs:border-b-0 date-picker-1 form-field"
+											   data-strict="1" name="DateOfVisit" data-required attr-date="gijgo-date" value="" placeholder="Date of Visit">
+										<small class="form-text-validation text-xss text-danger py-1"></small>
+									</div>
+									<div class="form-group flex flex-col my-4">
+										<label for="TimeOfVisit" class="hidden">Time of Visit</label>
+										<input type="text"
+											   class="rounded-lg text-sm outline-none-input py-3 px-3 bg-white box-shadow-md border-0 foucs:border-b-0 focus-within:border-b-0 active:foucs:border-b-0 date-picker-1 form-field"
+											   data-strict="1" name="TimeOfVisit" data-required attr-date="gijgo-time" value="" placeholder="Time of Visit">
+										<small class="form-text-validation text-xss text-danger py-1"></small>
+									</div>
+									<div class="form-group flex flex-col my-4">
+										<label for="Issue" class="hidden">Issue Description</label>
+										<div class="rounded-lg text-sm py-3 bg-white box-shadow-md">
+											<textarea class="outline-none-input outline-none-input-focus-none resize-none px-3 mb-2 w-full form-field" name="Description" data-required placeholder="Tell us more about your issue" rows="3"></textarea>
+											<div class="w-full bottom-2 left-0 flex flex-row-reverse flex-wrap gap-2 justify-start px-3 right issue-images-div textarea">
+												<div class="file-upload flex items-center justify-center text-center">
+													<i for="Images"
+													   class="fa fa-paperclip text-black text-xl p-[0.5rem] border-[1.5px] border-dashed border-black/50 rounded-lg text-stroke-white-1 cursor-pointer"
+													   title="Upload Image"></i>
+													<input type="file" class="file-upload-input hidden img-upload-1" name="Images"
+														   accept=".png, .jpg, .jpeg" multiple />
+												</div>
+											</div>
+										</div>
+										<small class="form-text-validation text-xss text-danger py-1"></small>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="w-[100%] md:w-1/3 px-2 md:px-6 py-2 md:py-0 md:min-h-[18rem] flex items-start">
+							<div class="container w-full">
+								<div class=" border-[#707070] rounded-lg">
+									<div class="form-group flex flex-col my-4 relative">
+										<label for="SearchLocation" class="hidden">Map Location</label>
+										<div class="relative flex flex-row bg-white box-shadow-md rounded-lg outline-none-input">
+											<input type="text"
+												   class="outline-none-input-focus-none pr-4 px-3 py-3 text-sm w-[90%] rounded-lg search-location form-field"
+												   data-strict="1" name="MapLocation" id="MapLocation" data-required placeholder="Search Location">
+											<div class="absolute border-ak-gold/40 border-l flex items-center mx-1 pl-2 right-0 top-[50%] translate-x-[-50%] translate-y-[-50%] w-[10%] w-fit">
+												<a href="javascript:void(0);" class="fa fa-crosshairs text-ak-gold text-xl text-stroke-white-1 cursor-pointer get-current-location" title="Get Current Location" @*onclick="getLocation()"*@></a>
+											</div>
+										</div>
+										<small class="form-text-validation text-xss text-danger py-1"></small>
+
+										<input type="hidden" name="Latitude" class="form-field" value="" />
+										<input type="hidden" name="Longitude" class="form-field" value="" />
+									</div>
+									<div class="form-group flex flex-col my-4">
+										<small class="text-xss text-ak-gray/80 text-center py-1 pb-2" id="drag-map">
+											<span>Drag marker on the map to select your desired location.</span>
+										</small>
+										<div class="map flex flex-col rounded-lg text-sm h-[12rem] bg-white border border-[#ebebeb] box-shadow-md" id="google_map">
+											<div class="flex flex-col my-auto py-2 text-center w-[100%]" style="">
+												<div class="mt-1 mx-auto dot-flashing text-center w-[100%]"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</form>
+			</div>
+			<!-- Body Section End -->
+			<!-- Footer Section -->
+			<div class="modal-footer flex items-center justify-end p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+				<button class="btn-primary bg-white hover:bg-ak-light focus:outline-none border border-gray-300 close-modal">
+					<p class="p-btn-primary text-gray-700 hover:text-gray-900">Close</p>
+				</button>
+				<button class="flex flex-row justify-center btn-primary bg-ak-gold/90 hover:bg-ak-gold focus:outline-none text-white" type="button"
+						form="booking_form">
+					<p class="p-btn-primary text-white">Submit</p>
+				</button>
+			</div>
+			<!-- Footer Section End -->
+		</div>
+		<!-- Modal Content End -->
+	</div>
+	<!-- Main Modal End -->
+</section>
+<!-- #endregion Modal -->
+<!--Write js Here-->
+<script src="~/Assets/Admin/js/customer/map/map.js"></script>
+@if (TempData["IsMapOpened"] != null && (bool)TempData["IsMapOpened"] == false)
+{
+	<script src="https://maps.googleapis.com/maps/api/js?key=@CustomHelper.MapKey&callback=initMap&libraries=places&callback=initAutocomplete"></script>
+}
+<script src="@Url.ContentVersioned("~/Assets/Admin/js/customer/booking/create.js")"></script>

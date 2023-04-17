@@ -1,0 +1,125 @@
+﻿@model MyProject.Data.JobOpening
+@{
+    ViewBag.Title = "Details";
+    Layout = null;
+}
+
+
+<div class="modal-header">
+    <h5 class="modal-title">Details</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <i aria-hidden="true" class="ki ki-close"></i>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <div class="float-right mb-3">
+                <i class="fa fa-calendar"></i>
+                <b>@Html.Label("Creation Date:", htmlAttributes: new { @class = "control-label" })</b>
+                @if (Model.CreatedOn.HasValue)
+                {
+                    var date = Model.CreatedOn.Value.ToString(MyProject.Web.Helpers.CustomHelper.GetDateFormat);
+                    <label class="control-label" readonly="readonly">@date</label>
+                }
+                else
+                {
+                    <label class="control-label" readonly="readonly"> - </label>
+                }
+            </div>
+        </div>
+    </div>
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<div class="form-group">
+				<label class="control-label">Category</label>
+				<div class="input-group mb-3">
+					<label class="form-control" readonly="readonly">@(Model.Category != null ? Model.Category.CategoryName : "-")</label>
+					<div class="input-group-append">
+						<span class="input-group-text"><i class="fa fa-list"></i></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-12">
+			<div class="form-group">
+				<label class="control-label">Title</label>
+				<div class="input-group mb-3">
+					<label class="form-control" readonly="readonly">@Model.Title</label>
+					<div class="input-group-append">
+						<span class="input-group-text"><i class="fa fa-tag"></i></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		@*<div class="col-md-6 col-sm-12" hidden>
+			<div class="form-group">
+				<label class="control-label">Title (Ar)</label>
+				<div class="input-group mb-3">
+					<label class="form-control text-right" readonly="readonly">@Model.TitleAr</label>
+					<div class="input-group-prepend">
+						<span class="input-group-text"><i class="fa fa-tag"></i></span>
+					</div>
+				</div>
+			</div>
+		</div>*@
+		<div class="col-md-6 col-sm-12">
+			<div class="form-group">
+				<label class="control-label">No of Positions</label>
+				<div class="input-group mb-3">
+					<label class="form-control" readonly="readonly">@Model.Position</label>
+					<div class="input-group-append">
+						<span class="input-group-text">
+							<i class="fa fa-hashtag"></i>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-12">
+			<div class="form-group">
+				<label class="control-label">Location</label>
+				<div class="input-group mb-2">
+					<label class="form-control" readonly="readonly">@Model.Location</label>
+					<div class="input-group-append">
+						<span class="input-group-text">
+							<i class="fa fa-map"></i>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-12">
+			<div class="form-group">
+				<label class="control-label">Last Date</label>
+				<div class="input-group mb-3">
+					<label class="form-control" readonly="readonly">@(Model.LastDate.HasValue ? Model.LastDate.Value.ToString("dd MMM yyyy") : "-")</label>
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<i class="fa fa-calendar"></i>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 col-sm-12">
+			<div class="form-group">
+				<label class="control-label">Requirements</label>
+				<div class="input-group mb-2">
+					<textarea class="form-control" rows="5" cols="30" readonly="readonly">@Model.Requirements</textarea>
+				</div>
+			</div>
+		</div>
+		@*<div class="col-md-6 col-sm-12" hidden>
+			<div class="form-group">
+				<label class="control-label">Requirements (Ar)</label>
+				<div class="input-group mb-3">
+					<textarea class="form-control" rows="5" cols="30" readonly="readonly">@Model.RequirementsAr</textarea>
+				</div>
+			</div>
+		</div>*@
+	</div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+</div>

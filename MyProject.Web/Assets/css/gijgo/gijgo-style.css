@@ -1,0 +1,112 @@
+/* gijgo datepicker */
+.gj-datepicker-md [role=right-icon] {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    font-size: 24px;
+    transform: translate(-50%, -50%);
+    color: #4a4a4a;
+}
+.gj-picker.gj-picker-md.datepicker{
+    border-radius: 10px;
+}
+.gj-picker.gj-picker-md.datepicker [role=body]{
+    
+}
+.gj-picker.gj-picker-md.datepicker [role=body] [role=navigator] {
+    padding: 0.5rem 1rem;
+    height: 58px;
+    line-height: 42px;
+    background-color: var(--thm-ak-gold);
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+.gj-picker.gj-picker-md.datepicker table {
+    margin: 0.5rem 1rem;
+}
+.gj-picker.gj-picker-md.datepicker [role=footer]{
+    width: 100%;
+    text-align: end;
+    border-top: 1px solid #cdcdcd;
+    background-color: var(--thm-bg-gray-color);
+    border-radius: 0 0 10px 10px;
+}
+.gj-picker.gj-picker-md.datepicker [role=footer] button.gj-button-md {
+    color: var(--thm-ak-gold-dark);
+    font-weight: 700;
+    font-size: 13px;
+}
+.gj-picker.gj-picker-md.datepicker table tr td.selected.gj-cursor-pointer div {
+    color: #FFF;
+    background-color: var(--thm-ak-gold);
+    border-radius: 50%;
+}
+.gj-picker.gj-picker-md.datepicker table tr td.today div {
+    color: var(--thm-ak-gold-dark);
+    font-weight: bold;
+}
+/* backgrund map image */
+.booking-map{
+    background-image: url(/assets/images/bg/booking-map.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+}
+
+/* gijgo timepicker */
+
+.gj-timepicker-md [role=right-icon] {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    font-size: 24px;
+    transform: translate(-50%, -50%);
+    color: #4a4a4a;
+}
+.gj-picker.gj-picker-md.timepicker {
+    border-radius: 10px;
+}
+.gj-picker.gj-picker-md.timepicker [role=header] {
+    font-size: 58px;
+    padding: 20px 0;
+    line-height: 58px;
+    display: flex;
+    align-items: baseline;
+    user-select: none;
+    justify-content: center;
+    background-color: var(--thm-ak-gold);
+    border-radius: 10px 10px 0 0;
+}
+.gj-picker.gj-picker-md.timepicker .arrow-begin, .gj-picker.gj-picker-md.timepicker [role=body] [role=arrow] {
+    background-color: var(--thm-ak-gold);
+}
+.gj-picker.gj-picker-md.timepicker .arrow-begin, .gj-picker.gj-picker-md.timepicker [role=body] [role=arrow] {
+    background-color: var(--thm-ak-gold);
+}
+.gj-picker.gj-picker-md.timepicker .arrow-end {
+    background-color: var(--thm-ak-gold);
+    border: 16px solid var(--thm-ak-gold);
+}
+.gj-picker.gj-picker-md.timepicker [role=body]{
+   padding: 0.5rem 1rem;
+}
+.gj-picker.gj-picker-md.timepicker [role=body] .selected {
+    background-color: var(--thm-ak-gold);
+    color: rgba(255,255,255,1);
+    border-radius: 50px;
+}
+.gj-picker.gj-picker-md.timepicker [role=footer]{
+    width: 100%;
+    text-align: end;
+    border-top: 1px solid #cdcdcd;
+    background-color: var(--thm-bg-gray-color);
+    border-radius: 0 0 10px 10px;
+}
+.gj-picker.gj-picker-md.timepicker [role=footer] button.gj-button-md {
+    color: var(--thm-ak-gold-dark);
+    font-weight: 700;
+    font-size: 13px;
+}

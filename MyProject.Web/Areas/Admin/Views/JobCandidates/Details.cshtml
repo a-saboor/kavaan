@@ -1,0 +1,330 @@
+﻿@model MyProject.Data.JobCandidate
+@{
+    ViewBag.Title = "Details";
+}
+
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Subheader-->
+    <div class="subheader py-2 py-lg-12 subheader-transparent" id="kt_subheader">
+        <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+            <!--begin::Info-->
+            <div class="d-flex align-items-center flex-wrap mr-1">
+                <!--begin::Heading-->
+                <div class="d-flex flex-column">
+                    <!--begin::Breadcrumb-->
+                    <div class="d-flex align-items-center font-weight-bold my-2">
+                        <!--begin::Item-->
+                        <a href="/Admin/Dashboard/Index" class="opacity-75 hover-opacity-100">
+                            <i class="flaticon2-shelter text-white icon-1x"></i>
+                        </a>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <a href="/Admin/Dashboard/Index" class="text-white text-hover-white opacity-75 hover-opacity-100">&nbsp;&nbsp;Dashboard</a>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
+                        <a href="javascript: window.location = document.referrer;" class="text-white text-hover-white opacity-75 hover-opacity-100">Applicants</a>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
+                        <a href="javascript:;" class="text-white text-hover-white opacity-75 hover-opacity-100">Details</a>
+                        <!--end::Item-->
+                    </div>
+                    <!--end::Breadcrumb-->
+                </div>
+                <!--end::Heading-->
+            </div>
+            <!--end::Info-->
+        </div>
+    </div>
+    <!--end::Subheader-->
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Dashboard-->
+            <!--begin::Row-->
+            <div class="row">
+                <div class="col-xl-12">
+                    <!--begin::Card-->
+                    <div class="card card-custom gutter-b">
+                        <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                            <div class="card-title">
+                                <h3 class="card-label">
+                                    Applicant Details
+                                    <span class="d-block text-muted pt-2 font-size-sm">Manage Applicant Details Here...</span>
+                                </h3>
+                            </div>
+                            <div class="card-toolbar">
+                                <!--begin::Dropdown-->
+                                <div class="dropdown dropdown-inline mr-2">
+                                    <a href="javascript: window.location = document.referrer;" class="btn btn-custom font-weight-bold">
+                                        <span class="fa fa-arrow-left"></span> Back to Applicants
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body px-10 py-0">
+                            <!-- begin: Invoice-->
+                            <!-- begin: Invoice header-->
+                            <div class="justify-content-center px-8 px-md-0 py-8 row">
+                                <div class="col-md-12 border-bottom card pb-4">
+                                    <div class="border-bottom w-100"></div>
+                                    <div class="d-md-flex justify-content-between pt-6">
+                                        <div class="d-flex flex-column flex-root">
+                                            <span class="font-weight-bolder mb-2">APPLIED DATE</span>
+                                            <span class="opacity-70">@(Model.CreatedOn.HasValue ? Model.CreatedOn.Value.ToString("MMM dd, yyyy, h:mm tt") : "-")</span>
+                                        </div>
+                                        <div class="d-flex flex-column flex-root">
+                                            <span class="font-weight-bolder mb-2">Applicant</span>
+                                            <span class="opacity-70">
+                                                @*<i class="fa fa-user"></i>*@
+                                                @Model.FirstName @Model.MiddleName @Model.LastName
+                                                <!--<br />-->
+                                                @*<i class="fa fa-phone-alt"></i>*@
+                                                <!--@Model.Mobile1
+                                                @(!string.IsNullOrEmpty(Model.Mobile2) ? ", "+ Model.Mobile2 : "")-->
+                                            </span>
+                                        </div>
+                                        <div class="d-flex flex-column flex-root">
+                                            <span class="font-weight-bolder mb-2">UCC</span>
+                                            <span class="opacity-70">@(!string.IsNullOrEmpty(Model.UCC) ? Model.UCC : "-")</span>
+                                        </div>
+                                        <div class="d-flex flex-column flex-root">
+                                            <span class="font-weight-bolder mb-2">CV</span>
+                                            <span class="opacity-70"><a class="label label-light-light p-4 rounded" target="_blank" href="@Model.Cv"><i class="fa fa-eye"></i></a> View</span>
+                                        </div>
+                                        <div class="d-flex flex-column flex-root">
+                                            <span class="font-weight-bolder mb-2">INTERVIEW DATE</span>
+                                            <span class="opacity-70">@(Model.Schedule.HasValue ? Model.Schedule.Value.ToString("MMM dd, yyyy, h:mm tt") : "-")</span>
+                                        </div>
+                                        <div class="d-flex flex-column flex-root">
+                                            <span class="font-weight-bolder mb-2">APPLICATION STATUS</span>
+                                            <span class="opacity-70">
+                                                @if (string.IsNullOrEmpty(Model.Status) || Model.Status == "Pending")
+                                                {
+                                                    <a class="text-black rounded" href="javascript:" onclick="OpenModelPopup(this, '/Admin/JobCandidates/ScheduleStatus/@Model.ID')">Pending</a>
+                                                }
+                                                else if (string.IsNullOrEmpty(Model.Status) || Model.Status == "Approved")
+                                                {
+                                                    <a class="text-success rounded" href="javascript:" onclick="OpenModelPopup(this, '/Admin/JobCandidates/ScheduleStatus/@Model.ID')">Approved</a>
+                                                }
+                                                else if (string.IsNullOrEmpty(Model.Status) || Model.Status == "Rejected")
+                                                {
+                                                    <a class="text-danger rounded" href="javascript:" onclick="OpenModelPopup(this, '/Admin/JobCandidates/ScheduleStatus/@Model.ID')">Rejected</a>
+                                                }
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end: Invoice header-->
+                            <!-- begin: Invoice body-->
+                            @if (Model.CandidateEducations.Count() > 0)
+                            {
+                                <div class="card card-body justify-content-center pb-0 pt-8 row">
+                                    <div class="col-md-12">
+                                        <h5 class="border-bottom pb-2"><i class="icon fa fa-book"></i> Education Details</h5>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-Left font-weight-bold text-muted text-uppercase">Degree</th>
+                                                        <th class="text-center font-weight-bold text-muted text-uppercase">Institute</th>
+                                                        <th class="text-right font-weight-bold text-muted text-uppercase">Year Of Passing</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Model.CandidateEducations)
+                                                    {
+                                                        <tr class="font-weight-boldest">
+                                                            <td class="text-Left pt-7 align-middle">@item.Degree</td>
+                                                            <td class="text-center pt-7 align-middle">@item.Institute</td>
+                                                            <td class="text-right pt-7 align-middle">@item.PassingYear</td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            @if (Model.CandidateExperiences.Count() > 0)
+                            {
+                                <div class="card card-body justify-content-center mt-8 pb-2 row">
+                                    <div class="col-md-12">
+                                        <h5 class="border-bottom pb-2"><i class="icon fa fa-briefcase"></i> Experience Details</h5>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-Left font-weight-bold text-muted text-uppercase">Company </th>
+                                                        <th class="text-Left font-weight-bold text-muted text-uppercase">Designation</th>
+                                                        <th class="text-center font-weight-bold text-muted text-uppercase">Start Date</th>
+                                                        <th class="text-right font-weight-bold text-muted text-uppercase">End Date</th>
+                                                        <th class="text-right font-weight-bold text-muted text-uppercase">Currently Working Here</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Model.CandidateExperiences)
+                                                    {
+                                                        <tr class="font-weight-boldest">
+                                                            <td class="text-left pt-7 align-middle">@item.CompanyName</td>
+                                                            <td class="text-left pt-7 align-middle">@item.Designation</td>
+                                                            <td class="text-center pt-7 align-middle">@(item.StartDate.HasValue ? item.StartDate.Value.ToString("dd MMM yyyy, h: mm tt") : "-")</td>
+                                                            <td class="text-right pt-7 align-middle">@(item.EndDate.HasValue ? item.EndDate.Value.ToString("dd MMM yyyy, h: mm tt") : "-")</td>
+                                                            <td class="text-right pt-7 align-middle">@(item.EndDate.HasValue ? "No" : "Yes")</td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            <div class="border card-body my-8 pt-5 pt-8 rounded row">
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 mb-4 pr-5">
+                                    <h5 class="text-center"><i class="icon fa fa-map-marker-alt "></i> Applicant Address</h5>
+                                    <div class="cart__footer mt-5">
+                                        <div class="solid-border">
+                                            <div class="row border-bottom pb-2">
+                                                <span class="col cart__subtotal-title">Address 1</span>
+                                                <span class="col text-right">@Model.Address1</span>
+                                            </div>
+                                            <div class="row border-bottom pb-2">
+                                                <span class="col cart__subtotal-title">Address 2</span>
+                                                <span class="col text-right">@Model.Address2</span>
+                                            </div>
+                                            <div class="row border-bottom pb-2">
+                                                <span class="col cart__subtotal-title">Country</span>
+                                                <span class="col text-right">@Model.Country</span>
+                                                @*<span class="col text-right">@(Model.Country!= null ? @Model.Country.Name : "-")</span>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 mb-4 pr-5">
+                                    <h5 class="text-center"><i class="icon fa fa-user "></i> Personal Details</h5>
+                                    <div class="cart__footer mt-5">
+                                        <div class="solid-border">
+                                            <div class="row border-bottom pb-2">
+                                                <span class="col cart__subtotal-title">Name</span>
+                                                <span class="col text-right">@Model.FirstName @Model.MiddleName @Model.LastName</span>
+                                            </div>
+                                            <div class="row border-bottom pb-2">
+                                                <span class="col cart__subtotal-title">Email</span>
+                                                <span class="col text-right">@Model.Email</span>
+                                            </div>
+                                            <div class="row border-bottom pb-2">
+                                                <span class="col cart__subtotal-title">Mobile</span>
+                                                <span class="col text-right">@Model.Mobile1 , @Model.Mobile2</span>
+                                            </div>
+
+                                            <div class="row border-bottom pb-2">
+                                                <span class="col cart__subtotal-title">Nationality</span>
+                                                <span class="col text-right">@Model.Nationality</span>
+                                            </div>
+                                            <div class="row border-bottom pb-2">
+                                                <span class="col cart__subtotal-title">Marital Status</span>
+                                                <span class="col text-right">@Model.MaritalStatus</span>
+                                            </div>
+                                            <div class="row border-bottom pb-2">
+                                                <span class="col cart__subtotal-title">Date Of Birth</span>
+                                                <span class="col text-right">@Model.Dob</span>
+                                            </div>
+                                            <div class="row border-bottom pb-2">
+                                                <span class="col cart__subtotal-title">Gender</span>
+                                                <span class="col text-right">@Model.Gender</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 mb-4 pr-5">
+                                    <h5 class="text-center"><i class="icon fa fa-user "></i> Other Details</h5>
+                                    <div class="cart__footer mt-5">
+                                        <div class="solid-border">
+                                            <div class="row border-bottom pb-2">
+                                                <span class="col cart__subtotal-title">Total Experience</span>
+                                                <span class="col text-right">@Model.TotalExperience</span>
+                                            </div>
+                                            <div class="row border-bottom pb-2">
+                                                <span class="col cart__subtotal-title">UAE Experience</span>
+                                                <span class="col text-right">@Model.UAEExperience</span>
+                                            </div>
+                                            <div class="row border-bottom pb-2">
+                                                <span class="col cart__subtotal-title">Industry Experience</span>
+                                                <span class="col text-right">@Model.INTExperience</span>
+                                            </div>
+                                            <div class="row border-bottom pb-2">
+                                                <span class="col cart__subtotal-title">Driving License</span>
+                                                <span class="col text-right">@Model.DrivingLicense</span>
+                                            </div>
+                                            <div class="row border-bottom pb-2">
+                                                <span class="col cart__subtotal-title">Notice Period</span>
+                                                <span class="col text-right">@Model.NoticePeriod</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Card-->
+                </div>
+            </div>
+            <!--end::Row-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+</div>
+<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" style="min-height:100px">
+            <div id='myModalContent'>
+                <div class="row justify-content-center">
+                    <div class="col-16">
+                        <div class="kt-spinner kt-spinner--lg kt-spinner--dark kt-spinner-modal"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section IndexScript {
+    <script>
+
+        jQuery(document).ready(function () {
+
+        });
+
+        function callback(dialog, elem, isedit, response) {
+
+            if (response.success) {
+                if (response.message == "Email sending failed ...") {
+                    toastr.error(response.message);
+                }
+                else {
+                    toastr.success(response.message);
+                    location.reload();
+                }
+            }
+            else {
+                jQuery('form', dialog).closest('.modal').find('button[type=submit]').removeClass('spinner spinner-sm spinner-left').attr('disabled', false);
+                toastr.error(response.message);
+            }
+        }
+
+    </script>
+
+    <!--begin::Page Vendors(used by this page)-->
+    <script src="~/assets/Admin/plugins/custom/datatables/datatables.bundle.js"></script>
+    <!--end::Page Vendors-->
+    <!--begin::Page Scripts(used by this page)-->
+    @*<script src="@Url.ContentVersioned("~/Assets/Admin/js/vendor/order/list.js")"></script>*@
+    <!--end::Page Scripts-->
+    <script src="~/Assets/Admin/js/general/ModalPopup.js"></script>
+    <!--end::Page Scripts-->
+}

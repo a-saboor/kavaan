@@ -1,0 +1,164 @@
+﻿@model MyProject.Data.IntroductionSetting
+@{
+    ViewBag.Title = "Edit";
+    Layout = null;
+}
+<div class="modal-header">
+    <h5 class="modal-title">Update @Model.Type</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <i aria-hidden="true" class="ki ki-close"></i>
+    </button>
+</div>
+<div class="modal-body">
+    <form id="editform" action="/Admin/IntroductionSetting/Edit/" name="form" enctype="multipart/form-data" class="form-file-custom" onsubmit="return form_file_custom(this)">
+
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.City, "City", htmlAttributes: new { @class = "control-label" })
+                    <div class="input-group mb-2">
+                        @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter City name here ..." } })
+                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-city"></i></span></div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Heading, "Heading", htmlAttributes: new { @class = "control-label" })
+                    <div class="input-group mb-2">
+                        @Html.EditorFor(model => model.Heading, new { htmlAttributes = new { @class = "form-control required-custom heading-check", placeholder = "Enter Heading here ..." } })
+                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-heading"></i></span></div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Heading, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HeadingAr, "HeadingAr", htmlAttributes: new { @class = "control-label" })
+                    <div class="input-group mb-2">
+                        @Html.EditorFor(model => model.HeadingAr, new { htmlAttributes = new { @class = "form-control required-custom heading-check", placeholder = "Enter Heading Ar name here...", dir = "rtl" } })
+                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-heading"></i></span></div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.HeadingAr, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Paragraph, "Paragraph", htmlAttributes: new { @class = "control-label" })
+                    <div class="input-group mb-2">
+                        <textarea class="form-control required-custom" name="Paragraph" id="Paragraph" rows="3" placeholder="Enter Paragraph name here...">@(Model != null?(String.IsNullOrEmpty(@Model.Paragraph) ? "" : @Model.Paragraph) :"")</textarea>
+                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-paragraph"></i></span></div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Paragraph, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ParagraphAr, "ParagraphAr", htmlAttributes: new { @class = "control-label" })
+                    <div class="input-group mb-2">
+                        <textarea class="form-control required-custom" name="ParagraphAr" id="ParagraphAr" rows="3" placeholder="Enter ParagraphAr name here..." dir="rtl">@(Model != null?(String.IsNullOrEmpty(@Model.ParagraphAr) ? "" : @Model.ParagraphAr) :"")</textarea>
+                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-paragraph"></i></span></div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ParagraphAr, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-custom" id="btnSubmit" form="editform">Save Changes</button>
+</div>
+
+<script>
+
+	$(document).ready(function () {
+        $("#myDocument").hide();
+
+        $(".heading-check").change(function () {
+                
+            let Type = "@Model.Type";
+            let elem = this;
+            let value = $(elem).val();
+            if (Type == "Header") {
+                let arr = value.split(" ");
+                if (arr.length > 2) {
+                    $(elem).closest(".form-group").find(".field-validation-valid").text("Only two words allowed like, Classical Facilities");
+                    $("#btnSubmit").attr('disabled', true);
+                } else if (arr.length < 2) {
+                    $(elem).closest(".form-group").find(".field-validation-valid").text("Kindly write two words like, Classical Facilities");
+                    $("#btnSubmit").attr('disabled', true);
+                }
+                else {
+                    $(elem).closest(".form-group").find(".field-validation-valid").text("");
+                    $("#btnSubmit").attr('disabled', false);
+                }
+            }
+        });
+
+	});
+	//$("#fileUpload").change(function (e) {
+	//	var file = this.files[0];
+	//	if (file) {
+	//		if (file.size >= (20 * 1000000)) {
+	//			Swal.fire({
+	//				icon: 'error',
+	//				title: 'Oops...',
+	//				text: 'Document size should be less than to or equal to 20 MB!',
+	//				//footer: '<a href>Image size should be less than or equal to  100KB and dimension should be 1713x540</a>'
+	//			})
+	//			$("#fileUpload").val("");
+	//		}
+	//		img = new Image();
+	//	}
+
+	//});
+
+    //$("#Userform").submit(function () {
+    //
+    //    $(this).closest('.modal').find('button[type=submit]').addClass('spinner spinner-sm spinner-left').attr('disabled', true);
+    //    var data = new FormData();
+    //    //var files = $("#fileUpload").get(0).files;
+    //    //if (files.length > 0) {
+    //    //	data.append("fileUpload", files[0]);
+    //    //}
+    //    data.append("id", $('#ID').val());
+    //    data.append("City", $('#City').val());
+    //    data.append("Heading", $('#Heading').val());
+    //    data.append("HeadingAr", $('#HeadingAr').val());
+    //    data.append("Paragraph", $('#Paragraph').val());
+    //    data.append("ParagraphAr", $('#ParagraphAr').val());
+
+    //    $.ajax({
+    //        url: "/Admin/IntroductionSetting/Edit",
+    //        type: "POST",
+    //        processData: false,
+    //        contentType: false,
+    //        data: data,
+    //        success: function (response) {
+    //            if (callback) {
+    //                callback($('#myModalContent'), element, true, response);
+    //            }
+    //        },
+    //        error: function (er) {
+    //            toastr.error(er);
+    //        }
+    //    });
+    //    return false;
+    //});
+	$("#cancelDocs").click(function () {
+		$("#viewDocs").hide();
+		$("#myDocument").show();
+
+		/*$("input[name=Video][type=hidden]").remove();*/
+    })
+
+
+
+</script>

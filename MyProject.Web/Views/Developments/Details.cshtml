@@ -1,0 +1,71 @@
+﻿@model MyProject.Data.Development
+@{
+	ViewBag.Title = "Development Details";
+	var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+	bool RTL = CultureHelper.IsRighToLeft();
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!--Body Content-->
+<div class="render-body" style="">
+	@Html.HiddenFor(model => model.ID)
+	<!-- Hero Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<div class="pt-10">
+			<div class="w-[80%] md:h-[150px] h-[100px] mx-auto bg-cover bg-center rounded-lg xl:w-[80%] flex flex-col justify-center items-center" style="background-image:url('@Url.Content(MyProject.Web.Helpers.Routing.CustomURL.GetImageServer()+Model.Image)')">
+				<h1 class="uppercase font-Rubik text-xl font-medium text-center text-white lg:text-4xl">@(culture=="en-ae" ? Model.Name : Model.NameAr)</h1>
+				<div class="flex items-center">
+					<a href="/@culture/home/index" class="font-Rubik text-xs uppercase text-white">Home</a>
+					<svg viewBox="0 0 192 512" class="w-1.5 mx-2 fill-current text-white flip-horizontal-rtl"><path fill="" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class="fill-white"></path></svg>
+					<a href="/@culture/developments" class="font-Rubik text-xs uppercase text-white">Developments</a>
+					<svg viewBox="0 0 192 512" class="w-1.5 mx-2 fill-current text-white flip-horizontal-rtl"><path fill="" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class="fill-white"></path></svg>
+					<p class="font-Rubik text-xs uppercase text-white">@(culture=="en-ae" ? Model.Name : Model.NameAr)</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="relative">
+			@*<div class="w-[80%] h-[1px] bg-[#707070] mx-auto xl:w-[70%] mt-4 opacity-20"></div>*@
+			<img src="/assets/images/bg/dots.png" alt="" class="absolute left-0 top-[-4.7rem] hidden md:block">
+		</div>
+	</section>
+	<!-- Hero Section End -->
+
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto pb-6">
+		<div class="w-[80%] mx-auto">
+
+			<h1 class="uppercase font-Rubik text-xl font-medium py-2 pt-6 text-center">DESCRIPTION</h1>
+
+			<p class="font-Rubik text-xs pb-4">@(culture == "en-ae" ? Model.Description : Model.DescriptionAr)</p>
+
+		</div>
+	</section>
+
+	<!-- masonry Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto pb-5" id="projects_section">
+
+		<div class="flex flex-wrap w-[80%] mx-auto xl:w-[80%] gap-[2.5%] main-div" style="">
+			<section class="text-center py-2 w-full" style=""><i class="fa fa-2x fa-circle-o-notch fa-spin"></i></section>
+			@*
+				<a href="" class="mb-8 w-full sm:w-[47.5%] lg:w-[17.5%] ml-1">
+					<img src="/assets/images/bg/project-02.png" alt="" class="rounded-lg mb-2 w-full h-[15rem] object-cover">
+					<p class="font-Rubik text-xs uppercase">Project No. 2</p>
+				</a>
+			*@
+		</div>
+
+		<div class="flex justify-center items-center animate-pulse py-10">
+			<a href="javascript:void(0);" class="bg-gk-gold uppercase font-Rubik text-xs text-center font-medium py-2 mb-12 px-4 hover:bg-gk-gold hover:text-white cursor-pointer transition delay-150 duration-300 ease-in-out hover:delay-0 rounded see-more" style="display:none;">SEE_MORE</a>
+			<a href="javascript:void(0);" class="bg-gk-gold ease-in-out font-Rubik font-medium px-4 py-2 mb-12 text-center text-xs uppercase rounded no-more" style="display:none;"><i class="fa fa-exclamation-circle mr-1"></i> COMING_SOON</a>
+		</div>
+
+	</section>
+	<!-- masonry Section End -->
+</div>
+<!--Body Content End-->
+<!--Write js Here-->
+@section IndexScript {
+	<script src="@Url.ContentVersioned("~/Assets/js/web/developments/details.js")"></script>
+}

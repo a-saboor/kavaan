@@ -1,0 +1,523 @@
+﻿@model MyProject.Web.ViewModels.Order.OrderDetailViewModel
+@{
+	ViewBag.Title = Resources.BookingDetails;
+	var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+	bool RTL = CultureHelper.IsRighToLeft();
+	Layout = "~/Views/Shared/_Layout.cshtml";
+
+	var OrderDetails = Model.orderdetails.FirstOrDefault();
+}
+<style>
+	.wo-vehiclesinfos:hover .wo-vehicles-img img {
+		opacity: 1 !important;
+	}
+
+	@@media (min-width: 992px) {
+		.col-lg-6 {
+			-ms-flex: 0 0 50%;
+			flex: 0 0 50%;
+			max-width: 50%;
+		}
+	}
+</style>
+<!-- PAGE CONTAINER START -->
+<div class="page-container pb-5">
+	<!-- MAIN START -->
+	<main class="wo-main overflow-hidden">
+		<!-- Appreciation Start -->
+		<section class="wo-main-section wo-main-section-pt20">
+			<div class="container">
+				<div class="row justify-content-md-center">
+					<div class="wo-forumgrid-wrap">
+						<div class="wo-searchhead">
+							<div class="col-12">
+								<input type="hidden" id="SuccessMessage" value="@ViewBag.SuccessMessage" />
+								<input type="hidden" id="ErrorMessage" value="@ViewBag.ErrorMessage" />
+								<div class="wo-searchhead m-0">
+									<div class="wo-searchhead__title">
+										<h2>
+											<a href="javascript: window.location = document.referrer;">
+												<i class="small ti-arrow-@(RTL ? "right" : "left") p@(RTL ? "l" : "r")-1"></i>
+											</a>
+											@Resources.BookingNo #@Model.OrderNo
+										</h2>
+										@*<span>About 12,854 search result found in “Manchester”</span>*@
+									</div>
+									<div class="wo-searchhead__type">
+										<a href="javascript:void(0);" class="wo-searchsort px-3">
+											<i class="ti-info-alt"></i>
+											<b>@Resources.Status : </b>&nbsp; @Model.Status
+										</a>
+										@*<a href="javascript:void(0);" class="wo-searchtype"><i class="ti-view-list"></i></a>*@
+										@*<a href="javascript:void(0);" class="wo-searchtype active"><i class="ti-view-grid"></i></a>*@
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="wo-articles-wrap">
+							<div class="col-12">
+								<div class="wo-vehiclesinfos card-hover-no-shadow" dir="ltr">
+									<figure class="wo-vehicles-img">
+										@if (!string.IsNullOrEmpty(OrderDetails.Thumbnail))
+										{
+											<img class="img-no-hover" src="@Url.Content(OrderDetails.Thumbnail)" alt="Car Image">
+										}
+										else
+										{
+											<img class="img-no-hover" src="" alt="Car Image">
+										}
+									</figure>
+									<div class="wo-vehiclesinfo">
+										<div class="wo-vehicles__tags">
+											<a href="javascript:void(0);" class="">@Model.CarModel</a>
+										</div>
+										<div class="wo-vehiclesinfo__title">
+											<h3><a href="javascript:void(0);">@OrderDetails.CarName</a></h3>
+											@*<address><i class="ti-location-pin"></i>607, BMI Building, Bank Street - Dubai - UAE</address>*@
+										</div>
+										@if (OrderDetails.Rating != null)
+										{
+											<div class="wo-tags">
+												<span class="wo-stars wo-stars-m-TL cursor-pointer-custom"><span class="rating-star-0">@OrderDetails.Rating</span></span>
+											</div>
+										}
+										<ul class="wo-vehiclesinfo__list">
+											<li><span>@Resources.LicensePlate<em>@OrderDetails.LicensePlate</em></span></li>
+											@if (OrderDetails.Color != null)
+											{
+												<li><span>Color<em>@OrderDetails.Color</em></span></li>
+											}
+											<li><span>@Resources.SKU<em>@OrderDetails.SKU</em></span></li>
+											@*<li><span>Fuel Type<em>Petrol</em></span></li>
+												<li><span>Transmission<em>Automatic</em></span></li>*@
+										</ul>
+									</div>
+									<div class="wo-contectinfo">
+										<div class="wo-contectinfo__save">
+											@*<a href="javascript:void(0);"><i class="ti-reload"></i> Add to Compare</a>*@
+											@*<a href="javascript:void(0);" class="wo-like"><i class="ti-heart"></i> Save</a>*@
+											@if (Model.Status == "Pending")
+											{
+												<a href="javascript:void(0);" data-toggle="modal" data-target="#cancel-booking-modal" class="wo-like bg-info-light-a">
+													@if (RTL)
+													{
+														@Resources.CancelBooking <i class="ti-close"></i>
+													}
+													else
+													{
+														<i class="ti-close"></i> @Resources.CancelBooking
+													}
+												</a>
+											}
+											else if (Model.Status == "Completed" || Model.Status == "Canceled")
+											{
+												if (OrderDetails.Rating == null)
+												{
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#write-review-modal" class="wo-like bg-info-light-a">
+														@if (RTL)
+														{
+															@Resources.WriteAReview <i class="ti-pencil-alt"></i>
+														}
+														else
+														{
+															<i class="ti-pencil-alt"></i> @Resources.WriteAReview
+														}
+													</a>
+												}
+												else
+												{
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#review-booking-modal" class="wo-like bg-info-light-a">
+														@if (RTL)
+														{
+															@Resources.YourReview <i class="ti-star"></i>
+														}
+														else
+														{
+															<i class="ti-star"></i> @Resources.YourReview
+														}
+													</a>
+												}
+											}
+										</div>
+										<div class="wo-contectinfo__price">
+											<h4><sup class="small-sup-BD">AED</sup> @Model.TotalAmount</h4>
+											@*<span>Updated on: Jun 27, 2020</span>*@
+											<a href="javascript:void(0);" class="wo-contectnum wo-contectnum-pd-10">
+												<span class="@(RTL ? "text-right" : "")">
+													@Resources.Provider
+													@if (true)//if need, Setup this condition for verified vendor. Asim*
+													{
+														<textTag class="provider-verify">
+															<em class="fa fa-check-circle text-success small"></em>
+															<em class="font-italic small">@Resources.Verified</em>
+														</textTag>
+													}
+												</span>
+												<figure class="wo-user__img wo-user__img-m0 font-weight-bold">
+													<img class="layout-profile-icon mr-2" src="@OrderDetails.VendorLogo" alt="Provider Logo" width="40">
+													<textTag class="provider-name">
+														@OrderDetails.VendorName
+													</textTag>
+													@*Click To Show Number<span>
+															+1 426 - <em class="wo-hidenum">***** - ***</em>
+															<em class="wo-shownum">55235 - 556</em>
+														</span>*@
+													@*Provider
+														<p class="">
+															Sahoolat Car Enterprise
+															<i class="ti-check-box text-success"></i> <em>Verified</em>
+														</p>*@
+												</figure>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-12">
+								<div class="wo-sinstruction">
+									<div class="wo-sinstruction__content w-100">
+										<figure class="wo-sinstruction__img wo-user__img-m0">
+											<h4 class="@(RTL ? "text-right" : "")">
+												@*<img src="~/Assets/images/icons/ticket-p.png" class="@(RTL ? "float-left" : "float-right")" alt="Booking Info">*@
+												@Resources.BookingInfo:
+											</h4>
+										</figure>
+										<div class="wo-vsingledetails">
+											<div class="wo-vsingledetails__content">
+												<div class="wo-featureslist">
+													<ul>
+														<li>
+															<div class="wo-featureslistcontent">
+																<strong style="min-width:45%">@Resources.From :</strong><textTag class="m@(RTL ? "r":"l")-auto @(RTL ? "text-left" : "text-right")">@OrderDetails.StartDateTime.Value.ToString("dd MMM yyyy, h:mm tt") </textTag>
+															</div>
+														</li>
+														<li>
+															<div class="wo-featureslistcontent">
+																<strong style="min-width:45%">@Resources.To :</strong><textTag class="m@(RTL ? "r":"l")-auto @(RTL ? "text-left" : "text-right")">@OrderDetails.EndDateTime.Value.ToString("dd MMM yyyy, h:mm tt")</textTag>
+															</div>
+														</li>
+														<li>
+															<div class="wo-featureslistcontent">
+																<strong>@Resources.DeliveryMethod :</strong><textTag class="m@(RTL ? "r":"l")-auto">@Model.DeliveryMethod</textTag>
+															</div>
+														</li>
+														<li>
+															<div class="wo-featureslistcontent">
+																<strong>@Resources.ExtraKilometers :</strong><textTag class="m@(RTL ? "r":"l")-auto">@OrderDetails.ExtraKilometer Km</textTag>
+															</div>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<h6 class="@(RTL ? "text-right" : "")"><a href="javascript:void(0);"> @(Model.DeliveryMethod == "Self Pickup" ? Resources.PickupAddress : Resources.DeliveryAddress)</a></h6>
+										@if (!string.IsNullOrEmpty(Model.Address))
+										{
+											<p>
+												@*<em>Pickup Address</em>*@
+												@*607, BMI Building, Bank Street - Dubai - United Arab Emirates*@
+												<textTag><i class="ti-location-pin"></i> @Model.Address</textTag>
+											</p>
+										}
+										<div class="map my-3">
+											<div class="form-group">
+												<div id="wo-locationmap" class="wo-locationmap"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							@*<div class="col-lg-4 col-md-4 col-sm-12">
+									<div class="wo-sinstruction">
+										<figure class="wo-sinstruction__img">
+											<img src="~/Assets/images/icons/tag-p.png" alt="Coupon & Redeem">
+										</figure>
+										<div class="wo-sinstruction__content">
+											<h4>Coupon & Redeem:</h4>
+											<p>Deserunt mollit anim “<em>aperspiciatis unde omnis natusta error auptatem</em> ” acaentium enim ad minimiums</p>
+											<ul>
+												<li><span>Doque etiame enim ipsam voluptatem</span></li>
+												<li><span>Quia quasi explicabo voluptas spernatur sit amet consectetur adipisicing</span></li>
+												<li><span>Eiusmod tempor incididunt ut labore et dolore magna aliqua</span></li>
+											</ul>
+										</div>
+									</div>
+								</div>*@
+							<div class="col-lg-6 col-md-6 col-sm-12 @(RTL ? "text-right" : "")">
+								<div class="wo-sinstruction">
+									<div class="wo-sinstruction__content w-100">
+										<figure class="wo-sinstruction__img wo-user__img-m0">
+											<h4 class="@(RTL ? "text-right" : "")">
+												@Resources.PaymentInfo:
+												@*<img src="~/Assets/images/icons/cash-p.png" class="@(RTL ? "float-left" : "float-right")" alt="Payment Info">*@
+											</h4>
+										</figure>
+										<div class="wo-vsingledetails mb-0">
+											<div class="wo-vsingledetails__content">
+												<div class="wo-featureslist">
+													<ul>
+														<li>
+															<div class="wo-featureslistcontent border-bottom-0">
+																<strong>@Resources.Method :</strong><textTag class="m@(RTL ? "r":"l")-auto">@Model.PaymentMethod</textTag>
+															</div>
+														</li>
+														<li>
+															<div class="wo-featureslistcontent border-bottom-0">
+																<strong>@Resources.Status :</strong><textTag class="m@(RTL ? "r":"l")-auto">@Model.IsPaid</textTag>
+															</div>
+														</li>
+														<li>
+															<div class="wo-featureslistcontent border-bottom-0">
+																<strong>@Resources.Package :</strong><textTag class="m@(RTL ? "r":"l")-auto">@OrderDetails.PackageName</textTag>
+															</div>
+														</li>
+														@*<li>
+																<div class="wo-featureslistcontent border-bottom-0">
+																	<strong>Status :</strong><textTag class="m@(RTL ? "r":"l")-auto">Unpaid</textTag>
+																</div>
+															</li>*@
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="wo-sidebarprice__content">
+											<div class="wo-dealerinfo">
+												<ul>
+													<li class="justify-content-center p-0 text-center">
+														@*<figure>
+																<img src="images/vehicle-single/user-img.jpg" alt="img description">
+															</figure>*@
+														<h4 class="m-0 p-2">@Resources.Charges</h4>
+														@*div class="wo-dealerprofile__title">
+																										<ul class="wo-socialmedia">
+																<li class="wo-facebook"><a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a></li>
+																<li class="wo-twitter"><a href="javascript:void(0)"><i class="fab fa-twitter"></i></a></li>
+																<li class="wo-googleplus"><a href="javascript:void(0)"><i class="fab fa-google"></i></a></li>
+																<li class="wo-instagram"><a href="javascript:void(0)"><i class="fab fa-instagram"></i></a></li>
+															</ul>
+																									</div>*@
+													</li>
+													<li class="mt-2">
+														<strong>@Resources.RentalFee :</strong>
+														<h5 class="m@(RTL ? "r":"l")-auto"><sup class="small-sup-BD">AED</sup> @OrderDetails.Price</h5>
+													</li>
+													<li class="mt-0">
+														<strong>@Resources.ExtraKilometers :</strong>
+														<h5 class="m@(RTL ? "r":"l")-auto"><sup class="small-sup-BD">AED</sup> @*@Model.ExtraKilometerPrice*@ 50.00</h5>
+													</li>
+													<li class="mt-0">
+														<strong>@Resources.SubTotal :</strong>
+														<h5 class="m@(RTL ? "r":"l")-auto"><sup class="small-sup-BD">AED</sup> @OrderDetails.TotalPrice</h5>
+													</li>
+													@if (Model.DeliveryMethod == "Delivery")
+													{
+														<li class="mt-0">
+															<strong>@Resources.DeliveryCharges :</strong>
+															<h5 class="m@(RTL ? "r":"l")-auto"><sup class="small-sup-BD">AED</sup> @Model.DeliveryCharges</h5>
+														</li>
+													}
+													@if (!string.IsNullOrEmpty(Model.CouponCode))
+													{
+														<li class="mt-0">
+															<strong>@Resources.Coupon (@Model.CouponCode) :</strong>
+															<h5 class="m@(RTL ? "r":"l")-auto"><sup class="small-sup-BD">AED</sup> @Model.CouponDiscount</h5>
+														</li>
+													}
+													<li class="mt-0">
+														<strong>@Resources.Total :</strong>
+														<h5 class="m@(RTL ? "r":"l")-auto"><sup class="small-sup-BD">AED</sup> @Model.TotalAmount</h5>
+													</li>
+												</ul>
+											</div>
+											@if (Model.PaymentMethod == "Card" && Model.Status != "Canceled" && Model.IsPaid == "Unpaid")
+											{
+												<div class="wo-socialcontact">
+													<ul>
+														@*<li>
+																<img src="images/vehicle-single/contact/img-01.jpg" alt="img description">
+																<h4>Phone No.</h4>
+																<span>verified</span>
+															</li>
+															<li>
+																<img src="images/vehicle-single/contact/img-02.jpg" alt="img description">
+																<h4>Email ID</h4>
+																<span>verified</span>
+															</li>
+															<li>
+																<img src="images/vehicle-single/contact/img-03.jpg" alt="img description">
+																<h4>Social ID</h4>
+																<span>not linked</span>
+															</li>*@
+														<li class="wo-btnsarea mt-3">
+															<a href="javascript:void(0);" onclick="InitiatePayment(@Model.orderID,`@Model.OrderNo`)" class="wo-btn" id="btn-paynow">@Resources.PayNow</a>
+														</li>
+													</ul>
+												</div>
+											}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Appreciation End -->
+	</main>
+	<!-- MAIN END -->
+</div>
+<!-- PAGE CONTAINER END -->
+<!-- #region Modal Popup -->
+<!-- Cancel Booking Modal Start -->
+<div class="modal fade wo-videopopup" tabindex="-1" role="dialog" id="cancel-booking-modal">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="wo-modalcontent modal-content">
+			<div class="modal-body">
+				<a href="javascript:void(0);" class="close"><i class="ti-close" data-dismiss="modal"></i></a>
+				<div class="login-header">
+					<h4 class="text-center mb-2">Cancel Booking</h4>
+				</div>
+				<!-- Modal Body Start -->
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12">
+							@Html.Raw(Resources.CancelBookingText)
+							<form class="wo-themeform my-3" id="Form-Cancel-Booking" action="/@culture/Customer/Order/Cancel" method="post">
+								<fieldset>
+									@Html.AntiForgeryToken()
+									<input type="hidden" name="id" value="@OrderDetails.OrderID" />
+									<input type="hidden" name="culture" value="@culture" />
+									<div class="form-group wo-form-checkbox">
+										<div class="wo-checkbox">
+											<input id="terms-cancel-booking" type="checkbox">
+											<label for="terms-cancel-booking">
+												@Html.Raw(Resources.CancelBookingCheck)
+											</label>
+										</div>
+									</div>
+								</fieldset>
+							</form>
+							<button class="btn btn-theme btn-block" type="submit" id="btn-cancel-booking" form="Form-Cancel-Booking" disabled>@Resources.Proceed</button>
+						</div>
+					</div>
+				</div>
+				<!-- Modal Body End -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Cancel Booking Modal End -->
+<!-- Write A Review Modal Start -->
+<div class="modal fade wo-videopopup" tabindex="-1" role="dialog" id="write-review-modal">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="wo-modalcontent modal-content">
+			<div class="modal-body">
+				<a href="javascript:void(0);" class="close"><i class="ti-close" data-dismiss="modal"></i></a>
+				<div class="login-header">
+					<h4 class="text-center mb-2">Write a Review</h4>
+				</div>
+				<!-- Modal Body Start -->
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12">
+							<form class="my-3" id="Form-Write-Review-Booking" action="/@culture/Customer/Order/Rating" method="post">
+								<fieldset>
+									@Html.AntiForgeryToken()
+									<input type="hidden" name="id" id="id" value="@OrderDetails.DetailID" />
+									<input type="hidden" name="Rating" id="Rating" value="0" />
+									<div class="mb-3">
+										<label class="form-label">Rate your overall experience.</label>
+										<div class="rating-star-custom" id="Order-Rating">
+											<i class="fas fa-2x fa-star"></i>
+											<i class="fas fa-2x fa-star"></i>
+											<i class="fas fa-2x fa-star"></i>
+											<i class="fas fa-2x fa-star"></i>
+											<i class="fas fa-2x fa-star"></i>
+										</div>
+									</div>
+									<div class="mb-3">
+										<label class="form-label">Share your experience with our service.</label>
+										<textarea class="form-control" rows="2" placeholder="Write your remarks" name="Remarks" id="Remarks" required></textarea>
+									</div>
+								</fieldset>
+							</form>
+							<button class="btn btn-theme btn-block" type="submit" id="btn-write-review-booking" form="Form-Write-Review-Booking">@Resources.Submit</button>
+						</div>
+					</div>
+				</div>
+				<!-- Modal Body End -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Write A Review Modal End -->
+<!-- Review Modal Start -->
+<div class="modal fade wo-videopopup" tabindex="-1" role="dialog" id="review-booking-modal">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="wo-modalcontent modal-content">
+			<div class="modal-body">
+				<a href="javascript:void(0);" class="close"><i class="ti-close" data-dismiss="modal"></i></a>
+				<div class="login-header">
+					<h4 class="text-center mb-2">@Resources.YourReview</h4>
+				</div>
+				<!-- Modal Body Start -->
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12 text-center">
+							<div class="my-3">
+								<div class="mb-3">
+									<h5>@Resources.Rating</h5>
+									<div class="rating-star-custom-model" dir="ltr">
+										<i class="fas fa-2x fa-star @(OrderDetails.Rating > 0 ? "filled-model" : "") cursor-default-custom"></i>
+										<i class="fas fa-2x fa-star @(OrderDetails.Rating > 1 ? "filled-model" : "") cursor-default-custom"></i>
+										<i class="fas fa-2x fa-star @(OrderDetails.Rating > 2 ? "filled-model" : "") cursor-default-custom"></i>
+										<i class="fas fa-2x fa-star @(OrderDetails.Rating > 3 ? "filled-model" : "") cursor-default-custom"></i>
+										<i class="fas fa-2x fa-star @(OrderDetails.Rating > 4 ? "filled-model" : "") cursor-default-custom"></i>
+									</div>
+								</div>
+								<div class="mb-3">
+									<div class="Cancel-Booking-Text-Div ">
+										<h5>@Resources.Remarks</h5>
+										<div class="description text-capitalize">
+											<p>
+												@OrderDetails.Remarks
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Modal Body End -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Review Modal End -->
+<!-- #endregion -->
+@section IndexScript {
+	<script src="https://maps.googleapis.com/maps/api/js?key=@Resources.MapApiKey"></script>
+	<script src="~/Assets/js/vendor/gmap3.js"></script>
+	<script>
+		//#region Map Location
+		var locationmap = document.querySelector("#wo-locationmap")
+		if (locationmap !== null) {
+			var center = [@Model.Latitude, @Model.Longitude];
+			$('#wo-locationmap')
+				.gmap3({
+					center: center,
+					zoom: 10,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				})
+				.marker({
+					position: center,
+					icon: DefaultMapMarker
+				});
+		}
+		//#endregion
+	</script>
+	<script src="@Url.ContentVersioned("~/Assets/Admin/js/customer/order/details.js")"></script>
+	<script src="~/Assets/Admin/js/general/ModalPopup.js"></script>
+}

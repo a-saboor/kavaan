@@ -1,0 +1,805 @@
+﻿@{
+    string culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+    string lang = System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLowerInvariant();
+    bool RTL = false;
+    string dir = lang == "en" ? "ltr" : "rtl";
+}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Kavaan | @ViewBag.Title</title>
+
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
+
+    <!-- Datepicker -->
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Assets/css/gijgo/gijgo-style.css" rel="stylesheet" />
+
+    <!-- Main Style CSS -->
+    <!-- Font Icons css -->
+    <link rel="stylesheet" href="~/Assets/css/font-icons.css">
+    <!-- plugins css -->
+    <link rel="stylesheet" href="~/Assets/css/plugins.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="~/Assets/css/style.css">
+    <!-- Responsive css -->
+    <link rel="stylesheet" href="~/Assets/css/responsive.css">
+
+    <link rel="stylesheet" href="~/Assets/css/web/shared/layout.css">
+    <link rel="stylesheet" href="~/Assets/css/intlTelInput/intlTelInput.css">
+    <!-- Select2 -->
+    <link href="~/Assets/css/select2/select2.css" rel="stylesheet" />
+
+    <!-- Owl Carousel -->
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+        integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />*@
+    @*<link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+        integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />*@
+
+    <!-- Swiper -->
+    @*<link href="/assets/css/swiper/swiper-bundle.min.css" rel="stylesheet" />*@
+
+    <!-- sweetalert2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.28/sweetalert2.min.css" integrity="sha512-yq+qDDTUuLA4zvJjuvcpV809SNmM0ReTyeadKsNvW0cSvGVfj3K20SdlkburwJHHdzuGDtFElBcxndjd7J3nrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Render Page Style CSS -->
+    @RenderSection("IndexStyles", required: false)
+</head>
+<body class="overflow-x-hidden" ondragstart="return false;">
+    <!-- #region Loader -->
+    <!-- preloader area start -->
+    <div class="preloader d-none" id="preloader">
+        <div class="preloader-inner">
+            <div class="spinner">
+                <div class="dot1"></div>
+                <div class="dot2"></div>
+            </div>
+        </div>
+    </div>
+    <!-- preloader area end -->
+    <!-- #endregion Loader -->
+    <!-- #region Links -->
+    <!-- links area start -->
+    <a id="whatsapp" target="_blank" class="whatsapp-link" href="javascript:void(0);" style="display:none;"><i class="fab fa-whatsapp"></i></a>
+    <!-- links area end -->
+    <!-- #endregion Links -->
+    <!-- #region Header -->
+    <!-- HEADER AREA START -->
+
+    <header class="bg-overlay-white-50 ltn__header-middle-area ltn__header-transparent ltn__sticky-bg-white">
+        <!-- ltn__header-top-area start -->
+        <div class="ltn__header-top-area section-bg-6 top-area-color-white---" hidden>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="ltn__top-bar-menu">
+                            <ul>
+                                <li><a href="mailto:info@webmail.com?Subject=Flower%20greetings%20to%20you"><i class="icon-mail"></i> info@webmail.com</a></li>
+                                <li><a href="~/contact-us"><i class="icon-placeholder"></i> 15/A, Nest Tower, NYC</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="top-bar-right text-end">
+                            <div class="ltn__top-bar-menu">
+                                <ul>
+                                    <li class="d-none">
+                                        <!-- ltn__language-menu -->
+                                        <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu">
+                                            <ul>
+                                                <li>
+                                                    <a href="javascript:void(0);" class="dropdown-toggle"><span class="active-currency">English</span></a>
+                                                    <ul>
+                                                        <li><a href="javascript:void(0);">Arabic</a></li>
+                                                        <li><a href="javascript:void(0);">Bengali</a></li>
+                                                        <li><a href="javascript:void(0);">Chinese</a></li>
+                                                        <li><a href="javascript:void(0);">English</a></li>
+                                                        <li><a href="javascript:void(0);">French</a></li>
+                                                        <li><a href="javascript:void(0);">Hindi</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <!-- ltn__social-media -->
+                                        <div class="ltn__social-media">
+                                            <ul>
+                                                <li><a href="javascript:void(0);" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                                <li><a href="javascript:void(0);" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+
+                                                <li><a href="javascript:void(0);" title="Instagram"><i class="fab fa-instagram"></i></a></li>
+                                                <li><a href="javascript:void(0);" title="Dribbble"><i class="fab fa-dribbble"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <!-- header-top-btn -->
+                                        <div class="header-top-btn">
+                                            <a href="~/projects">Add Listing</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ltn__header-top-area end -->
+        <!-- ltn__header-middle-area start -->
+        <div class="bg-overlay-white-90 bg-transparent ltn__header-middle-area sticky-active">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="site-logo-wrap">
+                            <div class="site-logo">
+                                <a href="~/home"><img src="~/Assets/img/logo/Text Logo HR.png" class="w-sm-60 w-md-50 w-lg-50" alt="Logo"></a>
+                            </div>
+                            <div class="get-support clearfix" hidden>
+                                <div class="get-support-icon">
+                                    <i class="icon-call"></i>
+                                </div>
+                                <div class="get-support-info">
+                                    <h6>Get Support</h6>
+                                    <h4><a href="tel:+123456789">123-456-789-10</a></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col header-menu-column">
+                        <div class="header-menu d-none d-xl-block">
+                            <nav>
+                                <div class="ltn__main-menu">
+                                    <ul>
+                                        <li><a href="~/home">Home</a></li>
+                                        <li><a href="~/projects">Projects</a></li>
+                                        <li><a href="~/about-us">About Us</a></li>
+                                        <li><a href="~/contact-us">Contact Us</a></li>
+                                        <li><a href="~/blogs">Blogs</a></li>
+                                        <li><a href="~/newsfeeds">Newsfeed</a></li>
+                                        <li><a href="~/frequently-asked-questions">FAQs</a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col ltn__header-options ltn__header-options-2 my-4">
+                        <!-- header-search-1 -->
+                        <div class="header-search-wrap" hidden>
+                            <div class="header-search-1">
+                                <div class="search-icon">
+                                    <i class="icon-search for-search-show"></i>
+                                    <i class="icon-cancel  for-search-close"></i>
+                                </div>
+                            </div>
+                            <div class="header-search-1-form">
+                                <form id="#" method="get" action="#">
+                                    <input type="text" name="search" value="" placeholder="Search here...">
+                                    <button type="submit">
+                                        <span><i class="icon-search"></i></span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- user-menu -->
+                        <div class="ltn__drop-menu user-menu">
+                            <ul>
+                                <li>
+                                    <a class="cursor-pointer"><i class="icon-user"></i></a>
+                                    <ul>
+                                        @if (!MyProject.Web.Helpers.CustomerSessionHelper.IsAuthorized)
+                                        {
+                                            <li><a href="~/customer/account/login">Login</a></li>
+                                            <li><a href="~/customer/account/signup">Sign Up</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="javascript:void(0);">Wish List</a></li>
+                                            <li><a href="~/Customer/Dashboard/Index">My account</a></li>
+                                            <li><a href="~/customer/account/logout?v=@Guid.NewGuid()">Logout</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- mini-cart -->
+                        <div class="mini-cart-icon" hidden>
+                            <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
+                                <i class="icon-shopping-cart"></i>
+                                <sup>2</sup>
+                            </a>
+                        </div>
+                        <!-- mini-cart -->
+                        <!-- Mobile Menu Button -->
+                        <div class="mobile-menu-toggle d-xl-none">
+                            <a href="#ltn__utilize-mobile-menu" class="ltn__utilize-toggle">
+                                <svg viewBox="0 0 800 600">
+                                    <path d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200" id="top"></path>
+                                    <path d="M300,320 L540,320" id="middle"></path>
+                                    <path d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190" id="bottom" transform="translate(480, 320) scale(1, -1) translate(-480, -318) "></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ltn__header-middle-area end -->
+    </header>
+
+    <!-- HEADER AREA END -->
+    <!-- Utilize Cart Menu Start -->
+    @*<div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
+            <div class="ltn__utilize-menu-inner ltn__scrollbar">
+                <div class="ltn__utilize-menu-head">
+                    <span class="ltn__utilize-menu-title">Cart</span>
+                    <button class="ltn__utilize-close">×</button>
+                </div>
+                <div class="mini-cart-product-area ltn__scrollbar">
+                    <div class="mini-cart-item clearfix">
+                        <div class="mini-cart-img">
+                            <a href="javascript:void(0);"><img src="~/Assets/img/product/1.png" alt="Image"></a>
+                            <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                        </div>
+                        <div class="mini-cart-info">
+                            <h6><a href="javascript:void(0);">Wheel Bearing Retainer</a></h6>
+                            <span class="mini-cart-quantity">1 x $65.00</span>
+                        </div>
+                    </div>
+                    <div class="mini-cart-item clearfix">
+                        <div class="mini-cart-img">
+                            <a href="javascript:void(0);"><img src="~/Assets/img/product/2.png" alt="Image"></a>
+                            <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                        </div>
+                        <div class="mini-cart-info">
+                            <h6><a href="javascript:void(0);">3 Rooms Manhattan</a></h6>
+                            <span class="mini-cart-quantity">1 x $85.00</span>
+                        </div>
+                    </div>
+                    <div class="mini-cart-item clearfix">
+                        <div class="mini-cart-img">
+                            <a href="javascript:void(0);"><img src="~/Assets/img/product/3.png" alt="Image"></a>
+                            <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                        </div>
+                        <div class="mini-cart-info">
+                            <h6><a href="javascript:void(0);">OE Replica Wheels</a></h6>
+                            <span class="mini-cart-quantity">1 x $92.00</span>
+                        </div>
+                    </div>
+                    <div class="mini-cart-item clearfix">
+                        <div class="mini-cart-img">
+                            <a href="javascript:void(0);"><img src="~/Assets/img/product/4.png" alt="Image"></a>
+                            <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                        </div>
+                        <div class="mini-cart-info">
+                            <h6><a href="javascript:void(0);">Shock Mount Insulator</a></h6>
+                            <span class="mini-cart-quantity">1 x $68.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mini-cart-footer">
+                    <div class="mini-cart-sub-total">
+                        <h5>Subtotal: <span>$310.00</span></h5>
+                    </div>
+                    <div class="btn-wrapper">
+                        <a href="javascript:void(0);" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+                        <a href="javascript:void(0);" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+                    </div>
+                    <p>Free Shipping on All Orders Over $100!</p>
+                </div>
+
+            </div>
+        </div>*@
+    <!-- Utilize Cart Menu End -->
+    <!-- Utilize Mobile Menu Start -->
+    <div id="ltn__utilize-mobile-menu" class="ltn__utilize ltn__utilize-mobile-menu">
+        <div class="ltn__utilize-menu-inner ltn__scrollbar">
+            <div class="ltn__utilize-menu-head">
+                <div class="site-logo">
+                    <a href="~/home"><img src="~/Assets/img/logo/Text Logo HR.png" alt="Logo"></a>
+                </div>
+                <button class="ltn__utilize-close">×</button>
+            </div>
+            @*<div class="ltn__utilize-menu-search-form">
+                    <form action="#">
+                        <input type="text" placeholder="Search...">
+                        <button><i class="fas fa-search"></i></button>
+                    </form>
+                </div>*@
+            <div class="ltn__utilize-menu">
+                <ul>
+                    <li><a href="~/home">Home</a></li>
+                    <li><a href="~/projects">Projects</a></li>
+                    <li><a href="~/about-us">About Us</a></li>
+                    <li><a href="~/contact-us">Contact Us</a></li>
+                    <li><a href="~/blogs">Blogs</a></li>
+                    <li><a href="~/newsfeeds">Newsfeed</a></li>
+                </ul>
+            </div>
+            @*<div class="ltn__utilize-buttons ltn__utilize-buttons-2">
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0);" title="My Account">
+                                <span class="utilize-btn-icon">
+                                    <i class="far fa-user"></i>
+                                </span>
+                                My Account
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" title="Wishlist">
+                                <span class="utilize-btn-icon">
+                                    <i class="far fa-heart"></i>
+                                    <sup>3</sup>
+                                </span>
+                                Wishlist
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" title="Shoping Cart">
+                                <span class="utilize-btn-icon">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <sup>5</sup>
+                                </span>
+                                Shoping Cart
+                            </a>
+                        </li>
+                    </ul>
+                </div>*@
+            @*<div class="ltn__social-media-2">
+                    <ul>
+                        <li><a href="javascript:void(0);" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="javascript:void(0);" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="javascript:void(0);" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
+                        <li><a href="javascript:void(0);" title="Instagram"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </div>*@
+        </div>
+    </div>
+    <!-- Utilize Mobile Menu End -->
+
+    <div class="ltn__utilize-overlay"></div>
+
+
+
+    <!-- #endregion Header -->
+    <!-- #region Main Content -->
+    <section id="render_body" class="min-h-screen">
+        @RenderBody()
+    </section>
+    <!-- #endregion Main Content -->
+    <!-- #region Footer-->
+    <!-- CALL TO ACTION START (call-to-action-6) -->
+    <div class="ltn__call-to-action-area call-to-action-6 before-bg-bottom" data-bs-bg="/Assets/img/1.jpg--">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="call-to-action-inner call-to-action-inner-6 ltn__secondary-bg position-relative text-center---">
+                        <div class="coll-to-info text-color-white">
+                            <h1>Looking for a dream home?</h1>
+                            <p>We can help you realize your dream of a new home</p>
+                        </div>
+                        <div class="btn-wrapper">
+                            <a class="btn btn-effect-3 btn-white" href="~/projects">Explore Properties <i class="icon-next"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CALL TO ACTION END -->
+    <!-- FOOTER AREA START -->
+    <footer class="ltn__footer-area  ">
+        <div class="footer-top-area  section-bg-2 plr--5">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-3 col-md-6 col-sm-6 col-12">
+                        <div class="footer-widget footer-about-widget">
+                            <div class="footer-logo">
+                                <div class="site-logo">
+                                    <img src="~/Assets/img/logo/Text Logo HR Dark.png" class="w-50" alt="Logo">
+                                </div>
+                            </div>
+                            <p class="small">Kavaan Real Estate is a trust worth platform for property dealing.</p>
+                            <div class="footer-address">
+                                <ul class="web-contact-info small">
+                                    @*
+                                        <li>
+                                            <div class="footer-address-icon">
+                                                <i class="icon-placeholder"></i>
+                                            </div>
+                                            <div class="footer-address-info">
+                                                <p>Brooklyn, New York, United States</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="footer-address-icon">
+                                                <i class="icon-call"></i>
+                                            </div>
+                                            <div class="footer-address-info">
+                                                <p><a href="tel:+0123-456789">+0123-456789</a></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="footer-address-icon">
+                                                <i class="icon-mail"></i>
+                                            </div>
+                                            <div class="footer-address-info">
+                                                <p><a href="mailto:example@example.com">example@example.com</a></p>
+                                            </div>
+                                        </li>
+                                    *@
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-sm-6 col-12">
+                        <div class="footer-widget footer-menu-widget clearfix">
+                            <h4 class="footer-title">Company</h4>
+                            <div class="footer-menu">
+                                <ul class="small">
+                                    <li><a href="~/home">Home</a></li>
+                                    <li><a href="~/projects">Projects</a></li>
+                                    <li><a href="~/about-us">About us</a></li>
+                                    <li><a href="~/contact-us">Contact us</a></li>
+                                    <li><a href="~/blogs">Blogs</a></li>
+                                    <li><a href="~/newsfeeds">Newsfeed</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-sm-6 col-12">
+                        <div class="footer-widget footer-menu-widget clearfix">
+                            <h4 class="footer-title">Customer Care</h4>
+                            <div class="footer-menu">
+                                <ul class="small">
+                                    @if (!MyProject.Web.Helpers.CustomerSessionHelper.IsAuthorized)
+                                    {
+                                        <li><a href="~/customer/account/login">Login</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="javascript:void(0);">Wish List</a></li>
+                                        <li><a href="~/Customer/Dashboard/Index">My account</a></li>
+                                    }
+                                    <li><a href="~/terms-and-conditions">Terms & Conditions</a></li>
+                                    <li><a href="~/privacy-policy">Privacy Policy</a></li>
+                                    <li><a href="~/frequently-asked-questions">FAQs</a></li>
+                                    @if (MyProject.Web.Helpers.CustomerSessionHelper.IsAuthorized)
+                                    {
+                                        <li><a href="~/customer/account/logout?v=@Guid.NewGuid()">Logout</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-sm-12 col-12">
+                        <div class="footer-widget footer-newsletter-widget form-group mb-4">
+                            <h4 class="footer-title">Newsletter</h4>
+                            <p class="small">Subscribe to our weekly Newsletter and receive updates via email.</p>
+                            <div class="footer-newsletter">
+                                <form id="form_subscribe">
+                                    @Html.AntiForgeryToken()
+                                    <label for="Email" hidden>Email</label>
+                                    <input type="email" name="Email" placeholder="Email*" class="form-field" data-strict="1">
+                                    <div class="btn-wrapper">
+                                        <button class="theme-btn-1 btn" type="submit" form="form_subscribe"><i class="fas fa-location-arrow"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="m-1">
+                                <small class="w-full form-text-validation small text-danger py-1">
+                                </small>
+                            </div>
+                            @*<h5 class="mt-30">We Accept</h5>
+                                <img src="~/Assets/img/icons/payment-4.png" alt="Payment Image">*@
+                        </div>
+                        <div class="ltn__social-media">
+                            <ul class="web-social-icons">
+                                @*
+                                    <li><a href="javascript:void(0);" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="javascript:void(0);" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="javascript:void(0);" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
+                                    <li><a href="javascript:void(0);" title="Youtube"><i class="fab fa-youtube"></i></a></li>
+                                *@
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ltn__copyright-area ltn__copyright-2 section-bg-7  plr--5">
+            <div class="container-fluid ltn__border-top-2">
+                <div class="row">
+                    <div class="col-md-6 col-12">
+                        <div class="ltn__copyright-design clearfix">
+                            <p>Copyright <span class="current-year"></span> © <a href="~/home" class="">Kavaan Real Estate</a>. All Rights Reserved</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12 align-self-center">
+                        <div class="ltn__copyright-menu text-end">
+                            <ul>
+                                <li><a href="~/terms-and-condition">Terms & Conditions</a></li>
+                                <li><a href="~/privacy-policy">Privacy & Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- FOOTER AREA END -->
+    <!-- #endregion Footer-->
+    <!-- #region Other Sections-->
+    <!--Layout End-->
+    <!-- #endregion Other Section-->
+    <!-- #region Login Popup-->
+    <!-- LOGIN POPUP -->
+    @*@if (!MyProject.Web.Helpers.CustomerSessionHelper.IsAuthorized)
+        {
+            @Html.Action("LoginModal", "ModalPopups", new { area = "" })
+        }*@
+    <!-- MODAL AREA START (Quick View Modal) -->
+    <div class="ltn__modal-area ltn__quick-view-modal-area">
+        <div class="modal fade" id="quick_view_modal" tabindex="-1">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <!-- <i class="fas fa-times"></i> -->
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="ltn__quick-view-modal-inner">
+                            <div class="modal-product-item">
+                                <div class="row">
+                                    <div class="col-lg-6 col-12">
+                                        <div class="modal-product-img">
+                                            <img src="~/Assets/img/product/4.png" alt="#">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-12">
+                                        <div class="modal-product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="javascript:void(0);"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="javascript:void(0);"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="javascript:void(0);"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="javascript:void(0);"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="javascript:void(0);"><i class="far fa-star"></i></a></li>
+                                                    <li class="review-total"> <a href="javascript:void(0);"> ( 95 Reviews )</a></li>
+                                                </ul>
+                                            </div>
+                                            <h3><a href="~/projects">3 Rooms Manhattan</a></h3>
+                                            <div class="product-price">
+                                                <span>$34,900</span>
+                                                <del>$36,500</del>
+                                            </div>
+                                            <hr>
+                                            <div class="modal-product-brief">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos repellendus repudiandae incidunt quidem pariatur expedita, quo quis modi tempore non.</p>
+                                            </div>
+                                            <div class="modal-product-meta ltn__product-details-menu-1 d-none">
+                                                <ul>
+                                                    <li>
+                                                        <strong>Categories:</strong>
+                                                        <span>
+                                                            <a href="javascript:void(0);">Parts</a>
+                                                            <a href="javascript:void(0);">Car</a>
+                                                            <a href="javascript:void(0);">Seat</a>
+                                                            <a href="javascript:void(0);">Cover</a>
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="ltn__product-details-menu-2 d-none">
+                                                <ul>
+                                                    <li>
+                                                        <div class="cart-plus-minus">
+                                                            <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="theme-btn-1 btn btn-effect-1" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                            <span>ADD TO CART</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <!-- <hr> -->
+                                            <div class="ltn__product-details-menu-3">
+                                                <ul>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                            <i class="far fa-heart"></i>
+                                                            <span>Add to Wishlist</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="" title="Compare" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                            <i class="fas fa-exchange-alt"></i>
+                                                            <span>Compare</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <hr>
+                                            <div class="ltn__social-media">
+                                                <ul>
+                                                    <li>Share:</li>
+                                                    <li><a href="javascript:void(0);" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                                    <li><a href="javascript:void(0);" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                                    <li><a href="javascript:void(0);" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
+                                                    <li><a href="javascript:void(0);" title="Instagram"><i class="fab fa-instagram"></i></a></li>
+
+                                                </ul>
+                                            </div>
+                                            <label class="float-end mb-0"><a class="text-decoration" href="~/projects"><small>View Details</small></a></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL AREA END -->
+    <!-- MODAL AREA START (Add To Cart Modal) -->
+    <div class="ltn__modal-area ltn__add-to-cart-modal-area">
+        <div class="modal fade" id="add_to_cart_modal" tabindex="-1">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="ltn__quick-view-modal-inner">
+                            <div class="modal-product-item">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="modal-product-img">
+                                            <img src="~/Assets/img/product/1.png" alt="#">
+                                        </div>
+                                        <div class="modal-product-info">
+                                            <h5><a href="~/projects">3 Rooms Manhattan</a></h5>
+                                            <p class="added-cart"><i class="fa fa-check-circle"></i>  Successfully added to your Cart</p>
+                                            <div class="btn-wrapper">
+                                                <a href="javascript:void(0);" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+                                                <a href="javascript:void(0);" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+                                            </div>
+                                        </div>
+                                        <!-- additional-info -->
+                                        <div class="additional-info d-none">
+                                            <p>We want to give you <b>10% discount</b> for your first order, <br>  Use discount code at checkout</p>
+                                            <div class="payment-method">
+                                                <img src="~/Assets/img/icons/payment.png" alt="#">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL AREA END -->
+    <!-- MODAL AREA START (Wishlist Modal) -->
+    <div class="ltn__modal-area ltn__add-to-cart-modal-area">
+        <div class="modal fade" id="liton_wishlist_modal" tabindex="-1">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="ltn__quick-view-modal-inner">
+                            <div class="modal-product-item">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="modal-product-img">
+                                            <img src="~/Assets/img/product/7.png" alt="#">
+                                        </div>
+                                        <div class="modal-product-info">
+                                            <h5><a href="~/projects">3 Rooms Manhattan</a></h5>
+                                            <p class="added-cart"><i class="fa fa-check-circle"></i>  Successfully added to your Wishlist</p>
+                                            <div class="btn-wrapper">
+                                                <a href="javascript:void(0);" class="theme-btn-1 btn btn-effect-1">View Wishlist</a>
+                                            </div>
+                                        </div>
+                                        <!-- additional-info -->
+                                        <div class="additional-info d-none">
+                                            <p>We want to give you <b>10% discount</b> for your first order, <br>  Use discount code at checkout</p>
+                                            <div class="payment-method">
+                                                <img src="~/Assets/img/icons/payment.png" alt="#">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL AREA END -->
+    <!-- LOGIN POPUP END -->
+    <!-- #endregion Login Section-->
+    <!-- #region Scripts -->
+    <!-- jquery -->
+    <!-- All JS Plugins -->
+    <script src="~/Assets/js/plugins.js"></script>
+    <!-- Main JS -->
+    <script src="~/Assets/js/main.js"></script>
+
+    <!-- owl carousel -->
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>*@
+
+    <!--vendor scripts-->
+    <script src="@Url.ContentVersioned("~/Assets/js/vendor/modernizr-3.6.0.min.js")"></script>
+    <script src="@Url.ContentVersioned("~/Assets/js/vendor/jquery.cookie.js")"></script>
+    <script src="@Url.ContentVersioned("~/Assets/js/vendor/wow.min.js")"></script>
+    <!--inputmask-->
+    <script src="@Url.ContentVersioned("~/Assets/js/inputmask/jquery.inputmask.bundle.js")"></script>
+    <!--select2-->
+    <script src="@Url.ContentVersioned("~/Assets/js/select2/select2.js")"></script>
+    <!--swiper-->
+    <script src="@Url.ContentVersioned("~/Assets/js/swiper/swiper-bundel-min.js")"></script>
+    <!--datepicker js-->
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+
+    <!--Layout Javascript Queries-->
+    <script>
+		let title = "@ViewBag.Title".toLowerCase();
+		let session = false;
+		const direction = 'ltr';
+    </script>
+    @if (Session["CustomerID"] != null)
+    {
+        <script>
+            session = true;
+        </script>
+    }
+    <!--custom layout script-->
+    <script src="@Url.ContentVersioned("~/Assets/js/web/shared/index.js")"></script>
+    <!--business setting script-->
+    <script src="@Url.ContentVersioned("~/Assets/js/web/shared/config.js")"></script>
+    <!--custom slider script-->
+    @*<script src="@Url.ContentVersioned("~/Assets/js/web/shared/custom-slider.js")"></script>*@
+    <!--custom alert and message script-->
+    <script src="@Url.ContentVersioned("~/Assets/js/web/shared/alert-messages.js")"></script>
+    <!--custom dynamic methods script-->
+    <script src="@Url.ContentVersioned("~/Assets/js/web/shared/format-methods.js")"></script>
+    <!--login script-->
+    @*<script src="@Url.ContentVersioned("~/Assets/js/web/account/register.js")"></script>*@
+    <!--international phone code binding script-->
+    <script src="@Url.ContentVersioned("~/Assets/js/intlTelInput/intlTelInput.js")"></script>
+    <!--sweet alert 2-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.28/sweetalert2.min.js" integrity="sha512-vBXZW60oYiantQ/5hVVhYcpt/jbHXsTG3La1EtR3/IxfbXxt++pqBU/ZnAPQZi6JbkWJNtPqnQrIqaI3e9BB7g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @RenderSection("IndexScript", required: false)
+    <!-- #endregion Scripts -->
+</body>
+</html>

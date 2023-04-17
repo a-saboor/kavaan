@@ -1,0 +1,11 @@
+﻿@model MyProject.Data.LeadRequest
+
+<div>
+    @Html.AntiForgeryToken()
+    <div class="col-md-12" style="margin-top:20px">
+
+        <p>@Html.Raw(Model.Remarks)</p>
+       
+    </div>
+
+</div>

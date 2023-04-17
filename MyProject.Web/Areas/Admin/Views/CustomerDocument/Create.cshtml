@@ -1,0 +1,161 @@
+﻿@model MyProject.Data.CustomerDocument
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+<div class="modal-header">
+    <h5 class="modal-title">Create</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <i aria-hidden="true" class="ki ki-close"></i>
+    </button>
+</div>
+<div class="modal-body">
+    @using (Html.BeginForm("Create", "CustomerDocument", new { area = "Admin" }, FormMethod.Post, new { id = "Userform", @enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="row">
+    <div class="col-md-4 col-sm-12">
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerDocumentTypeID, "Document Type", htmlAttributes: new { @class = "control-label" })
+            <div class="input-group mb-3">
+                @Html.DropDownList("CustomerDocumentTypeID", null, "Select document type", htmlAttributes: new { @class = "form-control required-custom" })
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-paper-plane"></i></span>
+                </div>
+            </div>
+            @Html.ValidationMessageFor(model => model.CustomerDocumentTypeID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12">
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerRelationID, "Customer Relation", htmlAttributes: new { @class = "control-label" })
+            <div class="input-group mb-3">
+                @Html.DropDownList("CustomerRelationID", null, "Select Customer Relation", htmlAttributes: new { @class = "form-control required-custom" })
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-layer-group"></i></span>
+                </div>
+            </div>
+            @Html.ValidationMessageFor(model => model.CustomerRelationID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12">
+        <label class="control-label">Expiry Date</label>
+        <div class="input-daterange input-group kt_datepicker_range">
+            @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { @class = "form-control kt_datepicker_range required-custom", type = "text", id = "ExpiryDate", placeholder = " MM/DD/YYYY" } })
+            <div class="input-group-append">
+                <span class="input-group-text">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
+    </div>
+
+
+
+</div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="input-group">
+                    <input type="file" id="fileUpload" name="FileUpload" class="form-control" required="required" />
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-upload"></i></span></div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-custom" id="btnSubmit" form="Userform">Submit</button>
+</div>
+
+<script>
+    $("#ExpiryDate").datepicker({
+        todayHighlight: true,
+        format: 'dd MM yyyy',
+    });
+    @*function savedata() {
+
+        $(this).closest('.modal').find('button[type=submit]').addClass('spinner spinner-sm spinner-left').attr('disabled', true);
+        var data = new FormData();
+        var files = $("#fileUpload").get(0).files;
+        if (files.length > 0) {
+            data.append("fileUpload", files[0]);
+        }
+        data.append("CustomerID",@ViewBag.CustomerID);
+        data.append("CustomerDocumentTypeID", $('#CustomerDocumentTypeID').val());
+        data.append("CustomerRelationID", $('#CustomerRelationID').val());
+        data.append("ExpiryDate", $('#ExpiryDate').val());
+        data.append("Family", $("#Family").val());
+        
+        $.ajax({
+            url: "/Admin/CustomerDocument/Create",
+            type: "POST",
+            //processData: false,
+            //contentType: false,
+            data: { 'CustomerID':@ViewBag.CustomerID, 'CustomerDocumentTypeID': $('#CustomerDocumentTypeID').val(), 'Family': $("#Family").val()},
+            success: function (response) {
+
+                if (callback) {
+                    callback($('#myModalContent'), element, false, response);
+                }
+            },
+            error: function (er) {
+                toastr.error(er);
+            }
+        });
+        return false;
+    }*@
+    $("#fileUpload").change(function (e) {
+        var file = this.files[0];
+        if (file) {
+            if (file.size >= (20 * 1000000)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Document size should be less than to or equal to 20 MB!',
+                    //footer: '<a href>Image size should be less than or equal to  100KB and dimension should be 1713x540</a>'
+                })
+                $("#fileUpload").val("");
+            }
+            img = new Image();
+        }
+    });
+   
+    $("#Userform").submit(function () {
+
+        $(this).closest('.modal').find('button[type=submit]').addClass('spinner spinner-sm spinner-left').attr('disabled', true);
+        var data = new FormData();
+        var files = $("#fileUpload").get(0).files;
+        if (files.length > 0) {
+            data.append("fileUpload", files[0]);
+        }
+
+         data.append("CustomerID",@ViewBag.CustomerID);
+        data.append("CustomerDocumentTypeID", $('#CustomerDocumentTypeID').val());
+        data.append("CustomerRelationID", $('#CustomerRelationID').val());
+        data.append("ExpiryDate", $('#ExpiryDate').val());
+        data.append("Family", $("#Family").val());
+
+
+        $.ajax({
+            url: "/Admin/CustomerDocument/Create",
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: data,
+            success: function (response) {
+                if (callback) {
+                    callback($('#myModalContent'), element, false, response);
+                }
+            },
+            error: function (er) {
+                toastr.error(er);
+            }
+        });
+        return false;
+    });
+
+</script>

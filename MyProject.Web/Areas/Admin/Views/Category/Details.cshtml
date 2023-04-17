@@ -1,0 +1,153 @@
+@model MyProject.Data.Category
+@{
+    ViewBag.Title = "Details";
+    Layout = null;
+}
+
+
+<div class="modal-header">
+    <h5 class="modal-title">Details</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <i aria-hidden="true" class="ki ki-close"></i>
+    </button>
+</div>
+
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <div class="float-left mb-3">
+                <i class="fa fa-calendar"></i>
+                <b>@Html.Label("Creation Date:", htmlAttributes: new { @class = "control-label" })</b>
+                @if (Model.CreatedOn.HasValue)
+                {
+                    var date = Model.CreatedOn.Value.ToString(MyProject.Web.Helpers.CustomHelper.GetDateFormat);
+                    <label class="control-label" readonly="readonly">@date</label>
+                }
+                else
+                {
+                    <label class="control-label" readonly="readonly"> - </label>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-lg-4 col-sm-4 text-center">
+            <div class="image-input image-input-outline" id="kt_image_1">
+                <div class="image-input-wrapper" style="background-image: url(@(!string.IsNullOrEmpty(Model.Icon)?@Model.Icon.Replace("~",""): "../../../../Assets/AppFiles/Images/default.png"))"></div>
+                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow cancelimage" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-4 text-center">
+            <div class="image-input image-input-outline" id="kt_image_2">
+                <div class="image-input-wrapper" style=" background-image: url( @(!string.IsNullOrEmpty(Model.Image)?@Model.Image.Replace("~",""): "../../../../Assets/AppFiles/Images/default.png") )"></div>
+                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow cancelimage" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-4 text-center">
+            <div class="image-input image-input-outline" id="kt_image_3">
+                <div class="image-input-wrapper" style=" background-image: url( @(!string.IsNullOrEmpty(Model.Thumbnail)?@Model.Thumbnail.Replace("~",""): "../../../../Assets/AppFiles/Images/default.png") )"></div>
+                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow cancelimage" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-group row">
+        @*<div class="col-md-12 col-sm-12 text-center">
+                <div class="flex-shrink-0 mr-7">
+                    <div class="symbol symbol-50 symbol-lg-120">
+                        <img alt="Pic" src="@Model.Image">
+                    </div>
+                </div>
+            </div>
+            <hr />*@
+        @*<div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Parent Category</label>
+                    <div class="input-group mb-2">
+                        <label class="form-control" readonly="readonly"> @(Model.Category2 != null ? Model.Category2.CategoryName : "-")</label>
+                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-server"></i></span></div>
+                    </div>
+                </div>
+            </div>*@
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Category Name</label>
+                <div class="input-group mb-2">
+                    <label class="form-control" readonly="readonly"> @Model.CategoryName</label>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-tag"></i></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Category Name (Ar)</label>
+                <div class="input-group mb-2">
+                    <label class="form-control" readonly="readonly"> @Model.CategoryNameAr</label>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-tag"></i></span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Sort (Order)</label>
+                <div class="input-group mb-2">
+                    <label class="form-control" readonly="readonly"> @Model.Position</label>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-sort"></i></span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Slug</label>
+                <div class="input-group mb-2">
+                    <label class="form-control" readonly="readonly"> @Model.Slug</label>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-link"></i></span></div>
+                </div>
+            </div>
+        </div>
+
+
+        @*<div class="col-md-2 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">IsDefault</label>
+                    <span class="switch">
+                        <label>
+                            @Html.CheckBox("IsDefault")
+                            <span></span>
+                        </label>
+                    </span>
+                </div>
+            </div>*@
+
+        <div class="col-md-6 col-sm-6">
+            <div class="form-group">
+                <label class="control-label">Description</label>
+                <div class="input-group mb-2">
+                    <textarea class="form-control" disabled name="Description" id="Description" rows="6" readonly placeholder="Enter Description name here ...">@Model.Description</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <div class="form-group">
+                <label class="control-label">Description (AR)</label>
+                <div class="input-group mb-2">
+                    <textarea class="form-control" disabled name="DescriptionAR" id="DescriptionAR" rows="6" readonly dir="rtl" placeholder="Enter Description name here ...">@Model.DescriptionAR</textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+</div>

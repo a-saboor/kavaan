@@ -1,0 +1,259 @@
+﻿@model MyProject.Data.Property
+@{
+	ViewBag.Title = "";
+	var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+	bool RTL = CultureHelper.IsRighToLeft();
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+	<style>
+		.apexcharts-text {
+			font-weight: bolder !important;
+			font-family: Rubik !important;
+		}
+	</style>
+
+}
+<!--Body Content-->
+<div class="render-body" style="">
+	@Html.HiddenFor(model => model.ID)
+	<!-- Hero Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<div class="w-[80%] mx-auto lg:w-[60%] lg:flex lg:items-center">
+			<div class="pt-10 w-full">
+				<h1 class="font-Rubik text-xs text-gk-blue uppercase font-medium mb-2">PROJECT</h1>
+				<h1 class="font-Rubik text-lg uppercase font-medium mb-2 md:text-3xl">@(culture == "en-ae" ? Model.Title : Model.TitleAr)</h1>
+				<a href="/@culture/construction-updates">
+                    <h1 class="font-Rubik text-xs text-gk-purple uppercase font-medium mb-2 flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                             stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M15 19l-7-7 7-7" />
+                        </svg>
+                        GO_TO_LISTING
+                    </h1>
+				</a>
+				<div class="flex justify-between mb-4 md:w-[50%] ">
+					<div class="flex flex-col items-center justify-end">
+						<img src="/assets/images/web-icons/rooms-icon.png" alt="" class="lg:w-10 ">
+						@*<p class="font-Rubik text-[10px] mt-4">Starting from</p>*@
+                    <h1 class="font-Rubik text-xs font-medium">4 ROOMS</h1>
+					</div>
+					<div class="flex flex-col items-center justify-end">
+						<img src="/assets/images/web-icons/baths-icon.png" alt="" class="lg:w-10 ">
+						@*<p class="font-Rubik text-[10px] mt-4">Starting from</p>*@
+                    <h1 class="font-Rubik text-xs font-medium">3 BATHROOMS</h1>
+					</div>
+					<div class="flex flex-col items-center justify-end">
+						<img src="/assets/images/web-icons/rooms-icon.png" alt="" class="lg:w-10 ">
+						@*<p class="font-Rubik text-[10px] mt-4">Starting from</p>*@
+                    <h1 class="font-Rubik text-xs font-medium">654 SQ_FT</h1>
+					</div>
+				</div>
+                <h1 class="font-Rubik text-base capitalize font-medium">DESCRIPTION</h1>
+				<p class="font-Rubik text-xs py-2 text-justify">@(culture == "en-ae" ? Model.Description : Model.DescriptionAr)</p>
+			</div>
+		</div>
+	</section>
+	<!-- Hero Section End -->
+	<!-- Progress Section Start -->
+	@if (Model.PropertyProgresses.Count() > 0)
+	{
+		int i = 0;
+
+		<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto pt-10" id="progress_section">
+			<div class="w-[80%] mx-auto">
+                <h1 class="font-Rubik text-base font-medium pt-4 lg:text-xl text-center">PROGRESS</h1>
+				<p class="text-gk-blue text-xs text-center pb-4">@ViewBag.LastUpdatedDate</p>
+			</div>
+			<div class="w-[80%] mx-auto lg:w-[80%] pt-4">
+				<div class="flex flex-wrap justify-center">
+					<!--begin::Chart-->
+					@foreach (var item in Model.PropertyProgresses.Where(x => x.IsActive == true))
+					{
+						i++;
+						<div id="chart_@i"></div>
+					}
+					<!--end::Chart-->
+				</div>
+			</div>
+		</section>
+	}
+	<!-- Progress Section End -->
+	<!-- Walkthrough Video Section Start -->
+	<!--Change Request -> comment it-->
+	<!--if (Model.Video != null)
+	{
+		<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto pb-10" id="video_section">
+			<div class="w-[80%] mx-auto">
+				<h1 class="font-Rubik text-base text-center font-medium py-4 lg:text-xl">WALKTHROUGH VIDEO</h1>
+			</div>
+			<div class="w-[80%] mx-auto relative xl:flex lg:w-[60%]">
+				<video src="@Url.Content(MyProject.Web.Helpers.Routing.CustomURL.GetImageServer()+Model.Video)"-->
+	@*autoplay*@
+	<!--loop preload="auto" class="w-full">
+				</video>
+				<a href="javascript:void(0);" onclick="PlayVideo(this);">
+					<span class="w-8 h-8 rounded-full p-2 absolute top-1/2 left-1/2 ">
+						<i class="fa fa fa-2x fa-play-circle text-white"></i>
+					</span>
+				</a>
+			</div>
+		</section>
+	}-->
+	<!-- Walkthrough Video Section End -->
+	<!-- Walkthrough Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<div class="w-[80%] lg:w-[50%] mx-auto lg:items-center">
+			<div class="mb-4">
+				<img src="@Url.Content(MyProject.Web.Helpers.Routing.CustomURL.GetImageServer()+Model.Thumbnail)" alt="" class="rounded-lg mx-auto lg:object-fill owl-thumbnail w-full h-30-ak">
+			</div>
+			@if (Model.PropertyImages.Count() > 0)
+			{
+				<div class="relative pb-10" id="gk-ozone">
+					<div class="h-[4.5rem] w-[6rem] absolute z-10 left-4 top-[-2px]
+                    bg-gradient-to-r from-gk-body to-transparent sm:w-[12rem] md:left-[3rem] lg:w-[10rem] lg:h-24 xl:left-[6rem] 2xl:h-[6.5rem]"></div>
+					<div class="owl-carousel owl-theme">
+						@foreach (var item in Model.PropertyImages.Where(x => x.IsActive == true && x.IsDeleted == false))
+						{
+							<div class="item">
+								<img src="@(MyProject.Web.Helpers.Routing.CustomURL.GetImageServer()+item.Image)" class="h-[3.3rem] lg:h-[4.8rem] 2xl:h-[5.3rem] object-cover" alt="">
+							</div>
+						}
+						<!--
+				<div class="item">
+					<img src="/assets/images/bg/blog-01.png" class="h-[3.3rem] lg:h-[4.8rem] 2xl:h-[5.3rem] object-cover" alt="">
+				</div>
+				<div class="item">
+					<img src="/assets/images/bg/blog-02.png" class="h-[3.3rem] lg:h-[4.8rem] 2xl:h-[5.3rem] object-cover" alt="">
+				</div>
+				<div class="item">
+					<img src="/assets/images/bg/blog-03.png" class="h-[3.3rem] lg:h-[4.8rem] 2xl:h-[5.3rem] object-cover" alt="">
+				</div>
+						-->
+					</div>
+					<div class="h-[4.5rem] w-[6rem] absolute z-10 right-4 top-[-2px]
+                    bg-gradient-to-r from-transparent to-gk-body sm:w-[12rem] md:right-[3rem] lg:w-[10rem] lg:h-24 xl:right-[6rem] 2xl:h-[6.5rem]"></div>
+				</div>
+			}
+		</div>
+	</section>
+	<!-- Walkthrough Section End -->
+
+</div>
+<!--Body Content End-->
+<!--Write js Here-->
+@section IndexScript {
+	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+	@*<script src="@Url.ContentVersioned("~/Assets/js/web/projects/progress.js")"></script>*@
+	<script>
+		$('.owl-carousel').owlCarousel({
+			rtl: direction == "ltr" ? false : true,
+			loop: false,
+			// navText:["<img src='/assets/images/web-icons/left-arrow.png'>","<img src='/assets/images/web-icons/right-arrow.png'>"],
+			nav: false,
+			margin: 16,
+			dots: false,
+			responsiveClass: true,
+			responsive: {
+				0: {
+					items: 3,
+				},
+				600: {
+					items: 6,
+				},
+				1000: {
+					items: 6,
+				}
+			}
+		})
+
+		$('.owl-item').click(function () {
+			$('.owl-thumbnail').attr('src', $(this).find('img').attr('src'))
+		});
+
+		// Shared Colors Definition
+		const primary = '#29A2C4';
+		const warning = '#FFB050';
+		const success = '#1BC5BD';
+		const info = '#8950FC';
+		const danger = '#F64E60';
+	</script>
+
+	@if (Model.PropertyProgresses.Count() > 0)
+	{
+		int i = 0;
+		foreach (var item in Model.PropertyProgresses.Where(x => x.IsActive == true))
+		{
+			i++;
+			<script>
+				var color;
+				if (@item.ProgressesPercent == 100)
+					color = warning;
+				else
+					color = warning;
+
+				var options = {
+					series: [@item.ProgressesPercent],
+					chart: {
+						height: 250,
+						type: 'radialBar',
+					},
+					plotOptions: {
+						radialBar: {
+							hollow: {
+								margin: 0,
+								size: '35%',
+								background: '#fff',
+								image: undefined,
+								imageOffsetX: 0,
+								imageOffsetY: 0,
+								position: 'front',
+								dropShadow: {
+									enabled: true,
+									top: 0,
+									left: 0,
+									blur: 0,
+									opacity: 0.24
+								}
+							},
+							track: {
+								// background: '#fff',
+								// strokeWidth: '67%',
+								margin: 0, // margin is in pixels
+								dropShadow: {
+									enabled: true,
+									top: 1,
+									left: 0,
+									blur: 1,
+									opacity: 0.35
+								}
+							},
+							dataLabels: {
+								name: {
+									offsetY: -90,
+									show: true,
+									color: '#000',
+									fontSize: '17px'
+								},
+								value: {
+									offsetY: -10,
+									color: '#111',
+									fontSize: '16px',
+									show: true,
+								}
+							}
+						}
+					},
+					labels: ['@(culture == "en-ae"? item.Progress.Name : item.Progress.NameAr)'],
+					colors: [color]
+				};
+
+				var chart = new ApexCharts(document.querySelector("#chart_@i"), options);
+				chart.render();
+			</script>
+		}
+	}
+}
+
+

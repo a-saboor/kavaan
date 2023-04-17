@@ -1,0 +1,386 @@
+﻿@model MyProject.Data.Unit
+@{
+    ViewBag.Title = ""+ "";
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+   bool RTL = false;
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+	<style>
+		.owl-carousel .owl-nav button.owl-prev {
+			left: 1rem;
+			background: #f9f9f9;
+			border-radius: 100px;
+			transform: translate(0px, -30px);
+		}
+
+		.owl-carousel .owl-nav button.owl-next {
+			right: 1rem;
+			background: #f9f9f9;
+			border-radius: 100px;
+			transform: translate(0px, -30px);
+		}
+
+			.owl-carousel .owl-nav button.owl-prev:hover, .owl-carousel .owl-nav button.owl-next:hover {
+				background: #f9f9f9 !important;
+			}
+	</style>
+}
+<!--Body Content-->
+<div class="render-body" style="">
+	@Html.HiddenFor(model => model.ID)
+	<!-- Hero Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<div class="w-[80%] mx-auto lg:w-full lg:flex lg:items-center">
+			<div class="pt-10 lg:w-1/2 lg:px-12 xl:px-24">
+				<h1 class="font-Rubik text-xs text-gk-blue uppercase font-medium mb-2"><a href="/@culture/projects/@Model.PropertyID">@(culture == "en-ae" ? Model.Property.Title: Model.Property.TitleAr)</a> | @(culture == "en-ae" ? Model.UnitType.Name: Model.UnitType.NameAr)</h1>
+				<h1 class="font-Rubik text-lg uppercase font-medium mb-2 md:text-3xl">
+					@(culture == "en-ae" ? Model.Title: Model.TitleAr)
+				</h1>
+				@*<a href="javascript: window.location = document.referrer;">*@
+			<a href="/@culture/units">
+				<h1 class="font-Rubik text-xs text-gk-purple uppercase font-medium mb-2 flex">
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+						 stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+							  d="M15 19l-7-7 7-7" />
+					</svg>
+					GO_TO_LISTING
+				</h1>
+			</a>
+				<div class="flex justify-between mb-4 md:w-[60%]">
+					@if (Model.NoOfRooms != null && Model.NoOfRooms > 0)
+					{
+						<div class="flex flex-col items-center justify-end">
+							<img src="/assets/images/web-icons/rooms-icon.png" alt="" class="lg:w-10 ">
+							@*<p class="font-Rubik text-[10px] mt-4">Starting from</p>*@
+							<h1 class="font-Rubik text-xs font-medium">@Model.NoOfRooms ROOMS</h1>
+						</div>
+					}
+					@if (Model.NoOfBedrooms != null && Model.NoOfBedrooms > 0)
+					{
+						<div class="flex flex-col items-center justify-end">
+							<img src="/assets/images/web-icons/rooms-icon.png" alt="" class="lg:w-10 ">
+							@*<p class="font-Rubik text-[10px] mt-4">Starting from</p>*@
+							<h1 class="font-Rubik text-xs font-medium">@Model.NoOfBedrooms BEDROOMS</h1>
+						</div>
+					}
+					@if (Model.NoOfBaths != null && Model.NoOfBaths > 0)
+					{
+						<div class="flex flex-col items-center justify-end">
+							<img src="/assets/images/web-icons/baths-icon.png" alt="" class="lg:w-10 ">
+							@*<p class="font-Rubik text-[10px] mt-4">Starting from</p>*@
+							<h1 class="font-Rubik text-xs font-medium">@Model.NoOfBaths BATHROOMS</h1>
+						</div>
+					}
+					<div class="flex flex-col items-center justify-end">
+						<img src="~/assets/images/web-icons/size-icon.png" alt="" class="lg:w-10 ">
+						@*<p class="font-Rubik text-[10px] mt-4">Starting from</p>*@
+						<h1 class="font-Rubik text-xs font-medium">@Model.Size SQ_FT</h1>
+					</div>
+				</div>
+				<h1 class="font-Rubik text-base capitalize font-medium">DESCRIPTION</h1>
+				<textarea hidden id="description">@(culture == "en-ae" ? Html.Raw(Model.Description) : Html.Raw(Model.DescriptionAr))</textarea>
+				<p class="font-Rubik text-xs my-2 text-justify" id="Description">
+					@*@(culture == "en-ae" ? Html.Raw(Model.Description) : Html.Raw(Model.DescriptionAr))*@
+				</p>
+				<div>
+					<div class="sm:flex sm:flex-wrap sm:justify-between">
+						<a href="javascript:void(0);" class="sm:w-[32.5%]">
+							<button onclick="showEnquirePopup(@Model.ID)" class="font-Rubik text-xs border-2 border-gray-300 rounded-md w-full py-3 uppercase my-2">
+								ENQUIRE
+							</button>
+						</a>
+						<a href="javascript:void(0);" class="sm:w-[32.5%]">
+							<button onclick="showPaymentPlanPopup(@Model.ID)" class="font-Rubik text-xs border-2 border-gray-300 rounded-md w-full py-3 uppercase my-2">
+								PAYMENT_PLAN
+							</button>
+						</a>
+						<a @*href="/@culture/bookings/book-now/@Model.ID"*@ class="sm:w-[32.5%]">
+							<button onclick="bookNow(@Model.ID)" class="font-Rubik text-xs border-2 border-gray-300 rounded-md w-full py-3 uppercase my-2">
+								BOOK_NOW
+							</button>
+						</a>
+					</div>
+					@if (!string.IsNullOrEmpty(Model.Broucher) || !string.IsNullOrEmpty(Model.VRTour))
+					{
+						<div>
+							<div class="sm:flex sm:flex-wrap sm:justify-between">
+								@if (!string.IsNullOrEmpty(Model.Broucher))
+								{
+									<a href="@Url.Content(MyProject.Web.Helpers.Routing.CustomURL.GetImageServer()+Model.Broucher)" target="_blank" class="border-2 border-gray-300 py-4 px-4 flex items-center rounded-md my-2 sm:w-[49%] capitalize">
+										<div class="mr-2">
+											<img src="/assets/images/web-icons/document.png" alt="">
+										</div>
+										<div class="font-Rubik text-xs">
+											<div class="mr-2">
+												<h1 class="font-medium uppercase">PROPERTY_PDF</h1>
+											</div>
+											<p>@(""+EVERYTHING_ABOUT_THIS_PROPERTY_YOU_NEED_TO_KNOW).</p>
+										</div>
+									</a>
+								}
+								@if (!string.IsNullOrEmpty(Model.VRTour))
+								{
+									<a href="@Model.VRTour" target="_blank" class="border-2 border-gray-300 py-4 px-4 flex items-center rounded-md my-2 sm:w-[49%] capitalize">
+										@*<a href="@Url.Content(MyProject.Web.Helpers.Routing.CustomURL.GetImageServer()+Model.VRTour)" class="mr-2">*@
+										<div class="mr-2">
+											<img src="/assets/images/web-icons/vr.png" alt="">
+										</div>
+										<div class="font-Rubik text-xs">
+											<div>
+												<h1 class="font-medium uppercase">VIRTUAL_TOUR</h1>
+											</div>
+											<p>TAKE_A_VIRTUAL_TOUR_OF_THE_PROPERTY_IN_VR</p>
+										</div>
+									</a>
+								}
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+			<div class="lg:w-1/2 pt-10" id="gk-ozone">
+				<div class="owl-carousel owl-theme single-item" style="width: 100% !important;">
+					<div class="item">
+						<img src="@Url.Content(MyProject.Web.Helpers.Routing.CustomURL.GetImageServer()+Model.Thumbnail)" alt="" class="h-[11.5rem] sm:h-[24rem] lg:object-fill rounded-lg">
+					</div>
+					@if (Model.UnitImages.Count() > 0)
+					{
+						foreach (var item in Model.UnitImages)
+						{
+							<div class="item">
+								<img src="@Url.Content(MyProject.Web.Helpers.Routing.CustomURL.GetImageServer() + item.Image)" alt="" class="h-[11.5rem] sm:h-[24rem] lg:object-fill rounded-lg">
+							</div>
+						}
+					}
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero Section End -->
+	<!-- Location Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<div class="w-[80%] mx-auto pt-10 lg:w-full lg:flex lg:items-center">
+			<div class="lg:w-1/2 py-4 ">
+				<!-- Map -->
+				<div id="googleMap" data-map-zoom="3" data-map-scroll="true" class="h-60 xl:h-72 rounded-lg"></div>
+			</div>
+			<div class="lg:w-1/2 lg:p-10 lg:mx-10">
+				<h1 class="font-Rubik text-base font-medium my-2">LOCATION</h1>
+				@*<p class="font-Rubik text-xs text-justify">
+						@(culture == "en-ae" ? Model.Description : Model.Description)
+					</p>*@
+				<div class="flex flex-wrap justify-between mt-2">
+					@*<div class="w-[50%] my-1 sm:w-[49%] flex ">
+							<h1 class="font-Rubik text-xs font-medium w-[30%]">ADDRESS</h1>
+							<p class="font-Rubik text-xs">@Model.Address</p>
+						</div>*@
+					<div class="w-[50%] my-1 sm:w-[49%] flex ">
+						<h1 class="font-Rubik text-xs font-medium w-[30%]">COUNTRY:</h1>
+						<p class="font-Rubik text-xs">@(culture == "en-ae" ? Model.Country.Name : Model.Country.NameAr)</p>
+					</div>
+					<div class="w-[50%] my-1 sm:w-[49%] flex ">
+						<h1 class="font-Rubik text-xs font-medium w-[30%]">STATECOUNTY</h1>
+						<p class="font-Rubik text-xs">@(culture == "en-ae" ? Model.City.Name : Model.City.NameAR)</p>
+					</div>
+					<div class="w-[50%] my-1 sm:w-[49%] flex ">
+						<h1 class="font-Rubik text-xs font-medium w-[30%]">CITY:</h1>
+						<p class="font-Rubik text-xs">@(culture == "en-ae" ? Model.City.Name : Model.City.NameAR)</p>
+					</div>
+					@*<div class="w-[50%] my-1 sm:w-[49%] flex ">
+							<h1 class="font-Rubik text-xs font-medium w-[30%]">ZIP</h1>
+							<p class="font-Rubik text-xs">@Model.ZipCode</p>
+						</div>*@
+					@*<div class="w-[50%] my-1 sm:w-[49%] flex ">
+							<h1 class="font-Rubik text-xs font-medium w-[30%]">AREA</h1>
+							<p class="font-Rubik text-xs">@(culture == "en-ae" ? Model.Area.Name : Model.Area.NameAR)</p>
+						</div>*@
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Location Section End -->
+	<!-- Description Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<div class="w-[80%] mx-auto lg:w-[70%] py-10">
+			@*<div>
+					<h1 class="font-Rubik text-base font-medium py-2">DESCRIPTION</h1>
+					<p class="font-Rubik text-xs text-justify">
+						@(culture == "en-ae" ? Model.Description : Model.Description)
+					</p>
+				</div>*@
+			<div>
+				<h1 class="font-Rubik text-base font-medium my-2">PROPERTY_DETAILS</h1>
+				<div class="flex flex-wrap">
+					<div class="w-[50%] my-1 sm:w-[33%] flex">
+						<h1 class="font-Rubik text-xs font-medium w-[50%]">PROPERTY_ID</h1>
+						<p class="font-Rubik text-xs text-right px-2 w-[50%]">@Model.UnitNo</p>
+					</div>
+					<div class="w-[50%] my-1 sm:w-[33%] flex">
+						<h1 class="font-Rubik text-xs font-medium w-[50%]">PROPERTY_TYPE</h1>
+						<p class="font-Rubik text-xs text-right px-2 w-[50%]">@(culture == "en-ae" ? Model.UnitType.Name : Model.UnitType.NameAr)</p>
+					</div>
+					<div class="w-[50%] my-1 sm:w-[33%] flex">
+						<h1 class="font-Rubik text-xs font-medium w-[50%]">PROPERTY_SIZE</h1>
+						<p class="font-Rubik text-xs text-right px-2 w-[50%]">@Model.Size SqFt</p>
+					</div>
+					<div class="w-[50%] my-1 sm:w-[33%] flex">
+						<h1 class="font-Rubik text-xs font-medium w-[50%]">BEDROOMS:</h1>
+						<p class="font-Rubik text-xs text-right px-2 w-[50%]">@Model.NoOfBedrooms</p>
+					</div>
+					<div class="w-[50%] my-1 sm:w-[33%] flex">
+						<h1 class="font-Rubik text-xs font-medium w-[50%]">ROOMS:</h1>
+						<p class="font-Rubik text-xs text-right px-2 w-[50%]">@Model.NoOfRooms</p>
+					</div>
+					<div class="w-[50%] my-1 sm:w-[33%] flex">
+						<h1 class="font-Rubik text-xs font-medium w-[50%]">BATHROOMS:</h1>
+						<p class="font-Rubik text-xs text-right px-2 w-[50%]">@Model.NoOfBaths</p>
+					</div>
+					<div class="w-[50%] my-1 sm:w-[33%] flex">
+						<h1 class="font-Rubik text-xs font-medium w-[50%]">BUILD_YEAR:</h1>
+						<p class="font-Rubik text-xs text-right px-2 w-[50%]">@Model.BuildYear</p>
+					</div>
+					@if (Model.NoOfGarages != null && Model.NoOfGarages > 0)
+					{
+						<div class="w-[50%] my-1 sm:w-[33%] flex">
+							<h1 class="font-Rubik text-xs font-medium w-[50%]">GARAGE</h1>
+							<p class="font-Rubik text-xs text-right px-2 w-[50%]">@Model.NoOfGarages</p>
+						</div>
+					}
+					@if (Model.NoOfDinings != null && Model.NoOfDinings > 0)
+					{
+						<div class="w-[50%] my-1 sm:w-[33%] flex">
+							<h1 class="font-Rubik text-xs font-medium w-[50%]">DINNING:</h1>
+							<p class="font-Rubik text-xs text-right px-2 w-[50%]">@Model.NoOfDinings</p>
+						</div>
+					}
+					@if (Model.NoOfLaundry != null && Model.NoOfLaundry > 0)
+					{
+						<div class="w-[50%] my-1 sm:w-[33%] flex">
+							<h1 class="font-Rubik text-xs font-medium w-[50%]">LAUNDRY:</h1>
+							<p class="font-Rubik text-xs text-right px-2 w-[50%]">@Model.NoOfLaundry</p>
+						</div>
+					}
+				</div>
+			</div>
+			<div>
+				<h1 class="font-Rubik text-base font-medium my-2">PAYMENT_INFO</h1>
+				<div class="flex flex-wrap jus">
+					<div class="w-[50%] my-1 sm:w-[33%] flex">
+						<h1 class="font-Rubik text-xs font-medium w-[50%]">UNIT_PRICE:</h1>
+						<p class="font-Rubik text-xs text-right px-2 w-[50%]">@Model.SellingPrice _AED</p>
+					</div>
+					<div class="w-[50%] my-1 sm:w-[33%] flex">
+						<h1 class="font-Rubik text-xs font-medium w-[50%]">BOOKINGAMOUNT:</h1>
+						<p class="font-Rubik text-xs text-right px-2 w-[50%]">@Model.BookingAmount _AED</p>
+					</div>
+					@if (Model.LandRegistrationFee != null && Model.LandRegistrationFee > 0)
+					{
+						<div class="w-[50%] my-1 sm:w-[33%] flex">
+							<h1 class="font-Rubik text-xs font-medium w-[50%]">LAND_REGISTRATION_FEE</h1>
+							<p class="font-Rubik text-xs text-right px-2 w-[50%]">@(Model.LandRegistrationFee ?? 0) _AED</p>
+						</div>
+					}
+					@if (Model.OqoodAmount != null && Model.OqoodAmount > 0)
+					{
+						<div class="w-[50%] my-1 sm:w-[33%] flex">
+							<h1 class="font-Rubik text-xs font-medium w-[50%]">OQOOD_AMOUNT</h1>
+							<p class="font-Rubik text-xs text-right px-2 w-[50%]">@(Model.OqoodAmount ?? 0) _AED</p>
+						</div>
+					}
+					@if (Model.DubaiLandDepartmentFee != null && Model.DubaiLandDepartmentFee > 0)
+					{
+						<div class="w-[50%] my-1 sm:w-[33%] flex">
+							<h1 class="font-Rubik text-xs font-medium w-[75%]">DUBAI_LAND_DEPARTMENT_FEE:</h1>
+							<p class="font-Rubik text-xs text-right px-2 w-[25%]">@(Model.DubaiLandDepartmentFee ?? 0) _PERCENTILE</p>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Description Section End -->
+</div>
+<!--Modal Popups-->
+@Html.Action("UnitModal", "ModalPopups", new { culture = culture })
+<!--Modal Popups End-->
+<!--Body Content End-->
+<!--Write js Here-->
+@section IndexScript {
+	<script>
+		$('.owl-carousel.single-item').owlCarousel({
+			rtl: direction == "ltr" ? false : true,
+			loop: false,
+			navText: ["<img src='/assets/images/web-icons/left-arrow.png'>", "<img src='/assets/images/web-icons/right-arrow.png'>"],
+			nav: true,
+			margin: 2,
+			dots: true,
+			responsiveClass: true,
+			autoWidth: false,
+			rewind: true,
+			autoplay: true,
+			smartSpeed: 1000,
+			autoplayTimeout: 10000,
+			autoplayHoverPause: true,
+			responsive: {
+				0: {
+					items: 1,
+				},
+			}
+		})
+
+		var locations = [
+			['@Model.Title', @Model.Latitude, @Model.Longitude, 1, '@Model.SellingPrice', '@Model.City.Name', @Model.ID]
+		];
+
+		function InitMap() {
+
+			var map = new google.maps.Map(document.getElementById('googleMap'), {
+				zoom: 12,
+				center: new google.maps.LatLng(@Model.Latitude, @Model.Longitude),
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			});
+
+			var infowindow = new google.maps.InfoWindow();
+
+			var marker, i;
+
+			for (i = 0; i < locations.length; i++) {
+				marker = new google.maps.Marker({
+					position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+					map: map,
+					icon: '/assets/images/web-icons/map-marker.png'
+				});
+				google.maps.event.addListener(marker, 'click', (function (marker, i) {
+					return function () {
+						var template = `<div class="flex flex-col font-Rubik">
+											<a class="flex mb-1" target="_blank" href="/@culture/units/${locations[i][6]}">
+												<p class="w-[50%]">PROPERTY:</p> <p class="w-[100%]">${locations[i][0]} </p>
+											</a>
+											<div class="flex mb-1">
+												<p class="w-[50%]">LOCATION:</p> <p class="w-[100%]">${locations[i][5]} </p>
+											</div>
+											<div class="flex mb-1">
+												<p class="w-[50%]">_AED:</p> <p class="w-[100%]">${locations[i][4]} </p>
+											</div>
+											<div class="flex">
+												<p class="w-[50%]">SEE_MORE:</p> <a href="https://maps.google.com/?q=${locations[i][1]},${locations[i][2]}" target="_blank" class="w-[100%]">CLICK_HERE </a>
+											</div>
+										</div>
+										`;
+						infowindow.setContent(template);
+						infowindow.open(map, marker);
+					}
+				})(marker, i));
+			}
+		}
+
+	</script>
+	<!-- Google API & Maps -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=MapApiKey&callback=InitMap"></script>
+
+	<script src="@Url.ContentVersioned("~/Assets/js/web/units/details.js")"></script>
+	<script src="@Url.ContentVersioned("~/Assets/js/web/units/unit-related.js")"></script>
+}
+

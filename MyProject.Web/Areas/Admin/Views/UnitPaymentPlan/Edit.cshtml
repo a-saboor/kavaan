@@ -1,0 +1,133 @@
+﻿@model MyProject.Data.UnitPaymentPlan
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = null;
+}
+
+<div class="modal-header">
+    <h5 class="modal-title">Update</h5>
+
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <i aria-hidden="true" class="ki ki-close"></i>
+    </button>
+</div>
+
+
+<div class="modal-body">
+    @using (Html.BeginForm("Edit", "UnitPaymentPlan", new { area = "Admin" }, FormMethod.Post, new { id = "frm-edit", @class = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+
+
+            @Html.HiddenFor(model => model.UnitID)
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Milestones </label>
+                    <div class="input-group mb-2">
+                        @Html.EditorFor(model => model.Milestones, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter milestones here ...", required = "required" } })
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-server"></i></span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Milestones, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Percentage </label>
+                    <div class="input-group mb-2">
+                        <input type="number" min="0" max="100" name="Percentage" value="@Model.Percentage" class="form-control" placeholder="Enter percentage 0-100 here" required>
+                        @*@Html.EditorFor(model => model.Percentage, new { htmlAttributes = new { @class = "form-control", min = "0", max = "4", placeholder = "Enter percentage here ...", required = "required" } })*@
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-percent"></i></span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Percentage, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Amount </label>
+                    <div class="input-group mb-2">
+                        <input type=number step=0.01 max="9999999999999999.99" value="@Model.Amount" min="0" name="Amount" class="form-control" placeholder="Enter amount here" oninvalid="this.setCustomValidity('Enter amount below than 9999999999999999.99')"
+                               oninput="this.setCustomValidity('')" required>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-coins"></i></span>
+                        </div>
+                    </div>
+                    <span class="form-text text-muted">Amount should be less than: <code>9999999999999999.99</code></span>
+                    @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+    }
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-custom" form="frm-edit">Save Changes</button>
+</div>
+
+<script>
+	var SuccessMessage = '@ViewBag.SuccessMessage';
+	var ErrorMessage = '@ViewBag.ErrorMessage';
+</script>
+
+<!--end::Row-->
+<script>
+	var SuccessMessage = '@ViewBag.SuccessMessage';
+	var ErrorMessage = '@ViewBag.ErrorMessage';
+</script>
+
+
+
+
+
+<!--end::Page Scripts-->
+
+<script>
+    // Class definition
+    var KTImageInputDemo = function () {
+        // Private functions
+        var initDemos = function () {
+            
+            var avatar1 = new KTImageInput('kt_image_1');
+        }
+
+        return {
+            // public functions
+            init: function () {
+                initDemos();
+            }
+        };
+    }();
+
+    'use strict';
+    KTUtil.ready(function () {
+        KTImageInputDemo.init();
+
+
+    });
+
+
+
+
+
+
+    var _URL = window.URL || window.webkitURL;
+
+
+    if (SuccessMessage) {
+        toastr.success(SuccessMessage);
+    }
+    else if (ErrorMessage) {
+        toastr.error(ErrorMessage);
+    }
+</script>
+
+<!--end::Page Scripts-->

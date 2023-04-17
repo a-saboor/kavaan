@@ -1,0 +1,35 @@
+﻿@model MyProject.Data.CustomerDocumentDetail
+@{
+	Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<body>
+	<div class="modal-header">
+		<h5 class="modal-title">@(ViewBag.Status == "Approved" ? "Approval Remarks" : ViewBag.Status == "Cancelled" ? "Rejection's Reason" : "Remarks") </h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<i aria-hidden="true" class="ki ki-close"></i>
+		</button>
+	</div>
+	@using (Html.BeginForm("StatusChange", "CustomerDocumentDetail", new { area = "Admin" }, FormMethod.Post, new { id = "Userform", @class = "form" }))
+	{
+		@Html.AntiForgeryToken()
+		<div class="col-md-12" style="margin-top:20px">
+			@Html.HiddenFor(model => model.ID)
+			@*@Html.HiddenFor(Model => Model.Status)*@
+			<input type="hidden" name="Status" value="@ViewBag.Status" />
+			<div class="test">
+				@Html.Raw(Model.Reason)
+			</div>
+			<textarea type="text" class="form-control" required name="Reason"></textarea>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-custom" form="Userform">Submit</button>
+			</div>
+		</div>
+	}
+</body>
+</html>
+<script>
+</script>
+

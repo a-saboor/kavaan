@@ -1,0 +1,1036 @@
+@model Project.Web.ViewModels.Vendor.VendorFormViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<style>
+
+
+    div.pac-container {
+        /*for search locaton on map model popup txtaddress*/
+        z-index: 99999999999 !important;
+    }
+
+    .wo-right-icon {
+        position: absolute;
+        top: 30px;
+        font-size: 12px;
+        color: #0989b8;
+        font-weight: 900;
+    }
+
+        .wo-right-icon:hover {
+            color: #0989b8;
+        }
+
+    .pin-on-map {
+        right: 50px;
+        padding-right: 5px;
+        border-right: 1px solid rgb(9 137 184 / 5%);
+    }
+
+    .get-current-location {
+        top: 25px;
+        right: 30px;
+    }
+
+        .get-current-location i {
+            color: #0989b8;
+        }
+    /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+    #map {
+        height: 100%;
+    }
+
+    @@media(max-width: 500px) {
+        .btn-send-for-approval {
+            margin-top: 10px !important;
+        }
+
+        .btn-remarks {
+            margin-top: 10px !important;
+            margin-right: 0px !important;
+        }
+    }
+</style>
+
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Subheader-->
+    <div class="subheader py-2 py-lg-12 subheader-transparent" id="kt_subheader">
+        <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+            <!--begin::Info-->
+            <div class="d-flex align-items-center flex-wrap mr-1">
+                <!--begin::Heading-->
+                <div class="d-flex flex-column">
+
+                    <!--begin::Breadcrumb-->
+                    <div class="d-flex align-items-center font-weight-bold my-2">
+                        <!--begin::Item-->
+                        <a href="/Admin/Dashboard/Index" class="opacity-75 hover-opacity-100">
+                            <i class="flaticon2-shelter text-white icon-1x"></i>
+                        </a>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <a href="/Admin/Dashboard/Index" class="text-white text-hover-white opacity-75 hover-opacity-100">&nbsp;&nbsp;Dashboard</a>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
+                        <a href="/Admin/Vendor/Index" class="text-white text-hover-white opacity-75 hover-opacity-100">Vendors</a>
+                        <span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
+                        <a href="javascript:;" class="text-white text-hover-white opacity-75 hover-opacity-100">Create</a>
+                        <!--end::Item-->
+                    </div>
+                    <!--end::Breadcrumb-->
+                </div>
+                <!--end::Heading-->
+            </div>
+            <!--end::Info-->
+        </div>
+    </div>
+    <!--end::Subheader-->
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Dashboard-->
+            <!--begin::Card-->
+            <div class="card card-custom" id="kt_page_sticky_card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3 class="card-label">
+                            Vendor
+                            <span class="d-block text-muted pt-2 font-size-sm">Create Vendor Here...</span>
+                        </h3>
+                    </div>
+                    <div class="card-toolbar">
+                        <a href="/Admin/Vendor/Index" class="btn btn-light-primary font-weight-bolder mr-2">
+                            <i class="ki ki-long-arrow-back icon-sm"></i>Back
+                        </a>
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-custom" form="Userform" id="btnSave">Submit</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <form action="/Admin/Vendor/Create" name="form" enctype="multipart/form-data" class="form" id="Userform" method="post">
+                        @Html.AntiForgeryToken()
+                        <div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group row">
+                            <div class="col-lg-12 text-center">
+                                <div class="image-input image-input-outline" id="kt_image_1">
+                                    <div class="image-input-wrapper" style="background-image: url('../../../../Assets/AppFiles/Images/default.png')"></div>
+                                    <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change Logo">
+                                        <i class="fa fa-pen icon-sm text-muted"></i>
+                                        <input type="file" name="Logo" id="Logo" accept=".png, .jpg, .jpeg" style="width:1px !important;height:1px !important" />
+                                        <input type="hidden" name="profile_avatar_remove" />
+                                    </label>
+                                    <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow cancelimage" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                        <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                    </span>
+                                </div>
+                                <span class="form-text text-muted">Image dimensions should be 690 x 460 pixels and Image size must be less than 500 kb</span>
+                            </div>
+
+                            @*<div class="col-lg-6 text-center ">
+                                    <div class="image-input image-input-outline" id="kt_image_2">
+                                        <div class="image-input-wrapper" style="background-image: url('../../../../Assets/AppFiles/Images/default.png')"></div>
+                                        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change cover">
+                                            <i class="fa fa-pen icon-sm text-muted"></i>
+                                            <input type="file" name="CoverImage" id="cover" accept=".png, .jpg, .jpeg" />
+                                            <input type="hidden" name="profile_avatar_remove" />
+                                        </label>
+                                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow cancelimage" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                            <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                        </span>
+                                    </div>
+                                    <span class="form-text text-muted">Image dimensions should be 1920 x 316 pixels and Image size must be less than 100 kb</span>
+                                </div>*@
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Vendor Code</label>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" name="VendorCode" id="VendorCode" value="@ViewBag.VendorCode" readonly required />
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.VendorCode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Legal Name as per Trade License</label>
+                                    <div class="input-group mb-2">
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter legal name as per trade license here ..." } })
+
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            @*<div class="col-md-5 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Vendor Name (Ar)</label>
+                <div class="input-group mb-2">
+                    @Html.EditorFor(model => model.NameAr, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter vendor name (ar) here ...", required = "required", dir = "rtl" } })
+
+                </div>
+                @Html.ValidationMessageFor(model => model.NameAr, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+                            <input type="text" class="" value="-" name="NameAr" hidden="" />
+
+
+                            <div class="col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Slug</label>
+                                    <div class="input-group mb-2">
+                                        @Html.EditorFor(model => model.Slug, new { htmlAttributes = new { @class = "form-control  required-custom", placeholder = "Enter vendor name here ...", @readonly = "readonly" } })
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-link"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                        @Html.ValidationMessageFor(model => model.Slug, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Email</label>
+                                    <div class="input-group mb-2">
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter email here ...", type = "email", id = "Email" } })
+                                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-envelope"></i></span></div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    <span id="error" hidden style="display:none;color:red;">Incorrect email format</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Landline</label>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">971</span>
+                                        </div>
+                                        @Html.EditorFor(model => model.Contact, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter landline here ...", @maxlength = "9", @minlength = "9", onkeypress = "validate(event)" } })
+                                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-phone"></i></span></div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Contact, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Mobile</label>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">971</span>
+                                        </div>
+                                        @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter mobile here ...", @maxlength = "9", @minlength = "9", onkeypress = "validate(event)" } })
+                                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-mobile"></i></span></div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Website</label>
+                                    <div class="input-group mb-2">
+                                        @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @class = "form-control", type = "url", placeholder = "Enter website address here ..." } })
+                                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-globe"></i></span></div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            @*<div class="col-md-4 col-sm-12" hidden>
+            <div class="form-group">
+                <label class="control-label">Commission</label>
+                <div class="input-group mb-2">
+                    @Html.EditorFor(model => model.Commission, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Commission here ...", min = "0", step = ".01", @type = "number" } })
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-hashtag"></i></span></div>
+                </div>
+                @Html.ValidationMessageFor(model => model.Commission, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+
+
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Emirates ID </label>
+                                    <div class="input-group mb-2">
+                                        <input type="text" name="IDNo" id="IDNo" placeholder="Type emirates id here ..." class="form-control" data-inputmask="'mask': '999-9999-9999999-9'" value="" autocomplete="off" />
+
+                                        @*@Html.EditorFor(model => model.IDNo, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter id no here ...", required = "required" } })*@
+                                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-hashtag"></i></span></div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.IDNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">TAX Return Number</label>
+                                    <div class="input-group mb-2">
+                                        @Html.EditorFor(model => model.TRN, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter tax return number here ..." } })
+                                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-hashtag"></i></span></div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.TRN, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">License No</label>
+                                    <div class="input-group mb-2">
+                                        @Html.EditorFor(model => model.License, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter license no here ..." } })
+                                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-file-invoice"></i></span></div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.License, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-12" hidden>
+                                <div class="form-group">
+                                    <label class="control-label">FAX No</label>
+                                    <div class="input-group mb-2">
+                                        @Html.EditorFor(model => model.FAX, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter fax no here ..." } })
+                                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-fax"></i></span></div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.FAX, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-12" hidden>
+                                <div class="form-group">
+                                    <label class="control-label">About</label>
+                                    <div class="input-group mb-2">
+                                        @Html.TextAreaFor(m => m.About, new { @class = "form-control", placeholder = "Enter about here ...", rows = "3" })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.About, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12 mt-5">
+                                <div class="form-group">
+                                    <h5 class="control-label">Vendor Type</h5>
+                                    <div class="border-bottom w-100"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Vendor Type</label>
+                                    <div class="input-group mb-2">
+                                        @Html.DropDownList("VendorTypeID", null, "Select type", htmlAttributes: new { @class = "form-control txtdisabled required-custom" })
+                                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-coins"></i></span></div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.VendorTypeID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Vendor Section</label>
+                                    <div class="input-group mb-2">
+                                        @Html.DropDownList("VendorSectionID", null, "Select section", htmlAttributes: new { @class = "form-control txtdisabled required-custom" })
+                                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-coins"></i></span></div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.VendorSectionID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Industry</label>
+                                    <div class="input-group mb-2">
+                                        @Html.DropDownList("VendorIndustryID", null, "Select industry", htmlAttributes: new { @class = "form-control required-custom txtdisabled" })
+                                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-coins"></i></span></div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.VendorIndustryID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-12 col-sm-12 mt-5">
+                                <div class="form-group">
+                                    <h5 class="control-label">Package And Modules</h5>
+                                    <div class="border-bottom w-100"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Package Name</label>
+                                    <div class="input-group mb-2">
+                                        @Html.DropDownList("VendorPackageID", null, "Select Package", htmlAttributes: new { @class = "form-control txtdisabled required-custom"})
+                                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-coins"></i></span></div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.VendorPackageID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            @*<div class="row col-md-12 col-sm-12">
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Facility Module</label>
+                    <span class="switch ml-10">
+                        <label>
+                            @Html.CheckBox("EnableFacilityModule", new { @readonly = "readonly" })
+                            <span></span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Coaching Module</label>
+                    <span class="switch ml-10">
+                        <label>
+                            @Html.CheckBox("EnableAcademyModule", new { @readonly = "readonly" })
+                            <span></span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Events Module</label>
+                    <span class="switch ml-10">
+                        <label>
+                            @Html.CheckBox("EnableOrganizerModule", new { @readonly = "readonly" })
+                            <span></span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Ecommerce Module</label>
+                    <span class="switch ml-10">
+                        <label>
+                            @Html.CheckBox("EnableEcommerceModule", new { @readonly = "readonly" })
+                            <span></span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+        </div>*@
+
+                            <div class="col-md-12 col-sm-12">
+                                <h4 class="card-label">
+                                    Location
+                                </h4>
+                                <hr />
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Country Name</label>
+                                    <div class="input-group mb-2">
+                                        @Html.DropDownList("CountryID", null, "Select Country", htmlAttributes: new { @class = "form-control txtdisabled required-custom" })
+                                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-flag"></i></span></div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">City Name</label>
+                                    <div class="input-group mb-2">
+                                        @Html.DropDownList("CityID", null, "Select City", htmlAttributes: new { @class = "form-control required-custom", id = "CityID" })
+                                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-home"></i></span></div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                                <div class="form-group w-100">
+                                    <label class="wo-titleinput mb-0">Address</label>
+                                    <div class="wo-form-icon">
+                                        <input type="text" class="form-control show-map-input Address required-custom" id="Address" name="Address" placeholder="Choose location" value="">
+                                        <a href="javascript:void(0);" class="wo-right-icon get-current-location" onclick="getLocation()">
+                                            <i class="flaticon2-map"></i>
+                                        </a>
+                                        <a href="javascript:void(0);" class="wo-right-icon pin-on-map" @*data-toggle="modal" data-target="#map-modal"*@ onclick="openMap()">
+                                            Pin On Map
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="MapSearchResult" style="display:none">
+                                </div>
+                                <input type="hidden" name="Latitude" id="Latitude" />
+                                <input type="hidden" name="Longitude" id="Longitude" />
+                            </div>
+
+
+
+
+
+                            <div class="col-md-12 col-sm-12 mt-5">
+                                <div class="form-group">
+                                    <h5 class="control-label">Bank Details</h5>
+                                    <div class="border-bottom w-100"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Bank Name</label>
+                                    <div class="input-group mb-2">
+                                        @Html.DropDownList("BankID", null, "Select Bank", htmlAttributes: new { @class = "form-control txtdisabled required-custom", @id = "BankID" })
+                                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-server"></i></span></div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.BankID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Bank Account Holder Name</label>
+                                    <div class="input-group mb-2">
+                                        @Html.EditorFor(model => model.AccountHolderName, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter account holder name here ..."} })
+                                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-hashtag"></i></span></div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.AccountHolderName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Bank Account Number</label>
+                                    <div class="input-group mb-2">
+                                        @Html.EditorFor(model => model.BankAccountNumber, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter bank account no here ..."} })
+                                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-hashtag"></i></span></div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.BankAccountNumber, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">IBAN</label>
+                                    <div class="input-group mb-2">
+                                        @Html.EditorFor(model => model.IBAN, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter iban here ..." } })
+                                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-hashtag"></i></span></div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.IBAN, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+
+
+                            @*<div class="col-sm-12 col-md-6">
+            <div class="form-group">
+                <label class="control-label">About (Ar)</label>
+                <div class="input-group mb-2">
+                    @Html.TextAreaFor(m => m.AboutAr, new { @class = "form-control", dir = "rtl", placeholder = "Enter about (ar) here ...", required = "required", rows = "3" })
+                </div>
+                @Html.ValidationMessageFor(model => model.AboutAr, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+                            <input type="text" class="" value="-" name="AboutAr" hidden="" />
+
+                        </div>
+                        <div class="row">
+                            <div class="card-title">
+                                <h4 class="card-label">
+                                    Vendor Administrative User Credentials
+                                </h4>
+                            </div>
+                            <hr />
+
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">User Email</label>
+                                    <div class="input-group mb-2">
+                                        @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter email here ..."} })
+                                        <div class="input-group-append"><span class="input-group-text"><i class="fa fa-envelope"></i></span></div>
+                                    </div>
+                                        @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">User Password</label>
+                                    <div class="input-group">
+                                        @Html.EditorFor(model => model.UserPassword, new { htmlAttributes = new { @class = "form-control required-custom s-p", placeholder = "Enter password here ...", type = "password", onkeyup = "isPasswordValid(this)" } })
+                                        <div class="input-group-append">
+                                            <span class="input-group-text cursor-pointer" onclick="seePassword(this)">
+                                                <i class="fa fa-eye"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <span class="form-text text-danger" style="font-size: 9px;">Min. 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character</span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--end::Card-->
+            <!--end::Dashboard-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+</div>
+
+
+
+<!--end::Row-->
+<div class="modal fade wo-videopopup " tabindex="-1" role="dialog" id="map-modal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="wo-modalcontent modal-content">
+            <div class="modal-body">
+                <a href="javascript:void(0);" class="close"><i class="ti-close" data-dismiss="modal"></i></a>
+                <div class="login-header">
+                    <h4 class="text-center mb-2">Search Location</h4>
+                    <p class="text-center" id="drag-map"><span>Drag marker on the map to select your desired location.</span></p>
+                </div>
+                <!-- Modal Body Start -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="map-div" style="display:none">
+                                <input type="text" class="form-control mb-3 Address" id="current-location" name="current-location" placeholder="Search Location" required="">
+                                <div id="googleMap" style="width:100%;height:400px;"></div>
+                                <button class="btn btn-block btn-theme border-radius-4 mt-3 p-3" type="button" data-dismiss="modal">Done</button>
+                            </div>
+                            <div class="map-div-spin p-5 m-5 text-center">
+                                <span class="fa fa-circle-notch fa-spin fa-2x"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal Body End -->
+            </div>
+        </div>
+    </div>
+</div>
+<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content" style="min-height:100px">
+            <div id='myModalContent'>
+                <div class="row justify-content-center">
+                    <div class="col-16">
+                        <div class="kt-spinner kt-spinner--lg kt-spinner--dark kt-spinner-modal"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var SuccessMessage = '@ViewBag.SuccessMessage';
+    var ErrorMessage = '@ViewBag.ErrorMessage';
+</script>
+
+@section IndexScript {
+
+    @*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmOcUK0pgT3lW3Cr9LoeCVGIrm1_qFq30&callback=initMap&libraries=&v=weekly&callback=myMap"></script>*@
+    <script src="~/Assets/js/inputmask/jquery.inputmask.bundle.js"></script>
+    <!--end::Page Scripts-->
+    <script src="~/Assets/Admin/js/general/ModalPopup.js"></script>
+    <script src="~/Assets/Admin/js/general/Map.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGeDHQMAVN3jAAPXYDvf87HCNPFK4hPX4&callback=initMap&libraries=places&callback=initAutocomplete"></script>
+    <!--end::Page Scripts-->
+
+    <script>
+        'use strict';
+
+        function validate(evt) {
+
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\./;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+        // Class definition
+        var KTImageInputDemo = function () {
+            // Private functions
+            var initDemos = function () {
+                var avatar1 = new KTImageInput('kt_image_1');
+                var avatar2 = new KTImageInput('kt_image_2');
+            }
+
+            return {
+                // public functions
+                init: function () {
+                    initDemos();
+                }
+            };
+        }();
+
+        KTUtil.ready(function () {
+            KTImageInputDemo.init();
+
+            //$('#Userform').submit(function () {
+            //    $('#btnSave').addClass('spinner spinner-left spinner-light').prop('disabled', true);
+            //    return true;
+            //});
+
+
+            $(document).ready(function () {
+                $('.mytimepicker').timepicker({});
+                $('#IDNo').inputmask();
+
+				$("input[name=EnableFacilityModule]").attr("disabled", true);
+				$("input[name=EnableEcommerceModule]").attr("disabled", true);
+				$("input[name=EnableAcademyModule]").attr("disabled", true);
+				$("input[name=EnableOrganizerModule]").attr("disabled", true);
+				$("input[name=EnableFacilityModule]").attr("disabled", true);
+
+                @*var city = $("#CityID").val();
+                if (city != 0 || null) {
+                    $("#CityID").val(@Html.Raw(Model.CityID));
+                }*@
+
+
+            });
+            $('.mytimepicker').timepicker({
+                timeFormat: 'h:mm p',
+                interval: 60,
+                minTime: '10',
+                maxTime: '6:00pm',
+                defaultTime: '11',
+                startTime: '10:00',
+                dynamic: false,
+                dropdown: true,
+                scrollbar: true
+            });
+
+			$("#VendorPackageID").change(function () {
+
+				var VendorPackageID = $('#VendorPackageID').val();
+
+				getVendorPackages(VendorPackageID);
+			});
+
+
+            $("#Email").change(function () {
+
+ var email = document.getElementById('Email');
+  var filter = /^(([^<>()[\]\.,;:\s@@\"]+(\.[^<>()[\]\.,;:\s@@\"]+)*)|(\".+\"))@@(([^<>()[\]\.,;:\s@@\"]+\.)+[^<>()[\]\.,;:\s@@\"]{2,})$/i
+    if (!filter.test(email.value)) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Invalid email address!',
+
+        });
+        $("#Email").val("");
+        email.focus;
+        return false;
+    }
+
+            });
+
+
+			function getVendorPackages(VendorPackageID) {
+				if (VendorPackageID == "") { VendorPackageID = -1; }
+				var json = { "id": VendorPackageID };
+				if (VendorPackageID == -1) {
+					$("input[name=EnableFacilityModule]").prop("checked", false);
+					$("input[name=EnableEcommerceModule]").prop("checked", false);
+					$("input[name=EnableAcademyModule]").prop("checked", false);
+                    $("input[name=EnableOrganizerModule]").prop("checked", false);
+
+
+					$("input[name=EnableFacilityModule]").attr("disabled", true);
+					$("input[name=EnableEcommerceModule]").attr("disabled", true);
+					$("input[name=EnableAcademyModule]").attr("disabled", true);
+					$("input[name=EnableOrganizerModule]").attr("disabled", true);
+					$("input[name=EnableFacilityModule]").attr("disabled", true);
+     //               $("input[name=EnableFacilityModule]").prop("checked", false);
+					//$("input[name=EnableEcommerceModule]").prop("checked", false);
+					//$("input[name=EnableAcademyModule]").prop("checked", false);
+					//$("input[name=EnableOrganizerModule]").prop("checked", false);
+				}
+				else {
+					$.ajax({
+						type: "GET",
+						contentType: "application/json; charset=utf-8",
+						url: '/Admin/Vendor/GetVendorPackagesByID/' + VendorPackageID,
+						async: true,
+						success: function (response) {
+							
+                            if (response.data != 0) {
+                                $("input[name=EnableFacilityModule]").prop("checked", false);
+								$("input[name=EnableEcommerceModule]").prop("checked", false);
+								$("input[name=EnableAcademyModule]").prop("checked", false);
+								$("input[name=EnableOrganizerModule]").prop("checked", false);
+                                if (response.data.Facility)
+                                {
+
+                                    $("input[name=EnableFacilityModule]").attr("disabled", true);
+                                    $("input[name=EnableFacilityModule]").prop("checked", true);
+
+                                }
+                                else
+                                {
+									$("input[name=EnableFacilityModule]").attr("disabled", true);
+									$("input[name=EnableFacilityModule]").prop("checked", false);
+								}
+
+								if (response.data.Ecommerce) {
+
+									$("input[name=EnableEcommerceModule]").attr("disabled", true);
+									$("input[name=EnableEcommerceModule]").prop("checked", true);
+
+                                }
+								else {
+									$("input[name=EnableEcommerceModule]").attr("disabled", true);
+									$("input[name=EnableEcommerceModule]").prop("checked", false);
+								}
+
+								if (response.data.Coaching) {
+
+									$("input[name=EnableAcademyModule]").attr("disabled", true);
+									$("input[name=EnableAcademyModule]").prop("checked", true);
+
+                                }
+								else {
+									$("input[name=EnableAcademyModule]").attr("disabled", true);
+									$("input[name=EnableAcademyModule]").prop("checked", false);
+								}
+
+								if (response.data.Events) {
+
+									$("input[name=EnableOrganizerModule]").attr("disabled", true);
+									$("input[name=EnableOrganizerModule]").prop("checked", true);
+
+                                }
+								else {
+									$("input[name=EnableOrganizerModule]").attr("disabled", true);
+									$("input[name=EnableOrganizerModule]").prop("checked", false);
+								}
+								/* GetDropdownValues(data);*/
+								//$('#FacilityName').val("");
+								//$("#Longitude").val(data.data.Longitude);
+								//$("#Latitude").val(data.data.Latitude);
+								//$('textarea[name=Address]').val(data.data.Address);
+								//$("#Longitude").prop('disabled', true);
+								//$("#Latitude").prop('disabled', true);
+								//$("#FacilityName").prop('disabled', true);
+								//$('textarea[name=Address]').prop('disabled', true);
+
+								//$("#btnMapAddress").hide();
+							}
+							else {
+								toastr.options = {
+									"positionClass": "toast-bottom-right",
+								};
+
+								toastr.success(data.message);
+
+								//setTimeout(function () { location.reload(); }, 2000);
+							}
+						},
+						error: function (err) { console.log(err); }
+					});
+				}
+			}
+
+
+
+
+
+            $('#CountryID').change(function () {
+                var count = 0;
+                var $dropdown = $("#CityID");
+                if ($(this).val() == 0) {
+                    $dropdown.empty();
+                    $dropdown.append($("<option />").val('').text("Please Select Country First!"));
+                }
+                else {
+                    $.ajax({
+                        type: 'Get',
+                        url: '/Admin/City/GetCitiesByCountry/' + $(this).val(),
+                        success: function (response) {
+                            $dropdown.empty();
+                            $dropdown.append($("<option />").val('').text("Select City"));
+
+                            $.each(response.data, function (k, v) {
+                                $dropdown.append($("<option />").val(v.value).text(v.text));
+                                count++;
+                            });
+                        }
+                    });
+                }
+            });
+            //$('#CountryID').change(function () {
+            //    var count = 0;
+            //    var $dropdown = $("#CityID");
+            //    var id = $("CountryID").val();
+            //    if ($(this).val() == 0) {
+            //        $dropdown.empty();
+            //        $dropdown.append($("<option />").val('').text("Please Select Country First!"));
+            //    }
+            //    else {
+            //        $.ajax({
+            //            type: 'Get',
+            //            url: '/City/GetCitiesByCountry/' + id,
+            //            success: function (response) {
+            //                $dropdown.empty();
+            //                $dropdown.append($("<option />").val('').text("Select City"));
+
+            //                $.each(response.data, function (k, v) {
+            //                    $dropdown.append($("<option />").val(v.value).text(v.text));
+            //                    count++;
+            //                });
+            //            }
+            //        });
+            //    }
+            //});
+
+            if(!$("#CityID").val()){
+                $("#CountryID").trigger("change");
+            }
+
+            $("#Name").on('change', function () {
+                var name = $(this);
+                $("#Slug").val($(name).val().replace(/ /g, "-").toLocaleLowerCase());
+            });
+        });
+
+
+        @*$('#email_address').on('keypress', function() {
+    var re = @Html.Raw(/([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{2,4}/.test(this.value));
+    if(!re) {
+        $('#error').show();
+    } else {
+        $('#error').hide();
+    }
+})*@
+        var _URL = window.URL || window.webkitURL;
+        $("#cover").change(function (e) {
+
+            var file, img;
+
+
+            if ((file = this.files[0])) {
+
+                img = new Image();
+                img.onload = function () {
+
+
+                    if (this.width < 1920) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Image dimension should be greater than 1920x316!',
+
+                        }).then(function (result) {
+                            $("#cover").attr("src", "/Assets/AppFiles/Images/default.png");
+                            $(".cancelimage").trigger('click');
+                        });
+                    }
+                    else if (this.height < 316) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Image dimension should be greater than 1920x316!',
+
+                        }).then(function (result) {
+                            $("#cover").attr("src", "/Assets/AppFiles/Images/default.png");
+                            $(".cancelimage").trigger('click');
+                        });
+                    }
+                    else {
+                        img.onerror = function () {
+                            alert("not a valid file: " + file.type);
+                        };
+                    }
+                };
+                img.src = _URL.createObjectURL(file);
+            }
+        });
+
+        //Image Validation Begin
+        $("#Logo").change(function (e) {
+
+
+            var file, img;
+
+            if ((file = this.files[0])) {
+
+                img = new Image();
+                img.onload = function () {
+
+                    if (this.width < 690 || this.width > 690) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Image dimension should be 690 x 460 !',
+
+                        }).then(function (result) {
+                            $("#Logo").attr("src", "/Assets/AppFiles/Images/default.png");
+                            $(".cancelimage").trigger('click');
+                        });
+                    }
+                    else if (this.height < 460 || this.height > 460) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Image dimension should be 690 x 460 !',
+
+                        }).then(function (result) {
+                            $("#Logo").attr("src", "/Assets/AppFiles/Images/default.png");
+                            $(".cancelimage").trigger('click');
+                        });
+                    }
+                    else if (file.size > 500000) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Image size must be less than 500 kb!',
+
+                        }).then(function (result) {
+                            $("#Logo").attr("src", "/Assets/AppFiles/Images/default.png");
+                            $(".cancelimage").trigger('click');
+                        });
+                    }
+                    else {
+                        img.onerror = function () {
+                            alert("not a valid file: " + file.type);
+                        };
+                    }
+                };
+                img.src = _URL.createObjectURL(file);
+            }
+        });
+        //Image Validation End
+
+
+        if (SuccessMessage) {
+            toastr.success(SuccessMessage);
+        }
+        else if (ErrorMessage) {
+            toastr.error(ErrorMessage);
+        }
+
+
+    </script>
+
+}

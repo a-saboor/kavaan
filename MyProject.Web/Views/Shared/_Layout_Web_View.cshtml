@@ -1,0 +1,40 @@
+﻿@{
+	string culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+	string lang = System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLowerInvariant();
+	bool RTL = CultureHelper.IsRighToLeft();
+	string dir = lang == "en" ? "ltr" : "rtl";
+}
+<!DOCTYPE html>
+<html lang="@lang" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Kavaan</title>
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="~/favicon.ico" />
+	<!-- Main Style CSS -->
+	<link rel="stylesheet" href="@Url.ContentVersioned("~/Content/font-awesome.min.css")">
+	<link rel="stylesheet" href="@(dir == "ltr" ? Url.ContentVersioned("~/Assets/css/web/shared/style.css") : Url.ContentVersioned("~/Assets/css/web/shared/style-rtl.css"))">
+	<link rel="stylesheet" href="@Url.ContentVersioned("~/Assets/css/web/shared/layout.css")">
+	@RenderSection("IndexStyles", required: false)
+</head>
+<body class="" ondragstart="return false">
+
+	<!-- Render Body -->
+	@RenderBody()
+	<!-- Render Body End -->
+	<!-- Including Jquery -->
+	<script src="~/Assets/js/vendor/jquery.min.3.6.0.js"></script>
+	<script src="~/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+	<script src="~/assets/js/vendor/jquery.cookie.js"></script>
+	<script src="~/assets/js/vendor/wow.min.js"></script>
+	<script>
+		let title = "@ViewBag.Title";
+		let session = false;
+		const direction = 'ltr';
+	</script>
+	<script src="@Url.ContentVersioned("~/Assets/js/web/shared/web-view-index.js")"></script>
+	@RenderSection("IndexScript", required: false)
+</body>
+</html>

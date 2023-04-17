@@ -1,0 +1,123 @@
+﻿@model Project.Data.VendorPackage
+
+
+@{
+	ViewBag.Title = "Edit";
+	Layout = null;
+}
+<link href="~/Assets/Admin/plugins/custom/richtextarea/rte_theme_default.css" rel="stylesheet" />
+<style>
+	.video-frame {
+		width: 100%;
+		height: auto;
+		box-shadow: 0 0.5rem 1.5rem 0.5rem rgb(0 0 0 / 8%);
+		border-radius: 5px;
+		padding: 10px;
+	}
+	.introduction-video {
+		width: auto;
+		height: 300px;
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+	}
+</style>
+
+
+<div class="modal-header">
+	<h5 class="modal-title">Update</h5>
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<i aria-hidden="true" class="ki ki-close"></i>
+	</button>
+</div>
+<div class="modal-body">
+	<form id="editform" action="/Admin/VendorPackages/Edit/" name="form" enctype="multipart/form-data" class="form-file-custom" onsubmit="return form_file_custom(this)">
+		@Html.AntiForgeryToken()
+		<div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+		@Html.HiddenFor(model => model.ID)
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Name</label>
+                <div class="input-group mb-2">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter Name here ..." } })
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="fa fa-server"></i></span>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Name (Ar)</label>
+                <div class="input-group mb-2">
+                    @Html.EditorFor(model => model.NameAr, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = " ...Enter Name (Ar) here", dir = "rtl" } })
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="fa fa-server"></i></span>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.NameAr, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Price</label>
+                <div class="input-group mb-2">
+                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control required-custom", placeholder = "Enter price here... "} })
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="fa fa-money-bill"></i></span>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.Label("Billing Period", htmlAttributes: new { @class = "control-label" })
+                <select class="form-control kt-selectpicker" id="BillingPeriod" name="BillingPeriod" data_actions_box="true">
+                    <option value="Monthly" @(Model.BillingPeriod == "Monthly" ? "selected" : "")>Monthly</option>
+                    <option value="Bi-Annual" @(Model.BillingPeriod == "Bi-Annual" ? "selected" : "")>Bi-Annual</option>
+                    <option value="Annual" @(Model.BillingPeriod == "Annual" ? "selected" : "")>Annual</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.BillingPeriod, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Description</label>
+                <div class="input-group mb-2">
+                    @*@Html.HiddenFor(model => model.TitleDescription)
+                    <div id="TitleDescriptionTXT" class="richtexteditor"></div>*@
+                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = "2", placeholder = "Enter description here ..." })
+                </div>
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Description(Ar)</label>
+                <div class="input-group mb-3">
+                    @*@Html.HiddenFor(model => model.TitleDescriptionAr)
+                    <div id="TitleDescriptionArTXT" class="richtexteditor"></div>*@
+                    @Html.TextAreaFor(model => model.DescriptionAr, new { @class = "form-control", rows = "2", placeholder = " ...Enter description (Ar) here", dir = "rtl" })
+                </div>
+                @Html.ValidationMessageFor(model => model.DescriptionAr, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+	</form>
+</div>
+
+<div class="modal-footer">
+	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	<button type="submit" class="btn btn-custom" form="editform">Save Changes</button>
+</div>
+
+<!--end::Page Scripts-->
+<script src="~/Assets/Admin/plugins/custom/richtextarea/rte.js"></script>
+<script src="~/Assets/Admin/plugins/custom/richtextarea/all_plugins.js"></script>
+<script src="~/Assets/Admin/plugins/custom/richtextarea/rte-upload.js"></script>
+

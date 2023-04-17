@@ -1,0 +1,153 @@
+﻿@model MyProject.Data.Prescription
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/CustomerPortal/Views/Shared/_Layout.cshtml";
+}
+
+<!--Body Content-->
+<div id="page-content" style="min-height: 600px;">
+    <!--Page Title-->
+    <div class="page section-header text-center">
+        <div class="page-title">
+            <div class="wrapper"><h1 class="page-width">Prescription</h1></div>
+            <div class="bredcrumbWrap m-0">
+                <div class="container breadcrumbs">
+                    <a href="/Customer/Dashboard/Index" title="Back to the home page">My Account</a><span aria-hidden="true">›</span>
+                    <span>Prescription</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Page Title-->
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 main-col">
+                <div class="mb-4">
+                    <!--Main Content-->
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
+                        <div class="blog--list-view">
+                            <div class="article">
+                                <!-- Article Image -->
+
+                                <h1>Prescription # @Model.PrescriptionCode</h1>
+                                <ul class="publish-detail">
+                                    <li><i class="icon anm anm-clock-r"></i> <time datetime="@(Model.CreatedOn.HasValue ? Model.CreatedOn.Value.ToString("yyyy- MMM-dd"): "")2017-05-02">@(Model.CreatedOn.HasValue ? Model.CreatedOn.Value.ToString("dd MMM yyyy, h:mm tt"): "")</time></li>
+                                </ul>
+                                <div class="rte">
+                                    <h3>Status : @Model.Status</h3>
+
+                                    <h2>Description</h2>
+                                    <p>@Model.Description</p>
+                                </div>
+                                <hr />
+
+                            </div>
+                            <!--Images-->
+                            <div class="car-rows section">
+                                <div class="container">
+                                    <div class="grid-cars grid-cars-hover-btn">
+                                        <div class="row justify-content-center">
+                                            @if (Model.PrescriptionImages.Count() > 0)
+                                            {
+                                                foreach (var image in Model.PrescriptionImages)
+                                                {
+                                                    <div class="col-6 col-sm-2 col-md-3 col-lg-3 item">
+                                                        <!-- start car image -->
+                                                        <div class="car-image">
+                                                            <!-- start car image -->
+                                                            <a href="javascript:void(0)" class="grid-view-item__link image-popup" data-toggle="modal" data-target="#Image_View">
+                                                                <!-- image -->
+                                                                <img class="primary blur-up lazyload" data-src="@image.Image" src="@image.Image" alt="@Model.PrescriptionCode" title="@Model.PrescriptionCode">
+                                                                <!-- End image -->
+                                                                <!-- Hover image -->
+                                                                <img class="hover blur-up lazyload" data-src="@image.Image" src="@image.Image" alt="@Model.PrescriptionCode" title="@Model.PrescriptionCode">
+                                                                <!-- End hover image -->
+                                                            </a>
+                                                            <!-- end car image -->
+                                                        </div>
+                                                        <!-- end car image -->
+
+                                                    </div>
+                                                }
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Images-->
+
+                        </div>
+                    </div>
+                    <!--End Main Content-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Body Content-->
+<!--Quick View popup-->
+<div class="modal fade quick-view-popup" id="Image_View">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="CarSection-car-template" class="car-template__container prstyle1">
+                    <div class="car-single">
+                        <!-- Start model close -->
+                        <a href="javascript:void()" data-dismiss="modal" class="model-close-btn pull-right" title="close"><span class="icon icon anm anm-times-l"></span></a>
+
+                        <!-- End model close -->
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="car-details-img">
+                                    <div class="pl-20 text-center">
+                                        <img id="image-popup" src="/Assets/AppFiles/Prescription/185d85e565-5da3-4c21-8e6d-9ca7a4d17610.png" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End-car-single-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Quick View popup-->
+<!--Script-->
+@section IndexScript {
+    <script>
+        $(".image-popup").click(function () {
+            $('#image-popup').attr('src', $(this).find('img').attr('src'));
+        });
+    </script>
+
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <script>
+		$(document).ready(function () {
+			$('#message').html('<span class="fa fa-check-circle mr-1"></span> ' + '@ViewBag.SuccessMessage')
+			$('#message').slideDown();
+			setTimeout(function () {
+				$('#message').slideUp();
+			}, 6000);
+		})
+        </script>
+    }
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <script>
+
+		$(document).ready(function () {
+			$('#message').html('<span class="fas fa-exclamation-triangle mr-1"></span> ' + '@ViewBag.ErrorMessage')
+			$('#message').slideDown();
+			setTimeout(function () {
+				$('#message').slideUp();
+			}, 6000);
+		})
+        </script>
+    }
+}
+<!--End Script-->

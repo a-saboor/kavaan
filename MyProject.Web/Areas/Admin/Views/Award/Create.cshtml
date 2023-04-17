@@ -1,0 +1,216 @@
+﻿@model MyProject.Data.Award
+
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+
+<div class="modal-header">
+    <h5 class="modal-title">Create</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <i aria-hidden="true" class="ki ki-close"></i>
+    </button>
+</div>
+<div class="modal-body">
+    <form id="partnerform" name="form"></form>
+    @Html.AntiForgeryToken()
+    <div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group row">
+        <div class="col-lg-12 text-center">
+            <div class="image-input image-input-outline" id="kt_image_1">
+                <div class="image-input-wrapper" style="background-image: url('../../../../Assets/AppFiles/Images/default.png')"></div>
+                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change logo">
+                    <i class="fa fa-pen icon-sm text-muted"></i>
+                    <input type="file" name="Image" id="cover" accept=".png, .jpg, .jpeg" />
+                    <input type="hidden" name="profile_avatar_remove" />
+                </label>
+                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow cancelimage" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                </span>
+            </div>
+            <span class="form-text text-muted">Image dimensions should be 300 x 400 pixels and Image size must be less than 200 kb</span>
+        </div>
+    </div>
+    <div class="row">
+
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Title</label>
+                <div class="input-group mb-2">
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter title here ...", required = "required" } })
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="fa fa-server"></i></span>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Title (Ar)</label>
+                <div class="input-group mb-2">
+                    @Html.EditorFor(model => model.TitleAr, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter title (ar) here ...", required = "required" , dir="rtl" } })
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="fa fa-server"></i></span>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.TitleAr, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Description</label>
+                <div class="input-group mb-2">
+                    @Html.TextAreaFor(model => model.Description, 5, 20, new { @class = "form-control", placeholder = "Enter description here ..." })
+                    @*@Html.TextAreaFor(model => model.TitleDescription, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter descriptipn here ...", required = "required" } })*@
+
+                </div>
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Description (Ar)</label>
+                <div class="input-group mb-2">
+                    @Html.TextAreaFor(model => model.DescriptionAr, 5, 20, new { @class = "form-control", placeholder = "Enter description (ar) here ...", dir="rtl" })
+                    @*@Html.TextAreaFor(model => model.TitleDescription, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter descriptipn here ...", required = "required" } })*@
+
+                </div>
+                @Html.ValidationMessageFor(model => model.DescriptionAr, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-custom" form="partnerform">Submit</button>
+</div>
+
+
+
+<script>
+    // Class definition
+    var KTImageInputDemo = function () {
+        // Private functions
+        var initDemos = function () {
+            
+            var avatar1 = new KTImageInput('kt_image_1');
+        }
+
+        return {
+            // public functions
+            init: function () {
+                initDemos();
+            }
+        };
+    }();
+
+    'use strict';
+    KTUtil.ready(function () {
+        KTImageInputDemo.init();
+
+
+    });
+
+    $("#partnerform").submit(function () {
+        var data = new FormData();
+        data.append("Image", $("#cover")[0].files[0]);;
+        data.append("Name", $("#Title").val());
+        data.append("NameAr", $("#TitleAr").val());
+        data.append("Description", $("#Description").val());
+        data.append("DescriptionAr", $("#DescriptionAr").val());
+        data.append("__RequestVerificationToken", $('input[name=__RequestVerificationToken]').val());
+        $.ajax({
+            url: "/Admin/Award/Create/",
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: data,
+            success: function (response) {
+
+                if (callback) {
+                    callback($('#myModalContent'), element, true, response);
+                }
+            },
+            error: function (er) {
+                
+                toastr.error(er);
+            }
+        });
+        return false;
+    });
+
+
+
+
+    var _URL = window.URL || window.webkitURL;
+    //Image Validation Begin
+    $("#cover").change(function (e) {
+        
+
+        var file, img;
+
+        if ((file = this.files[0])) {
+
+            img = new Image();
+            img.onload = function () {
+
+                if (this.width < 300 || this.width > 400) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Image dimension should be 300 x 400 !',
+
+                    }).then(function (result) {
+                        $("#cover").attr("src", "/Assets/AppFiles/Images/default.png");
+                        $(".cancelimage").trigger('click');
+                    });
+                }
+                else if (this.height < 400 || this.height > 400) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Image dimension should be 300 x 400 !',
+
+                    }).then(function (result) {
+                        $("#cover").attr("src", "/Assets/AppFiles/Images/default.png");
+                        $(".cancelimage").trigger('click');
+                    });
+                }
+                else if (this.size > 200000) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Image size must be less than 200 kb!',
+
+                    }).then(function (result) {
+                        $("#cover").attr("src", "/Assets/AppFiles/Images/default.png");
+                        $(".cancelimage").trigger('click');
+                    });
+                }
+                else {
+                    img.onerror = function () {
+                        alert("not a valid file: " + file.type);
+                    };
+                }
+            };
+            img.src = _URL.createObjectURL(file);
+        }
+    });
+    //Image Validation End
+
+
+</script>
+
+
+

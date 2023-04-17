@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Project.Data.VendorWalletShareHistory>
+@{
+    Layout = null;
+}
+<div id="VendorHistory">
+    <table class="table table-separate table-head-custom table-checkable" id="kt_datatable_history">
+        <thead>
+            <tr>
+                <th>
+                    Transaction Date
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.VendorName)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(item.CreatedOn.HasValue ? item.CreatedOn.Value.ToString("dd MMM yyyy, h:mm tt") : "-")	</td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.VendorName)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+
+                    <td>
+                        @if (item.Type == 1)
+                        {
+                            <p class="label label-lg  label-light-danger label-inline">Debit</p>
+                        }
+                        else if (item.Type == 2)
+                        {
+                            <p class="label label-lg  label-light-success label-inline">Credit</p>
+                        }
+                    </td>
+                    <td class="text-right">
+                        <span class="mr-5">@Html.DisplayFor(modelItem => item.Amount) AED</span>                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

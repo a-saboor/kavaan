@@ -1,0 +1,167 @@
+﻿@model MyProject.Data.Ozone
+@{
+    ViewBag.Title = ""+ "";
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+   bool RTL = false;
+}
+<!--Give Styling Here-->
+@section IndexStyles {
+
+}
+<!--Body Content-->
+<div class="render-body" style="">
+	<!-- Hero Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<div class="">
+			<div class="mx-auto bg-ozone-bg bg-cover">
+				<div class="bg-[#00000020] flex flex-col h-[150px] items-center justify-center lg:h-[300px] md:h-[200px] rounded-lg">
+					<h1 class="uppercase font-Rubik text-xl font-medium text-center text-white lg:text-4xl lg:mb-2">OZONE</h1>
+					<div class="flex items-center">
+						<a href="/@culture/home/index" class="font-Rubik text-xs uppercase text-white">HOME</a>
+						<svg viewBox="0 0 192 512" class="w-1.5 mx-2 fill-current text-white flip-horizontal-rtl"><path fill="" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class="fill-white"></path></svg>
+						<p class="font-Rubik text-xs uppercase text-white">OZONE</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero Section End -->
+	<!-- Ozone Section Start -->
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto pb-6">
+		<div class="w-[80%] md:w-[70%] mx-auto pb-4 pt-4">
+			<img src="@Url.Content("~/Assets/images/bg/ozone-working.png")" alt="" class="rounded-lg w-full md:w-[80%] mx-auto">
+		</div>
+		<div class="w-[80%] mx-auto xl:w-[60%]">
+
+			@*<h1 class="uppercase font-Rubik text-xl font-medium py-2 pt-4">DESCRIPTION</h1>*@
+
+			<p class="font-Rubik text-xs pb-4">SAY_GOODBYE_TO_DULL___DRAB__OZONE_IS</p>
+
+			<h1 class="uppercase font-Rubik text-xl font-medium py-2">HEALTH_CLUB</h1>
+
+			<p class="font-Rubik text-xs pb-4">BUILDING_A_HEALTHY_WORKFORCE</p>
+
+			<h1 class="uppercase font-Rubik text-xl font-medium py-2">LIBRARY</h1>
+
+			<p class="font-Rubik text-xs pb-4">A_PLACE_TO_LEARN_RELEARN_AND_UPLIFT_</p>
+
+			<h1 class="uppercase font-Rubik text-xl font-medium py-2">CINEMA </h1>
+
+			<p class="font-Rubik text-xs pb-4">A_CINEMAGRADE_SCREEN_WITH_DOLBY_</p>
+
+			<h1 class="uppercase font-Rubik text-xl font-medium py-2">LIVE_KITCHEN</h1>
+
+			<p class="font-Rubik text-xs pb-4">FOSTERING_A_CULTURE_OF_EMPLOYEES_</p>
+
+			<h1 class="uppercase font-Rubik text-xl font-medium py-2">KARAOKE </h1>
+
+			<p class="font-Rubik text-xs pb-4">GIVING_EMPLOYEES_AN_OPPORTUNITY_</p>
+
+			<h1 class="font-Rubik text-xl font-medium py-2">CAFEORO </h1>
+
+			<p class="font-Rubik text-xs pb-4">THE_MOST_SUCCESSFUL_MEETINGS_</p>
+
+		</div>
+	</section>
+
+	<section class="bg-gk-body pb-4 max-w-screen-2xl 2xl:mx-auto">
+		<div class="w-[80%] mx-auto pb-4">
+			<img src="@Url.Content(Model.Thumbnail)" alt="" class="rounded-lg owl-thumbnail w-full md:w-[80%] mx-auto">
+		</div>
+		@if (Model.OzoneImages.Count() > 0)
+		{
+			<div class="relative" id="gk-ozone">
+				<div class="w-[6rem] absolute z-10 left-8 xl:left-[12rem] top-[-2px]
+            bg-gradient-to-r from-gk-body to-transparent sm:w-[15rem] h-[4.5rem] lg:h-24 2xl:h-[6.5rem]"></div>
+				<div class="owl-carousel owl-theme ">
+					@foreach (var item in Model.OzoneImages)
+					{
+						<div class="item">
+							<img src="@Url.Content(item.Image)" alt="" class="h-[4.3rem] lg:h-[5.8rem] 2xl:h-[6.3rem] object-cover">
+						</div>
+					}
+					@*<div class="item">
+							<img src="/assets/images/bg/blog-01.png" alt="" class="h-[4.3rem] lg:h-[5.8rem] 2xl:h-[6.3rem] object-cover">
+						</div>
+						<div class="item">
+							<img src="/assets/images/bg/blog-02.png" alt="" class="h-[4.3rem] lg:h-[5.8rem] 2xl:h-[6.3rem] object-cover">
+						</div>
+						<div class="item">
+							<img src="/assets/images/bg/blog-03.png" alt="" class="h-[4.3rem] lg:h-[5.8rem] 2xl:h-[6.3rem] object-cover">
+						</div>*@
+				</div>
+				<div class="w-[6rem] absolute z-10 right-8 xl:right-[12rem] top-[-2px]
+            bg-gradient-to-r from-transparent to-gk-body sm:w-[15rem] h-[4.5rem] lg:h-24 2xl:h-[6.5rem]"></div>
+			</div>
+		}
+	</section>
+
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<div class="h-[1px] bg-[#707070] mx-auto opacity-20 w-[80%] xl:w-[70%] max-w-screen-2xl 2xl:mx-auto"></div>
+	</section>
+
+	@if (!string.IsNullOrEmpty(Model.Video))
+	{
+		<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto py-10">
+			<div class="w-[80%] mx-auto">
+                <h1 class="font-Rubik text-base uppercase text-center font-medium py-4 lg:text-xl">VIDEO</h1>
+			</div>
+			<div class="w-[80%] mx-auto relative xl:flex lg:w-[60%]">
+				<video src="@Url.Content(Model.Video)" @*autoplay*@ loop preload="auto" class="w-full rounded-lg" onclick="PlayVideo(this);">
+				</video>
+				<a href="javascript:void(0);" onclick="PlayVideo(this);">
+					<span class="w-8 h-8 rounded-full p-2 absolute top-1/2 left-1/2 transform-translate-50">
+						<i class="fa fa fa-2x fa-play-circle text-white"></i>
+					</span>
+				</a>
+			</div>
+		</section>
+
+		<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+			<div class="h-[1px] bg-[#707070] mx-auto opacity-20 w-[80%] xl:w-[70%] max-w-screen-2xl 2xl:mx-auto"></div>
+		</section>
+	}
+
+	<section class="bg-gk-body max-w-screen-2xl 2xl:mx-auto">
+		<div class="w-[80%] mx-auto sm:w-[50%] py-10 text-center">
+			<a @*href="/@culture/coming-soon"*@ class="">
+                <button class="bg-gk-gold text-sm font-medium uppercase text-white mx-auto w-full xl:w-[80%] py-4 rounded-lg">
+                    COMING_SOON
+                </button>
+			</a>
+		</div>
+	</section>
+	<!-- Ozone Section Start -->
+
+</div>
+<!--Body Content End-->
+<!--Write js Here-->
+@section IndexScript {
+	@*<script src="@Url.ContentVersioned("~/Assets/js/web/ozone/index.js")"></script>*@
+	<script>
+		$('.owl-carousel').owlCarousel({
+			rtl: direction == "ltr" ? false : true,
+			loop: true,
+			// navText:["<img src='./assets/images/web-icons/left-arrow.png'>","<img src='./assets/images/web-icons/right-arrow.png'>"],
+			nav: false,
+			margin: 16,
+			dots: false,
+			responsiveClass: true,
+			responsive: {
+				0: {
+					items: 3,
+				},
+				600: {
+					items: 6,
+				},
+				1000: {
+					items: 6,
+				}
+			}
+		})
+
+		$('.owl-loaded .owl-item').click(function () {
+			$('.owl-thumbnail').attr('src', $(this).find('img').attr('src'))
+		});
+	</script>
+}

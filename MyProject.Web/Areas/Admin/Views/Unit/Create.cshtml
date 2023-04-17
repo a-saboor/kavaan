@@ -1,0 +1,1010 @@
+﻿@model MyProject.Data.Unit
+
+@{
+	ViewBag.Title = "Create";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Subheader-->
+	<div class="subheader py-2 py-lg-12 subheader-transparent" id="kt_subheader">
+		<div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+			<!--begin::Info-->
+			<div class="d-flex align-items-center flex-wrap mr-1">
+				<!--begin::Heading-->
+				<div class="d-flex flex-column">
+
+					<!--begin::Breadcrumb-->
+					<div class="d-flex align-items-center font-weight-bold my-2">
+						<!--begin::Item-->
+						<a href="/Admin/Dashboard/Index" class="opacity-75 hover-opacity-100">
+							<i class="flaticon2-shelter text-white icon-1x"></i>
+						</a>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<a href="/Admin/Dashboard/Index" class="text-white text-hover-white opacity-75 hover-opacity-100">&nbsp;&nbsp;Dashboard</a>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
+						<a href="javascript:;" class="text-white text-hover-white opacity-75 hover-opacity-100">Units</a>
+						<!--end::Item-->
+					</div>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Heading-->
+			</div>
+			<!--end::Info-->
+		</div>
+	</div>
+	<!--end::Subheader-->
+	<!--begin::Entry-->
+	<div class="d-flex flex-column-fluid">
+		<!--begin::Container-->
+		<div class="container">
+			<!--begin::Dashboard-->
+			<div class="row">
+				<div class="col-xl-12">
+					<!--begin::Card-->
+					<div class="card card-custom gutter-b">
+						<div class="card-header flex-wrap border-0 pt-6 pb-0">
+							<div class="card-title">
+								<h3 class="card-label">
+									Unit
+									<span class="d-block text-muted pt-2 font-size-sm">Create New Unit Here...</span>
+								</h3>
+							</div>
+							<div class="card-toolbar">
+								<!--begin::Button-->
+								<div class="dropdown dropdown-inline mr-2">
+									@*@using (Html.BeginForm("UsersReport", "User", FormMethod.Post))
+										{
+											@Html.AntiForgeryToken()
+
+											<button type="submit" class="btn btn-dark btn-sm" @(Model.Count() > 0 ? "" : "disabled")>
+												<i class="far fa-file-excel"></i>
+												Export Excel
+											</button>
+										}*@
+								</div>
+								<a href="/Admin/unit/index" class="btn btn-custom font-weight-bolder">
+									<span class="svg-icon svg-icon-md svg-icon-white">
+										<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+												<rect x="0" y="0" width="24" height="24" />
+												<circle fill="#ffffff" cx="9" cy="15" r="6" />
+												<path d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z" fill="#ffffff" opacity="0.3" />
+											</g>
+										</svg>
+										<!--end::Svg Icon-->
+									</span>Back
+								</a>
+								<!--end::Button-->
+							</div>
+						</div>
+
+						<div class="card-body">
+							<!--begin: form-->
+							<form enctype="multipart/form-data" id="createform">
+
+								@Html.AntiForgeryToken()
+								<div class="alert alert-danger text-center" id="divMessage" style="display:none"></div>
+								@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+								<h3 class="font-size-lg text-dark font-weight-bold mb-6 card-label">Unit Info:</h3>
+								<div class="row">
+
+									<div class="col-md-10 col-sm-10">
+										<div class="form-group">
+											<label class="control-label">Projects</label>
+											<div class="input-group mb-3">
+												@if (ViewBag.PropertyID == null)
+												{
+													<label class="control-label">Please Make Projects First</label>
+
+												}
+												else
+												{
+													@Html.DropDownList("PropertyID", null, "Select Project", htmlAttributes: new { @class = "form-control kt-selectpicker", @required = "required" })
+												}
+
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-building"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.PropertyID, "", new { @class = "text-danger" })
+										</div>
+									</div>
+
+									<div class="col-md-2 col-sm-2">
+										<div class="form-group">
+											<label class="control-label">Enable Featured</label>
+											<div class="input-group mb-2">
+												<span class="switch">
+													<label>
+
+														@Html.CheckBoxFor(model => model.IsFeatured, new { id = "IsFeatured" })
+														<span></span>
+													</label>
+												</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-12 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">Thumbnail</label>
+											<div class="input-group mb-2">
+												@Html.TextBoxFor(m => m.Thumbnail, "", new { type = "file", name = "Thumbnail", @class = "form-control", @accept = "image/*", required = "required" })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fa fa-image"></i></span>
+												</div>
+											</div>
+											<span class="form-text text-muted">Image dimensions should be 1092 x 615 pixels and Image size must be less than 200 kb</span>
+										</div>
+									</div>
+
+									@*<input type="checkbox" value="true" style="display:none;" />*@
+
+									<div class="col-md-6 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">Title</label>
+											<div class="input-group mb-2">
+												@Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter title here ...", required = "required" } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fa fa-server"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">Title (Ar)</label>
+											<div class="input-group mb-2">
+												@Html.EditorFor(model => model.TitleAr, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter title (Ar) here ...", required = "required", dir = "rtl" } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fa fa-server"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.TitleAr, "", new { @class = "text-danger" })
+										</div>
+									</div>
+
+									<div class="col-md-12 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">Slug</label>
+											<div class="input-group mb-3">
+												@Html.EditorFor(model => model.Slug, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter slug name here ...", required = "required", @readonly = "readonly" } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fa fa-link"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.Slug, "", new { @class = "text-danger" })
+										</div>
+									</div>
+
+									<div class="col-md-6 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">Description</label>
+											<div class="input-group mb-3">
+												@Html.TextAreaFor(model => model.Description, 3, 20, new { @class = "form-control", placeholder = "Enter description here ...", required = "required" })
+												@*@Html.TextAreaFor(model => model.TitleDescriptionAr, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter description (ar) here ...", required = "required", dir = "rtl" } })*@
+
+											</div>
+											@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">Description(Ar)</label>
+											<div class="input-group mb-3">
+												@Html.TextAreaFor(model => model.DescriptionAr, 3, 20, new { @class = "form-control", placeholder = "Enter description (Ar) here ...", required = "required", dir = "rtl" })
+												@*@Html.TextAreaFor(model => model.TitleDescriptionAr, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter description (ar) here ...", required = "required", dir = "rtl" } })*@
+
+											</div>
+											@Html.ValidationMessageFor(model => model.DescriptionAr, "", new { @class = "text-danger" })
+										</div>
+									</div>
+
+								</div>
+
+								<h3 class="font-size-lg text-dark font-weight-bold mb-6 card-label">Unit Details:</h3>
+								<div class="row">
+
+									@*<div class="col-md-3 col-sm-6">
+											<div class="form-group">
+												<label class="control-label">Unit No</label>
+												<div class="input-group mb-2">
+													@Html.EditorFor(model => model.UnitNo, new { htmlAttributes = new { type = "text", @class = "form-control", placeholder = "Generate unit no...", required = "required",@readonly="readonly" } })
+													<div class="input-group-append">
+														<span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+													</div>
+												</div>
+												@Html.ValidationMessageFor(model => model.UnitNo, "", new { @class = "text-danger" })
+											</div>
+										</div>
+										<div class="col-md-3 col-sm-6">
+											<div class="form-group">
+												<label class="control-label">Generate Unit No</label>
+												<div class="input-group mb-2">
+											  <button type="button" id="generateunitno" class="btn btn-secondary" typeof="readonly ">Click to Generate Unit No</button>
+													<div class="input-group-append">
+														<span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+													</div>
+												</div>
+											</div>
+										</div>*@
+									<!--<div class="col-md-3 col-sm-6">
+									<div class="form-group">
+										<label class="control-label">Status</label>
+										<div class="input-group mb-2">-->
+									@*@Html.EditorFor(model => model.Status, new { htmlAttributes = new { type = "text", @class = "form-control", placeholder = "Enter status here ...", required = "required" } })*@
+									<!--<select id="Status" name="Status" class="form-control" required="required">
+													<option value="">Please Select a Status</option>
+													<option value="forsale">For Sale</option>
+													<option value="notforsale">Not For Sale</option>
+												</select>
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fa fa-server"></i></span>
+												</div>
+											</div>
+											@@Html.ValidationMessageFor(model => model.Status, "", new { @@class = "text-danger" })
+										</div>
+									</div>-->
+									@*<div class="col-md-3 col-sm-6">
+											<div class="form-group">
+												<label class="control-label">Property Usage</label>
+												<div class="input-group mb-2">
+													@Html.EditorFor(model => model.PropertyUsage, new { htmlAttributes = new { type = "number", @class = "form-control", placeholder = "Enter property usage here ...", required = "required" } })
+													<div class="input-group-append">
+														<span class="input-group-text"><i class="fas fa-sort-numeric-up-alt"></i></span>
+													</div>
+												</div>
+												@Html.ValidationMessageFor(model => model.PropertyUsage, "", new { @class = "text-danger" })
+											</div>
+										</div>*@
+
+									<div class="col-md-4 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">Unit Type</label>
+											<div class="input-group mb-2">
+												@Html.DropDownList("UnitTypeID", null, "Select Unit Type", htmlAttributes: new { @class = "form-control", required = "required" })
+
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fa fa-server"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.UnitTypeID, "", new { @class = "text-danger" })
+										</div>
+									</div>
+
+									<div class="col-md-4 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">SqFt</label>
+											<div class="input-group mb-2">
+												@Html.TextBoxFor(model => model.Size, "", new { type = "number", @step = "0.01", @class = "form-control", required = "required", placeholder = "Enter size here ...", })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-sort-numeric-up-alt"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.Size, "", new { @class = "text-danger" })
+										</div>
+									</div>
+
+									<div class="col-md-4 col-sm-6">
+										<label class="control-label">Build Year</label>
+										<div class="input-daterange input-group kt_datepicker_range">
+											@Html.EditorFor(model => model.BuildYear, new { htmlAttributes = new { @class = "form-control kt_datepicker_range", type = "text", id = "BuildYear", placeholder = "yyyy", required = "required", @readonly = "readonly" } })
+											<div class="input-group-append">
+												<span class="input-group-text">
+													<i class="fa fa-calendar"></i>
+												</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-4 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">No of Bedrooms</label>
+											<div class="input-group mb-2">
+												@*@Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control", type = "number", step = "0", min = "0.00", placeholder = "Enter lat here ...", required = "required", id = "Price", value = 0, enabled = "enabled" } })*@
+												@Html.EditorFor(model => model.NoOfBedrooms, new { htmlAttributes = new { type = "number", @class = "form-control", placeholder = "Enter bedrooms here ...", required = "required" } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-sort-numeric-up-alt"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.NoOfBedrooms, "", new { @class = "text-danger" })
+										</div>
+									</div>
+
+									<div class="col-md-4 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">No of Rooms</label>
+											<div class="input-group mb-2">
+												@*@Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control", type = "number", step = "0", min = "0.00", placeholder = "Enter lat here ...", required = "required", id = "Price", value = 0, enabled = "enabled" } })*@
+												@Html.EditorFor(model => model.NoOfRooms, new { htmlAttributes = new { type = "number", @class = "form-control", placeholder = "Enter rooms  here ...", required = "required" } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-sort-numeric-up-alt"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.NoOfRooms, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">No of Baths</label>
+											<div class="input-group mb-2">
+												@*@Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control", type = "number", step = "0", min = "0.00", placeholder = "Enter lat here ...", required = "required", id = "Price", value = 0, enabled = "enabled" } })*@
+												@Html.EditorFor(model => model.NoOfBaths, new { htmlAttributes = new { type = "number", @class = "form-control", placeholder = "Enter bath here ...", required = "required" } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-sort-numeric-up-alt"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.NoOfBaths, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">No of Garages (Optional)</label>
+											<div class="input-group mb-2">
+												@*@Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control", type = "number", step = "0", min = "0.00", placeholder = "Enter lat here ...", required = "required", id = "Price", value = 0, enabled = "enabled" } })*@
+												@Html.EditorFor(model => model.NoOfGarages, new { htmlAttributes = new { type = "number", @class = "form-control", placeholder = "Enter garages here ..." } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-sort-numeric-up-alt"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.NoOfGarages, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">No of Dinning (Optional)</label>
+											<div class="input-group mb-2">
+												@*@Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control", type = "number", step = "0", min = "0.00", placeholder = "Enter lat here ...", required = "required", id = "Price", value = 0, enabled = "enabled" } })*@
+												@Html.EditorFor(model => model.NoOfDinings, new { htmlAttributes = new { type = "number", @class = "form-control", placeholder = "Enter dinnings here ..." } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-sort-numeric-up-alt"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.NoOfDinings, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">No of Laundry (Optional)</label>
+											<div class="input-group mb-2">
+												@*@Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control", type = "number", step = "0", min = "0.00", placeholder = "Enter lat here ...", id = "Price", value = 0, enabled = "enabled" } })*@
+												@Html.EditorFor(model => model.NoOfLaundry, new { htmlAttributes = new { type = "number", @class = "form-control", placeholder = "Enter laundry here ..." } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-sort-numeric-up-alt"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.NoOfLaundry, "", new { @class = "text-danger" })
+										</div>
+									</div>
+								</div>
+								<h3 class="font-size-lg text-dark font-weight-bold mb-6 card-label">Payment Details:</h3>
+								<div class="row">
+									<div class="col-md-4 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">Unit Price</label>
+											<div class="input-group mb-2">
+												@Html.EditorFor(model => model.SellingPrice, new { htmlAttributes = new { @type = "number", @class = "form-control", placeholder = "Enter unit price here ...", required = "required" } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-money-bill"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.SellingPrice, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">Booking Amount</label>
+											<div class="input-group mb-2">
+												@Html.EditorFor(model => model.BookingAmount, new { htmlAttributes = new { @type = "number", @class = "form-control", placeholder = "Enter booking amount  here ...", required = "required" } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-money-bill"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.BookingAmount, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">Land Registration Fee (Optional)</label>
+											<div class="input-group mb-2">
+												@*@Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control", type = "number", step = "0", min = "0.00", placeholder = "Enter lat here ...", required = "required", id = "Price", value = 0, enabled = "enabled" } })*@
+												@Html.EditorFor(model => model.LandRegistrationFee, new { htmlAttributes = new { type = "number", @class = "form-control", placeholder = "Enter land registration fee here ..." } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-money-bill"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.LandRegistrationFee, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">Oqood Amount (Optional)</label>
+											<div class="input-group mb-2">
+												@*@Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control", type = "number", step = "0", min = "0.00", placeholder = "Enter lat here ...", id = "Price", value = 0, enabled = "enabled" } })*@
+												@Html.EditorFor(model => model.OqoodAmount, new { htmlAttributes = new { type = "number", @class = "form-control", placeholder = "Enter oqood amount here ..." } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-money-bill"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.OqoodAmount, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">Dubai Land Department Fee (Optional)</label>
+											<div class="input-group mb-2">
+
+												@Html.EditorFor(model => model.DubaiLandDepartmentFee, new { htmlAttributes = new { type = "number", @class = "form-control", placeholder = "Enter dubai land department fee here ..." } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-money-bill"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.DubaiLandDepartmentFee, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									@*<div class="col-md-3 col-sm-6">
+											<div class="form-group">
+												<label class="control-label">EMI</label>
+												<div class="input-group mb-2">
+
+													@Html.EditorFor(model => model.EMI, new { htmlAttributes = new { type = "number", @class = "form-control", placeholder = "Enter EMI here ...", required = "required" } })
+													<div class="input-group-append">
+														<span class="input-group-text"><i class="fas fa-money-bill"></i></span>
+													</div>
+												</div>
+												@Html.ValidationMessageFor(model => model.EMI, "", new { @class = "text-danger" })
+											</div>
+										</div>*@
+								</div>
+								<h3 class="font-size-lg text-dark font-weight-bold mb-6 card-label">Address:</h3>
+								<div class="row">
+									<div class="col-md-6 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">Countries</label>
+											<div class="input-group mb-2">
+												@Html.DropDownList("CountryID", null, "Select Country ", htmlAttributes: new { @class = "form-control", required = "required" })
+
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-globe-asia"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">Cities</label>
+											<div class="input-group mb-2">
+												<select class="form-control" id="CityID" name="CityID" required="required">
+													<option value="">Select Country First!</option>
+												</select>
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-city"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									@*<div class="col-md-3 col-sm-12">
+											<div class="form-group">
+												<label class="control-label">Areas</label>
+												<div class="input-group mb-2">
+													<select class="form-control" id="AreaID" name="AreaID" required="required">
+														<option value="">Select City First!</option>
+													</select>
+
+													<div class="input-group-append">
+														<span class="input-group-text"><i class="fas fa-map"></i></span>
+													</div>
+												</div>
+												@Html.ValidationMessageFor(model => model.AreaID, "", new { @class = "text-danger" })
+											</div>
+										</div>*@
+									<!--<div class="col-md-3 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">Zip Code</label>
+											<div class="input-group mb-2">-->
+									@*@Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control", type = "number", step = "0", min = "0.00", placeholder = "Enter lat here ...", required = "required", id = "Price", value = 0, enabled = "enabled" } })*@
+									<!--@@Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { type = "text", @@class = "form-control", placeholder = "Enter zip code here ...", required = "required" } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fa fa-map-pin"></i></span>
+												</div>
+											</div>
+											@@Html.ValidationMessageFor(model => model.ZipCode, "", new { @@class = "text-danger" })
+										</div>
+									</div>-->
+									<div class="col-md-6 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">Latitude</label>
+											<div class="input-group mb-2">
+												<input type="text" maxlength="9" placeholder="Enter latitude here ##.######" name="Latitude" id="Latitude" class="form-control" pattern="^[1-9]\d*(\.\d+)?$" required/>
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">Longitude</label>
+											<div class="input-group mb-2">
+												<input type="text" maxlength="10" placeholder="Enter latitude here ##.#######" class="form-control" name="Longitude" id="Longitude" pattern="^[1-9]\d*(\.\d+)?$" required/>
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fas fa-map-marker"></i></span>
+												</div>
+											</div>
+											@Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+										</div>
+									</div>
+
+									@*<div class="col-md-12 col-sm-12">
+											<div class="form-group">
+												<label class="control-label">Address</label>
+												<div class="input-group mb-3">
+													@Html.TextAreaFor(model => model.Address, 3, 20, new { @class = "form-control", placeholder = "Enter address here ...", required = "required" })
+
+												</div>
+												@Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+											</div>
+										</div>*@
+								</div>
+
+								<h3 class="font-size-lg text-dark font-weight-bold mb-6 card-label">Media:</h3>
+								<div class="row">
+									<div class="col-md-12 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">VrTour Link (Optional)</label>
+											<div class="input-group mb-2">
+												@Html.EditorFor(model => model.VRTour, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter vr tour link here ..." } })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fa fa-link"></i></span>
+												</div>
+											</div>
+											<span class="form-text text-muted"></span>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">Video (Optional)</label>
+											<div class="input-group mb-2">
+												@Html.TextBoxFor(m => m.Video, "", new { type = "file", name = "Video", @class = "form-control", @accept = "video/*"})
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fa fa-video"></i></span>
+												</div>
+											</div>
+											<span class="form-text text-muted">Video Size should be less than 20 mb</span>
+										</div>
+									</div>
+									@*<div class="col-md-4 col-sm-12">
+			<div class="form-group">
+				<label class="control-label">VrTour Video</label>
+				<div class="input-group mb-2">
+					@Html.TextBoxFor(m => m.VRTour, "", new { type = "file", name = "VRTour", @class = "form-control", @accept = "video/*", required = "required" })
+					<div class="input-group-append">
+						<span class="input-group-text"><i class="fa fa-video"></i></span>
+					</div>
+				</div>
+				<span class="form-text text-muted">Video Size should be less than 20 MB</span>
+			</div>
+		</div>*@
+									<div class="col-md-4 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">Floor Plan (Optional)</label>
+											<div class="input-group mb-2">
+												@Html.TextBoxFor(m => m.FloorPlan, "", new { type = "file", name = "FloorPlan", @class = "form-control", @accept = ".jpg, .jpeg, .png, .pdf, .doc, .docx, .xlsx" })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fa fa-file"></i></span>
+												</div>
+											</div>
+											<span class="form-text text-muted">File Size should be less than 20 mb</span>
+
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-12">
+										<div class="form-group">
+											<label class="control-label">Property PDF (Optional)</label>
+											<div class="input-group mb-2">
+												@Html.TextBoxFor(m => m.Broucher, "", new { type = "file", name = "Broucher", @class = "form-control", @accept = "application/pdf" })
+												<div class="input-group-append">
+													<span class="input-group-text"><i class="fa fa-file"></i></span>
+												</div>
+											</div>
+											<span class="form-text text-muted">File Size should be less than 20 mb</span>
+										</div>
+									</div>
+								</div>
+
+								<div class="modal-footer">
+									<a type="button" class="btn btn-secondary" href="/Admin/unit/index">Back</a>
+									<button type="submit" id="createbutton" form="createform" class="btn btn-custom">Submit</button>
+								</div>
+								<div class="example-preview" id="kt_blockui_content">
+
+								</div>
+							</form>
+							<!--end: form-->
+						</div>
+					</div>
+					<!--end::Card-->
+				</div>
+			</div>
+
+			<!--end::Dashboard-->
+		</div>
+		<!--end::Container-->
+	</div>
+	<!--end::Entry-->
+</div>
+<!--end::Page Scripts-->
+
+@section IndexScript{
+	@if (ViewBag.ErrorMessage != null)
+	{
+		<script>
+            toastr.error('@ViewBag.ErrorMessage');
+		</script>
+	}
+
+	<script>
+
+		$('#PropertyID').attr("data-live-search", "true").attr("data-size", "6");
+		var KTBootstrapSelect = function () {
+
+			// Private functions
+			var demos = function () {
+				// minimum setup
+				$('.kt-selectpicker').selectpicker();
+			}
+
+			return {
+				// public functions
+				init: function () {
+					demos();
+				}
+			};
+		}();
+		//build year picker
+
+		var arrows;
+		if (KTUtil.isRTL()) {
+			arrows = {
+				leftArrow: '<i class="la la-angle-right"></i>',
+				rightArrow: '<i class="la la-angle-left"></i>'
+			}
+		} else {
+			arrows = {
+				leftArrow: '<i class="la la-angle-left"></i>',
+				rightArrow: '<i class="la la-angle-right"></i>'
+			}
+		}
+		// Date Range
+		$("#BuildYear").datepicker({
+			todayHighlight: true,
+			format: 'yyyy',
+			viewMode: "years",
+			minViewMode: "years",
+		});
+		function blockui() {
+
+			$("#createbutton").addClass("spinner spinner-dark spinner-right");
+			$("#createbutton").prop('disabled', true);
+			$("#createbutton").html("Creating Unit");
+			KTApp.blockPage({
+				overlayColor: '#000000',
+				state: 'primary',
+				message: 'Creating Unit Please Wait...'
+			});
+
+		}
+		function unblockui() {
+			KTApp.unblockPage();
+			$("#createbutton").removeClass("spinner spinner-dark spinner-right");
+			$("#createbutton").prop('disabled', false);
+			$("#createbutton").html("Submit");
+		}
+		$(document).ready(function () {
+			$('#CountryID').change(function () {
+				var count = 0;
+				var $dropdown = $("#CityID");
+				var $dropdown1 = $("#AreaID").empty();
+				$dropdown1.append($("<option />").val('').text("Please Select City First!"));
+				$dropdown1.selectpicker('refresh');
+
+				if ($(this).val() == 0) {
+					$dropdown.empty();
+					$dropdown.append($("<option />").val('').text("Please Select Country First!"));
+					$dropdown.selectpicker('refresh');
+				}
+				else {
+					$.ajax({
+						type: 'Get',
+						url: '/Admin/City/GetCitiesByCountry/' + $(this).val(),
+						success: function (response) {
+							$dropdown.empty();
+							$dropdown.append($("<option />").val('').text("Select City"));
+
+							$.each(response.data, function (k, v) {
+								$dropdown.append($("<option />").val(v.value).text(v.text));
+								count++;
+							});
+							$dropdown.selectpicker('refresh');
+						}
+					});
+				}
+			});
+			$('#CityID').change(function () {
+				var count = 0;
+				var $dropdown = $("#AreaID");
+				if ($(this).val() == 0) {
+					$dropdown.empty();
+					$dropdown.append($("<option />").val('').text("Please Select City First!"));
+					$dropdown.selectpicker('refresh');
+				}
+				else {
+					$.ajax({
+						type: 'Get',
+						url: '/Admin/Area/GetAreasByCity/' + $(this).val(),
+						success: function (response) {
+							$dropdown.empty();
+							$dropdown.append($("<option />").val('').text("Select Area"));
+
+							$.each(response.data, function (k, v) {
+								$dropdown.append($("<option />").val(v.value).text(v.text));
+								count++;
+							});
+							$dropdown.selectpicker('refresh');
+						}
+
+					});
+				}
+			});
+			KTBootstrapSelect.init();
+
+		});
+
+		var _URL = window.URL || window.webkitURL;
+		//Thumbnail Image Validation Begin
+		$("#Thumbnail").change(function (e) {
+			var file, img;
+
+			if ((file = this.files[0])) {
+
+				img = new Image();
+				img.onload = function () {
+
+					if (this.width !== 1092 || this.height !== 615) {
+						Swal.fire({
+							icon: 'error',
+							title: 'Oops...',
+							text: 'Image dimension should be 1092 x 615 pixels!',
+
+						}).then(function (result) {
+							$("#Thumbnail").val("");
+						});
+					}
+					//else if (this.height < 460 || this.height > 460) {
+					//    Swal.fire({
+					//        icon: 'error',
+					//        title: 'Oops...',
+					//        text: 'Image dimension should be 690 x 460 !',
+
+					//    }).then(function (result) {
+					//        $("#Thumbnail").val("");
+					//    });
+					//}
+					else if (this.size > 200000) {
+						Swal.fire({
+							icon: 'error',
+							title: 'Oops...',
+							text: 'Image size must be less than 200 kb!',
+
+						}).then(function (result) {
+							$("#Thumbnail").val("");
+						});
+					}
+					else {
+						img.onerror = function () {
+							$("#Thumbnail").val("");
+							alert("not a valid file: " + file.type);
+						};
+					}
+				};
+				img.src = _URL.createObjectURL(file);
+			}
+		});
+		//Image Validation End
+
+		//Image Validation End
+		//Floor Image Validation Begin
+		$("#FloorPlan").change(function (e) {
+			var doc;
+			doc = this.files[0];
+			if (doc.size > 20 * (1000000)) {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'File Size Should be Lower than 20mb!',
+
+				}).then(function (result) {
+					$("#Broucher").val('');
+				});
+
+			}
+			else {
+				doc.onerror = function () {
+					alert("not a valid file: " + file.type);
+				};
+			}
+		});
+		//Image Validation End
+
+		//Property Pdf Validation Begin
+		$("#Broucher").change(function (e) {
+			var doc;
+			doc = this.files[0];
+			if (doc.size > 20 * (1000000)) {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'File Size Should be Lower than 20mb!',
+
+				}).then(function (result) {
+					$("#Broucher").val('');
+				});
+
+			}
+			else if (doc.type != "application/pdf") {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Please Upload Pdf files only !',
+
+				}).then(function (result) {
+					$("#Broucher").val('');
+				});
+			}
+			else {
+				doc.onerror = function () {
+					alert("not a valid file: " + file.type);
+				};
+			}
+		});
+		//Property Pdf Validation End
+
+		//video validation
+		$("#Video").change(function (e) {
+			var file;
+			if ((file = this.files[0])) {
+				if (!file.type.match('video.*')) {
+					Swal.fire({
+						icon: 'error',
+						title: 'Oops...',
+						text: 'Please upload valid video file !',
+
+					}).then(function (result) {
+						$("#Video").val("");
+					});
+				}
+				else if (file.size >= 20 * (1000000)) {
+					Swal.fire({
+						icon: 'error',
+						title: 'Oops...',
+						text: 'Video size must be less than 20 MB!',
+
+					}).then(function (result) {
+						$("#Video").val("");
+					});
+				}
+			}
+
+		});
+
+		$("#Title").on('change', function () {
+			var name = $(this);
+			$("#Slug").val($(name).val().replace(/ /g, "-").replace(/'/g, "").toLocaleLowerCase());
+		});
+
+		function ValidateLatLng() {
+			var lat = document.getElementById("Latitude").value;
+			var lng = document.getElementById("Longitude").value;
+			if (lat < -90 || lat > 90) {
+				toastr.error("Latitude must be between -90 and 90 degrees inclusive.");
+				return false;
+			}
+			else if (lng < -180 || lng > 180) {
+				toastr.error("Longitude must be between -180 and 180 degrees inclusive.");
+				return false;
+			}
+			else if (lat == "" || lng == "") {
+				toastr.error("Enter a valid Latitude or Longitude!");
+				return false;
+			} else if (isNaN(lat || isNaN(lng))) {
+				toastr.error("Enter a valid Latitude or Longitude!");
+				return false;
+			}
+			return true;
+		}
+
+		$("#createform").submit(function (e) {
+
+			//   $(this).closest('.modal').find('button[type=submit]').addClass('spinner spinner-sm spinner-left').attr('disabled', true);
+
+			e.preventDefault();
+			if (!ValidateLatLng()) {
+				return false
+			}
+			var data = new FormData();
+			data.append("PropertyID", $("#PropertyID").val());
+			data.append("IsFeatured", $("#IsFeatured").prop("checked"));
+			data.append("Thumbnail", $("#Thumbnail")[0].files[0]);
+			data.append("Title", $('#Title').val());
+			data.append("TitleAr", $('#TitleAr').val());
+			data.append("Description", $('#Description').val());
+			data.append("DescriptionAr", $('#DescriptionAr').val());
+			data.append("Slug", $('#Slug').val());
+			//data.append("Status", $("#Status").val());
+			//data.append("PropertyUsage", $("#PropertyUsage").val());
+			data.append("Size", $("#Size").val());
+			data.append("UnitTypeID", $("#UnitTypeID").val());
+			data.append("NoOfBedrooms", $("#NoOfBedrooms").val());
+			data.append("NoOfGarages", $("#NoOfGarages").val());
+			data.append("NoOfRooms", $("#NoOfRooms").val());
+			data.append("NoOfBaths", $("#NoOfBaths").val());
+			data.append("NoOfDinings", $("#NoOfDinings").val());
+			data.append("NoOfLaundry", $("#NoOfLaundry").val());
+			data.append("BuildYear", $("#BuildYear").val());
+			data.append("SellingPrice", $("#SellingPrice").val());
+			data.append("BookingAmount", $("#BookingAmount").val());
+			data.append("LandRegistrationFee", $("#LandRegistrationFee").val());
+			data.append("OqoodAmount", $("#OqoodAmount").val());
+			data.append("DubaiLandDepartmentFee", $("#DubaiLandDepartmentFee").val());
+			data.append("CountryID", $("#CountryID").val());
+			data.append("CityID", $("#CityID").val());
+			//data.append("AreaID", $("#AreaID").val());
+			//data.append("ZipCode", $("#ZipCode").val());
+			data.append("Latitude", $("#Latitude").val());
+			data.append("Longitude", $("#Longitude").val());
+			data.append("VRTour", $("#VRTour").val());
+			//data.append("Address", $("#Address").val());
+			data.append("Video", $("#Video")[0].files[0]);
+			//data.append("VRTour", $("#VRTour")[0].files[0]);
+			data.append("Broucher", $("#Broucher")[0].files[0]);
+			data.append("FloorPlan", $("#FloorPlan")[0].files[0]);
+
+			data.append("__RequestVerificationToken", $('input[name=__RequestVerificationToken]').val());
+			blockui();
+			$.ajax({
+				url: "/Admin/Unit/Create/",
+				type: "POST",
+				processData: false,
+				contentType: false,
+				data: data,
+				success: function (response) {
+
+					if (response.success) {
+						unblockui();
+						window.location.href = response.url.toString();
+					} else {
+						unblockui();
+						toastr.error(response.message);
+					}
+
+				},
+				error: function (er) {
+					unblockui();
+					toastr.error(er);
+				}
+			});
+			return false;
+		});
+	</script>
+}
+<!--end::Page Scripts-->

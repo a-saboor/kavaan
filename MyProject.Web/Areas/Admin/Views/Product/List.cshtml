@@ -1,0 +1,144 @@
+@model IEnumerable<MyProject.Data.Product>
+
+@{
+    ViewBag.Title = "List";
+    Layout = null;
+}
+<style>
+    #kt_datatable1 tbody tr td:last-child {
+        white-space: nowrap;
+    }
+</style>
+<!--begin::Row-->
+<div class="row">
+    <div class="col-xl-12">
+        <!--begin::Card-->
+        <div class="card card-custom gutter-b">
+            <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                <div class="card-title">
+                    <h3 class="card-label">
+                        Product Inventory
+                        <span class="d-block text-muted pt-2 font-size-sm">Manage Product Inventory Here...</span>
+                    </h3>
+                </div>
+
+                <div class="card-toolbar">
+                    <div class="dropdown dropdown-inline d-flex mr-5">
+
+                        <select class="form-control" id="VendorID" name="VendorID">
+                            <option value="" selected>Select Vendor</option>
+                            @*<option value="All">All</option>*@
+                            @if (ViewBag.VendorID != null)
+                            {
+                                foreach (var item in ViewBag.VendorID)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            }
+
+                        </select>
+
+                        @*@Html.DropDownList("VendorID", null, "Select Vendor", htmlAttributes: new { @class = "form-control", @id = "VendorID" })*@
+
+                    </div>
+                   
+                    <div class="dropdown dropdown-inline mr-2">
+                        @using (Html.BeginForm("ProductsReport", "Product", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="text" value="" id="VendorID_Report" name="VendorID" class="form-control kt_datepicker_range" hidden />
+                            <button type="submit" id="btnSubmit" class="btn btn-dark btn-sm excel-btn">
+                                <i class="far fa-file-excel"></i>
+                                Export Excel
+                            </button>
+                        }
+                    </div>
+                    @*<!--begin::Button-->
+        <div class="dropdown dropdown-inline mr-2">
+            <a href="~/Assets/AppFiles/Documents/CSVSample/BulkProduct.xlsx" download type="button" class="btn btn-dark btn-sm">
+                <i class="fa fa-download"></i>
+                Sample CSV
+            </a>
+        </div>
+        <form id="BlkUploader" action="/City/BulkUpload" method="post" enctype="multipart/form-data">
+            <div class="dropdown dropdown-inline mr-2">
+                <input type="file" hidden id="FileUpload" name="FileUpload" />
+                <button type="button" class="btn btn-dark btn-sm" onclick="OpenModelPopup(this, '/Vendor/Product/BulkUpload')" data="/Vendor/Product/BulkUpload">
+                    <i class="fa fa-plus"></i>
+                    Bulk Upload
+                </button>
+            </div>
+        </form>
+        <a href="javascript:;" class="btn btn-custom font-weight-bolder" onclick="OpenModelPopup(this,'/Vendor/Product/QuickCreate')">
+            <span class="svg-icon svg-icon-md svg-icon-light">
+                <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24" />
+                        <circle fill="#ffffff" cx="9" cy="15" r="6" />
+                        <path d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z" fill="#ffffff" opacity="0.3" />
+                    </g>
+                </svg>
+                <!--end::Svg Icon-->
+            </span> Add Product
+        </a>
+        <!--end::Button-->*@
+                </div>
+            </div>
+            <div class="card-body">
+                @Html.AntiForgeryToken()
+                <!--begin: Datatable-->
+                <table class="table table-separate table-head-custom table-checkable" id="kt_datatable1">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            @*<th>SKU</th>*@
+                            <th>Stock</th>
+                            <th>Categories</th>
+                            <th>Tags</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody style="display:none">
+                        @*@foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@(item.CreatedOn.HasValue ? item.CreatedOn.Value.ToString(MyProject.Web.Helpers.CustomHelper.GetDateFormat) : "-")	</td>
+                                    <td>@(item.Vendor != null ? item.Vendor.Logo + "|" + item.Vendor.Name + "|" + item.Vendor.VendorCode : "-")</td>
+                                    <td>@item.Name|@item.SKU</td>
+                                    <td>@item.ApprovalStatus</td>
+                                    <td nowrap="nowrap">@item.ApprovalStatus,@item.ID</td>
+                                </tr>
+                            }*@
+                    </tbody>
+                </table>
+                <!--end: Datatable-->
+            </div>
+        </div>
+        <!--end::Card-->
+    </div>
+</div>
+<!--end::Row-->
+@*<script>
+    
+    $("#VendorID").change(function () {
+    var data = new FormData();
+    data.append("VendorID", $('#VendorID').val());
+    $.ajax({
+        url: "/Admin/Product/List",
+        type: "POST",
+        data: data,
+        success: function (response) {
+            if (callback) {
+                callback($('#myModalContent'), element, false, response);
+            }
+        },
+        error: function (er) {
+            toastr.error(er);
+        }
+    });
+        return false;
+    });
+</script>*@
