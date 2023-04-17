@@ -1,9 +1,6 @@
-# kavaan
+# Kavaan Builder and Construction Company Website
 <!DOCTYPE html>
 <html>
-  <head>
-    <h1>Kavaan Builder and Construction Company Website</h1>
-  </head>
   <body>
     <h1>Welcome to our website!</h1>
     <p>Our project aims to provide users with a convenient way to access information about our agency and the properties we offer. Rather than having to visit our physical office, users can simply log in to our website and browse through pictures of our buildings, plots, and apartments. They can also subscribe to our newsletter to stay up to date on our latest offerings.</p>
